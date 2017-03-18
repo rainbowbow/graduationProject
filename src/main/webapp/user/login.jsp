@@ -21,10 +21,8 @@
 
 	
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
-  <script type="text/javascript" src="${ctx}/resources/js/jquery-2.1.4.min.js"></script>
-
-
-    <script src="${ctx}/resources/js/bootstrap.js"></script>
+   <script type="text/javascript" src="${ctx}/resources/js/jquery-2.1.4.min.js"></script>
+   <script src="${ctx}/resources/js/bootstrap.js"></script>
     <script type="text/javascript">
 		var message = "${message}"
 		    if ("no" == message) {

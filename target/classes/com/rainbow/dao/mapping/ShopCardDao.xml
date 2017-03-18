@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rainbow.dao.ShopCardDao">
+
+    <select id="findByUserId" resultType="ShopCard">
+		select 
+			s.order_id orderId, 
+			s.user_id userId,
+			s.product_id productId,
+			p.product_name productName,
+			p.price price, 
+			p.count count,
+			p.detail detail,
+			p.type type
+		from product p, shopcard s where s.user_id=#{s.useId} and p.product_id=s.product_id
+	</select>
+	 
+	<insert id="createProduct">
+		insert into product(product_id,productName,price,count,detail,type) 
+		values(#{productId},#{productName},#{price},#{count},#{detail},#{type})
+	</insert>
+
+</mapper>

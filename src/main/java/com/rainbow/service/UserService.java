@@ -34,7 +34,7 @@ public class UserService {
 	        return userDao.login(userName,password);
 	    }
       
-	    List<User> AllUser(){
+      public List<User> AllUser(){
 	    	
 	    	return userDao.AllUser();
 	    }

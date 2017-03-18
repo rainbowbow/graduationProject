@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rainbow.dao.ProductDao">
+
+    <select id="AllProduct" resultType="Product">
+		select 
+			product_id productId, 
+			product_name productName,
+			price price,
+			count count,
+			detail detail,
+			type type
+		from product where 1=1
+	</select>
+	 
+	<insert id="createProduct">
+		insert into product(product_id,productName,price,count,detail,type) 
+		values(#{productId},#{productName},#{price},#{count},#{detail},#{type})
+	</insert>
+
+</mapper>

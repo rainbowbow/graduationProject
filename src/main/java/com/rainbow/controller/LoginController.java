@@ -27,8 +27,7 @@ public class LoginController {
 				if(userName != null && password != null){
 					
 					User user=userService.login(userName,password);
-					System.out.println(user.getUserName()+"oooo"+user.getPassword());
-					if(password.equals(user.getPassword())){
+ 					if(user!=null&&password.equals(user.getPassword())){
 						System.out.println("success");
 					    model.addAttribute("user",user);
 					    if(identify.equals("admin")){
