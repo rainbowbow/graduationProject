@@ -11,8 +11,9 @@
 			phone phone,
 			e-mail eMail,
 			address address,
+			type type,
 			praise_rate praiseRate
-		from user where user_id=#{userId}
+		from user where user_id=#{userId} and type like concat(#{type},'%') 
 	</select>
 	<select id="login" resultType="User">
 		select 
@@ -22,10 +23,11 @@
 			sex sex,
 			age age, 
 			phone phone,
+			type type,
 			e_mail eMail,
 			address address,
 			praise_rate praiseRate
-		from user where user_name=#{userName} and password=#{password}
+		from user where user_name=#{userName} and password=#{password} and type like concat(#{type},'%')
 	</select>
 	<insert id="createUser">
 		insert into user(user_id,user_name) 

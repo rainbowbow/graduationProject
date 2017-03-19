@@ -2,10 +2,12 @@ package com.rainbow.controller;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-
+import javax.servlet.http.HttpSession;
+ 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 import com.rainbow.beans.User;
 import com.rainbow.service.UserService;
 
@@ -16,21 +18,19 @@ public class LoginController {
 	
 	
 	        @RequestMapping("loginIn")
-			public String login(Model model,HttpServletRequest request){
+			public String login(Model model,HttpServletRequest request,HttpSession session){
 				String userName = request.getParameter("userName");
 				String password = request.getParameter("Password");
-				String identify = request.getParameter("RadioList");
-				
-				System.out.println("userId:"+userName+"\n password："+password+"\n identify："+identify);
-				
+				String type = request.getParameter("RadioList");				
 				
 				if(userName != null && password != null){
 					
-					User user=userService.login(userName,password);
- 					if(user!=null&&password.equals(user.getPassword())){
-						System.out.println("success");
+					User user=userService.login(userName,password,type);
+ 					if(user!=null){
+						System.out.println("lllllllhahah"+user.getType());
+						session.setAttribute("user", user);
 					    model.addAttribute("user",user);
-					    if(identify.equals("admin")){
+					    if(type.equals("0")){
 					    	return "admin";
 					    }else{
 					    	return "user";
@@ -39,7 +39,6 @@ public class LoginController {
 					}else{
 						System.out.println("nosuccess");
 						model.addAttribute("message", "erro");
-		
 						return "login";
 					}
 	 	        }else {

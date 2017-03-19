@@ -18,7 +18,7 @@ public class UserController {
 	 
 	 
 		@RequestMapping("admin")
-		public ModelAndView home(){
+		public ModelAndView admin(){
 			ModelAndView model = new ModelAndView("admin");
 			return model;
 		}
@@ -27,6 +27,10 @@ public class UserController {
 			ModelAndView model = new ModelAndView("user");
 			return model;
 		}
-	
+		@RequestMapping("login")
+		public ModelAndView login(){
+			ModelAndView model = new ModelAndView("login");
+			return model;
+		}
 	 
   }

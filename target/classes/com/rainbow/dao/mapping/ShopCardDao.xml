@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.rainbow.dao.ShopCardDao">
 
-    <select id="findByUserId" resultType="ShopCard">
+    <select id="ShopCardList" resultType="ShopCard">
 		select 
 			s.order_id orderId, 
 			s.user_id userId,

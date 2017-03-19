@@ -4,5 +4,5 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="${pageContext.request.contextPath}/resources/js/bootstrap.js"></script>
      <script src="${pageContext.request.contextPath}/resources/js/bootstrap-table.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/bootstrap-table-min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/bootstrap-table.min.js"></script>
      

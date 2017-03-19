@@ -15,7 +15,7 @@ public class ProductService{
 	@Resource
 	private ProductDao productDao;
 
-    public void setproductDao(ProductDao productDao) {
+    public void setProductDao(ProductDao productDao) {
         this.productDao = productDao;
     }
 	  

@@ -21,12 +21,17 @@ public class ProductController {
 	  @Resource
 	  ProductService productService;
 	 
-	 
+	  
+	  @RequestMapping("product")
+		public ModelAndView product(){
+			ModelAndView model = new ModelAndView("product");
+			return model;
+		}
+	  
 		@RequestMapping("ProductService/productlist")
 		@ResponseBody
 		public List<Product> productlist(){
-			System.out.println("hahahahah");
-			List<Product> productList=new ArrayList<Product>();
+ 			List<Product> productList=new ArrayList<Product>();
 			productList=productService.AllProduct();
 			System.out.println(productList.get(0).getProductName());
 			return productList;

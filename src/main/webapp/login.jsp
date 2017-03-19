@@ -40,8 +40,8 @@
                             <input class="form-control" type="password" name="Password" id="Password" placeholder="密码">
                         </div>
 				 
-				         <label> <input class="radio-inline" id="identify" name="RadioList" type="radio" value="user" checked/>用户 </label>             
-                         <label> <input class="radio-inline" id="identify" name="RadioList" type="radio" value="admin" />管理员 </label>
+				         <label> <input class="radio-inline" id="type" name="RadioList" type="radio" value="1" checked/>用户 </label>             
+                         <label> <input class="radio-inline" id="type" name="RadioList" type="radio" value="0" />管理员 </label>
                        
 				        <div class="login-a">
 				          <a  class="btn btn-warning btn-large" onclick="login()">登陆</a>

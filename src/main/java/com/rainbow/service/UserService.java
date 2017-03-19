@@ -29,9 +29,9 @@ public class UserService {
 	    }
 	    
 	    
-      public User login(String userName,String password) {
+      public User login(String userName,String password,String type) {
 	    	
-	        return userDao.login(userName,password);
+	        return userDao.login(userName,password,type);
 	    }
       
       public List<User> AllUser(){
