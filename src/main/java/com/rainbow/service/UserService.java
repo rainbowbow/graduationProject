@@ -23,9 +23,9 @@ public class UserService {
 	     * @author miaomiao
 	     * @return
 	     */
-	    public User findByUserId(String userName) {
+	    public User findByUserId(String userId) {
 	    	
-	        return userDao.findByUserId(userName);
+	        return userDao.findByUserId(userId);
 	    }
 	    
 	    

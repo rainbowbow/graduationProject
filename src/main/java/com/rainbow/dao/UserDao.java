@@ -13,6 +13,7 @@ import  com.rainbow.beans.User;
 public interface UserDao {
 	
 	User login(@Param("userName")String userName,@Param("password")String password,@Param("type")String type);
+	
 	User findByUserId(String userId);//获取某个用户
 	
 	

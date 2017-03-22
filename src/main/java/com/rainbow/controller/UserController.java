@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,17 +46,35 @@ public class UserController {
 				return model;
 			}
 		 
+		 @RequestMapping("oneUserMessage")
+			public ModelAndView oneUserMessage(){
+				ModelAndView model = new ModelAndView("oneUserMessage");
+				return model;
+			}
 		 
-		/*@RequestMapping("UserController/userlist")
+		 
+		 
+		@RequestMapping("UserController/userlist")
 		@ResponseBody
 		public List<User> userlist(){
  			List<User> userList=new ArrayList<User>();
  			userList=userService.UserList();
 			System.out.println(userList.get(0).getUserName());
 			return userList;
-		}*/
+		} 
+		
+		@RequestMapping("UserController/oneUserMessage")
+		@ResponseBody
+		public User findByUserId(HttpSession session){
+			
+			String userId=(String) session.getAttribute("userId");
+ 			User oneUserMessage=new User();
+ 			oneUserMessage=userService.findByUserId(userId);
+			System.out.println(oneUserMessage.getUserName()+"hahahha");
+			return oneUserMessage;
+		} 
 		 
-		 @RequestMapping("UserController/userlist")
+		 /*@RequestMapping("UserController/userlist")
 			@ResponseBody
 			public List<User> userlistByQuery(HttpServletRequest request){
 				String userName = request.getParameter("userName");
@@ -65,6 +84,6 @@ public class UserController {
 	 			userListByQuery=userService.UserListByQuery(userName,age);
 				System.out.println(userListByQuery.get(0).getUserName());
 				return userListByQuery;
-			}
+			}*/
 	 
   }

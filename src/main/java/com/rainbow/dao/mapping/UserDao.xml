@@ -9,11 +9,11 @@
 			sex sex,
 			age age, 
 			phone phone,
-			e-mail eMail,
+			e_mail eMail,
 			address address,
 			type type,
 			praise_rate praiseRate
-		from user where user_id=#{userId} and type like concat(#{type},'%') 
+		from user where user_id=#{userId} 
 	</select>
 	<select id="login" resultType="User">
 		select 
