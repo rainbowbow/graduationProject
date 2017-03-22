@@ -14,8 +14,10 @@ public interface UserDao {
 	
 	User login(@Param("userName")String userName,@Param("password")String password,@Param("type")String type);
 	User findByUserId(String userId);//获取某个用户
-    List<User> AllUser();//获取所有用户
 	
+	
+    List<User> UserList();//获取所有用户
+    List<User> UserListByQuery(String userName, String age);
     public void createUser(User user);//添加用户
     
     public void updateUser(User user);//修改用户

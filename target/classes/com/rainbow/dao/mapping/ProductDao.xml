@@ -13,6 +13,19 @@
 		from product where 1=1
 	</select>
 	 
+	 
+	 <select id="RepertoryList" resultType="Product">
+		select 
+			product_id productId, 
+			product_name productName,
+			price price,
+			count count,
+			detail detail,
+			type type
+		from product where type=1
+	</select>
+	
+	
 	<insert id="createProduct">
 		insert into product(product_id,productName,price,count,detail,type) 
 		values(#{productId},#{productName},#{price},#{count},#{detail},#{type})

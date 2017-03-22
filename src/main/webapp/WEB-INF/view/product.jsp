@@ -10,7 +10,7 @@
 	    <meta name="viewport" content="width=device-width, initial-scale=1">
 	    
 		<jsp:include page="include/header.jsp"></jsp:include>
-		<title>User</title>
+		<title></title>
 
 	</head>
 
@@ -59,7 +59,7 @@
     $(document).ready(function(){
     var li=document.getElementById('order-active');
     li.setAttribute("class","active");
-    var path="${ctx}"+"/ProductService/productlist";
+    var path="${ctx}"+"/ProductController/productlist";
     $('#productTable').bootstrapTable({
     url: path, 
     dataType: "json",

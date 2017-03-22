@@ -12,9 +12,7 @@ import com.rainbow.beans.Product;
 public interface ProductDao {
 	
     List<Product> AllProduct();//获取所有产品
-	
-     
-     
-
+    List<Product> RepertoryList();
+ 
 }
 

@@ -51,7 +51,7 @@
     $(document).ready(function(){
     var li=document.getElementById('product-active');
     li.setAttribute("class","active");
-    var path="${ctx}"+"/ProductService/productlist";
+    var path="${ctx}"+"/ProductController/productlist";
     $('#productTable').bootstrapTable({
     url: path, 
     dataType: "json",
@@ -87,7 +87,7 @@
               field: 'doSomething',
               align: 'center',
               formatter:function(value,row,index){  
-                   var e = '<a href="#" mce_href="#" onclick="shop(\''+ row.productId + '\')">加入购物车</a> ';  
+                var e = '<a href="#" mce_href="#" onclick="shop(\''+ row.productId + '\')">加入购物车</a> ';  
                 return e;  
             }}
       ]

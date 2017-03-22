@@ -29,6 +29,9 @@ public class ProductService{
 	    	return productDao.AllProduct();
 	    }
 		
-	    
+     public List<Product> RepertoryList(){
+	    	
+	    	return productDao.RepertoryList();
+	    }  
 	  
 	}

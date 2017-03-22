@@ -30,14 +30,7 @@
 					<i class="icon-th-list"></i>
 					产品管理					
 				</h1>
-	 
-				<div class="right-content">
-				<div id="toolbar" class="btn-group">
-		            <button id="btn_add" type="button" onclick="addProduct()" class="btn btn-default">
-		                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
-		            </button>
-                </div>
-                <div>
+	  
 				 <table  data-search="true" class="table table-bordered" id="productTable">
 				 </table>
 				 </div>
@@ -49,14 +42,15 @@
 	 </div> <!-- /container -->
 	
     </div> <!-- /content -->
-  <div id="add_dialog_div"></div>
+    
+ 
 <jsp:include page="include/footer.jsp"></jsp:include>
    <script >
     
     $(document).ready(function(){
     var li=document.getElementById('product-active');
     li.setAttribute("class","active");
-    var path="${ctx}"+"/ProductService/productlist";
+    var path="${ctx}"+"/ProductController/productlist";
     $('#productTable').bootstrapTable({
     url: path, 
     dataType: "json",
@@ -89,33 +83,18 @@
           },
           {
               title: '操作',
-              field: 'productId',
+              field: 'doSomething',
               align: 'center',
               formatter:function(value,row,index){  
-                   var e = '<a href="#" mce_href="#" onclick="edit(\''+ row.id + '\')">编辑</a> ';  
-                   var d = '<a href="#" mce_href="#" onclick="del(\''+ row.id +'\')">删除</a> ';  
+                   var e = '<a href="#" mce_href="#" onclick="edit(\''+ row.productId + '\')">编辑</a> ';  
+                   var d = '<a href="#" mce_href="#" onclick="del(\''+ row.productId +'\')">下架</a> ';  
                 return e+d;  
             }}
       ]
       });
     });
     
-    function addProduct(){
-    	alert("pp");
-    	var addURL ="${ctx}"+"/roleAction";
-		jQuery('#add_dialog_div').dialog({    
-			title: 			"添加角色",  
-			width: 			800,  
-			height: 		390,  
-			closed: 		false,  
-			modal: 			true, 
-			minimizable: 	false, //是否可最小化，默认false
-			maximizable: 	false, //是否可最大化，默认false
-			resizable: 		false, 
-			cache: 			false,  
-			content:		"<iframe name='roleFrame' id='roleFrame' scrolling='no' frameborder='0' style=\"width:100%;height:99%;\" src='"+addURL+"'></iframe>" 
-		}); 
-    }
+   
     </script>
 	</body>
 </html>

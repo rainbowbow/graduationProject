@@ -20,21 +20,33 @@ public class ProductController {
 	  
 	  @Resource
 	  ProductService productService;
-	 
 	  
 	  @RequestMapping("product")
 		public ModelAndView product(){
 			ModelAndView model = new ModelAndView("product");
 			return model;
 		}
+	  @RequestMapping("repertory")
+		public ModelAndView repertory(){
+			ModelAndView model = new ModelAndView("repertory");
+			return model;
+		}
 	  
-		@RequestMapping("ProductService/productlist")
+		@RequestMapping("ProductController/productlist")
 		@ResponseBody
-		public List<Product> productlist(){
+		public List<Product> allProduct(){
  			List<Product> productList=new ArrayList<Product>();
 			productList=productService.AllProduct();
 			System.out.println(productList.get(0).getProductName());
 			return productList;
+		}
+		@RequestMapping("ProductController/repertoryList")
+		@ResponseBody
+		public List<Product> RepertoryList(){
+ 			List<Product> repertoryList=new ArrayList<Product>();
+ 			repertoryList=productService.RepertoryList();
+			System.out.println(repertoryList.get(0).getProductName());
+			return repertoryList;
 		}
 	 
   }

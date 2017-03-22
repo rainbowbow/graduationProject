@@ -34,11 +34,14 @@ public class UserService {
 	        return userDao.login(userName,password,type);
 	    }
       
-      public List<User> AllUser(){
+      public List<User> UserList(){
 	    	
-	    	return userDao.AllUser();
+	    	return userDao.UserList();
 	    }
-		
+      public List<User> UserListByQuery(String userName, String age){
+	    	
+	    	return userDao.UserListByQuery(userName, age);
+	    }
 	    
 	    public void updateUser(User user){
 	    	

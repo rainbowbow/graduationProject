@@ -29,6 +29,35 @@
 			praise_rate praiseRate
 		from user where user_name=#{userName} and password=#{password} and type like concat(#{type},'%')
 	</select>
+	 <select id="UserList" resultType="User">
+		select 
+			user_id userId, 
+			user_name userName,
+			sex sex,
+			age age, 
+			phone phone,
+			e_mail eMail,
+			address address,
+			type type,
+			praise_rate praiseRate
+		from user where 1=1
+	</select>
+	
+	<select id="UserListByQuery" resultType="User">
+		select 
+			user_id userId, 
+			user_name userName,
+			sex sex,
+			age age, 
+			phone phone,
+			e_mail eMail,
+			address address,
+			type type,
+			praise_rate praiseRate
+		from user where user_name=#{userName} andage=#{age} 
+	</select>
+	
+	
 	<insert id="createUser">
 		insert into user(user_id,user_name) 
 		values(#{userId},#{userName})
