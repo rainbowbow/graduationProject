@@ -42,13 +42,13 @@ public class UserController {
 		}
 		 @RequestMapping("userMessage")
 			public ModelAndView product(){
-				ModelAndView model = new ModelAndView("userMessage");
+				ModelAndView model = new ModelAndView("user/userMessage");
 				return model;
 			}
 		 
 		 @RequestMapping("oneUserMessage")
 			public ModelAndView oneUserMessage(){
-				ModelAndView model = new ModelAndView("oneUserMessage");
+				ModelAndView model = new ModelAndView("user/oneUserMessage");
 				return model;
 			}
 		 
@@ -67,10 +67,9 @@ public class UserController {
 		@ResponseBody
 		public User findByUserId(HttpSession session){
 			
-			String userId=(String) session.getAttribute("userId");
+			User user=(User) session.getAttribute("user");
  			User oneUserMessage=new User();
- 			oneUserMessage=userService.findByUserId(userId);
-			System.out.println(oneUserMessage.getUserName()+"hahahha");
+ 			oneUserMessage=userService.findByUserId(user.getUserId());
 			return oneUserMessage;
 		} 
 		 

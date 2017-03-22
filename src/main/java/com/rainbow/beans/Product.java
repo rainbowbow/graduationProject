@@ -7,17 +7,19 @@ import java.io.Serializable;
  * @since 201703015
  */
 public class Product implements Serializable {
-    private String productId;
+    
+	private int productId;
     private String productName;
     private String price;
     private String count;
     private String detail;
     private String type;//0:在售；1：库存（未上架+下架）
 	 
-	public String getProductId() {
+	 
+	public int getProductId() {
 		return productId;
 	}
-	public void setProductId(String productId) {
+	public void setProductId(int productId) {
 		this.productId = productId;
 	}
 	public String getProductName() {

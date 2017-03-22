@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.rainbow.dao.ProductDao">
 
-    <select id="AllProduct" resultType="Product">
+	<select id="AllProduct" resultType="Product">
 		select 
 			product_id productId, 
 			product_name productName,
@@ -14,7 +14,7 @@
 	</select>
 	 
 	 
-	 <select id="RepertoryList" resultType="Product">
+	<select id="RepertoryList" resultType="Product">
 		select 
 			product_id productId, 
 			product_name productName,
@@ -25,6 +25,12 @@
 		from product where type=1
 	</select>
 	
+	 
+	
+	<insert id="AddProduct" keyProperty="price" useGeneratedKeys="true" parameterType="com.rainbow.beans.Product" >
+		insert into product(product_name,price,count,detail,type) 
+		values(#{productName},#{price},#{count},#{detail},"1")
+	</insert>
 	
 	<insert id="createProduct">
 		insert into product(product_id,productName,price,count,detail,type) 

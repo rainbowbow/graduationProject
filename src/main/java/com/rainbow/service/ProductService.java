@@ -33,5 +33,9 @@ public class ProductService{
 	    	
 	    	return productDao.RepertoryList();
 	    }  
-	  
+     
+     public int AddProduct(String productName,String count, String price,String detail){
+	    	
+    	 return productDao.AddProduct(productName,count,price,detail);
+	    }
 	}

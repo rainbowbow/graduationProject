@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -23,14 +25,16 @@ public class ProductController {
 	  
 	  @RequestMapping("product")
 		public ModelAndView product(){
-			ModelAndView model = new ModelAndView("product");
+			ModelAndView model = new ModelAndView("product/product");
 			return model;
 		}
 	  @RequestMapping("repertory")
 		public ModelAndView repertory(){
-			ModelAndView model = new ModelAndView("repertory");
+			ModelAndView model = new ModelAndView("product/repertory");
 			return model;
 		}
+	
+	  
 	  
 		@RequestMapping("ProductController/productlist")
 		@ResponseBody
@@ -47,6 +51,20 @@ public class ProductController {
  			repertoryList=productService.RepertoryList();
 			System.out.println(repertoryList.get(0).getProductName());
 			return repertoryList;
+		}
+		@RequestMapping("ProductController/addProduct")
+		@ResponseBody
+		void addProduct(Model model,HttpServletRequest request){
+ 			
+			
+			String productName = request.getParameter("productName");
+			String count = request.getParameter("count");
+			String price = request.getParameter("price");
+			String detail=request.getParameter("detail");
+			int addId=productService.AddProduct(productName, count, price, detail);
+ 			System.out.println(productName+"ooo"+count+"ppp"+price);
+ 			System.out.println(addId+"aaaaaaaaaaaaaa");
+ 			model.addAttribute("addId",addId);
 		}
 	 
   }
