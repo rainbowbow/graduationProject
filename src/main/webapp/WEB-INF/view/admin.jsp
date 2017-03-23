@@ -10,7 +10,7 @@
 	    <meta name="viewport" content="width=device-width, initial-scale=1">
 	    
 		<jsp:include page="include/header.jsp"></jsp:include>
-		<title>Admin</title>
+		<title>农产品销售系统</title>
 
 	</head>
 
@@ -46,9 +46,9 @@
  
 <jsp:include page="include/footer.jsp"></jsp:include>
    <script >
-    
+  
     $(document).ready(function(){
-    var li=document.getElementById('product-active');
+    var li=document.getElementById('order-active');
     li.setAttribute("class","active");
     var path="${ctx}"+"/ProductController/productlist";
     $('#productTable').bootstrapTable({
@@ -86,15 +86,56 @@
               field: 'doSomething',
               align: 'center',
               formatter:function(value,row,index){  
-                   var e = '<a href="#" mce_href="#" onclick="edit(\''+ row.productId + '\')">编辑</a> ';  
-                   var d = '<a href="#" mce_href="#" onclick="del(\''+ row.productId +'\')">下架</a> ';  
-                return e+d;  
+            	  var d = '<a href="#" mce_href="#" onclick="downShop(\''
+						+ row.productId
+						+ '\')">下架</a> ';
+				  return d;  
             }}
       ]
       });
     });
-    
-   
+    function downShop(id) {
+		if (!id) {
+			alert('Error！');
+			return false;
+		}
+		// var form_data = new Array();
+
+		$.ajax({
+			url : "${ctx}" + "/ProductController/upOrDownShopProduct",
+			data : {"productId" : id,"type" : "1"},
+			type : "post",
+			beforeSend : function() {
+				if (window.confirm('你确定要下架吗？')) {
+					//alert("确定");
+					return true;
+				} else {
+					//alert("取消");
+					return false;
+				}
+			},
+			success : function(data) {
+				if (data > 0) {
+					alert('操作成功:' + data);
+
+					// document.location.href='world_system_notice.php'
+					location.reload();
+				} else {
+					alert('操作失败' + data);
+				}
+			},
+			error : function() {
+				alert('请求出错');
+			},
+			complete : function() {
+				// $('#tips').hide();
+			}
+		});
+
+		return false;
+	}
+	
+	
     </script>
 	</body>
 </html>

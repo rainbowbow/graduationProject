@@ -10,7 +10,7 @@
 	    <meta name="viewport" content="width=device-width, initial-scale=1">
 	    
 		<jsp:include page="include/header.jsp"></jsp:include>
-		<title>User</title>
+		<title>农产品销售系统</title>
 
 	</head>
 

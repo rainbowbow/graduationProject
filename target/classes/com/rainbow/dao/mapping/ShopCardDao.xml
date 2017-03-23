@@ -12,7 +12,7 @@
 			p.count count,
 			p.detail detail,
 			p.type type
-		from product p, shopcard s where s.user_id=#{s.useId} and p.product_id=s.product_id
+		from product p, shop_card s where s.user_id=#{s.useId} and p.product_id=s.product_id
 	</select>
 	 
 	<insert id="createProduct">

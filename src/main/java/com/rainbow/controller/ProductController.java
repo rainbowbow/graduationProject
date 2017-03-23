@@ -38,9 +38,9 @@ public class ProductController {
 	  
 		@RequestMapping("ProductController/productlist")
 		@ResponseBody
-		public List<Product> allProduct(){
+		public List<Product> ShopProduct(){
  			List<Product> productList=new ArrayList<Product>();
-			productList=productService.AllProduct();
+			productList=productService.ShopProduct();
 			System.out.println(productList.get(0).getProductName());
 			return productList;
 		}
@@ -78,6 +78,21 @@ public class ProductController {
  			System.out.println(delId+"hahahhahdel");
   			model.addAttribute("delId",delId);
   			return delId;
+		}
+		
+		@RequestMapping("ProductController/upOrDownShopProduct")
+		@ResponseBody
+		int upOrDownShopProduct(HttpServletRequest request){
+			
+			int productId = Integer.parseInt(request.getParameter("productId"));
+			System.out.println(productId+"productIdhahahhahdel");
+
+			int type = Integer.parseInt(request.getParameter("type"));
+
+			System.out.println(type+"productIdhahahhahdel");
+			int upShopId=productService.upOrDownShopProduct(productId,type);
+ 			System.out.println(upShopId+"hahahhahdel");
+  			return upShopId;
 		}
 	 
   }

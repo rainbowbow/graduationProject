@@ -15,7 +15,7 @@ public class User implements Serializable {
     private String age;
     private String address;
     private String eMail;
-    private String type;//0:admin; 1:user;  2:blackUser
+    private String type;//0:admin; 11:user;  12:blackUser
     private String praiseRate;//好评率
 	public String getUserId() {
 		return userId;

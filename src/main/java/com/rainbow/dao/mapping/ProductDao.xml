@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.rainbow.dao.ProductDao">
 
-	<select id="AllProduct" resultType="Product">
+	<select id="ShopProduct" resultType="Product">
 		select 
 			product_id productId, 
 			product_name productName,
@@ -10,7 +10,7 @@
 			count count,
 			detail detail,
 			type type
-		from product where 1=1
+		from product where count>0 and type=0
 	</select>
 	 
 	 
@@ -26,7 +26,6 @@
 	</select>
 	
 	 
-	
 	<insert id="AddProduct" keyProperty="price" useGeneratedKeys="true" parameterType="com.rainbow.beans.Product" >
 		insert into product(product_name,price,count,detail,type) 
 		values(#{productName},#{price},#{count},#{detail},"1")
@@ -42,4 +41,8 @@
         delete from product where product_id=#{productId}
     </delete>
 
+
+    <update id="upOrDownShopProduct" parameterType="int">
+		update product set type=#{type} where product_id=#{productId}
+	</update>
 </mapper>

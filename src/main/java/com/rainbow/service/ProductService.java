@@ -24,9 +24,9 @@ public class ProductService{
 	     * @return
 	     */
      
-     public List<Product> AllProduct(){
+     public List<Product> ShopProduct(){
 	    	
-	    	return productDao.AllProduct();
+	    	return productDao.ShopProduct();
 	    }
 		
      public List<Product> RepertoryList(){
@@ -42,5 +42,10 @@ public class ProductService{
      public int DelProduct(int productId){
 	    	
     	 return productDao.DelProduct(productId);
+	    }
+     
+     public int upOrDownShopProduct(int productId,int type){
+	    	
+    	 return productDao.upOrDownShopProduct(productId,type);
 	    }
 	}

@@ -13,11 +13,12 @@ import com.rainbow.beans.Product;
  */
 public interface ProductDao {
 	
-    List<Product> AllProduct();//获取所有产品
+    List<Product> ShopProduct();//获取所有产品
     List<Product> RepertoryList();
     
     int AddProduct(@Param("productName")String productName,@Param("count")String count,@Param("price")String price, @Param("detail")String detail);
 
     int DelProduct(int productId);
+    int upOrDownShopProduct(@Param("productId")int productId,@Param("type")int type);
 }
 
