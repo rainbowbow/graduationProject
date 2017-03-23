@@ -36,5 +36,10 @@
 		insert into product(product_id,productName,price,count,detail,type) 
 		values(#{productId},#{productName},#{price},#{count},#{detail},#{type})
 	</insert>
+	
+	
+    <delete id="DelProduct" parameterType="int">
+        delete from product where product_id=#{productId}
+    </delete>
 
 </mapper>

@@ -17,5 +17,7 @@ public interface ProductDao {
     List<Product> RepertoryList();
     
     int AddProduct(@Param("productName")String productName,@Param("count")String count,@Param("price")String price, @Param("detail")String detail);
+
+    int DelProduct(int productId);
 }
 

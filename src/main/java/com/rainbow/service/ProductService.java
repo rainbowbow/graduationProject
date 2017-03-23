@@ -38,4 +38,9 @@ public class ProductService{
 	    	
     	 return productDao.AddProduct(productName,count,price,detail);
 	    }
+     
+     public int DelProduct(int productId){
+	    	
+    	 return productDao.DelProduct(productId);
+	    }
 	}

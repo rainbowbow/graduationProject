@@ -66,5 +66,18 @@ public class ProductController {
  			System.out.println(addId+"aaaaaaaaaaaaaa");
  			model.addAttribute("addId",addId);
 		}
+		
+		@RequestMapping("ProductController/delProduct")
+		@ResponseBody
+		int delProduct(Model model,HttpServletRequest request){
+ 			
+			
+			int productId = Integer.parseInt(request.getParameter("productId"));
+			System.out.println(productId+"productIdhahahhahdel");
+			int delId=productService.DelProduct(productId);
+ 			System.out.println(delId+"hahahhahdel");
+  			model.addAttribute("delId",delId);
+  			return delId;
+		}
 	 
   }
