@@ -55,7 +55,6 @@ public class ProductController {
 		@RequestMapping("ProductController/addProduct")
 		@ResponseBody
 		int addProduct(Model model,HttpServletRequest request){
- 			
 			
 			String productName = request.getParameter("productName");
 			int count = Integer.parseInt(request.getParameter("count"));
@@ -70,16 +69,16 @@ public class ProductController {
 		@RequestMapping("ProductController/updateProduct")
 		@ResponseBody
 		int updateProduct(Model model,HttpServletRequest request){
- 			
+			
 			int  productId = Integer.parseInt(request.getParameter("productId"));
 			String productName = request.getParameter("productName");
 			int count = Integer.parseInt(request.getParameter("count"));
 			Double price = Double.parseDouble(request.getParameter("price"));
 			String detail=request.getParameter("detail");
-			System.out.println(productId+"aaaaaaaaa");
-			int updateId=productService.UpdateProduct(productId,productName, count, price, detail);
-     		model.addAttribute("updateId",updateId);
- 			return updateId;
+ 			int updateId=productService.UpdateProduct(productId,productName, count, price, detail);
+      		System.out.println(updateId+"aaaaaqqaaaaaa");
+      		model.addAttribute("updateId",updateId);
+      		return updateId;
 		}
 		
 		
@@ -87,7 +86,6 @@ public class ProductController {
 		@ResponseBody
 		int delProduct(Model model,HttpServletRequest request){
  			
-			
 			int productId = Integer.parseInt(request.getParameter("productId"));
 			System.out.println(productId+"productIdhahahhahdel");
 			int delId=productService.DelProduct(productId);

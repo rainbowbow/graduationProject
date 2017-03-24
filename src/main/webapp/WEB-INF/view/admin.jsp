@@ -48,7 +48,7 @@
    <script >
   
     $(document).ready(function(){
-    var li=document.getElementById('order-active');
+    var li=document.getElementById('product-active');
     li.setAttribute("class","active");
     var path="${ctx}"+"/ProductController/productlist";
     $('#productTable').bootstrapTable({

@@ -26,13 +26,13 @@
 	</select>
 	
 	 
-	<insert id="AddProduct" keyProperty="type" useGeneratedKeys="true" parameterType="Product" >
+	<insert id="AddProduct" >
 		insert into product(product_name,price,count,detail,type) 
 		values(#{productName},#{price},#{count},#{detail},"1")
 	</insert>
 	
 	
-	<update id="UpdateProduct" parameterType="object">
+	<update id="UpdateProduct"  >
 		update product set product_name=#{productName},price=#{price},count=#{count},detail=#{detail} where product_id=#{productId}
 	</update>
 	
