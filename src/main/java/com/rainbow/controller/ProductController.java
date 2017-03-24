@@ -54,18 +54,34 @@ public class ProductController {
 		}
 		@RequestMapping("ProductController/addProduct")
 		@ResponseBody
-		void addProduct(Model model,HttpServletRequest request){
+		int addProduct(Model model,HttpServletRequest request){
  			
 			
 			String productName = request.getParameter("productName");
-			String count = request.getParameter("count");
-			String price = request.getParameter("price");
+			int count = Integer.parseInt(request.getParameter("count"));
+			Double price = Double.parseDouble(request.getParameter("price"));
 			String detail=request.getParameter("detail");
 			int addId=productService.AddProduct(productName, count, price, detail);
- 			System.out.println(productName+"ooo"+count+"ppp"+price);
- 			System.out.println(addId+"aaaaaaaaaaaaaa");
- 			model.addAttribute("addId",addId);
+     		model.addAttribute("addId",addId);
+ 			return addId;
 		}
+		
+		
+		@RequestMapping("ProductController/updateProduct")
+		@ResponseBody
+		int updateProduct(Model model,HttpServletRequest request){
+ 			
+			int  productId = Integer.parseInt(request.getParameter("productId"));
+			String productName = request.getParameter("productName");
+			int count = Integer.parseInt(request.getParameter("count"));
+			Double price = Double.parseDouble(request.getParameter("price"));
+			String detail=request.getParameter("detail");
+			System.out.println(productId+"aaaaaaaaa");
+			int updateId=productService.UpdateProduct(productId,productName, count, price, detail);
+     		model.addAttribute("updateId",updateId);
+ 			return updateId;
+		}
+		
 		
 		@RequestMapping("ProductController/delProduct")
 		@ResponseBody
@@ -75,7 +91,6 @@ public class ProductController {
 			int productId = Integer.parseInt(request.getParameter("productId"));
 			System.out.println(productId+"productIdhahahhahdel");
 			int delId=productService.DelProduct(productId);
- 			System.out.println(delId+"hahahhahdel");
   			model.addAttribute("delId",delId);
   			return delId;
 		}
@@ -85,14 +100,9 @@ public class ProductController {
 		int upOrDownShopProduct(HttpServletRequest request){
 			
 			int productId = Integer.parseInt(request.getParameter("productId"));
-			System.out.println(productId+"productIdhahahhahdel");
-
 			int type = Integer.parseInt(request.getParameter("type"));
-
-			System.out.println(type+"productIdhahahhahdel");
-			int upShopId=productService.upOrDownShopProduct(productId,type);
- 			System.out.println(upShopId+"hahahhahdel");
-  			return upShopId;
+   			int upShopId=productService.upOrDownShopProduct(productId,type);
+   			return upShopId;
 		}
 	 
   }

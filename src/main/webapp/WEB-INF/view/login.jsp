@@ -61,6 +61,7 @@
   <script type="text/javascript">
 		var message = "${message}"
 		    if ("no" == message) {
+		    	alert("无此用户");
 		    	$.messager.alert("警告", "无此用户");
 		    }else if ("error" == message) {
 		    	$.messager.alert("警告", "密码错误");

@@ -26,10 +26,16 @@
 	</select>
 	
 	 
-	<insert id="AddProduct" keyProperty="price" useGeneratedKeys="true" parameterType="com.rainbow.beans.Product" >
+	<insert id="AddProduct" keyProperty="type" useGeneratedKeys="true" parameterType="Product" >
 		insert into product(product_name,price,count,detail,type) 
 		values(#{productName},#{price},#{count},#{detail},"1")
 	</insert>
+	
+	
+	<update id="UpdateProduct" parameterType="object">
+		update product set product_name=#{productName},price=#{price},count=#{count},detail=#{detail} where product_id=#{productId}
+	</update>
+	
 	
 	<insert id="createProduct">
 		insert into product(product_id,productName,price,count,detail,type) 

@@ -34,10 +34,17 @@ public class ProductService{
 	    	return productDao.RepertoryList();
 	    }  
      
-     public int AddProduct(String productName,String count, String price,String detail){
+     public int AddProduct(String productName,int count, double price,String detail){
 	    	
     	 return productDao.AddProduct(productName,count,price,detail);
 	    }
+     
+     public int UpdateProduct(int productId,String productName,int count, double price,String detail){
+	    	
+    	 return productDao.UpdateProduct(productId,productName,count,price,detail);
+	    }
+     
+     
      
      public int DelProduct(int productId){
 	    	
