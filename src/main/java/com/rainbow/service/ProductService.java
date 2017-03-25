@@ -44,7 +44,7 @@ public class ProductService{
     	 return productDao.UpdateProduct(productId,productName,count,price,detail);
 	    }
      
-     
+    
      
      public int DelProduct(int productId){
 	    	

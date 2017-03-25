@@ -1,6 +1,6 @@
 package com.rainbow.controller;
 
-import java.util.ArrayList;
+ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -84,14 +84,21 @@ public class ProductController {
 		
 		@RequestMapping("ProductController/delProduct")
 		@ResponseBody
-		int delProduct(Model model,HttpServletRequest request){
- 			
-			int productId = Integer.parseInt(request.getParameter("productId"));
-			System.out.println(productId+"productIdhahahhahdel");
-			int delId=productService.DelProduct(productId);
-  			model.addAttribute("delId",delId);
-  			return delId;
+		int delProduct(Model model,HttpServletRequest request){	
+			
+			String productIdMore = request.getParameter("productId");
+			String[] productId = productIdMore.split(",");
+			System.out.println(productId.toString());
+            int num=0;
+			for (int i = 0; i < productId.length; i++) {
+			 if(productService.DelProduct(Integer.parseInt(productId[i]))!=0){
+				 num++;
+			 }
+			}
+			System.out.println(num);
+			return num;
 		}
+		 
 		
 		@RequestMapping("ProductController/upOrDownShopProduct")
 		@ResponseBody

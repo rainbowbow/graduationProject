@@ -43,7 +43,14 @@
 	
     </div> <!-- /content -->
     
- 
+   <!-- 新增 Modal start -->
+	<div class="modal hide fade" id="addModal" tabindex="-1" role="dialog">
+		<div class="modal-body">
+			<jsp:include page="product/addProduct.jsp"></jsp:include>
+		</div>
+	</div>
+	<!-- 新增 Modal end -->
+	
 <jsp:include page="include/footer.jsp"></jsp:include>
    <script >
   

@@ -22,7 +22,7 @@
 			count count,
 			detail detail,
 			type type
-		from product where type=1
+		from product where 1=1 and count>0
 	</select>
 	
 	 
@@ -43,8 +43,8 @@
 	</insert>
 	
 	
-    <delete id="DelProduct" parameterType="int">
-        delete from product where product_id=#{productId}
+    <delete id="DelProduct"  >
+        delete from product where product_id =#{productId}
     </delete>
 
 
