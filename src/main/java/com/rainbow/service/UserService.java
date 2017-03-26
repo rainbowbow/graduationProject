@@ -38,9 +38,9 @@ public class UserService {
 	    	
 	    	return userDao.UserList();
 	    }
-      public List<User> UserListByQuery(String userName, String age){
+      public List<User> UserListByQuery(String userName, String sex){
 	    	
-	    	return userDao.UserListByQuery(userName, age);
+	    	return userDao.UserListByQuery(userName, sex);
 	    }
 	    
 	    public void updateUser(User user){

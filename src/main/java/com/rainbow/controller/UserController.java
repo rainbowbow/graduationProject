@@ -56,10 +56,13 @@ public class UserController {
 		 
 		@RequestMapping("UserController/userlist")
 		@ResponseBody
-		public List<User> userlist(){
+		public List<User> userlist(HttpServletRequest request){
+			
+			String userName = request.getParameter("userName");
+			String sex = request.getParameter("sex");
+			System.out.println(userName+"llllllllqqq"+sex);
  			List<User> userList=new ArrayList<User>();
- 			userList=userService.UserList();
-			System.out.println(userList.get(0).getUserName());
+ 			userList=userService.UserListByQuery(userName,sex);
 			return userList;
 		} 
 		

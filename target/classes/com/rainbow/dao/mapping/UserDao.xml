@@ -43,6 +43,8 @@
 		from user where 1=1
 	</select>
 	
+ 
+	
 	<select id="UserListByQuery" resultType="User">
 		select 
 			user_id userId, 
@@ -54,7 +56,17 @@
 			address address,
 			type type,
 			praise_rate praiseRate
-		from user where user_name=#{userName} andage=#{age} 
+		from user 
+		<where>
+			
+            <if test="userName!=null and userName!='' ">
+				and user_name like concat('%',#{userName},'%')
+		    </if>
+            <if test="sex !=null and sex!=''">
+				and sex=#{sex} 
+		    </if>
+		</where>
+ 
 	</select>
 	
 	
