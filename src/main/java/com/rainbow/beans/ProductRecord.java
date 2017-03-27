@@ -7,13 +7,33 @@ import java.io.Serializable;
  * @since 201703015
  */
 public class ProductRecord implements Serializable {
-    private String productId;
-    private String productName;
-    private String price;
-    private String count;
-    private String detail;
-    private String type;//0:在售；1：库存（未上架+下架）
-	 
+	 private String orderId;
+	 private String userId;
+	 private String userName;
+     private String productId;
+     private String productName;
+     private String price;
+     private String count;
+     private String orderTime; 
+     private String totalMoney;
+	public String getOrderId() {
+		return orderId;
+	}
+	public void setOrderId(String orderId) {
+		this.orderId = orderId;
+	}
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 	public String getProductId() {
 		return productId;
 	}
@@ -38,19 +58,19 @@ public class ProductRecord implements Serializable {
 	public void setCount(String count) {
 		this.count = count;
 	}
-	public String getDetail() {
-		return detail;
+	public String getOrderTime() {
+		return orderTime;
 	}
-	public void setDetail(String detail) {
-		this.detail = detail;
+	public void setOrderTime(String orderTime) {
+		this.orderTime = orderTime;
 	}
-	public String getType() {
-		return type;
+	public String getTotalMoney() {
+		return totalMoney;
 	}
-	public void setType(String type) {
-		this.type = type;
-	}
-   
+	public void setTotalMoney(String totalMoney) {
+		this.totalMoney = totalMoney;
+	} 
+ 
 	 
 	
 }
