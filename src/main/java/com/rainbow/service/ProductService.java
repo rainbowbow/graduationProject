@@ -29,9 +29,9 @@ public class ProductService{
 	    	return productDao.ShopProduct();
 	    }
 		
-     public List<Product> RepertoryList(){
+     public List<Product> RepertoryList(String productName,String type){
 	    	
-	    	return productDao.RepertoryList();
+	    	return productDao.RepertoryList(productName,type);
 	    }  
      
      public int AddProduct(String productName,int count, double price,String detail){

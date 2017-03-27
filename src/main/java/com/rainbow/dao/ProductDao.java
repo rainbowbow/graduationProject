@@ -14,7 +14,7 @@ import com.rainbow.beans.Product;
 public interface ProductDao {
 	
     List<Product> ShopProduct();//获取所有产品
-    List<Product> RepertoryList();
+    List<Product> RepertoryList(@Param("productName")String productName,@Param("type")String type);
     
     int AddProduct(@Param("productName")String productName,@Param("count")int count,@Param("price")double price, @Param("detail")String detail);
     int UpdateProduct(@Param("productId")int productId,@Param("productName")String productName,@Param("count")int count,@Param("price")double price, @Param("detail")String detail);

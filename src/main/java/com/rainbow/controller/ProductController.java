@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.rainbow.beans.Product;
+import com.rainbow.beans.User;
 import com.rainbow.service.ProductService;
  
 @Controller
@@ -46,10 +47,12 @@ public class ProductController {
 		}
 		@RequestMapping("ProductController/repertoryList")
 		@ResponseBody
-		public List<Product> RepertoryList(){
+		public List<Product> RepertoryList(HttpServletRequest request){
+			String productName = request.getParameter("productName");
+			String type = request.getParameter("type");
+			System.out.println(productName+"bbbbbbb"+type); 			
  			List<Product> repertoryList=new ArrayList<Product>();
- 			repertoryList=productService.RepertoryList();
-			System.out.println(repertoryList.get(0).getProductName());
+ 			repertoryList=productService.RepertoryList(productName,type);
 			return repertoryList;
 		}
 		@RequestMapping("ProductController/addProduct")
