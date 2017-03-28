@@ -32,8 +32,29 @@
 				</h1>
 	 
 				<div class="right-content">
-                <div>
-				 <table  data-search="true" class="table table-bordered" id="productTable">
+				<div class="panel panel-default">
+								<div class="panel-heading" >查询条件</div>
+								<div class="panel-body">
+								
+								<form class="form-inline" role="form">
+									<div class="form-group">
+									    <label  for="productName">名称</label> 
+										<input style="height: 25px"  class="form-control" name="productName" id="productName" placeholder="Enter productName">
+									   <label  for="startMoney">价格区间</label> 
+										<input style="height: 25px"  class="form-control" name="startMoney" id=""startMoney"" placeholder="Enter startMoney">
+								       —— <input style="height: 25px"  class="form-control" name="endMoney" id="endMoney" placeholder="Enter endMoney">
+									   
+										<button type="button" style="margin-right: 20px"
+											id="btn_query" onclick="searchProduct();" class="btn btn-primary">查询</button>
+								   
+									</div>
+								 	
+									</form>
+									
+								</div>
+							</div>
+                 <div>
+				   <table  data-search="true" class="table table-bordered" id="productTable">
 				 </table>
 				 </div>
 				</div>
@@ -44,7 +65,17 @@
 	 </div> <!-- /container -->
 	
     </div> <!-- /content -->
-  
+  <!-- 加入购物车Modal start -->
+	<div class="modal hide fade" id="shopModal" tabindex="-1" role="dialog">
+		<div class="modal-header">
+			<button class="close" type="button" data-dismiss="modal">×</button>
+			<h3>加入购物车</h3>
+		</div>
+		<div class="modal-body">
+			<jsp:include page="shopCard/addShopCard.jsp"></jsp:include>
+		</div>
+	</div>
+	<!-- 加入购物车Modal end -->
 <jsp:include page="include/footer.jsp"></jsp:include>
    <script >
   
@@ -87,12 +118,38 @@
               field: 'doSomething',
               align: 'center',
               formatter:function(value,row,index){  
-                var e = '<a href="#" mce_href="#" onclick="shop(\''+ row.productId + '\')">加入购物车</a> ';  
+            	  var e = '<a href="#" onclick="shop(\''
+						+ row.productId+'\'\,\''
+						+ row.productName+'\'\,\''
+						+ row.price+'\'\,\''
+						+ row.count+
+				'\')">加入购物车</a> ';
                 return e;  
             }}
       ]
       });
     });
+    
+    
+    // 回填购物车
+	function shop(id,productName,price,count) {  
+		//向模态框中传值  
+	    $("#shopProductId").val(id);  
+		$("#shopProductName").val(productName);  
+	    $("#shopPrice").val(price); 
+	    $("#maxCount").val(count);
+	    
+	    $("#shopProductId").prop("readonly","readonly");
+	    $("#shopProductName").prop("readonly","readonly");
+ 	    $("#shopPrice").prop("readonly","readonly");
+ 	    $("#shopdetail").prop("readonly","readonly");
+	    
+	    $('#shopModal').modal('show');  
+	}  
+    
+    
+    
+
     </script>
 	</body>
 </html>

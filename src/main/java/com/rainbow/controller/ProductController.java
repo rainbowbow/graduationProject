@@ -109,6 +109,9 @@ public class ProductController {
 			
 			int productId = Integer.parseInt(request.getParameter("productId"));
 			int type = Integer.parseInt(request.getParameter("type"));
+			if(type==1){//1:在售商品--》修改shop_card表的type为1
+				
+			}else{}
    			int upShopId=productService.upOrDownShopProduct(productId,type);
    			return upShopId;
 		}
