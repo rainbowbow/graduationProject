@@ -110,7 +110,7 @@
 
 		$.ajax({
 			url : "${ctx}" + "/ProductController/upOrDownShopProduct",
-			data : {"productId" : id,"type" : "1"},
+			data : {"productId" : id,"type" : "0"},
 			type : "post",
 			beforeSend : function() {
 				if (window.confirm('你确定要下架吗？')) {

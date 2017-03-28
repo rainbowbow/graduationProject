@@ -21,5 +21,7 @@ public interface ProductDao {
 
     int DelProduct(int productId);
     int upOrDownShopProduct(@Param("productId")int productId,@Param("type")int type);
+    int updateShopCardType(@Param("productId")int productId,@Param("type")int type);
+
 }
 

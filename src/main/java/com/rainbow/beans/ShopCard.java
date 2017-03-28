@@ -8,20 +8,22 @@ import java.io.Serializable;
  */
 public class ShopCard implements Serializable {
     
-    private String orderId;
+    private String shopCardId;
     private String userId;
     private String userName;
     private String productId;
     private String productName;
     private String price;
     private String count;
-    private String orderTime;
+    private String type;
+    
     private String totalMoney;
-	public String getOrderId() {
-		return orderId;
+	 
+	public String getShopCardId() {
+		return shopCardId;
 	}
-	public void setOrderId(String orderId) {
-		this.orderId = orderId;
+	public void setShopCardId(String shopCardId) {
+		this.shopCardId = shopCardId;
 	}
 	public String getUserId() {
 		return userId;
@@ -59,11 +61,12 @@ public class ShopCard implements Serializable {
 	public void setCount(String count) {
 		this.count = count;
 	}
-	public String getOrderTime() {
-		return orderTime;
+	 
+	public String getType() {
+		return type;
 	}
-	public void setOrderTime(String orderTime) {
-		this.orderTime = orderTime;
+	public void setType(String type) {
+		this.type = type;
 	}
 	public String getTotalMoney() {
 		return totalMoney;

@@ -60,4 +60,8 @@
     <update id="upOrDownShopProduct" parameterType="int">
 		update product set type=#{type} where product_id=#{productId}
 	</update>
+	
+	<update id="updateShopCardType"  >
+		update shop_card set type=#{type} where product_id=#{productId}
+	</update>
 </mapper>

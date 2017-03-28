@@ -23,7 +23,10 @@ public class ProductService{
 	     * @author miaomiao
 	     * @return
 	     */
-     
+    public int updateShopCardType(int productId,int type){
+    	
+    	return productDao.updateShopCardType(productId, type);
+    }
      public List<Product> ShopProduct(){
 	    	
 	    	return productDao.ShopProduct();

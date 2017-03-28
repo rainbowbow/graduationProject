@@ -4,15 +4,14 @@
 
     <select id="ShopCardList" resultType="ShopCard">
 		select 
-			s.order_id orderId, 
+			s.shop_card_id shopCardId, 
 			s.user_id userId,
 			s.product_id productId,
+			s.count count,
+			s.type type,
 			p.product_name productName,
-			p.price price, 
-			p.count count,
-			p.detail detail,
-			p.type type
-		from product p, shop_card s where s.user_id=#{s.useId} and p.product_id=s.product_id
+			p.price price 
+		from product p ,shop_card s where s.user_id=#{s.useId} and p.product_id=s.product_id
 	</select>
 	 
 	<insert id="AddShopCard">
