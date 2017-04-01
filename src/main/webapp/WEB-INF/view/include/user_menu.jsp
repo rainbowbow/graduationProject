@@ -32,10 +32,11 @@
 							购物车	
 						</a>
 					</li>
+					
 					<li id="order-active">
-						<a href="product" >
+						<a href="product_record">
 							<i class="icon-pushpin"></i>
-							订单信息	
+							订单管理	
 						</a>
 					</li>
 					 

@@ -45,10 +45,21 @@
 								
 								<form class="form-inline" role="form">
 									<div class="form-group">
-									    <label  for="productName">名称</label> 
+									    <label  for="productName">产品名称</label> 
 										<input style="height: 25px"  class="form-control" name="productName" id="productName" placeholder="Enter productName">
-									    <label  for="userName">名称</label> 
-										<input style="height: 25px"  class="form-control" name="userName" id="userName" placeholder="Enter userName">
+									    
+									    
+							<c:choose>
+								<c:when test="${user.getType()=='0'}">
+									<label  for="userName">用户名称</label> 
+									<input style="height: 25px"  class="form-control" name="userName" id="userName" placeholder="Enter userName">
+												   
+								</c:when>
+								
+							</c:choose>
+				
+				
+									    
 									    <label  for="orderTime">时间</label> 
 										<input style="height: 25px"  class="form-control" name="orderTime" id="orderTime" placeholder="Enter orderTime">
 									     
@@ -183,12 +194,8 @@
 						});
 
 		  function searchProductRecord(){
-			    var b=$("#userName").val();
-			    alert(b);
-		    	var searchUrl="${ctx}"+ "/ProductRecordController/productRecordList";
-		    	alert(searchUrl);
-		    	
-		    	$('#orderTable').bootstrapTable('refresh', {url: searchUrl});  
+			    var searchUrl="${ctx}"+ "/ProductRecordController/productRecordList";
+ 		    	$('#orderTable').bootstrapTable('refresh', {url: searchUrl});  
 		    	}
 		  
 		function del(id) {

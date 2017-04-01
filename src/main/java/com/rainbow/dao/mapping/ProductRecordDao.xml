@@ -22,6 +22,9 @@
             <if test="userName !=null and userName!=''">
 				and user_name like concat('%',#{userName},'%')
 		    </if>
+		    <if test="userId !=1">
+				and user_id =#{userId}
+		    </if>
 		</where>
 	</select>
 	 <delete id="DelProduct"  >

@@ -165,7 +165,7 @@
 														},
 														{
 															field : 'count',
-															title : '可拍数量'
+															title : '库存量'
 														},
 														{
 															field : 'type',

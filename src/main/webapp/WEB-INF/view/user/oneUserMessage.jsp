@@ -36,24 +36,78 @@
 				
 				<h1 class="page-title">
 					<i class="icon-th-list"></i>
-					用户管理					
+					个人信息管理					
 				</h1>
 	 
 				<div class="right-content">
-				<div class="panel-body" style="padding-bottom:0px;">
-					  
- 
-               <div id="toolbar" class="btn-group">
-		            <input type="button" class="btn btn-primary" value="新增"  data-toggle="modal"  data-target="#add"  href="user"/>
-                </div>
-                <div>
-				 <table  data-search="true" class="table table-bordered" id="messageTable">
-				 </table>
-				 </div>
-				</div>
-			</div> <!-- /span9 -->
+				
+				 <form id="oneMessageForm"  method="post" class="form-horizontal" novalidate="novalidate">
+						<div class="control-group">
+							<label class="control-label">用户Id:</label>
+							<div class="controls">
+								<input style="height: 25px;width:210px;" type="text" name="userId" id="userId" >
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">用户名:</label>
+							<div class="controls">
+								<input style="height: 25px;width:210px;" type="text" name="userName" id="userName" >
+							</div>
+						</div>
 			
-	      </div> <!-- /row -->
+						
+						<div class = "control-group"> 
+						     <label class="control-label" for = "sex">性别</label> 
+						     <div class="controls">
+						     <select id = "sex" style="height: 25px;width:210px;"> 
+						      <option value="0" selected>女生0</option> 
+						      <option value="1">男生1</option> 
+						     </select> 
+						     </div>
+						 </div> 
+						 
+						<div class="control-group">
+							<label class="control-label">年龄</label>
+							<div class="controls">
+								<input style="height: 25px;width:210px;" type="text" name="age" id="age" onkeyup='this.value=this.value.replace(/\D/gi,"")'>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">电话:</label>
+							<div class="controls">
+								<input style="height: 25px;width:210px;" type="text" name="phone" id="phone" onkeyup='this.value=this.value.replace(/\D/gi,"")'>
+							
+							</div>
+						</div>
+						 
+						<div class="control-group">
+							<label class="control-label">E-mail</label>
+							<div class="controls">
+								<input style="height: 25px;width:210px;" type="text" name="count" id="editCount" >
+							
+							</div>
+						</div>
+				      <div class="control-group">
+							<label class="control-label">地址:</label>
+							<div class="controls">
+								<input style="height: 25px;width:210px;" type="text" name="count" id="editCount"  >
+							
+							</div>
+						</div>
+						<div class="form-actions" style="padding-left: 170px;">
+				
+							<button type="button" onclick="shopCard()" class="btn btn-primary">
+								<i class="icon-ok icon-white"></i>保存
+							</button>
+							&nbsp;&nbsp;
+							<button type="button" onclick="$('#editModal').modal('hide');" class="btn btn-primary cancelBtn" >
+								<i class="icon-remove icon-white"></i>取消
+							</button>
+						</div>
+					</form>
+			</div>  
+			
+	      </div> <!-- /span9 -->
 		
 	 </div> <!-- /container -->
 	
@@ -73,68 +127,6 @@
     var li=document.getElementById('oneUserMessage-active');
     li.setAttribute("class","active");
     var path="${ctx}"+"/UserController/oneUserMessage";
-    $('#messageTable').bootstrapTable({
-    url: path, 
-    dataType: "json",
-    toolbar: '#toolbar',                //工具按钮用哪个容器
-    striped: true, 
-    cache: false,   //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
-    sortable: true,   //是否启用排序
-    sortOrder: "asc",   //排序方式
-    showRefresh: true,//刷新功能  
-    search: true,//搜索功能 
-    singleSelect: false,
-    pagination: true, //分页
-    pageNumber:1, 
-    clickToSelect: true,
-    pageSize: 10,                       //每页的记录行数（*）
-    pageList: [10, 25, 50, 100],        //可供选择的每页的行数（*）
-    sidePagination: "client", //客户端处理分页
-          columns: [{
-              field: 'userId',
-              title: '序号'
-          }, {
-              field: 'userName',
-              title: '名称'
-          }, {
-              field: 'sex',
-              title: '性别'
-          }, {
-              field: 'age',
-              title: '年龄'
-          },{
-              field: 'phone',
-              title: '电话'
-          }, {
-              field: 'address',
-              title: '地址'
-          }, {
-              field: 'eMail',
-              title: 'e-mail'
-          },
-          {
-              field: 'type',
-              title: '状态'
-          },
-          {
-              title: '操作',
-              field: 'doSomething',
-              align: 'center',
-              formatter:function(value,row,index){  
-            	 
-            	 var t;
-            	 if(row.type=="12"){
-            		 t = '<a href="#" mce_href="#" onclick="shop(\''+row.userId+ '\')">拉白</a> ';
-            	 }else{
-            		 t = '<a href="#" mce_href="#" onclick="shop(\''+row.userId+ '\')">拉黑</a> ';
-            	 }
-            	
-                 var e = '<a href="#" mce_href="#" onclick="shop(\''+ row.userId + '\')">详情</a> ';  
-
-                return t+e;  
-            }}
-      ]
-      });
     
     });
      

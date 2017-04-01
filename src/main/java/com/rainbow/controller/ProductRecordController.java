@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.rainbow.beans.Product;
 import com.rainbow.beans.ProductRecord;
+import com.rainbow.beans.User;
 import com.rainbow.service.ProductRecordService;
   
 @Controller
@@ -33,12 +35,15 @@ public class ProductRecordController {
 	  
 		@RequestMapping("ProductRecordController/productRecordList")
 		@ResponseBody
-		public List<ProductRecord> ShopProductRecord(HttpServletRequest request){
+		public List<ProductRecord> ShopProductRecord(HttpServletRequest request,HttpSession session){
+			
+			User user=(User) session.getAttribute("user");
+			int userId=Integer.parseInt(user.getUserId());
 			String productName = request.getParameter("productName");
 			String userName = request.getParameter("userName");
 			System.out.println(productName+"bbbbaabbb"+userName); 			
  			List<ProductRecord> recordList=new ArrayList<ProductRecord>();
- 			recordList=productRecordService.RecordList(productName,userName);
+ 			recordList=productRecordService.RecordList(productName,userName,userId);
 			return recordList;
 		}
 		@RequestMapping("ProductRecordController/delProductRecord")
