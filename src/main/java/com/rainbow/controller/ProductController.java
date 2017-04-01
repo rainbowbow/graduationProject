@@ -42,7 +42,6 @@ public class ProductController {
 		public List<Product> ShopProduct(){
  			List<Product> productList=new ArrayList<Product>();
 			productList=productService.ShopProduct();
-			System.out.println(productList.get(0).getProductName());
 			return productList;
 		}
 		@RequestMapping("ProductController/repertoryList")

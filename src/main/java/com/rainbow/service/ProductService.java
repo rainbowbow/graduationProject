@@ -58,4 +58,10 @@ public class ProductService{
 	    	
     	 return productDao.upOrDownShopProduct(productId,type);
 	    }
+     
+   //通过这个productId获取productId和购物车数量，类型，价格
+     public Product productById(int productId){
+    	 return productDao.productById(productId);
+     }
+     
 	}

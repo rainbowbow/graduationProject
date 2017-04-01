@@ -8,15 +8,34 @@
 			s.user_id userId,
 			s.product_id productId,
 			s.count count,
-			s.type type,
+			p.type type,
 			p.product_name productName,
 			p.price price 
 		from product p ,shop_card s where s.user_id=#{s.useId} and p.product_id=s.product_id
 	</select>
 	 
-	<insert id="AddShopCard">
-		insert into shop_card(product_id,user_id,count,type) 
-		values(#{productId},#{userId},#{count},"1")
+	<insert id="addShopCard">
+		insert into shop_card(product_id,user_id,count) 
+		values(#{productId},#{userId},#{count})
 	</insert>
-
+	
+	<update id="updateShopCard">
+		update shop_card set count=count+#{count}
+		where product_id=#{productId} and user_id=#{userId}
+	</update>
+    <select id="isShopCard" resultType="java.lang.Integer"  >
+			select count(*) from shop_card  where product_id=#{productId} and user_id=#{userId}
+	</select>
+	
+	<select id="productCount" resultType="java.lang.Integer" >
+			select count from product  where product_id=#{productId}
+	</select>
+	<select id="shopcardById"  resultType="ShopCard">
+			select 
+			shop_card_id shopCardId, 
+			user_id userId,
+			product_id productId,
+			count count
+			where shop_card_id=#{shopCardId}
+	</select>
 </mapper>

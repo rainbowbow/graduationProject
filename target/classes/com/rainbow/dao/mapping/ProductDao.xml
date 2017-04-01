@@ -10,9 +10,18 @@
 			count count,
 			detail detail,
 			type type
-		from product where count>0 and type=0
+		from product where count>0 and type=1
 	</select>
 	 
+	 <select id="productById" resultType="Product">
+		select 
+			product_id productId, 
+			product_name productName,
+			price price,
+			count count,
+			type type
+		from product where product_id=#{productId} 
+	</select>
 	 
 	<select id="RepertoryList" resultType="Product">
 		select 
@@ -37,7 +46,7 @@
 	 
 	<insert id="AddProduct" >
 		insert into product(product_name,price,count,detail,type) 
-		values(#{productName},#{price},#{count},#{detail},"1")
+		values(#{productName},#{price},#{count},#{detail},"0")
 	</insert>
 	
 	

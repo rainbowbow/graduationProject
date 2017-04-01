@@ -22,6 +22,7 @@ public interface ProductDao {
     int DelProduct(int productId);
     int upOrDownShopProduct(@Param("productId")int productId,@Param("type")int type);
     int updateShopCardType(@Param("productId")int productId,@Param("type")int type);
-
+    public Product productById(int productId);
+    //通过这个productId获取productId和购物车数量，类型，价格
 }
 
