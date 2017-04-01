@@ -1,0 +1,227 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>
+
+<c:set var="ctx" value="${pageContext.request.contextPath}" />
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<jsp:include page="../include/header.jsp"></jsp:include>
+<title>农产品销售系统</title>
+
+</head>
+
+<body>
+
+	<jsp:include page="../include/top.jsp"></jsp:include>
+
+	<div id="content">
+
+		<div class="container">
+
+			<div class="row">
+				<c:choose>
+					<c:when test="${user.getType()=='0'}">
+						<jsp:include page="../include/admin_menu.jsp"></jsp:include>
+					</c:when>
+					<c:otherwise>
+						<jsp:include page="../include/user_menu.jsp"></jsp:include>
+					</c:otherwise>
+				</c:choose>
+
+				<div class="span9">
+
+					<h1 class="page-title">
+						<i class="icon-th-list"></i> 购物车
+					</h1>
+
+					<div class="right-content">
+                         
+							<div id="toolbar" class="btn-group">
+								<input type="button" class="btn btn-primary" value="删除" onclick="delMore()" />
+							</div>
+							<div >
+							<table data-search="true"  class="table table-bordered"
+								id="shopCardTable">
+							</table>
+						    </div>
+						    <div >
+								<input class="btn btn-primary" type="button"  value="结算" onclick="payBill()" />
+					            <input type="hidden" name="testList" id="testList" />
+					        </div>
+					</div>
+					
+				</div>
+				<!-- /span9 -->
+
+			</div>
+			<!-- /row -->
+
+		</div>
+		<!-- /container -->
+
+	</div>
+	<!-- /content -->
+ 
+	
+	<!-- edit Modal -->
+	<div class="modal hide fade" id="editModal" tabindex="-1" role="dialog">
+		<div class="modal-header">
+			<button class="close" type="button" data-dismiss="modal">×</button>
+			<h3>修改信息</h3>
+		</div>
+		<div class="modal-body">
+			<jsp:include page="editShopCard.jsp"></jsp:include>
+		</div>
+	</div>
+	<!-- edit Modal end -->
+
+<div class="modal hide fade" id="shopPayBillModal" tabindex="-1" role="dialog">
+		<div class="modal-header">
+			<button class="close" type="button" data-dismiss="modal">×</button>
+			<h3>支付信息</h3>
+		</div>
+		<div class="modal-body">
+			<jsp:include page="payBill.jsp"></jsp:include>
+		</div>
+	</div>
+	
+	
+	<jsp:include page="../include/footer.jsp"></jsp:include>
+	<script>
+$(document).ready(function() {
+	var li = document.getElementById('shopcard-active');
+	li.setAttribute("class", "active");
+	var path = "${ctx}"+ "/ShopCardController/shopCardList";
+	$('#shopCardTable').bootstrapTable(
+					{
+						url : path,
+						dataType : "json",
+						toolbar : '#toolbar', //工具按钮用哪个容器
+						striped : true,
+						cache : false, //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+						sortable : true, //是否启用排序
+						sortOrder : "asc", //排序方式
+						showRefresh : true,//刷新功能  
+						search : true,//搜索功能 
+						singleSelect : false,
+						pagination : true, //分页
+						pageNumber : 1,
+						clickToSelect : true,
+						pageSize : 7, //每页的记录行数（*）
+						pageList : [ 7, 10, 25 ], //可供选择的每页的行数（*）
+						sidePagination : "client", //客户端处理分页
+						columns : [{
+				                   checkbox: true
+				                },{
+									field : 'shopCardId',
+									title : '序号'
+								},{
+									field : 'productName',
+									title : '产品名称'
+								},{
+									field : 'price',
+									title : '价格'
+								},{
+									field : 'count',
+									title : '数量'
+								},{
+									field : 'type',
+									title : '状态',
+									formatter:function(value, row,index){
+										if(value=="1"){
+											return '<p style="color:black" >可购买</>';
+									    }else{
+									    	return '<p style="color:gray" >已失效</>';
+									    }
+									}
+								},{
+									title : '操作',
+									field : 'doSomething',
+									align : 'center',
+									formatter : function(value, row,index) {
+                                                          var e = '<a href="#" onclick="editInfo(\''
+												+ row.productId+'\'\,\''
+												+ row.productName+'\'\,\''
+												+ row.price+'\'\,\''
+												+ row.count+
+										'\')">编辑</a> ';
+										
+											var d = '<a href="#"  onclick="del(\''
+												+ row.productId
+												+ '\')">删除</a> ';
+										return  e+ d;
+									}
+								} ]
+					});
+          });
+		// 回填表单
+		function editInfo(id,productName,price,count) {  
+			//向模态框中传值  
+		    $("#editProductId").val(id);  
+		    $("#editProductName").val(productName);  
+		    $("#editPrice").val(price);  
+		    $("#editCount").val(count); 
+		    
+		    $("#shopProductId").prop("readonly","readonly");
+		    $("#shopProductName").prop("readonly","readonly");
+	 	    $("#shopPrice").prop("readonly","readonly");
+		    $('#editModal').modal('show');  
+		}
+		
+		
+		function payBill() {
+			var row=$.map($('#shopCardTable').bootstrapTable('getSelections'), function (row) {
+		        return row.shopCardId;
+		    });
+			$("#testList").val(row);
+			 
+		    $('#shopPayBillModal').modal('show');
+		}
+		function delMore() {
+			var row=$.map($('#shopCardTable').bootstrapTable('getSelections'), function (row) {
+		        return row.shopCardId;
+		    });
+			if(row.length>0){
+
+				$.ajax({
+					url : "${ctx}" + "/ProductController/delProduct?shopCardId="+row,
+					data : {"shopCardId" : row},
+					type : "post",
+					dataType : "json",
+					contentType: "application/x-www-form-urlencoded",
+					beforeSend : function() {
+						if (window.confirm('你确定要删除吗？')) {
+							//alert("确定");
+							return true;
+						} else {
+							alert(row)
+							//alert("取消");
+							return false;
+						}
+					},
+					success : function(data) {
+						if (data > 0) {
+							alert('操作成功:' + data);
+
+							// document.location.href='world_system_notice.php'
+							location.reload();
+						} else {
+							alert('操作失败' + data);
+						}
+					},
+					error : function() {
+						alert('请求出错');
+					},
+				});
+			}else{ 
+				alert("请至少选择一条数据");
+				return false;
+		   }
+		}
+	</script>
+</body>
+</html>

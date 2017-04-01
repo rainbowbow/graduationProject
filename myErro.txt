@@ -1,0 +1,14 @@
+1:用ajax提交修改数据，显示操作不成功但数据修改成功---》用了type="submit"
+   type = "submit" 用在表单内,里面有类似的默认方法封装,普通单击就是提交所在表单
+   type = "button" 就是说这个是个普通的按钮,如果不写单击等事件,那么这个按钮点击是没有任何反应的,所有事件都需要自己手动写
+即：
+    type=submit 是发送表单
+    type=button 就单纯是按钮功能 
+
+2:int型的id批量删除不方便，一开始用in（）删除，但传的是字符类型只能删除前面一个ID--》for循环挨个删除
+　or mybatis里面foreach
+3:传两个及两个以上的参数要加@Param("userName")String userName，不然会找不到参数！！
+
+4:AJAX POST请求中参数以form data和request payload形式在servlet中的获取方式 -
+post请求的Content-Type为application/x-www-form-urlencoded，参数是在请求体中，即上面请求中的Form Data。
+Content-Type为text/plain;charset=UTF-8，而请求表单参数在RequestPayload中。
