@@ -19,9 +19,9 @@ public interface UserDao {
 	
     List<User> UserList();//获取所有用户
     List<User> UserListByQuery(@Param("userName")String userName, @Param("sex")String sex);
-    public void createUser(User user);//添加用户
+    public int createUser(User user);//添加用户
     
-    public void updateUser(User user);//修改用户
+    public int updateUser(User user);//修改用户
 
     
      

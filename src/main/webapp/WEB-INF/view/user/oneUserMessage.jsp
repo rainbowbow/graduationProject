@@ -41,7 +41,7 @@
 	 
 				<div class="right-content">
 				
-				 <form id="oneMessageForm"  method="post" class="form-horizontal" novalidate="novalidate">
+				 <form id="editForm"  method="post" class="form-horizontal" novalidate="novalidate">
 						<div class="control-group">
 							<label class="control-label">用户Id:</label>
 							<div class="controls">
@@ -59,9 +59,9 @@
 						<div class = "control-group"> 
 						     <label class="control-label" for = "sex">性别</label> 
 						     <div class="controls">
-						     <select id = "sex" style="height: 25px;width:210px;"> 
+						     <select name="sex" id = "sex" style="height: 25px;width:210px;"> 
 						      <option value="0" selected>女生0</option> 
-						      <option value="1">男生1</option> 
+						      <option value="1" >男生1</option> 
 						     </select> 
 						     </div>
 						 </div> 
@@ -83,24 +83,24 @@
 						<div class="control-group">
 							<label class="control-label">E-mail</label>
 							<div class="controls">
-								<input style="height: 25px;width:210px;" type="text" name="count" id="editCount" >
+								<input style="height: 25px;width:210px;" type="text" name="eMail" id="eMail" >
 							
 							</div>
 						</div>
 				      <div class="control-group">
 							<label class="control-label">地址:</label>
 							<div class="controls">
-								<input style="height: 25px;width:210px;" type="text" name="count" id="editCount"  >
+								<input style="height: 25px;width:210px;" type="text" name="address" id="address"  >
 							
 							</div>
 						</div>
 						<div class="form-actions" style="padding-left: 170px;">
 				
-							<button type="button" onclick="shopCard()" class="btn btn-primary">
+							<button type="button" onclick="editOneUserMessage()" class="btn btn-primary">
 								<i class="icon-ok icon-white"></i>保存
 							</button>
 							&nbsp;&nbsp;
-							<button type="button" onclick="$('#editModal').modal('hide');" class="btn btn-primary cancelBtn" >
+							<button type="button" onclick="location.reload()" class="btn btn-primary cancelBtn" >
 								<i class="icon-remove icon-white"></i>取消
 							</button>
 						</div>
@@ -127,10 +127,50 @@
     var li=document.getElementById('oneUserMessage-active');
     li.setAttribute("class","active");
     var path="${ctx}"+"/UserController/oneUserMessage";
-    
+    $.ajax({
+		url : path,
+ 		type : "post",
+		success : function(data) {
+ 			 	$("#userId").val(data.userId);  
+ 			    $("#userName").val(data.userName);  
+ 			    $("#sex").val(data.sex);  
+ 			    $("#age").val(data.age); 
+ 			    $("#phone").val(data.phone); 
+ 			    $("#eMail").val(data.eMail); 
+ 			    $("#address").val(data.address); 
+ 			   $("#userId").prop("readonly","readonly");
+  
+		},
+		error : function() {
+			alert('请求出错!');
+		},
+	});
     });
      
-  
+    function editOneUserMessage(){  
+	       
+	    $.ajax({  
+	        type: "post",  
+	        url:  "${ctx}" + "/UserController/updateOneUserMessage",
+	        data:$('#editForm').serialize(),
+	        
+	        success : function(data) {
+				if (data > 0) {
+					alert('保存成功:' + data);
+					location.reload();
+				} else {
+					alert('保存失败' + data);
+				}
+			},
+	        error : function() {
+				alert('请求出错');
+				location.reload();
+			} 
+	    }); 
+	    return false; 
+	}
+    
+    
     </script>
 	</body>
 </html>

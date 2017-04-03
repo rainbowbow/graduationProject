@@ -69,6 +69,10 @@
  
 	</select>
 	
+	<update id="updateUser"  parameterType="User"  >
+		update user set user_name=#{userName},sex=#{sex},age=#{age},phone=#{phone},e_mail=#{eMail},address=#{address}
+		where user_id=#{userId}
+	</update>
 	
 	<insert id="createUser">
 		insert into user(user_id,user_name) 

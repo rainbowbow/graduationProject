@@ -43,13 +43,13 @@ public class UserService {
 	    	return userDao.UserListByQuery(userName, sex);
 	    }
 	    
-	    public void updateUser(User user){
+	    public int updateUser(User user){
 	    	
-	    	userDao.updateUser(user);
+	    	return userDao.updateUser(user);
 	    }
 	    
-	    public void createUser(User user) {
+	    public int createUser(User user) {
 	         
-	        userDao.createUser(user);
+	    	return userDao.createUser(user);
 	    }
 	}

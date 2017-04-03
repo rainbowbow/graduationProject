@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -71,10 +72,29 @@ public class UserController {
 		public User findByUserId(HttpSession session){
 			
 			User user=(User) session.getAttribute("user");
+			System.out.println("userId:"+user.getUserId());
  			User oneUserMessage=new User();
  			oneUserMessage=userService.findByUserId(user.getUserId());
+ 			System.out.println("oneUserMessage:"+oneUserMessage.getUserId()+"\nname:"+oneUserMessage.getUserName());
 			return oneUserMessage;
 		} 
+		@RequestMapping("UserController/updateOneUserMessage")
+		@ResponseBody
+		int updateUser(Model model,HttpServletRequest request){
+			
+			User user=new User();
+			user.setUserId(request.getParameter("userId"));
+			user.setUserName(request.getParameter("userName"));
+			user.setSex(request.getParameter("sex"));
+			user.setAddress(request.getParameter("address"));
+			user.setAge(request.getParameter("age"));
+			user.setPhone(request.getParameter("phone"));
+			user.seteMail(request.getParameter("eMail"));
+			System.out.println("name"+user.getSex());
+		    int updateId= userService.updateUser(user);
+      		System.out.println(request.getParameter("sex")+"updateIdaaaaaqqaaaaaa");
+       		return updateId;
+		}
 		 
 		 /*@RequestMapping("UserController/userlist")
 			@ResponseBody

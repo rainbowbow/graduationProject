@@ -41,13 +41,12 @@
 					</li>
 					 
 					
-					<li id="message-active">
-						<a href="#">
+					<li id="oneUserMessage-active">
+						<a href="oneUserMessage">
 							<i class="icon-signal"></i>
-							个人信息
+							个人信息管理
 						</a>
 					</li>
-					
 					<li id="loginOut-active">
 						<a href="login.jsp">
 							<i class="icon-lock"></i>
