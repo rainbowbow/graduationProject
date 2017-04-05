@@ -12,6 +12,7 @@
 			p.product_name productName,
 			p.price price 
 		from product p ,shop_card s where s.user_id=#{s.useId} and p.product_id=s.product_id
+	
 	</select>
 	 
 	<insert id="addShopCard">

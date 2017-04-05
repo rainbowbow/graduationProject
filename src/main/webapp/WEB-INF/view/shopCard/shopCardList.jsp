@@ -174,11 +174,40 @@ $(document).ready(function() {
 		
 		
 		function payBill() {
-			var row=$.map($('#shopCardTable').bootstrapTable('getSelections'), function (row) {
+			var type=$.map($('#shopCardTable').bootstrapTable('getSelections'), function (row) {
+		        return row.type;
+		    });
+			var shopCardId=$.map($('#shopCardTable').bootstrapTable('getSelections'), function (row) {
 		        return row.shopCardId;
 		    });
-			$("#testList").val(row);
-			 
+			
+			if(type.indexOf('0')!=-1){
+				alert('失效产品不能结算，请重新勾选！！');
+				return  false;
+			}else if(type.indexOf('1')<0){
+				alert('请选择产品！');
+			}
+			
+			
+			var path = "${ctx}"+ "/ShopCardController/shopCardListSelective?shopCardIdMore="+shopCardId;
+			$('#shopCardPayListTable').bootstrapTable(
+							{
+								url : path,
+								dataType : "json",
+								columns : [{
+											field : 'shopCardId',
+											title : '序号'
+										},{
+											field : 'productName',
+											title : '产品名称'
+										},{
+											field : 'price',
+											title : '价格'
+										},{
+											field : 'count',
+											title : '数量'
+										}]
+							});
 		    $('#shopPayBillModal').modal('show');
 		}
 		function delMore() {

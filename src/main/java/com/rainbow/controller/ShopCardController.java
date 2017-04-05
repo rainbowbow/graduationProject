@@ -47,8 +47,35 @@ public class ShopCardController {
 			String userId=user.getUserId();
 			List<ShopCard> shopCardList=new ArrayList<ShopCard>();
  			shopCardList=shopCardService.ShopCardList(userId);
- 			return shopCardList;
+			return shopCardList;
 		}
+		
+		
+		@RequestMapping("ShopCardController/shopCardListSelective")
+		@ResponseBody
+		public List<ShopCard> shopCardListSelective(HttpSession session,HttpServletRequest request){
+			
+			User user=(User) session.getAttribute("user");
+			String userId=user.getUserId();
+			String shopCardIdMore =request.getParameter("shopCardIdMore");
+			
+			String[] shopCardId = shopCardIdMore.split(",");
+			System.out.println(shopCardIdMore.toString());
+            int num=0;
+			
+			List<ShopCard> shopCardList=new ArrayList<ShopCard>();
+			ShopCard shopCard;
+			System.out.println(shopCardId+"hhhh");
+  			    for(int i=0;i<shopCardId.length;i++){
+  			    	shopCard= shopCardService.shopcardById(Integer.parseInt(shopCardId[i]));
+  			    	shopCardList.add(shopCard);
+  			    	num++;
+  			    }
+  			  System.out.println(shopCardList.get(1).getProductName());
+			return shopCardList;
+		}
+		
+		
 		
 		@RequestMapping("ShopCardController/payBill")
 		@ResponseBody
