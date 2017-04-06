@@ -61,10 +61,14 @@
 	</insert>
 	
 	
-    <delete id="DelProduct"  >
-        delete from product where product_id =#{productId}
+    <delete id="DelProduct" parameterType="java.util.List" >
+        delete from product where product_id in
+        <foreach item="id" collection="list" open="(" close=")" separator=",">
+             #{id}
+        </foreach>
+         
     </delete>
-
+  
 
     <update id="upOrDownShopProduct" parameterType="int">
 		update product set type=#{type} where product_id=#{productId}

@@ -79,4 +79,8 @@
 		values(#{userId},#{userName})
 	</insert>
 
+  <update id="editType" >
+		update user set type=#{type} where user_id=#{userId}
+	</update>
+	
 </mapper>

@@ -100,7 +100,14 @@
     pageSize: 10,                       //每页的记录行数（*）
     pageList: [10, 25, 50, 100],        //可供选择的每页的行数（*）
     sidePagination: "client", //客户端处理分页
-          columns: [{
+          columns: [{  
+              title: '序号',
+              formatter: function (value, row, index) {  
+                  return index+1;  
+              },
+              width:60,
+              align:'center' 
+           },{
               field: 'productId',
               title: '序号'
           }, {

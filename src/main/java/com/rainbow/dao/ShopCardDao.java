@@ -18,7 +18,9 @@ public interface ShopCardDao {
     
   //添加购物车
     public int addShopCard(@Param("productId")int productId,@Param("userId")String userId,@Param("count")int count);
-    int DelShopCard(int shopCardId);
+    //int DelShopCard(int shopCardId);
+    int DelShopCard(List<String> shopCardId);
+
     public int saveShopCard(@Param("productId")int productId,@Param("userId")String userId,@Param("count")int count);//添加购物车
     
     public int updateShopCard(@Param("shopCardId")int shopCardId,@Param("count")int count);//修改购物车

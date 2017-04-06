@@ -19,7 +19,7 @@ public interface ProductDao {
     int AddProduct(@Param("productName")String productName,@Param("count")int count,@Param("price")double price, @Param("detail")String detail);
     int UpdateProduct(@Param("productId")int productId,@Param("productName")String productName,@Param("count")int count,@Param("price")double price, @Param("detail")String detail);
 
-    int DelProduct(int productId);
+    int DelProduct(List<String> productId);
     int upOrDownShopProduct(@Param("productId")int productId,@Param("type")int type);
     int updateShopCardType(@Param("productId")int productId,@Param("type")int type);
     public Product productById(int productId);

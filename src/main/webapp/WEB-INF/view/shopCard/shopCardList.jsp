@@ -114,8 +114,15 @@ $(document).ready(function() {
 						pageList : [ 7, 10, 25 ], //可供选择的每页的行数（*）
 						sidePagination : "client", //客户端处理分页
 						columns : [{
-				                   checkbox: true
-				                },{
+			                        checkbox: true
+		                            },{  
+					                title: '序号',
+					                formatter: function (value, row, index) {  
+					                    return index+1;  
+					                },
+					                width:60,
+					                align:'center' 
+	                  			 },{
 									field : 'shopCardId',
 									title : '序号'
 								},{
@@ -159,6 +166,7 @@ $(document).ready(function() {
 									}
 								} ]
 					});
+	$('#shopCardTable').bootstrapTable('hideColumn', 'shopCardId');
           });
 		// 回填表单
 		function editInfo(id,productName,price,count) {  

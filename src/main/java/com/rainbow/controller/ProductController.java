@@ -89,18 +89,10 @@ public class ProductController {
 		int delProduct(Model model,HttpServletRequest request){	
 			
 			String productIdMore = request.getParameter("productId");
-			String[] productId = productIdMore.split(",");
-			System.out.println(productId.toString());
-            int num=0;
-			for (int i = 0; i < productId.length; i++) {
-			 if(productService.DelProduct(Integer.parseInt(productId[i]))!=0){
-				 num++;
-			 }
-			}
-			return num;
+			return productService.DelProduct(productIdMore);
+			
 		}
 		 
-		
 		@RequestMapping("ProductController/upOrDownShopProduct")
 		@ResponseBody
 		int upOrDownShopProduct(HttpServletRequest request){
@@ -108,9 +100,9 @@ public class ProductController {
 			int productId = Integer.parseInt(request.getParameter("productId"));
 			int type = Integer.parseInt(request.getParameter("type"));
 			//1:在售商品--》修改shop_card表的type为1
-			int updateShopCardType=productService.updateShopCardType(productId, type);
    			int upShopId=productService.upOrDownShopProduct(productId,type);
-   			return updateShopCardType+upShopId;
+   			return upShopId;
 		}
+		
 	 
   }

@@ -102,57 +102,44 @@
               field: 'doSomething',
               align: 'center',
               formatter:function(value,row,index){ 
-            	  var u;
+            	  var d;
             	  if(${user.getType()}=='0'){
-            		 d = '<a href="#"  onclick="downShop(\''
+            		 d = '<a href="#"   onclick="downShop(\''
   						+ row.productId
   						+ '\')">下架</a> ';
             	  }else{
-            	   d = '<a href="#" mce_href="#" onclick="downShop(\''
+            	   d = '<a href="#"  onclick="downShop(\''
 						+ row.productId
 						+ '\')">加入购物车</a> ';
             	  }
 				  return d;  
-            }}
-      ]
+            }
+          }]
       });
     });
     function downShop(id) {
-		if (!id) {
-			alert('Error！');
-			return false;
-		}
-		// var form_data = new Array();
-
-		$.ajax({
+	 $.ajax({
 			url : "${ctx}" + "/ProductController/upOrDownShopProduct",
 			data : {"productId" : id,"type" : "0"},
 			type : "post",
 			beforeSend : function() {
 				if (window.confirm('你确定要下架吗？')) {
-					//alert("确定");
-					return true;
+ 					return true;
 				} else {
-					//alert("取消");
-					return false;
+ 					return false;
 				}
 			},
 			success : function(data) {
 				if (data > 0) {
 					alert('操作成功:' + data);
-
-					// document.location.href='world_system_notice.php'
-					location.reload();
+                    location.reload();
 				} else {
 					alert('操作失败' + data);
 				}
 			},
 			error : function() {
 				alert('请求出错');
-			},
-			complete : function() {
-				// $('#tips').hide();
-			}
+			} 
 		});
 
 		return false;

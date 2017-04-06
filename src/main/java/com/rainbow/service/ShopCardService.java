@@ -1,4 +1,5 @@
 package com.rainbow.service;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -52,9 +53,16 @@ public class ShopCardService{//定义一个名为shopCardService的bean
      public ShopCard shopcardById(int shopCardId){
     	 return shopCardDao.shopcardById(shopCardId);
      }
-     public int DelShopCard(int shopCardId){
-	    	
-    	 return shopCardDao.DelShopCard(shopCardId);
+     public int DelShopCard(String shopCardId){
+    	 List<String> shopCardIdList = getList(shopCardId);
+    	 return shopCardDao.DelShopCard(shopCardIdList);
 	    }
-     
+     public List<String> getList(String id) {
+	      List<String> list = new ArrayList<String>();
+	      String[] str = id.split(",");
+	       for (int i = 0; i < str.length; i++) {
+	          list.add(str[i]);
+	      }
+	      return list;
+	  }
 	}

@@ -102,96 +102,100 @@
 	<!-- 新增 Modal end -->
 	<jsp:include page="../include/footer.jsp"></jsp:include>
 	<script>
-		$(document)
-				.ready(
-						function() {
-							var li = document
-									.getElementById('order-active');
-							li.setAttribute("class", "active");
-							var path = "${ctx}"
-									+ "/ProductRecordController/productRecordList";
-							$('#orderTable')
-									.bootstrapTable(
-											{
-												url : path,
-												dataType : "json",
-												contentType: "application/x-www-form-urlencoded",
-												toolbar : '#toolbar', //工具按钮用哪个容器
-												striped : true,
-												cache : false, //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
-												sortable : true, //是否启用排序
-												sortOrder : "asc", //排序方式
-												showRefresh : true,//刷新功能  
-												search : true,//搜索功能 
-												queryParamsType: "limit", //参数格式,发送标准的RESTFul类型的参数请求  
-												queryParams: function (params) {
- 													return {
-												           
-												    	    rows: this.pageSize,
-												            page: this.pageNumber,
-												            userName:$("input[name='userName']").val(),
-												            productName:$("input[name='productName']").val()
-												        };
-												    },
-												singleSelect : false,
-												pagination : true, //分页
-												pageNumber : 1,
-												clickToSelect : true,
-												pageSize : 7, //每页的记录行数（*）
-												pageList : [ 7, 10, 25 ], //可供选择的每页的行数（*）
-												sidePagination : "client", //客户端处理分页
-												columns : [
-													    {
-										                   checkbox: true
-										                },
-														{
-															field : 'orderId',
-															title : '序号'
-														},
-														{
-															field : 'productName',
-															title : '产品名称'
-														},
-														{
-															field : 'userName',
-															title : '买家'
-														},
-														{
-															field : 'price',
-															title : '价格'
-														},
-														{
-															field : 'count',
-															title : '数量'
-														},
-														{
-															field : 'orderTime',
-															title : '购买时间',
-														},{
-															field : 'totalMoney',
-															title : '总价',
-														},
-														{
-															title : '操作',
-															field : 'doSomething',
-															align : 'center',
-															formatter : function(value, row,index) {
-                                                                
-																var e = '<a href="#" onclick="editInfo(\''
-																		+ row.productId+'\'\,\''
-																		+ row.productName+'\'\,\''
-																		+ row.price+'\'\,\''
-																		+ row.count+
-																'\')">详情</a> ';
-																
- 																var d = '<a href="#"  onclick="del(\''
-																		+ row.orderId
-																		+ '\')">删除</a> ';
-																return e+ d;
-															}
-														} ]
-											});
-						});
+		$(document).ready(
+			function() {
+				var li = document.getElementById('order-active');
+				li.setAttribute("class", "active");
+				var path = "${ctx}"
+						+ "/ProductRecordController/productRecordList";
+				$('#orderTable').bootstrapTable({
+				url : path,
+				dataType : "json",
+				contentType: "application/x-www-form-urlencoded",
+				toolbar : '#toolbar', //工具按钮用哪个容器
+				striped : true,
+				cache : false, //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+				sortable : true, //是否启用排序
+				sortOrder : "asc", //排序方式
+				showRefresh : true,//刷新功能  
+				search : true,//搜索功能 
+				queryParamsType: "limit", //参数格式,发送标准的RESTFul类型的参数请求  
+				queryParams: function (params) {
+						return {
+				           
+				    	    rows: this.pageSize,
+				            page: this.pageNumber,
+				            userName:$("input[name='userName']").val(),
+				            productName:$("input[name='productName']").val()
+				        };
+				    },
+				singleSelect : false,
+				pagination : true, //分页
+				pageNumber : 1,
+				clickToSelect : true,
+				pageSize : 7, //每页的记录行数（*）
+				pageList : [ 7, 10, 25 ], //可供选择的每页的行数（*）
+				sidePagination : "client", //客户端处理分页
+				columns : [{
+	                        checkbox: true
+                        },{  
+			                title: '序号',
+			                formatter: function (value, row, index) {  
+			                    return index+1;  
+			                },
+			                width:60,
+			                align:'center' 
+                     },
+						{
+							field : 'orderId',
+							title : '序号'
+						},
+						{
+							field : 'productName',
+							title : '产品名称'
+						},
+						{
+							field : 'userName',
+							title : '买家'
+						},
+						{
+							field : 'price',
+							title : '价格'
+						},
+						{
+							field : 'count',
+							title : '数量'
+						},
+						{
+							field : 'orderTime',
+							title : '购买时间',
+						},{
+							field : 'totalMoney',
+							title : '总价',
+						},
+						{
+							title : '操作',
+							field : 'doSomething',
+							align : 'center',
+							formatter : function(value, row,index) {
+                                                        
+								var e = '<a href="#" onclick="editInfo(\''
+										+ row.productId+'\'\,\''
+										+ row.productName+'\'\,\''
+										+ row.price+'\'\,\''
+										+ row.count+
+								'\')">详情</a> ';
+								
+									var d = '<a href="#"  onclick="del(\''
+										+ row.orderId
+										+ '\')">删除</a> ';
+								return e+ d;
+							}
+						} ]
+			});
+				
+				$('#orderTable').bootstrapTable('hideColumn', 'orderId');
+    });
 
 		  function searchProductRecord(){
 			    var searchUrl="${ctx}"+ "/ProductRecordController/productRecordList";

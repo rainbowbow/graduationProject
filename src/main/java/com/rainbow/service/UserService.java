@@ -52,4 +52,8 @@ public class UserService {
 	         
 	    	return userDao.createUser(user);
 	    }
+         public int editType(int userId,String type){
+	    	
+	    	return userDao.editType(userId,type);
+	    }
 	}

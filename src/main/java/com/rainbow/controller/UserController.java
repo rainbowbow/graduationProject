@@ -107,5 +107,15 @@ public class UserController {
 				System.out.println(userListByQuery.get(0).getUserName());
 				return userListByQuery;
 			}*/
-	 
+		@RequestMapping("UserController/editType")
+		@ResponseBody
+		int editType(HttpServletRequest request){
+			
+			int userId = Integer.parseInt(request.getParameter("userId"));
+			String type = request.getParameter("type");
+			System.out.println("typeppppppp"+type);
+			
+   			int editType=userService.editType(userId,type);
+   			return editType;
+		}
   }

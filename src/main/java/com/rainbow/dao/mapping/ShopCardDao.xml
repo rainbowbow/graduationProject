@@ -49,8 +49,11 @@
 		from product p ,shop_card s where  p.product_id=s.product_id and shop_card_id=#{shopCardId}
 	
 	</select>
-	
-	<delete id="DelShopCard"  >
-        delete from shop_card where shop_card_id =#{shopCardId}
+	 <delete id="DelShopCard" parameterType="java.util.List" >
+        delete from shop_card where shop_card_id in
+        <foreach item="id" collection="list" open="(" close=")" separator=",">
+             #{id}
+        </foreach>
     </delete>
+	 
 </mapper>

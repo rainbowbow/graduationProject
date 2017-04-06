@@ -149,16 +149,8 @@ public class ShopCardController {
 		int delShopCard(Model model,HttpServletRequest request){	
 			
 			String shopCardIdMore = request.getParameter("shopCardId");
-			String[] shopCardId = shopCardIdMore.split(",");
-			System.out.println(shopCardId.toString());
-            int num=0;
-			for (int i = 0; i < shopCardId.length; i++) {
-			 if(shopCardService.DelShopCard(Integer.parseInt(shopCardId[i]))!=0){
-				 num++;
-			 }
-			}
-			System.out.println(num);
-			return num;
+			System.out.println("kkkkkkkkkk====>"+shopCardIdMore);
+			return shopCardService.DelShopCard(shopCardIdMore);
 		}
 		
 	 
