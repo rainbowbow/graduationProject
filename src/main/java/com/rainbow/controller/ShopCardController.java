@@ -1,6 +1,7 @@
 package com.rainbow.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.rainbow.beans.ProductRecord;
 import com.rainbow.beans.ShopCard;
 import com.rainbow.beans.User;
 import com.rainbow.service.ProductRecordService;
@@ -29,7 +31,7 @@ public class ShopCardController {
 	 
 	  @Resource
 	  ProductRecordService productRecordService;
-	  
+	   
 	  @Resource
 	  ProductService productService;
 	  
@@ -68,10 +70,10 @@ public class ShopCardController {
 			System.out.println(shopCardId+"hhhh");
   			    for(int i=0;i<shopCardId.length;i++){
   			    	shopCard= shopCardService.shopcardById(Integer.parseInt(shopCardId[i]));
+  			    	System.out.println("i:"+i+"==>"+shopCard);
   			    	shopCardList.add(shopCard);
   			    	num++;
   			    }
-  			  System.out.println(shopCardList.get(1).getProductName());
 			return shopCardList;
 		}
 		
@@ -79,19 +81,32 @@ public class ShopCardController {
 		
 		@RequestMapping("ShopCardController/payBill")
 		@ResponseBody
-		int addProduct(Model model,HttpServletRequest request,HttpSession session){
+		int addProductRecord(Model model,HttpServletRequest request,HttpSession session){
+			
 			User user=(User) session.getAttribute("user");
 			String userId=user.getUserId();
-			String shopCardId =request.getParameter("shopCardId");
-			//获取要结算的购物车id，通过这个id获取productId和shop数量
+			String userName=user.getUserName();
+			String shopCardIdMore =request.getParameter("shopCardId");
+			//获取要结算的购物车id，通过这个id获取productId,count
 			//ShopCard shopCard=shopCardService.shopcardById(shopCardId);
-			//通过productId获取产品的可购买数量和类型是否失效，获取价格
-			//判断产品是否失效
-			//判断购买数量是否大于产品数量   若大于--》操作失败，产品失效或者超过库存
-			//若不大于 --》购买 总价=数量*价格
+			//通过productId获取产品的productName,price
+			 
+			//购买 总价=数量*价格
 			//购买成功则--》1：删除对应的购物车    2：添加对应的订单
- 			int num=1;
-			System.out.println(shopCardId+"qqqqqqww"+userId);
+			
+			String[] shopCardId = shopCardIdMore.split(",");
+			System.out.println(shopCardId.toString());
+            int num=0;
+            ProductRecord productRecord=new ProductRecord();
+            productRecord.setUserId(userId);
+            productRecord.setUserName(userName);
+            productRecord.setOrderTime(new Date());
+            
+            //获取要结算的购物车id，通过这个id获取productId,count
+			for (int i = 0; i < shopCardId.length; i++) {
+			 
+			}
+ 			System.out.println(shopCardId+"qqqqqqww"+userId);
  			
 			
 		 
@@ -109,11 +124,42 @@ public class ShopCardController {
 		    	System.out.println(userId+"\nproductId"+productId+"\ncount"+count);
 		    	System.out.println("\n"+"num: "+num);
 				if(num>0){
-					return shopCardService.updateShopCard(productId, userId, count);
+					return shopCardService.saveShopCard(productId, userId, count);
 		    	}else{
 			       return shopCardService.addShopCard(productId, userId, count);
 
 		    	}
 		    }
-	 	
+		@RequestMapping("ShopCardController/editShopCard")
+		@ResponseBody
+		 public int editShopCard(HttpServletRequest request,HttpSession session){
+			   
+			     
+				int shopCardId =Integer.parseInt(request.getParameter("shopCardId"));
+				int count =Integer.parseInt(request.getParameter("count"));
+
+		    	System.out.println("\n"+"num: "+shopCardId);
+		    	System.out.println();
+		    	return shopCardService.updateShopCard(shopCardId,count); 
+		    }
+		
+		
+		@RequestMapping("ShopCardController/delShopCard")
+		@ResponseBody
+		int delShopCard(Model model,HttpServletRequest request){	
+			
+			String shopCardIdMore = request.getParameter("shopCardId");
+			String[] shopCardId = shopCardIdMore.split(",");
+			System.out.println(shopCardId.toString());
+            int num=0;
+			for (int i = 0; i < shopCardId.length; i++) {
+			 if(shopCardService.DelShopCard(Integer.parseInt(shopCardId[i]))!=0){
+				 num++;
+			 }
+			}
+			System.out.println(num);
+			return num;
+		}
+		
+	 
   }

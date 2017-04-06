@@ -48,7 +48,7 @@ public class ProductRecordController {
 		}
 		@RequestMapping("ProductRecordController/delProductRecord")
 		@ResponseBody
-		int delProduct(Model model,HttpServletRequest request){	
+		int delProductRecord(Model model,HttpServletRequest request){	
 			
 			String orderIdMore = request.getParameter("orderId");
 			String[] orderId = orderIdMore.split(",");

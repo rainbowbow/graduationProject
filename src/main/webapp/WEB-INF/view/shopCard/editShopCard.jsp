@@ -13,9 +13,9 @@
 <body style="padding: 20px;">
 	<form id="shopForm"  method="post" class="form-horizontal" novalidate="novalidate">
 		<div class="control-group">
-			<label class="control-label">产品Id:</label>
+			<label class="control-label">购物Id:</label>
 			<div class="controls">
-				<input style="height: 25px" type="text" name="productId" id="editProductId" >
+				<input style="height: 25px" type="text" name="shopCardId" id="editShopCardId" >
 			</div>
 		</div>
 		<div class="control-group">
@@ -60,7 +60,7 @@
 	      }else{
 	    $.ajax({  
 	        type: "post",  
-	        url:  "${ctx}" + "/ShopCardController/addShopCard",
+	        url:  "${ctx}" + "/ShopCardController/editShopCard",
 	        data:$('#shopForm').serialize(),
 	        
 	        success : function(data) {

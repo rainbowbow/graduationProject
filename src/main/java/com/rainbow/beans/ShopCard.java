@@ -15,6 +15,7 @@ public class ShopCard implements Serializable {
     private String productName;
     private String price;
     private String count;
+    private String allCount;
     private String type;
     
     private String totalMoney;
@@ -62,6 +63,13 @@ public class ShopCard implements Serializable {
 		this.count = count;
 	}
 	 
+	 
+	public String getAllCount() {
+		return allCount;
+	}
+	public void setAllCount(String allCount) {
+		this.allCount = allCount;
+	}
 	public String getType() {
 		return type;
 	}

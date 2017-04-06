@@ -3,6 +3,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
 import com.rainbow.beans.ShopCard;
@@ -33,11 +34,14 @@ public class ShopCardService{//定义一个名为shopCardService的bean
     	 return shopCardDao.addShopCard(productId,userId,count);
 	    }
      
-     public int updateShopCard(int productId,String userId,int count){
+     public int saveShopCard(int productId,String userId,int count){
 	    	
-    	 return shopCardDao.updateShopCard(productId,userId,count);
+    	 return shopCardDao.saveShopCard(productId,userId,count);
 	    }
-	  
+     public int updateShopCard(int shopCardId,int count){
+	    	
+    	 return shopCardDao.updateShopCard(shopCardId,count);
+	    }
      public int productCount(int productId){
 	    	
     	 return shopCardDao.productCount(productId);
@@ -48,4 +52,9 @@ public class ShopCardService{//定义一个名为shopCardService的bean
      public ShopCard shopcardById(int shopCardId){
     	 return shopCardDao.shopcardById(shopCardId);
      }
+     public int DelShopCard(int shopCardId){
+	    	
+    	 return shopCardDao.DelShopCard(shopCardId);
+	    }
+     
 	}

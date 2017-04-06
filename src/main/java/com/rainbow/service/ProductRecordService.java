@@ -34,8 +34,8 @@ public class ProductRecordService{
 	    	
     	 return productRecordDao.DelProduct(orderId);
 	    }
-     public int addProductRecord(ShopCard shopCard){
-    	 return productRecordDao.addProductRecord(shopCard);
+     public int addProductRecord(ProductRecord productRecord){
+    	 return productRecordDao.addProductRecord(productRecord);
      }
      
 	}

@@ -219,14 +219,7 @@
 		    	$('#productTable').bootstrapTable('refresh', {url: searchUrl});  
 		    	}
 		function del(id) {
-			
-			if (!id) {
-				alert('Error！');
-				return false;
-			}
-			// var form_data = new Array();
-
-			$.ajax({
+			 	$.ajax({
 				url : "${ctx}" + "/ProductController/delProduct",
 				data : {
 					"productId" : id,
@@ -245,8 +238,7 @@
 				success : function(data) {
 					if (data!=null) {
 						alert('操作成功:' + data);
-
-						// document.location.href='world_system_notice.php'
+ 
 						location.reload();
 					} else {
 						alert('操作失败' + data);
@@ -254,10 +246,7 @@
 				},
 				error : function() {
 					alert('请求出错');
-				},
-				complete : function() {
-					// $('#tips').hide();
-				}
+				} 
 			});
 
 			return false;

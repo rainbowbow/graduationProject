@@ -16,6 +16,6 @@ public interface ProductRecordDao {
 	
     List<ProductRecord> RecordList(@Param("productName")String productName,@Param("userName")String userName,@Param("userId")int userId);
     int DelProduct(int orderId);
-    public int addProductRecord(ShopCard shopCard);
+    public int addProductRecord(ProductRecord productRecord);
 }
 

@@ -97,7 +97,6 @@ public class ProductController {
 				 num++;
 			 }
 			}
-			System.out.println(num);
 			return num;
 		}
 		 

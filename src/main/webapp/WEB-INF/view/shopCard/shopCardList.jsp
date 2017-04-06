@@ -49,8 +49,7 @@
 							</table>
 						    </div>
 						    <div >
-								<input class="btn btn-primary" type="button"  value="结算" onclick="payBill()" />
-					            <input type="hidden" name="testList" id="testList" />
+								<input class="btn btn-primary" type="button"  value="  结算    " onclick="payBill()" />
 					        </div>
 					</div>
 					
@@ -81,7 +80,7 @@
 
 <div class="modal hide fade" id="shopPayBillModal" tabindex="-1" role="dialog">
 		<div class="modal-header">
-			<button class="close" type="button" data-dismiss="modal">×</button>
+			<button class="close" type="button" onclick="location.reload()" data-dismiss="modal">×</button>
 			<h3>支付信息</h3>
 		</div>
 		<div class="modal-body">
@@ -129,6 +128,9 @@ $(document).ready(function() {
 									field : 'count',
 									title : '数量'
 								},{
+									field : 'allCount',
+									title : '可买数量'
+								},{
 									field : 'type',
 									title : '状态',
 									formatter:function(value, row,index){
@@ -144,14 +146,14 @@ $(document).ready(function() {
 									align : 'center',
 									formatter : function(value, row,index) {
                                                           var e = '<a href="#" onclick="editInfo(\''
-												+ row.productId+'\'\,\''
+												+ row.shopCardId+'\'\,\''
 												+ row.productName+'\'\,\''
 												+ row.price+'\'\,\''
 												+ row.count+
 										'\')">编辑</a> ';
 										
 											var d = '<a href="#"  onclick="del(\''
-												+ row.productId
+												+ row.shopCardId
 												+ '\')">删除</a> ';
 										return  e+ d;
 									}
@@ -161,14 +163,14 @@ $(document).ready(function() {
 		// 回填表单
 		function editInfo(id,productName,price,count) {  
 			//向模态框中传值  
-		    $("#editProductId").val(id);  
+		    $("#editShopCardId").val(id);  
 		    $("#editProductName").val(productName);  
 		    $("#editPrice").val(price);  
 		    $("#editCount").val(count); 
 		    
-		    $("#shopProductId").prop("readonly","readonly");
-		    $("#shopProductName").prop("readonly","readonly");
-	 	    $("#shopPrice").prop("readonly","readonly");
+		    $("#editShopCardId").prop("readonly","readonly");
+		    $("#editProductName").prop("readonly","readonly");
+	 	    $("#editPrice").prop("readonly","readonly");
 		    $('#editModal').modal('show');  
 		}
 		
@@ -180,6 +182,13 @@ $(document).ready(function() {
 			var shopCardId=$.map($('#shopCardTable').bootstrapTable('getSelections'), function (row) {
 		        return row.shopCardId;
 		    });
+			var row=$('#shopCardTable').bootstrapTable('getSelections');
+ 			for(var i=0;i<row.length;i++){
+				if(parseInt(row[i].count)>parseInt(row[i].allCount)){
+					alert(row[i].count+"--"+row[i].productName+"购买数量不能超过"+row[i].allCount+"!!");
+					return false;
+				}
+			}
 			
 			if(type.indexOf('0')!=-1){
 				alert('失效产品不能结算，请重新勾选！！');
@@ -188,7 +197,7 @@ $(document).ready(function() {
 				alert('请选择产品！');
 			}
 			
-			
+			$("#testList").val(shopCardId);
 			var path = "${ctx}"+ "/ShopCardController/shopCardListSelective?shopCardIdMore="+shopCardId;
 			$('#shopCardPayListTable').bootstrapTable(
 							{
@@ -217,27 +226,23 @@ $(document).ready(function() {
 			if(row.length>0){
 
 				$.ajax({
-					url : "${ctx}" + "/ProductController/delProduct?shopCardId="+row,
+					url : "${ctx}" + "/ShopCardController/delShopCard?shopCardId="+row,
 					data : {"shopCardId" : row},
 					type : "post",
 					dataType : "json",
 					contentType: "application/x-www-form-urlencoded",
 					beforeSend : function() {
 						if (window.confirm('你确定要删除吗？')) {
-							//alert("确定");
-							return true;
+ 							return true;
 						} else {
 							alert(row)
-							//alert("取消");
-							return false;
+ 							return false;
 						}
 					},
 					success : function(data) {
 						if (data > 0) {
 							alert('操作成功:' + data);
-
-							// document.location.href='world_system_notice.php'
-							location.reload();
+ 			location.reload();
 						} else {
 							alert('操作失败' + data);
 						}
@@ -250,6 +255,38 @@ $(document).ready(function() {
 				alert("请至少选择一条数据");
 				return false;
 		   }
+		}
+		
+function del(id) {
+			 
+			$.ajax({
+				url : "${ctx}" + "/ShopCardController/delShopCard",
+				data : {
+					"shopCardId" : id,
+					"type" : "0"
+				},
+				type : "post",
+				beforeSend : function() {
+					if (window.confirm('你确定要删除吗？')) {
+ 						return true;
+					} else {
+ 						return false;
+					}
+				},
+				success : function(data) {
+					if (data!=null) {
+						alert('操作成功:' + data);
+                        location.reload();
+					} else {
+						alert('操作失败' + data);
+					}
+				},
+				error : function() {
+					alert('请求出错');
+				} 
+			});
+
+			return false;
 		}
 	</script>
 </body>

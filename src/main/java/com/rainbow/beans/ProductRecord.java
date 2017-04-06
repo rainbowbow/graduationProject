@@ -2,6 +2,7 @@ package com.rainbow.beans;
 
 
 import java.io.Serializable;
+import java.util.Date;
 /**
  * @author miaomiao
  * @since 201703015
@@ -14,7 +15,7 @@ public class ProductRecord implements Serializable {
      private String productName;
      private String price;
      private String count;
-     private String orderTime; 
+     private Date orderTime; 
      private String totalMoney;
 	public String getOrderId() {
 		return orderId;
@@ -58,10 +59,10 @@ public class ProductRecord implements Serializable {
 	public void setCount(String count) {
 		this.count = count;
 	}
-	public String getOrderTime() {
+	public Date getOrderTime() {
 		return orderTime;
 	}
-	public void setOrderTime(String orderTime) {
+	public void setOrderTime(Date orderTime) {
 		this.orderTime = orderTime;
 	}
 	public String getTotalMoney() {
