@@ -201,9 +201,18 @@
 								field : 'doSomething',
 								align : 'center',
 								formatter : function(value,row,index) {
+									var e = '<a href="#" onclick="detailInfo(\''
+										+ row.userId+'\'\,\''
+										+ row.userName+'\'\,\''
+										+ row.age+'\'\,\''
+										+ row.phone+'\'\,\''
+										+ row.address+'\'\,\''
+										+ row.eMail+'\'\,\''
+										+ row.type+
+								'\')">详情</a> ';
 									var e = '<a href="#" onclick="detail(\''
 										+ row.userId
-										+ '\')">详情</a> ';
+										+ '\')">编辑</a> ';
 
 									var t;
 									if (row.type == "12") {
@@ -268,7 +277,25 @@
 
 				return false;  
 			}
-			function detail(id) {
+			function detail(userId,userName,age,phone,address,eMail,type) {
+				//向模态框中传值  
+				userId,userName,age,phone,address,eMail,type+
+			    $("#userId").val(userId);  
+			    $("#userName").val(userName);  
+			    $("#age").val(age);  
+			    $("#phone").val(phone); 
+			    $("#address").val(address);
+			    $("#eMail").val(eMail);
+			    $("#type").val(type);
+			    
+			    if(type=="11"){
+					 $("#type").val("正常用户");
+			    }else if(value=="0"){
+			    	$("#type").val("管理员");
+ 			    }else{
+			    	$("#type").val("拉黑中");
+ 			    }
+			    
 				$('#userDetail').modal('show');
 				
 			}

@@ -15,7 +15,7 @@ public class ProductRecord implements Serializable {
      private String productName;
      private String price;
      private String count;
-     private Date orderTime; 
+     private String orderTime; 
      private String totalMoney;
 	public String getOrderId() {
 		return orderId;
@@ -59,10 +59,11 @@ public class ProductRecord implements Serializable {
 	public void setCount(String count) {
 		this.count = count;
 	}
-	public Date getOrderTime() {
+	 
+	public String getOrderTime() {
 		return orderTime;
 	}
-	public void setOrderTime(Date orderTime) {
+	public void setOrderTime(String orderTime) {
 		this.orderTime = orderTime;
 	}
 	public String getTotalMoney() {

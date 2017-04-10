@@ -1,6 +1,8 @@
 package com.rainbow.controller;
 
- import java.util.ArrayList;
+ import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -37,13 +39,14 @@ public class ProductRecordController {
 		@ResponseBody
 		public List<ProductRecord> ShopProductRecord(HttpServletRequest request,HttpSession session){
 			
+			String orderTime = request.getParameter("orderTime");
 			User user=(User) session.getAttribute("user");
 			int userId=Integer.parseInt(user.getUserId());
 			String productName = request.getParameter("productName");
 			String userName = request.getParameter("userName");
-			System.out.println(productName+"bbbbaabbb"+userName); 			
+			System.out.println(productName+"bbbbaabbb"+orderTime+"\naaaaaa"); 			
  			List<ProductRecord> recordList=new ArrayList<ProductRecord>();
- 			recordList=productRecordService.RecordList(productName,userName,userId);
+ 			recordList=productRecordService.RecordList(productName,userName,userId,orderTime);
 			return recordList;
 		}
 		@RequestMapping("ProductRecordController/delProductRecord")

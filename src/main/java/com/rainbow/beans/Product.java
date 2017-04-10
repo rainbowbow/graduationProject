@@ -13,6 +13,7 @@ public class Product implements Serializable {
     private String price;
     private String count;
     private String detail;
+    private String imgUrl;
     private String type;//0:在售；1：库存（未上架+下架）
 	 
 	 
@@ -45,6 +46,12 @@ public class Product implements Serializable {
 	}
 	public void setDetail(String detail) {
 		this.detail = detail;
+	}
+	public String getImgUrl() {
+		return imgUrl;
+	}
+	public void setImgUrl(String imgUrl) {
+		this.imgUrl = imgUrl;
 	}
 	public String getType() {
 		return type;

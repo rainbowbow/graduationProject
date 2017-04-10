@@ -7,9 +7,11 @@ import java.io.Serializable;
  * @since 20170304
  */
 public class User implements Serializable {
+	
     private String userId;
     private String password;
     private String userName;
+    private String imgUrl;
     private String sex;
     private String phone;
     private String age;
@@ -41,6 +43,12 @@ public class User implements Serializable {
 	}
 	public void setSex(String sex) {
 		this.sex = sex;
+	}
+	public String getImgUrl() {
+		return imgUrl;
+	}
+	public void setImgUrl(String imgUrl) {
+		this.imgUrl = imgUrl;
 	}
 	public String getPhone() {
 		return phone;

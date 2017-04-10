@@ -6,11 +6,26 @@
 		select 
 			product_id productId, 
 			product_name productName,
+			img_url imgUrl,
 			price price,
 			count count,
 			detail detail,
 			type type
-		from product where count>0 and type=1
+		from product 
+		<where>
+			count>0 and type=1
+            <if test="productName!=null and productName!='' ">
+				and product_name like concat('%',#{productName},'%')
+		    </if>
+		    
+            <if test="startMoney !=null and startMoney!=''">
+				and price <![CDATA[  >=  ]]> #{startMoney}
+		    </if>
+		    <if test="endMoney !=null and endMoney!=''">
+				and  price <![CDATA[   <=  ]]> #{endMoney}
+		    </if>
+		</where>
+		
 	</select>
 	 
 	 <select id="productById" resultType="Product">
@@ -27,6 +42,7 @@
 		select 
 			product_id productId, 
 			product_name productName,
+			img_url imgUrl,
 			price price,
 			count count,
 			detail detail,

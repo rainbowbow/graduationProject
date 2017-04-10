@@ -41,7 +41,7 @@
 									    <label  for="productName">名称</label> 
 										<input style="height: 25px"  class="form-control" name="productName" id="productName" placeholder="Enter productName">
 									   <label  for="startMoney">价格区间</label> 
-										<input style="height: 25px"  class="form-control" name="startMoney" id=""startMoney"" placeholder="Enter startMoney">
+										<input style="height: 25px"  class="form-control" name="startMoney" id="startMoney" placeholder="Enter startMoney">
 								       —— <input style="height: 25px"  class="form-control" name="endMoney" id="endMoney" placeholder="Enter endMoney">
 									   
 										<button type="button" style="margin-right: 20px"
@@ -93,6 +93,16 @@
     sortOrder: "asc",   //排序方式
     showRefresh: true,//刷新功能  
     search: true,//搜索功能 
+    queryParamsType: "limit", //参数格式,发送标准的RESTFul类型的参数请求  
+	queryParams: function (params) {
+			return {
+	    	    rows: this.pageSize,
+	            page: this.pageNumber,
+	            productName:$("input[name='productName']").val(),
+	            startMoney:$("#startMoney").val(),
+	            endMoney:$("#endMoney").val()
+	        };
+	    },
     singleSelect: false,
     pagination: true, //分页
     pageNumber:1, 
@@ -135,8 +145,13 @@
             }}
       ]
       });
+    $('#productTable').bootstrapTable('hideColumn', 'productId');
     });
-    
+    function searchProduct(){
+	   
+    	var searchUrl="${ctx}"+ "/ProductController/productlist";
+     	$('#productTable').bootstrapTable('refresh', {url: searchUrl});  
+    	}
     
     // 回填购物车
 	function shop(id,productName,price,count) {  

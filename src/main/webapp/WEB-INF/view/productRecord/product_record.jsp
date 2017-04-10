@@ -61,8 +61,8 @@
 				
 									    
 									    <label  for="orderTime">时间</label> 
-										<input style="height: 25px"  class="form-control" name="orderTime" id="orderTime" placeholder="Enter orderTime">
-									     
+										<input style="height: 25px"  class="dateSearch" name="orderTime" id="orderTime" placeholder="Enter orderTime">
+									    
 										<button type="button" style="margin-right: 20px"
 											id="btn_query" onclick="searchProductRecord();" class="btn btn-primary">查询</button>
 								   
@@ -92,16 +92,31 @@
 		<!-- /container -->
 
 	</div>
-	<!-- /content -->
-<!-- 新增 Modal start -->
-	<div class="modal hide fade" id="addModal" tabindex="-1" role="dialog">
+	<!-- 新增 Modal start -->
+	<div class="modal hide fade" id="recordDetail" tabindex="-1" role="dialog">
+		<div class="modal-header">
+			<button class="close" type="button" data-dismiss="modal">×</button>
+			<h3>用户详情</h3>
+		</div>
 		<div class="modal-body">
-		 	<jsp:include page="../product/addProduct.jsp"></jsp:include>
- 		</div>
+			<jsp:include page="recordDetail.jsp"></jsp:include>
+		</div>
 	</div>
-	<!-- 新增 Modal end -->
+ 	<!-- 新增 Modal end -->
 	<jsp:include page="../include/footer.jsp"></jsp:include>
 	<script>
+	 $(".dateSearch").datetimepicker({
+		 format: "yyyy-mm-dd",
+		 autoclose: true,//当选择一个日期之后是否立即关闭此日期时间选择器
+		 todayBtn: true,//日期时间选择器组件的底部显示一个 "Today" 按钮用以选择当前日期
+		 todayHighlight: true,//如果为true, 高亮当前日期
+		 pickerPosition: "bottom-right",
+		 language: 'zh-CN',//中文，需要引用zh-CN.js包
+		 endDate:new Date(),
+		 startView: 2,//日期时间选择器打开之后首先显示的视图。 可接受的值：2==月视图
+		 minView: 2//日期时间选择器所能够提供的最精确的时间选择视图
+		 });
+	 
 		$(document).ready(
 			function() {
 				var li = document.getElementById('order-active');
@@ -178,13 +193,15 @@
 							field : 'doSomething',
 							align : 'center',
 							formatter : function(value, row,index) {
-                                                        
-								var e = '<a href="#" onclick="editInfo(\''
-										+ row.productId+'\'\,\''
-										+ row.productName+'\'\,\''
-										+ row.price+'\'\,\''
-										+ row.count+
-								'\')">详情</a> ';
+								var e = '<a href="#" onclick="detailInfo(\''
+									+ row.orderId+'\'\,\''
+									+ row.productName+'\'\,\''
+									+ row.userName+'\'\,\''
+									+ row.price+'\'\,\''
+									+ row.count+'\'\,\''
+									+ row.orderTime+'\'\,\''
+									+ row.totalMoney+
+							'\')">详情</a> ';
 								
 									var d = '<a href="#"  onclick="del(\''
 										+ row.orderId
@@ -198,7 +215,8 @@
     });
 
 		  function searchProductRecord(){
-			    var searchUrl="${ctx}"+ "/ProductRecordController/productRecordList";
+			    var orderTime=$("#orderTime").val();
+			    var searchUrl="${ctx}"+ "/ProductRecordController/productRecordList?orderTime="+orderTime;
  		    	$('#orderTable').bootstrapTable('refresh', {url: searchUrl});  
 		    	}
 		  

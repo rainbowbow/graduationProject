@@ -61,15 +61,15 @@
 									</form>
 									
 								</div>
+								<div  class="btn-group">
+								<input type="button" class="btn btn-primary" value="新增" data-toggle="modal" data-target="#addModal" />
+								<input type="button" class="btn btn-primary" value="删除" onclick="delMore()" />
+							    </div>
 							</div>
-							<div id="toolbar" class="btn-group">
-								<input type="button" class="btn btn-primary" value="新增"
-									data-toggle="modal" data-target="#addModal" />
-									<input type="button" class="btn btn-primary" value="删除" onclick="delMore()" />
-							</div>
-							<div >
-							<table data-search="true"  class="table table-bordered"
-								id="productTable">
+							
+							<br/>
+							<div class="pre-scrollable">
+							<table class="table table-bordered " id="productTable">
 							</table>
 						    </div>
 					</div>
@@ -125,8 +125,6 @@ function() {
 			cache : false, //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
 			sortable : true, //是否启用排序
 			sortOrder : "asc", //排序方式
-			showRefresh : true,//刷新功能  
-			search : true,//搜索功能 
 			queryParamsType: "limit", //参数格式,发送标准的RESTFul类型的参数请求  
 			queryParams: function (params) {
 					return {
@@ -151,16 +149,25 @@ function() {
 		                formatter: function (value, row, index) {  
 		                    return index+1;  
 		                },
-		                width:60,
+		                width:50,
 		                align:'center' 
                    },
 					{
 						field : 'productId',
 						title : '序号'
-					},
+					},{
+						field: 'imgUrl',
+                        title: '头像',
+                        align: 'center',
+                        width:70,
+                        formatter: function(value,row,index){
+                            return '<img  height="50" width="60" src="${pageContext.request.contextPath}/resources/img/'+value+'">';
+                        }
+                    },
 					{
 						field : 'productName',
-						title : '产品名称'
+						title : '产品名称',
+						align: 'center'
 					},
 					{
 						field : 'price',

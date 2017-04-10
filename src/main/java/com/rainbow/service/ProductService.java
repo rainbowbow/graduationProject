@@ -28,9 +28,9 @@ public class ProductService{
     	
     	return productDao.updateShopCardType(productId, type);
     }
-     public List<Product> ShopProduct(){
+     public List<Product> ShopProduct(String productName,String startMoney,String endMoney){
 	    	
-	    	return productDao.ShopProduct();
+	    	return productDao.ShopProduct(productName,startMoney,endMoney);
 	    }
 		
      public List<Product> RepertoryList(String productName,String type){

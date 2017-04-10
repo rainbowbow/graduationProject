@@ -107,6 +107,7 @@
             }}
       ]
       });
+    $('#productTable').bootstrapTable('hideColumn', 'productId');
     });
     function downShop(id) {
 		if (!id) {

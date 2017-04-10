@@ -25,9 +25,9 @@ public class ProductRecordService{
 	     * @return
 	     */
    
-     public List<ProductRecord> RecordList(String productName,String userName,int userId){
+     public List<ProductRecord> RecordList(String productName,String userName,int userId,String orderTime){
 	    	
-	    	return productRecordDao.RecordList(productName,userName,userId);
+	    	return productRecordDao.RecordList(productName,userName,userId,orderTime);
 	    }  
      
      public int DelProduct(int orderId){

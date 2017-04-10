@@ -1,5 +1,6 @@
 package com.rainbow.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -100,7 +101,10 @@ public class ShopCardController {
             ProductRecord productRecord=new ProductRecord();
             productRecord.setUserId(userId);
             productRecord.setUserName(userName);
-            productRecord.setOrderTime(new Date());
+            
+            SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");  
+            Date date = new Date();  
+            productRecord.setOrderTime(sdf.format(date));
             
             //获取要结算的购物车id，通过这个id获取productId,count
 			for (int i = 0; i < shopCardId.length; i++) {

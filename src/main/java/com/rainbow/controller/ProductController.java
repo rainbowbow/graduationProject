@@ -39,9 +39,12 @@ public class ProductController {
 	  
 		@RequestMapping("ProductController/productlist")
 		@ResponseBody
-		public List<Product> ShopProduct(){
+		public List<Product> ShopProduct(HttpServletRequest request){
+			String productName = request.getParameter("productName");
+			String startMoney = request.getParameter("startMoney");
+			String endMoney = request.getParameter("endMoney");
  			List<Product> productList=new ArrayList<Product>();
-			productList=productService.ShopProduct();
+			productList=productService.ShopProduct(productName,startMoney,endMoney);
 			return productList;
 		}
 		@RequestMapping("ProductController/repertoryList")
@@ -52,7 +55,9 @@ public class ProductController {
 			System.out.println(productName+"bbbbbbb"+type); 			
  			List<Product> repertoryList=new ArrayList<Product>();
  			repertoryList=productService.RepertoryList(productName,type);
-			return repertoryList;
+			
+ 			System.out.println(repertoryList.get(0).getImgUrl()+"\n\nooo\n"); 
+ 			return repertoryList;
 		}
 		@RequestMapping("ProductController/addProduct")
 		@ResponseBody

@@ -25,6 +25,9 @@
 		    <if test="userId !=1">
 				and user_id =#{userId}
 		    </if>
+		    <if test="orderTime !=null and orderTime!=''">
+				and order_time like concat(#{orderTime},'%')
+		    </if>
 		</where>
 	</select>
 	 <delete id="DelProduct"  >
