@@ -76,6 +76,18 @@
 		</div>
 	</div>
 	<!-- 加入购物车Modal end -->
+	
+	 <!--查看大图Modal start -->
+	<div class="modal hide fade" id="photoModal" tabindex="-1" role="dialog">
+		<div class="modal-header">
+			<button class="close" type="button" data-dismiss="modal">×</button>
+			<h3>大图</h3>
+		</div>
+		<div id="divImg" class="modal-body">
+ 		</div>
+	</div>
+	<!-- 加入购物车Modal end -->
+	
 <jsp:include page="include/footer.jsp"></jsp:include>
    <script >
   
@@ -118,6 +130,14 @@
               width:60,
               align:'center' 
            },{
+				field: 'imgUrl',
+                title: '图片',
+                align: 'center',
+                width:70,
+                formatter: function(value,row,index){
+                    return '<img  height="50" width="60" src="${pageContext.request.contextPath}/resources/img/'+value+'">';
+                }
+            },{
               field: 'productId',
               title: '序号'
           }, {
@@ -141,7 +161,10 @@
 						+ row.price+'\'\,\''
 						+ row.count+
 				'\')">加入购物车</a> ';
-                return e;  
+				var p= '<a href="#" onclick="photo(\''
+					+ row.imgUrl+
+			'\')">查看大图</a> ';
+                return p+e;  
             }}
       ]
       });
@@ -170,7 +193,14 @@
 	}  
     
     
-    
+	function photo(imgUrl) {  
+		//向模态框中传值  
+		$("#divImg").empty();
+	    var img='<img width="400"  src="${pageContext.request.contextPath}/resources/img/'+imgUrl+'">'
+	    $('#divImg').append(img);
+	    $('#photoModal').modal('show');  
+	    
+	}  
 
     </script>
 	</body>

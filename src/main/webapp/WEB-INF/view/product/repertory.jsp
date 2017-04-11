@@ -157,7 +157,7 @@ function() {
 						title : '序号'
 					},{
 						field: 'imgUrl',
-                        title: '头像',
+                        title: '图片',
                         align: 'center',
                         width:70,
                         formatter: function(value,row,index){

@@ -68,34 +68,43 @@
 									data-toggle="modal" data-target="#add" href="user" />
 							</div>
 							<div>
-								<table data-search="true" class="table table-bordered"
-									id="messageTable">
+								<table  class="table table-bordered"id="messageTable">
 								</table>
 							</div>
-						</div>
 					</div>
-					<!-- /span9 -->
-
 				</div>
-				<!-- /row -->
+				<!-- /span9 -->
 
 			</div>
-			<!-- /container -->
+			<!-- /row -->
 
 		</div>
-		<!-- /content -->
+		<!-- /container -->
 
-  <!-- 新增 Modal start -->
+	</div>
+  <!-- detail Modal start -->
 	<div class="modal hide fade" id="userDetail" tabindex="-1" role="dialog">
 		<div class="modal-header">
 			<button class="close" type="button" data-dismiss="modal">×</button>
-			<h3>用户详情</h3>
+			<h3>客户详情</h3>
 		</div>
 		<div class="modal-body">
 			<jsp:include page="userDetail.jsp"></jsp:include>
 		</div>
 	</div>
-	<!-- 新增 Modal end -->
+	<!-- detailModal end -->
+	
+	 <!-- edit Modal start -->
+	<div class="modal hide fade" id="editUser" tabindex="-1" role="dialog">
+		<div class="modal-header">
+			<button class="close" type="button" data-dismiss="modal">×</button>
+			<h3>编辑用户</h3>
+		</div>
+		<div class="modal-body">
+			<jsp:include page="editUser.jsp"></jsp:include>
+		</div>
+	</div>
+	<!-- edit Modal end -->
 	
 		<jsp:include page="../include/footer.jsp"></jsp:include>
 		<script>
@@ -109,13 +118,11 @@
 					dataType : "json",
 				    method: 'post', //请求方式（*）
 				    contentType: "application/x-www-form-urlencoded",
-                                            toolbar : '#toolbar', //工具按钮用哪个容器
+                    toolbar : '#toolbar', //工具按钮用哪个容器
 					striped : true,
 					cache : false, //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
 					sortable : true, //是否启用排序
 					sortOrder : "asc", //排序方式
-					showRefresh : true,//刷新功能  
-					search : true,//搜索功能 
 				  	queryParamsType: "limit", //参数格式,发送标准的RESTFul类型的参数请求  
 					queryParams: function (params) {
 					    return {
@@ -201,18 +208,25 @@
 								field : 'doSomething',
 								align : 'center',
 								formatter : function(value,row,index) {
-									var e = '<a href="#" onclick="detailInfo(\''
+									var d = '<a href="#" onclick="detail(\''
 										+ row.userId+'\'\,\''
 										+ row.userName+'\'\,\''
 										+ row.age+'\'\,\''
+										+ row.sex+'\'\,\''
 										+ row.phone+'\'\,\''
 										+ row.address+'\'\,\''
-										+ row.eMail+'\'\,\''
-										+ row.type+
+										+ row.eMail+
 								'\')">详情</a> ';
-									var e = '<a href="#" onclick="detail(\''
-										+ row.userId
-										+ '\')">编辑</a> ';
+								
+									var e = '<a href="#" onclick="edit(\''
+										+ row.userId+'\'\,\''
+										+ row.userName+'\'\,\''
+										+ row.age+'\'\,\''
+										+ row.sex+'\'\,\''
+										+ row.phone+'\'\,\''
+										+ row.address+'\'\,\''
+										+ row.eMail+
+										'\')">编辑</a> ';
 
 									var t;
 									if (row.type == "12") {
@@ -229,7 +243,7 @@
 										return e;
 									}
 
-									return t+ e;
+									return d + t + e;
 								}
 							} ]
 			});
@@ -277,24 +291,40 @@
 
 				return false;  
 			}
-			function detail(userId,userName,age,phone,address,eMail,type) {
+			
+			function edit(userId,userName,age,sex,phone,address,eMail) {
 				//向模态框中传值  
-				userId,userName,age,phone,address,eMail,type+
+				//userId,userName,age,phone,address,eMail,type+
+			    $("#userIdEdit").val(userId);  
+			    $("#userNameEdit").val(userName);  
+			    $("#ageEdit").val(age);  
+			    $("#phoneEdit").val(phone); 
+			    $("#sexEdit").val(sex);  
+			    $("#addressEdit").val(address);
+			    $("#eMailEdit").val(eMail);
+			     
+				$('#editUser').modal('show');
+				
+			}
+			
+			
+			function detail(userId,userName,age,sex,phone,address,eMail) {
+				//向模态框中传值  
+				//userId,userName,age,phone,address,eMail,type+
 			    $("#userId").val(userId);  
-			    $("#userName").val(userName);  
+			    $("#userNameDetail").val(userName);  
 			    $("#age").val(age);  
 			    $("#phone").val(phone); 
+			  
+			    if(sex==1){
+			    	$("#sexDetail").val("男");
+			    }else{
+			    	$("#sexDetail").val("女");
+			    }
+			     
 			    $("#address").val(address);
 			    $("#eMail").val(eMail);
-			    $("#type").val(type);
-			    
-			    if(type=="11"){
-					 $("#type").val("正常用户");
-			    }else if(value=="0"){
-			    	$("#type").val("管理员");
- 			    }else{
-			    	$("#type").val("拉黑中");
- 			    }
+			     
 			    
 				$('#userDetail').modal('show');
 				

@@ -77,8 +77,7 @@
 									<input type="button" class="btn btn-primary" value="删除" onclick="delMore()" />
 							</div>
 							<div >
-							<table data-search="true"  class="table table-bordered"
-								id="orderTable">
+							<table  class="table table-bordered" id="orderTable">
 							</table>
 						    </div>
 					</div>
@@ -92,6 +91,7 @@
 		<!-- /container -->
 
 	</div>
+	
 	<!-- 新增 Modal start -->
 	<div class="modal hide fade" id="recordDetail" tabindex="-1" role="dialog">
 		<div class="modal-header">
@@ -103,8 +103,34 @@
 		</div>
 	</div>
  	<!-- 新增 Modal end -->
+ 	
 	<jsp:include page="../include/footer.jsp"></jsp:include>
 	<script>
+	
+	function detail(userId,userName,age,phone,address,eMail,type) {
+		//向模态框中传值  
+		//userId,userName,age,phone,address,eMail,type+
+	    $("#userId").val(userId);  
+	    $("#userName").val(userName);  
+	    $("#age").val(age);  
+	    $("#phone").val(phone); 
+	    $("#address").val(address);
+	    $("#eMail").val(eMail);
+	    $("#type").val(type);
+	    
+	    if(type=="11"){
+			 $("#type").val("正常用户");
+	    }else if(value=="0"){
+	    	$("#type").val("管理员");
+		    }else{
+	    	$("#type").val("拉黑中");
+		    }
+	    
+		$('#recordDetail').modal('show');
+		
+	}
+	
+	
 	 $(".dateSearch").datetimepicker({
 		 format: "yyyy-mm-dd",
 		 autoclose: true,//当选择一个日期之后是否立即关闭此日期时间选择器
@@ -132,8 +158,6 @@
 				cache : false, //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
 				sortable : true, //是否启用排序
 				sortOrder : "asc", //排序方式
-				showRefresh : true,//刷新功能  
-				search : true,//搜索功能 
 				queryParamsType: "limit", //参数格式,发送标准的RESTFul类型的参数请求  
 				queryParams: function (params) {
 						return {
@@ -193,7 +217,7 @@
 							field : 'doSomething',
 							align : 'center',
 							formatter : function(value, row,index) {
-								var e = '<a href="#" onclick="detailInfo(\''
+								var e = '<a href="#" onclick="detail(\''
 									+ row.orderId+'\'\,\''
 									+ row.productName+'\'\,\''
 									+ row.userName+'\'\,\''

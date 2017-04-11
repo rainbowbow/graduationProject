@@ -11,43 +11,41 @@
 
 	</head>
 
-	<body>
+	<body  style="padding: 20px;">
 
-				 <form id="editForm"  method="post" class="form-horizontal" novalidate="novalidate">
+				 <form id="detailForm"  method="post" class="form-horizontal" novalidate="novalidate">
 						<div class="control-group">
 							<label class="control-label">用户Id:</label>
 							<div class="controls">
-								<input style="height: 25px;width:210px;" type="text" name="userId" id="userId" >
+								<input style="height: 25px;width:210px;" type="text" readonly="readonly" id="userId" >
 							</div>
 						</div>
 						<div class="control-group">
 							<label class="control-label">用户名:</label>
 							<div class="controls">
-								<input style="height: 25px;width:210px;" type="text" name="userName" id="userName" >
+								<input style="height: 25px;width:210px;" type="text" readonly="readonly" id="userNameDetail" >
 							</div>
 						</div>
 			
-						
-						<div class = "control-group"> 
-						     <label class="control-label" for = "sex">性别</label> 
-						     <div class="controls">
-						     <select name="sex" id = "sex" style="height: 25px;width:210px;"> 
-						      <option value="0" selected>女生0</option> 
-						      <option value="1" >男生1</option> 
-						     </select> 
-						     </div>
-						 </div> 
+			
+			           <div class="control-group">
+							<label class="control-label">性别:</label>
+							<div class="controls">
+								<input style="height: 25px;width:210px;" type="text" readonly="readonly" id = "sexDetail"  >
+							</div>
+						</div>
+						 
 						 
 						<div class="control-group">
 							<label class="control-label">年龄</label>
 							<div class="controls">
-								<input style="height: 25px;width:210px;" type="text" name="age" id="age" onkeyup='this.value=this.value.replace(/\D/gi,"")'>
+								<input style="height: 25px;width:210px;" type="text" readonly="readonly" id="age"  >
 							</div>
 						</div>
 						<div class="control-group">
 							<label class="control-label">电话:</label>
 							<div class="controls">
-								<input style="height: 25px;width:210px;" type="text" name="phone" id="phone" onkeyup='this.value=this.value.replace(/\D/gi,"")'>
+								<input style="height: 25px;width:210px;" type="text" readonly="readonly" id="phone"  >
 							
 							</div>
 						</div>
@@ -55,33 +53,20 @@
 						<div class="control-group">
 							<label class="control-label">E-mail</label>
 							<div class="controls">
-								<input style="height: 25px;width:210px;" type="text" name="eMail" id="eMail" >
+								<input style="height: 25px;width:210px;" type="text" readonly="readonly" id="eMail" >
 							
 							</div>
 						</div>
 				      <div class="control-group">
 							<label class="control-label">地址:</label>
 							<div class="controls">
-								<input style="height: 25px;width:210px;" type="text" name="address" id="address"  >
+								<input style="height: 25px;width:210px;" type="text" readonly="readonly" id="address"  >
 							
 							</div>
 						</div>
 						 
 					</form>
 			
-    </div> <!-- /content -->
- <!-- 新增 Modal start -->
-	<div class="modal hide fade" id="addModal" tabindex="-1" role="dialog">
-		
-		<div class="modal-body">
-			<jsp:include page="../product/addProduct.jsp"></jsp:include>
-		</div>
-	</div>
-	<!-- 新增 Modal end -->
-	   <script >
-  
-   
-    
-    </script>
+    </div> <!-- /content -->    
 	</body>
 </html>

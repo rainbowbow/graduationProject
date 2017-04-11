@@ -11,7 +11,7 @@
 
 	</head>
 
-	<body>
+	<body  style="padding: 20px;">
 
 				 <form id="editForm"  method="post" class="form-horizontal" novalidate="novalidate">
 						<div class="control-group">
@@ -70,18 +70,6 @@
 					</form>
 			
     </div> <!-- /content -->
- <!-- 新增 Modal start -->
-	<div class="modal hide fade" id="addModal" tabindex="-1" role="dialog">
-		
-		<div class="modal-body">
-			<jsp:include page="../product/addProduct.jsp"></jsp:include>
-		</div>
-	</div>
-	<!-- 新增 Modal end -->
-	   <script >
   
-   
-    
-    </script>
 	</body>
 </html>

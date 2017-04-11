@@ -54,6 +54,37 @@ public class UserController {
 			}
 		 
 		 
+	 
+			@RequestMapping("UserController/updateUser")
+			@ResponseBody
+			int updateProduct(Model model,HttpServletRequest request){
+				
+				User user=new User();
+				
+				String  userId =request.getParameter("userId");
+				String userName = request.getParameter("userName");
+				String sex = request.getParameter("sex");
+				String age = request.getParameter("age");
+				String phone = request.getParameter("phone");
+				String eMail = request.getParameter("eMail");
+				String address = request.getParameter("address");
+
+				user.setUserId(userId);
+				user.setUserName(userName);
+				user.setSex(sex);
+				user.setAge(age);
+				user.setPhone(phone);
+				user.seteMail(eMail);
+				user.setAddress(address);
+				
+				 
+	 			int updateId=userService.updateUser(user);
+	      		System.out.println("address:"+address+"\n"+updateId+"aaaaaqqaaaaaa");
+	      	 
+	      		return updateId;
+			}
+			
+		 
 		 
 		@RequestMapping("UserController/userlist")
 		@ResponseBody

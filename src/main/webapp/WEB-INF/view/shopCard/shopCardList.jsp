@@ -126,6 +126,14 @@ $(document).ready(function() {
 									field : 'shopCardId',
 									title : '序号'
 								},{
+									field: 'imgUrl',
+					                title: '图片',
+					                align: 'center',
+					                width:70,
+					                formatter: function(value,row,index){
+					                    return '<img  height="50" width="60" src="${pageContext.request.contextPath}/resources/img/'+value+'">';
+					                }
+					            },{
 									field : 'productName',
 									title : '产品名称'
 								},{
@@ -158,11 +166,13 @@ $(document).ready(function() {
 												+ row.price+'\'\,\''
 												+ row.count+
 										'\')">编辑</a> ';
-										
+										var p= '<a href="#" onclick="photo(\''
+											+ row.imgUrl+
+									'\')">查看大图</a> ';
 											var d = '<a href="#"  onclick="del(\''
 												+ row.shopCardId
 												+ '\')">删除</a> ';
-										return  e+ d;
+										return  p+e+ d;
 									}
 								} ]
 					});

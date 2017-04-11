@@ -14,8 +14,7 @@
 	<form id="shopForm"  method="post" class="form-horizontal" novalidate="novalidate">
         <input type="hidden" name="testList" id="testList" />
 
-	     <table class="table table-bordered"
-								id="shopCardPayListTable">
+	     <table class="table table-bordered" id="shopCardPayListTable">
 	     </table>
    	     <input class="btn btn-primary" type="button"  value="去支付咯" onclick="payBillEnd()" />
 	
