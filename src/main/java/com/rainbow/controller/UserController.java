@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.rainbow.beans.Address;
 import com.rainbow.beans.Product;
 import com.rainbow.beans.User;
 import com.rainbow.service.UserService;
@@ -53,7 +54,11 @@ public class UserController {
 				return model;
 			}
 		 
-		 
+		 @RequestMapping("address")
+			public ModelAndView address(){
+				ModelAndView model = new ModelAndView("address/address");
+				return model;
+			}
 	 
 			@RequestMapping("UserController/updateUser")
 			@ResponseBody
@@ -144,9 +149,17 @@ public class UserController {
 			
 			int userId = Integer.parseInt(request.getParameter("userId"));
 			String type = request.getParameter("type");
-			System.out.println("typeppppppp"+type);
-			
+ 			
    			int editType=userService.editType(userId,type);
    			return editType;
 		}
+		@RequestMapping("UserController/addresslist")
+		@ResponseBody
+		public List<Address> addresslist(){
+			 
+ 			List<Address> addressList=new ArrayList<Address>();
+ 			addressList=userService.AddressList();
+			return addressList;
+		} 
+		
   }

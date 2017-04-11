@@ -2,6 +2,7 @@ package com.rainbow.beans;
 
 
 import java.io.Serializable;
+import java.util.List;
 /**
  * @author miaomiao
  * @since 20170304

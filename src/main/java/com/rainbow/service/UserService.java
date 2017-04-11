@@ -6,7 +6,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.rainbow.dao.UserDao;
-
+import com.rainbow.beans.Address;
 import com.rainbow.beans.User;
 
 @Service("userService")
@@ -38,6 +38,9 @@ public class UserService {
 	    	
 	    	return userDao.UserList();
 	    }
+      public List<Address> AddressList(){
+    	  return userDao.AddressList();
+      }
       public List<User> UserListByQuery(String userName, String sex){
 	    	
 	    	return userDao.UserListByQuery(userName, sex);

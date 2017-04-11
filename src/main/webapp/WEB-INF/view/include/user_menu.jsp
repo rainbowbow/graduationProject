@@ -39,7 +39,12 @@
 							订单管理	
 						</a>
 					</li>
-					 
+					 <li id="address-active">
+						<a href="address">
+							<i class="icon-pushpin"></i>
+							地址管理	
+						</a>
+					</li>
 					
 					<li id="oneUserMessage-active">
 						<a href="oneUserMessage">
