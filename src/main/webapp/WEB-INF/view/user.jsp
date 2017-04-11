@@ -54,7 +54,7 @@
 								</div>
 							</div>
                  <div>
-				   <table  data-search="true" class="table table-bordered" id="productTable">
+				   <table   class="table table-bordered" id="productTable">
 				 </table>
 				 </div>
 				</div>
@@ -81,12 +81,12 @@
 	<div class="modal hide fade" id="photoModal" tabindex="-1" role="dialog">
 		<div class="modal-header">
 			<button class="close" type="button" data-dismiss="modal">×</button>
-			<h3>大图</h3>
+			<h3>图片</h3>
 		</div>
 		<div id="divImg" class="modal-body">
  		</div>
 	</div>
-	<!-- 加入购物车Modal end -->
+	<!-- 查看大图Modal end -->
 	
 <jsp:include page="include/footer.jsp"></jsp:include>
    <script >
@@ -103,8 +103,6 @@
     cache: false,   //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
     sortable: true,   //是否启用排序
     sortOrder: "asc",   //排序方式
-    showRefresh: true,//刷新功能  
-    search: true,//搜索功能 
     queryParamsType: "limit", //参数格式,发送标准的RESTFul类型的参数请求  
 	queryParams: function (params) {
 			return {
@@ -122,6 +120,9 @@
     pageSize: 10,                       //每页的记录行数（*）
     pageList: [10, 25, 50, 100],        //可供选择的每页的行数（*）
     sidePagination: "client", //客户端处理分页
+    formatNoMatches: function () {  //没有匹配的结果
+	    return '无符合条件的记录';
+	  },
           columns: [{  
               title: '序号',
               formatter: function (value, row, index) {  
@@ -132,11 +133,8 @@
            },{
 				field: 'imgUrl',
                 title: '图片',
-                align: 'center',
-                width:70,
-                formatter: function(value,row,index){
-                    return '<img  height="50" width="60" src="${pageContext.request.contextPath}/resources/img/'+value+'">';
-                }
+                align: 'center' 
+                 
             },{
               field: 'productId',
               title: '序号'
@@ -161,13 +159,18 @@
 						+ row.price+'\'\,\''
 						+ row.count+
 				'\')">加入购物车</a> ';
-				var p= '<a href="#" onclick="photo(\''
-					+ row.imgUrl+
-			'\')">查看大图</a> ';
-                return p+e;  
+				if(row.imgUrl!=null){
+					var p= '<a href="#" onclick="photo(\''
+						+ row.imgUrl+
+				'\')">查看图片</a> ';
+	                return p+e;
+				}
+				
+                return e;  
             }}
       ]
       });
+    $('#productTable').bootstrapTable('hideColumn', 'imgUrl');
     $('#productTable').bootstrapTable('hideColumn', 'productId');
     });
     function searchProduct(){

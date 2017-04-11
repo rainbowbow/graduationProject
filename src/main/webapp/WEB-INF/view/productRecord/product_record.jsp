@@ -175,6 +175,9 @@
 				pageSize : 7, //每页的记录行数（*）
 				pageList : [ 7, 10, 25 ], //可供选择的每页的行数（*）
 				sidePagination : "client", //客户端处理分页
+				 formatNoMatches: function () {  //没有匹配的结果
+					    return '无符合条件的记录';
+					  },
 				columns : [{
 	                        checkbox: true
                         },{  
@@ -217,7 +220,7 @@
 							field : 'doSomething',
 							align : 'center',
 							formatter : function(value, row,index) {
-								var e = '<a href="#" onclick="detail(\''
+								/* var e = '<a href="#" onclick="detail(\''
 									+ row.orderId+'\'\,\''
 									+ row.productName+'\'\,\''
 									+ row.userName+'\'\,\''
@@ -225,12 +228,12 @@
 									+ row.count+'\'\,\''
 									+ row.orderTime+'\'\,\''
 									+ row.totalMoney+
-							'\')">详情</a> ';
+							'\')">详情</a> '; */
 								
 									var d = '<a href="#"  onclick="del(\''
 										+ row.orderId
 										+ '\')">删除</a> ';
-								return e+ d;
+								return d;
 							}
 						} ]
 			});

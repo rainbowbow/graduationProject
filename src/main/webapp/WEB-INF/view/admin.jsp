@@ -75,6 +75,9 @@
     pageSize: 10,                       //每页的记录行数（*）
     pageList: [10, 25, 50, 100],        //可供选择的每页的行数（*）
     sidePagination: "client", //客户端处理分页
+    formatNoMatches: function () {  //没有匹配的结果
+	    return '无符合条件的记录';
+	  },
           columns: [{  
               title: '序号',
               formatter: function (value, row, index) {  

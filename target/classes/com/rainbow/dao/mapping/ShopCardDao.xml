@@ -11,6 +11,7 @@
 			p.type type,
 			p.product_name productName,
 			p.price price, 
+			p.img_url imgUrl,
 			p.count allCount
 		from product p ,shop_card s where s.user_id=#{s.useId} and p.product_id=s.product_id
 	

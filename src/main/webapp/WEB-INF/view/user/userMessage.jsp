@@ -48,7 +48,7 @@
 									    <label  for="userName">名称</label> 
 										<input style="height: 25px"  class="form-control" name="userName" id="userName" placeholder="Enter userName">
 									    <select id="sex" name="sex" class="form-control" >
-													<option value="" >请选择</option>
+													<option value="" >请选择性别</option>
 													<option value="0" >女生</option>
 													<option value="1">男生</option>
 													
@@ -240,7 +240,7 @@
 											+ row.type
 												+ '\')">拉黑</a> ';
 									}else{
-										return e;
+										return d;
 									}
 
 									return d + t + e;

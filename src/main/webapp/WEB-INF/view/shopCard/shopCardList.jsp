@@ -88,6 +88,16 @@
 		</div>
 	</div>
 	
+	<!--查看大图Modal start -->
+	<div class="modal hide fade" id="photoModal" tabindex="-1" role="dialog">
+		<div class="modal-header">
+			<button class="close" type="button" data-dismiss="modal">×</button>
+			<h3>图片</h3>
+		</div>
+		<div id="divImg" class="modal-body">
+ 		</div>
+	</div>
+	<!-- 查看大图Modal end -->
 	
 	<jsp:include page="../include/footer.jsp"></jsp:include>
 	<script>
@@ -113,6 +123,9 @@ $(document).ready(function() {
 						pageSize : 7, //每页的记录行数（*）
 						pageList : [ 7, 10, 25 ], //可供选择的每页的行数（*）
 						sidePagination : "client", //客户端处理分页
+						 formatNoMatches: function () {  //没有匹配的结果
+							    return '无符合条件的记录';
+							  },
 						columns : [{
 			                        checkbox: true
 		                            },{  
@@ -126,13 +139,7 @@ $(document).ready(function() {
 									field : 'shopCardId',
 									title : '序号'
 								},{
-									field: 'imgUrl',
-					                title: '图片',
-					                align: 'center',
-					                width:70,
-					                formatter: function(value,row,index){
-					                    return '<img  height="50" width="60" src="${pageContext.request.contextPath}/resources/img/'+value+'">';
-					                }
+									field: 'imgUrl' 
 					            },{
 									field : 'productName',
 									title : '产品名称'
@@ -166,16 +173,21 @@ $(document).ready(function() {
 												+ row.price+'\'\,\''
 												+ row.count+
 										'\')">编辑</a> ';
-										var p= '<a href="#" onclick="photo(\''
-											+ row.imgUrl+
-									'\')">查看大图</a> ';
-											var d = '<a href="#"  onclick="del(\''
-												+ row.shopCardId
-												+ '\')">删除</a> ';
-										return  p+e+ d;
+										var d = '<a href="#"  onclick="del(\''
+											+ row.shopCardId
+											+ '\')">删除</a> ';
+                                                 if(row.imgUrl!=null){
+                                 					var p= '<a href="#" onclick="photo(\''
+                                 						+ row.imgUrl+
+                                 				'\')">查看图片</a> ';
+                                 	                return p+e+d;
+                                 				}
+                                 				
+										return  e+ d;
 									}
 								} ]
 					});
+	$('#shopCardTable').bootstrapTable('hideColumn', 'imgUrl');
 	$('#shopCardTable').bootstrapTable('hideColumn', 'shopCardId');
           });
 		// 回填表单
@@ -306,6 +318,16 @@ function del(id) {
 
 			return false;
 		}
+		
+
+function photo(imgUrl) {  
+	//向模态框中传值  
+	$("#divImg").empty();
+    var img='<img width="400"  src="${pageContext.request.contextPath}/resources/img/'+imgUrl+'">'
+    $('#divImg').append(img);
+    $('#photoModal').modal('show');  
+    
+}  
 	</script>
 </body>
 </html>

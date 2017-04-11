@@ -142,6 +142,9 @@ function() {
 			pageSize : 7, //每页的记录行数（*）
 			pageList : [ 7, 10, 25 ], //可供选择的每页的行数（*）
 			sidePagination : "client", //客户端处理分页
+			 formatNoMatches: function () {  //没有匹配的结果
+				    return '无符合条件的记录';
+				  },
 			columns : [{
 			                checkbox: true
 			            },{  
@@ -155,15 +158,7 @@ function() {
 					{
 						field : 'productId',
 						title : '序号'
-					},{
-						field: 'imgUrl',
-                        title: '图片',
-                        align: 'center',
-                        width:70,
-                        formatter: function(value,row,index){
-                            return '<img  height="50" width="60" src="${pageContext.request.contextPath}/resources/img/'+value+'">';
-                        }
-                    },
+					},
 					{
 						field : 'productName',
 						title : '产品名称',

@@ -10,20 +10,21 @@
 			product_name productName,
 			price price,
 			count count,
-			user_name userName,
-			user_id userId,
+			u.user_name userName,
+			pr.user_id userId,
 			order_time orderTime,
 			total_money totalMoney
-		from product_record
+		from product_record pr,user u  
 		<where>
+			pr.user_id=u.user_id
             <if test="productName!=null and productName!='' ">
 				and product_name like concat('%',#{productName},'%')
 		    </if>
             <if test="userName !=null and userName!=''">
-				and user_name like concat('%',#{userName},'%')
+				and u.user_name like concat('%',#{userName},'%')
 		    </if>
 		    <if test="userId !=1">
-				and user_id =#{userId}
+				and pr.user_id =#{userId}
 		    </if>
 		    <if test="orderTime !=null and orderTime!=''">
 				and order_time like concat(#{orderTime},'%')

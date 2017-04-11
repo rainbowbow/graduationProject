@@ -11,6 +11,7 @@ public class ShopCard implements Serializable {
     private String shopCardId;
     private String userId;
     private String userName;
+    private String imgUrl;
     private String productId;
     private String productName;
     private String price;
@@ -52,6 +53,12 @@ public class ShopCard implements Serializable {
 	}
 	public String getPrice() {
 		return price;
+	}
+	public String getImgUrl() {
+		return imgUrl;
+	}
+	public void setImgUrl(String imgUrl) {
+		this.imgUrl = imgUrl;
 	}
 	public void setPrice(String price) {
 		this.price = price;
