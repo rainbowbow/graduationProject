@@ -13,44 +13,34 @@
 <body style="padding: 20px;">
 	<form id="addForm" method="post" class="form-horizontal" novalidate="novalidate">
 		<div class="control-group">
-			<label class="control-label">产品名称:</label>
+			<label class="control-label">收件人:</label>
 			<div class="controls">
-				<input style="height: 25px" type="text" name="productName">
+				<input style="height: 25px" type="text" name="addressName">
 			</div>
 		</div>
+		 
 		<div class="control-group">
-			<label class="control-label">数量:</label>
+			<label class="control-label">联系电话:</label>
 			<div class="controls">
-				<input style="height: 25px" type="text" name="count">
+				<input style="height: 25px" type="text" name="addressPhone">
 			</div>
 		</div>
-		<div class="control-group">
-			<label class="control-label">价格:</label>
-			<div class="controls">
-				<input style="height: 25px" type="text" name="price">
-			</div>
+		<div  data-toggle="distpicker">
+		  <select id="province" data-province="---- 选择省 ----"></select>
+		  <select id="city" data-city="---- 选择市 ----"></select>
+		  <select id="district" data-district="---- 选择区 ----"></select>
 		</div>
+		
 		<div class="control-group">
-			<label class="control-label">详情:</label>
+			<label class="control-label">详细街道:</label>
 			<div class="controls">
 				<input style="height: 25px" type="text" name="detail">
 			</div>
 		</div>
-		<div class="form-group">
-			<label class="col-sm-2 control-label" for="profession">选择职业</label>
-			<div class="col-sm-2">
-				<select id="profession" class="form-control">
-					<option>软件工程师</option>
-					<option>测试工程师</option>
-					<option>硬件工程师</option>
-					<option>质量分析师</option>
-				</select>
-			</div>
-		</div>
-
+		
 		<div class="form-actions" style="padding-left: 135px;">
-		 
-			<button type="button" onclick="addProduct();"  class="btn btn-primary">
+			 
+			<button type="button" onclick="addAddress();"  class="btn btn-primary">
 				<i class="icon-ok icon-white"></i>保存
 			</button>
 			&nbsp;&nbsp;
@@ -61,11 +51,14 @@
 	</form>
 	 <script >
 	 
-	 function addProduct() { 
-		 
-		    $.ajax({  
+	 function addAddress() { 
+		 var p=$("#province").val();
+		 var c=$("#city").val();
+		 var d=$("#district").val();
+		 var address=p+c+d;
+ 		    $.ajax({  
 		        type: "post",  
-		        url:  "${ctx}" + "/ProductController/addProduct",
+		        url:  "${ctx}" + "/UserController/addAddress?address="+address,
 		        data:$('#addForm').serialize(),
 		        
 		        success : function(data) {

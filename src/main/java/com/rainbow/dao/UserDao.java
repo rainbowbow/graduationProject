@@ -17,7 +17,7 @@ public interface UserDao {
 	
 	User findByUserId(String userId);//获取某个用户
 	
-	List<Address> AddressList();//获取所有地址
+	List<Address> AddressList(String userId);//获取所有地址
     List<User> UserList();//获取所有用户
     List<User> UserListByQuery(@Param("userName")String userName, @Param("sex")String sex);
     public int createUser(User user);//添加用户

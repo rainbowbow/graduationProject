@@ -1,5 +1,6 @@
 package com.rainbow.controller;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -155,11 +156,31 @@ public class UserController {
 		}
 		@RequestMapping("UserController/addresslist")
 		@ResponseBody
-		public List<Address> addresslist(){
+		public List<Address> addresslist(HttpSession session){
+			
+			User user=(User) session.getAttribute("user");
 			 
  			List<Address> addressList=new ArrayList<Address>();
- 			addressList=userService.AddressList();
+ 			addressList=userService.AddressList(user.getUserId());
 			return addressList;
+		} 
+		@RequestMapping("UserController/addAddress")
+		@ResponseBody
+		public int addAddresslist(HttpSession session,HttpServletRequest request) throws UnsupportedEncodingException{
+			
+			User user=(User) session.getAttribute("user");
+			String userId=user.getUserId();
+			/*String province = request.getParameter("province");
+			String city = request.getParameter("city");
+			String district = request.getParameter("district");*/
+			String address = new String(request.getParameter("address").getBytes("ISO-8859-1"),"UTF-8");
+			String detail = request.getParameter("detail");
+			String addressDetail=address+detail;
+			System.out.println(addressDetail+"\n");
+			
+			String addressName=request.getParameter("addressName");
+			String addressPhone=request.getParameter("addressPhone");
+  			return  1;
 		} 
 		
   }

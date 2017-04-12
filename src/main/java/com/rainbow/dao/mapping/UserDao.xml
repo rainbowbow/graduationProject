@@ -2,12 +2,22 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.rainbow.dao.UserDao">
 	
+	<resultMap id="addressMap" type="com.rainbow.beans.Address" >
+         <result property="userId"     column="user_id" />
+	     <result property="addressId" column="address_id" />
+	     <result property="addressDetail"    column="address_detail" />
+	     <result property="addressName"    column="address_name" />
+	     <result property="addressPhone"    column="address_phone" />
+	     <result property="type" column="type" />
+	 </resultMap>
  
-	<select id="AddressList" resultType="com.rainbow.beans.Address">
+	<select id="AddressList" resultMap="addressMap">
 		select 
 			user_id userId, 
 			address_id addressId,
-			address address,
+			address_detail addressDetail,
+			address_name addressName,
+			address_phone addressPhone,
 			type type
 			from address where user_id=#{userId} 
 	</select>

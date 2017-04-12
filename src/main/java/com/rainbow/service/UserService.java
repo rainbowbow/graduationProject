@@ -38,8 +38,8 @@ public class UserService {
 	    	
 	    	return userDao.UserList();
 	    }
-      public List<Address> AddressList(){
-    	  return userDao.AddressList();
+      public List<Address> AddressList(String userId){
+    	  return userDao.AddressList(userId);
       }
       public List<User> UserListByQuery(String userName, String sex){
 	    	

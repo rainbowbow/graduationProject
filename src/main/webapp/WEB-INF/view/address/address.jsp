@@ -43,7 +43,7 @@
 								 
 							<div id="toolbar" class="btn-group">
 								 
-									<input type="button" class="btn btn-primary" value="删除" onclick="delMore()" />
+									<input type="button" class="btn btn-primary" value="新增地址" data-toggle="modal" data-target="#addModal" />
 							</div>
 							<div >
 							<table  class="table table-bordered" id="addressTable">
@@ -60,9 +60,17 @@
 		<!-- /container -->
 
 	</div>
-	
-	< 
- 	
+	<!-- 新增 Modal start -->
+	<div class="modal hide fade" id="addModal" tabindex="-1" role="dialog">
+		<div class="modal-header">
+			<button class="close" type="button" data-dismiss="modal">×</button>
+			<h3>新增地址</h3>
+		</div>
+		<div class="modal-body">
+			<jsp:include page="addAddress.jsp"></jsp:include>
+		</div>
+	</div>
+	<!-- 新增 Modal end -->
 	<jsp:include page="../include/footer.jsp"></jsp:include>
 	<script>
 	
@@ -108,8 +116,16 @@
 							title : 'user序号'
 						},
 						{
-							field : 'address',
+							field : 'addressName',
+							title : '收件人'
+						} ,
+						{
+							field : 'addressDetail',
 							title : '地址'
+						} ,
+						{
+							field : 'addressPhone',
+							title : '联系电话'
 						} ,
 						{
 							title : '操作',
@@ -129,8 +145,8 @@
 						} ]
 			});
 				
-				$('#orderTable').bootstrapTable('hideColumn', 'addressId');
-				$('#orderTable').bootstrapTable('hideColumn', 'userId');
+				$('#addressTable').bootstrapTable('hideColumn', 'addressId');
+				$('#addressTable').bootstrapTable('hideColumn', 'userId');
     });
  
 	</script>
