@@ -25,16 +25,18 @@
 				<input style="height: 25px" type="text" name="addressPhone">
 			</div>
 		</div>
-		<div  data-toggle="distpicker">
-		  <select id="province" data-province="---- 选择省 ----"></select>
-		  <select id="city" data-city="---- 选择市 ----"></select>
-		  <select id="district" data-district="---- 选择区 ----"></select>
+		<div   class="control-group" data-toggle="distpicker">
+		<label class="control-label">地址:</label>
+		<div class="controls" >
+		  <select style="width: 210px" id="province" data-province="---- 选择省 ----"></select>
+		  <select style="width: 210px" id="city" data-city="---- 选择市 ----"></select>
+		  <select style="width: 210px" id="district" data-district="---- 选择区 ----"></select>
 		</div>
-		
+		 </div>
 		<div class="control-group">
 			<label class="control-label">详细街道:</label>
 			<div class="controls">
-				<input style="height: 25px" type="text" name="detail">
+				<input style="height: 25px" type="text" name="detail" >
 			</div>
 		</div>
 		
@@ -52,10 +54,35 @@
 	 <script >
 	 
 	 function addAddress() { 
+		 
+		 if($("#addressName").val()==""){
+			 alert("收件人不能为空！");
+			 return false;
+		 }
+		 if($("#addressPhone").val()==""){
+			 alert("联系电话不能为空1！");
+			 return false;
+		 }
+		 if($("#detail").val()==""){
+			 alert("详细街道不能为空！");
+			 return false;
+		 }
 		 var p=$("#province").val();
 		 var c=$("#city").val();
 		 var d=$("#district").val();
 		 var address=p+c+d;
+		 if($("#province").val()==""){
+			 alert("province地址不能为空！");
+			 return false;
+		 }
+		 if($("#city").val()==""){
+			 alert("city地址不能为空！");
+			 return false;
+		 }
+		 if($("#district").val()==""){
+			 alert("district地址不能为空！");
+			 return false;
+		 }
  		    $.ajax({  
 		        type: "post",  
 		        url:  "${ctx}" + "/UserController/addAddress?address="+address,

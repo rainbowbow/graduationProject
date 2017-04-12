@@ -9,4 +9,3 @@
     <script src="${pageContext.request.contextPath}/resources/js/bootstrap-datetimepicker.zh-CN.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/bootstrap-datetimepicker.fr.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/distpicker.js"></script>
-   
