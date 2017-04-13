@@ -27,7 +27,6 @@ public class LoginController {
 					
 					User user=userService.login(userName,password,type);
  					if(user!=null){
-						System.out.println("lllllllhahah"+user.getType());
 						session.setAttribute("user", user);
 					    model.addAttribute("user",user);
 					    if(type.equals("0")){

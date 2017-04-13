@@ -59,4 +59,8 @@ public class UserService {
 	    	
 	    	return userDao.editType(userId,type);
 	    }
+         public int addAddress(Address address) {
+	         
+ 	    	return userDao.addAddress(address);
+ 	    }
 	}

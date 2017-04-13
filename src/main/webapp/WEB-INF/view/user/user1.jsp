@@ -11,63 +11,7 @@
 	    
 		<jsp:include page="include/header.jsp"></jsp:include>
 		<title>农产品销售系统</title>
-<style type="text/css">
 
- 
-.tabContent li {
-	float: left;
-	margin-right: -1px;
-	margin-bottom: 60px;
-	_position: relative;
-	border: 1px solid #e4e4e4;
-	margin-left: 50px;
-	border: 1px
-}
-
-.tabContent li:hover {
-	filter: alpha(opacity =             70);
-	-moz-opacity: 0.7;
-	opacity: 0.7;
-}
-
-.tabContent img {
-	width: 120px;
-	height: 120px;
-	display: block;
-}
-
-.tabContent1 {
-	width: 600px;
-	position: absolute;
-	left: 270px;
-	top: 320px;
-	padding-left: 5px;
-	_padding-left: 2px;
-}
-
-.tabContent1 li {
-	float: left;
-	margin-right: -1px;
-	margin-bottom: 60px;
-	_position: relative;
-	border: 1px solid #e4e4e4;
-	margin-left: 50px;
-	border: 1px
-}
-
-.tabContent1 li:hover {
-	filter: alpha(opacity =             70);
-	-moz-opacity: 0.7;
-	opacity: 0.7;
-}
-
-.tabContent1 img {
-	width: 120px;
-	height: 120px;
-	display: block;
-}
-
-</style>
 	</head>
 
 	<body>
@@ -110,21 +54,9 @@
 								</div>
 							</div>
                  <div class="pre-scrollable">
-				   <div id="productDiv">
-						 <input type="hidden" id="num" value="0"> 
-				  </div>
-				 
+				   <table   class="table table-bordered" id="productTable">
+				 </table>
 				 </div>
-				 <div>
-				 
-						 
-	    			总共 页&nbsp;&nbsp;当前第 页&nbsp;&nbsp;
-	    			    <a href="#" onclick="alert(0);">首页</a>&nbsp;
-	    				<a href="#" onclick="nextPage();">上页</a>&nbsp;
-	    			    <a href="middle_all.action?page=${page+1}&meid=${meid }">下页</a>&nbsp;
-	    				<a href="middle_all.action?page=${pageCount}&meid=${meid }">尾页</a>&nbsp;
- 						 
-				  </div>
 				</div>
 			</div> <!-- /span9 -->
 			
@@ -158,61 +90,86 @@
 	
 <jsp:include page="include/footer.jsp"></jsp:include>
    <script >
-  function nextPage(){
-	  var num= $("#num").val();
-	  $("#num").val(num+1);
-	  alert($("#num").val());
-  }
+  
     $(document).ready(function(){
     var li=document.getElementById('product-active');
     li.setAttribute("class","active");
-    var path="${ctx}"+"/ProductController/productlist?num=0";
-	    $.ajax({  
-	        type: "post",  
-	        url:  path,
-	        success : function(data) {
-	        	
-	        	 var div=document.getElementById("productDiv");
-	        	 var ul=document.createElement('ul');
-	        	 ul.setAttribute("id", "0");
-	             ul.setAttribute("class", "tabContent");
-
-	             var json = eval(data); //数组         
-	             $.each(json, function (index, item) {  
-	                 //循环获取数据    
-	                 var productId = json[index].productId; 
-	                 var productName = json[index].productName; 
-	                 var price = json[index].price; 
-	                 var count = json[index].count; 
-	                 var imgUrl = json[index].imgUrl; 
-					
-					
-	                 var li = document.createElement('li');
-	                 var a = document.createElement('a');
-	                 a.onclick="alert(11)";
-	                 var img = document.createElement("img");
-	                 img.src="${pageContext.request.contextPath}/resources/img/"+imgUrl;
-	                 img.style.width = '100px';
-	                 img.style.height = '100px';
-	                 var span=document.createElement('span');
-	                // span.display="inline-block";
-	                 span.innerHTML=price;
-	                 
-	              
-	                 a.appendChild(img);
-	                 li.appendChild(a);
-	                 li.appendChild(span);
-	                 ul.appendChild(li);
-	                 
-	             });  
-	             div.appendChild(ul);
-	        	//alert(data[0].productName); 
-			},
-	        error : function() {
-				alert('请求出错');
-				location.reload();
-			}
-	    });  
+    var path="${ctx}"+"/ProductController/productlist";
+    $('#productTable').bootstrapTable({
+    url: path, 
+    dataType: "json",
+    toolbar: '#toolbar',                //工具按钮用哪个容器
+    striped: true, 
+    showToggle:true,                    //是否显示详细视图和列表视图的切换按钮
+    cache: false,   //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+    sortable: true,   //是否启用排序
+    sortOrder: "asc",   //排序方式
+    queryParamsType: "limit", //参数格式,发送标准的RESTFul类型的参数请求  
+	queryParams: function (params) {
+			return {
+	    	    rows: this.pageSize,
+	            page: this.pageNumber,
+	            productName:$("input[name='productName']").val(),
+	            startMoney:$("#startMoney").val(),
+	            endMoney:$("#endMoney").val()
+	        };
+	    },
+    singleSelect: false,
+    pagination: true, //分页
+    pageNumber:1, 
+    clickToSelect: true,
+    pageSize: 10,                       //每页的记录行数（*）
+    pageList: [10, 25, 50, 100],        //可供选择的每页的行数（*）
+    sidePagination: "client", //客户端处理分页
+    formatNoMatches: function () {  //没有匹配的结果
+	    return '无符合条件的记录';
+	  },
+          columns: [ {
+				field: 'imgUrl',
+                title: '',
+                align: 'center' ,
+                width:60,
+                formatter: function (value, row, index) {  
+                	 return '<img  src="${pageContext.request.contextPath}/resources/img/'+value+'">'
+                }
+               
+                 
+            },{
+              field: 'productId',
+              title: '序号'
+          }, {
+              field: 'productName',
+              title: '产品名称'
+          }, {
+              field: 'price',
+              title: '价格'
+          }, {
+              field: 'count',
+              title: '可拍数量'
+          },
+          {
+              title: '操作',
+              field: 'doSomething',
+              align: 'center',
+              formatter:function(value,row,index){  
+            	  var e = '<a href="#" onclick="shop(\''
+						+ row.productId+'\'\,\''
+						+ row.productName+'\'\,\''
+						+ row.price+'\'\,\''
+						+ row.count+
+				'\')">加入购物车</a> ';
+				if(row.imgUrl!=null){
+					var p= '<a href="#" onclick="photo(\''
+						+ row.imgUrl+
+				'\')">查看图片</a> ';
+	                return p+e;
+				}
+				
+                return e;  
+            }}
+      ]
+      });
+    $('#productTable').bootstrapTable('hideColumn', 'productId');
     });
     function searchProduct(){
 	   

@@ -10,7 +10,8 @@
 	     <result property="addressPhone"    column="address_phone" />
 	     <result property="type" column="type" />
 	 </resultMap>
- 
+	
+	
 	<select id="AddressList" resultMap="addressMap">
 		select 
 			user_id userId, 
@@ -104,4 +105,10 @@
 		update user set type=#{type} where user_id=#{userId}
 	</update>
 	
+	
+	<insert id="addAddress"   >
+		insert into address(user_id,address_detail,address_name,address_phone)
+		value(#{userId},#{addressDetail},#{addressName},#{addressPhone} )
+  </insert>
+  
 </mapper>

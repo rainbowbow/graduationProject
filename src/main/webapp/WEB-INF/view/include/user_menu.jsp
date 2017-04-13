@@ -21,7 +21,7 @@
 				<ul id="main-nav" class="nav nav-tabs nav-stacked">
 					
 					<li id="product-active">
-						<a href="user" targe>
+						<a href="user" >
 							<i class="icon-home"></i>
 							购买产品			
 						</a>

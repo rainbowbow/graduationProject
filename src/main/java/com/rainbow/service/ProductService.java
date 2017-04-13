@@ -28,9 +28,9 @@ public class ProductService{
     	
     	return productDao.updateShopCardType(productId, type);
     }
-     public List<Product> ShopProduct(String productName,String startMoney,String endMoney){
+     public List<Product> ShopProduct(String productName,String startMoney,String endMoney,int numStart,int numEnd){
 	    	
-	    	return productDao.ShopProduct(productName,startMoney,endMoney);
+	    	return productDao.ShopProduct(productName, startMoney, endMoney, numStart, numEnd);
 	    }
 		
      public List<Product> RepertoryList(String productName,String type){
@@ -38,14 +38,14 @@ public class ProductService{
 	    	return productDao.RepertoryList(productName,type);
 	    }  
      
-     public int AddProduct(String productName,int count, double price,String detail){
+     public int AddProduct(Product product){
 	    	
-    	 return productDao.AddProduct(productName,count,price,detail);
+    	 return productDao.AddProduct(product);
 	    }
      
-     public int UpdateProduct(int productId,String productName,int count, double price,String detail){
+     public int UpdateProduct(Product product){
 	    	
-    	 return productDao.UpdateProduct(productId,productName,count,price,detail);
+    	 return productDao.UpdateProduct(product);
 	    }
      
     

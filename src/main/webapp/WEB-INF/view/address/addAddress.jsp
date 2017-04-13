@@ -15,28 +15,28 @@
 		<div class="control-group">
 			<label class="control-label">收件人:</label>
 			<div class="controls">
-				<input style="height: 25px" type="text" name="addressName">
+				<input style="height: 25px" type="text" id="addressName"name="addressName">
 			</div>
 		</div>
 		 
 		<div class="control-group">
 			<label class="control-label">联系电话:</label>
 			<div class="controls">
-				<input style="height: 25px" type="text" name="addressPhone">
+				<input style="height: 25px" type="text" id="addressPhone" name="addressPhone">
 			</div>
 		</div>
 		<div   class="control-group" data-toggle="distpicker">
 		<label class="control-label">地址:</label>
 		<div class="controls" >
-		  <select style="width: 210px" id="province" data-province="---- 选择省 ----"></select>
-		  <select style="width: 210px" id="city" data-city="---- 选择市 ----"></select>
-		  <select style="width: 210px" id="district" data-district="---- 选择区 ----"></select>
+		  <select style="width: 210px" id="province" name="province" data-province="---- 选择省 ----"></select>
+		  <select style="width: 210px" id="city" name="city" data-city="---- 选择市 ----"></select>
+		  <select style="width: 210px" id="district" name="district" data-district="---- 选择区 ----"></select>
 		</div>
 		 </div>
 		<div class="control-group">
 			<label class="control-label">详细街道:</label>
 			<div class="controls">
-				<input style="height: 25px" type="text" name="detail" >
+				<input style="height: 25px" type="text" name="detail" id="detail">
 			</div>
 		</div>
 		
@@ -70,8 +70,7 @@
 		 var p=$("#province").val();
 		 var c=$("#city").val();
 		 var d=$("#district").val();
-		 var address=p+c+d;
-		 if($("#province").val()==""){
+ 		 if($("#province").val()==""){
 			 alert("province地址不能为空！");
 			 return false;
 		 }
@@ -85,7 +84,7 @@
 		 }
  		    $.ajax({  
 		        type: "post",  
-		        url:  "${ctx}" + "/UserController/addAddress?address="+address,
+		        url:  "${ctx}" + "/UserController/addAddress",
 		        data:$('#addForm').serialize(),
 		        
 		        success : function(data) {

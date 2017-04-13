@@ -3,7 +3,7 @@
 <mapper namespace="com.rainbow.dao.ProductDao">
 
 	<select id="ShopProduct" resultType="Product">
-		select 
+		select * from(select 
 			product_id productId, 
 			product_name productName,
 			img_url imgUrl,
@@ -25,7 +25,7 @@
 				and  price <![CDATA[   <=  ]]> #{endMoney}
 		    </if>
 		</where>
-		
+		) p limit #{numStart},#{numEnd}
 	</select>
 	 
 	 <select id="productById" resultType="Product">

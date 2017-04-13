@@ -40,11 +40,15 @@ public class ProductController {
 		@RequestMapping("ProductController/productlist")
 		@ResponseBody
 		public List<Product> ShopProduct(HttpServletRequest request){
+			
+			int num = Integer.parseInt(request.getParameter("num"));
+			
+			System.out.println(num+"\nnum");
 			String productName = request.getParameter("productName");
 			String startMoney = request.getParameter("startMoney");
 			String endMoney = request.getParameter("endMoney");
  			List<Product> productList=new ArrayList<Product>();
-			productList=productService.ShopProduct(productName,startMoney,endMoney);
+			productList=productService.ShopProduct(productName,startMoney,endMoney,num,num+10);
 			return productList;
 		}
 		@RequestMapping("ProductController/repertoryList")
@@ -61,31 +65,29 @@ public class ProductController {
 		}
 		@RequestMapping("ProductController/addProduct")
 		@ResponseBody
-		int addProduct(Model model,HttpServletRequest request){
-			
+		int addProduct(Product product){
+			/*
 			String productName = request.getParameter("productName");
 			int count = Integer.parseInt(request.getParameter("count"));
 			Double price = Double.parseDouble(request.getParameter("price"));
-			String detail=request.getParameter("detail");
-			int addId=productService.AddProduct(productName, count, price, detail);
-     		model.addAttribute("addId",addId);
+			String detail=request.getParameter("detail");*/
+			int addId=productService.AddProduct(product);
  			return addId;
 		}
 		
 		
 		@RequestMapping("ProductController/updateProduct")
 		@ResponseBody
-		int updateProduct(Model model,HttpServletRequest request){
+		int updateProduct(Product product){
 			
-			int  productId = Integer.parseInt(request.getParameter("productId"));
+			/*int  productId = Integer.parseInt(request.getParameter("productId"));
 			String productName = request.getParameter("productName");
 			int count = Integer.parseInt(request.getParameter("count"));
 			Double price = Double.parseDouble(request.getParameter("price"));
-			String detail=request.getParameter("detail");
- 			int updateId=productService.UpdateProduct(productId,productName, count, price, detail);
+			String detail=request.getParameter("detail");*/
+ 			int updateId=productService.UpdateProduct(product);
       		System.out.println(updateId+"aaaaaqqaaaaaa");
-      		model.addAttribute("updateId",updateId);
-      		return updateId;
+       		return updateId;
 		}
 		
 		

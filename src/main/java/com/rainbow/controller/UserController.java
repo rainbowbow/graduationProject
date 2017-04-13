@@ -117,20 +117,12 @@ public class UserController {
 		} 
 		@RequestMapping("UserController/updateOneUserMessage")
 		@ResponseBody
-		int updateUser(Model model,HttpServletRequest request){
+		int updateUser(User user){
 			
-			User user=new User();
-			user.setUserId(request.getParameter("userId"));
-			user.setUserName(request.getParameter("userName"));
-			user.setSex(request.getParameter("sex"));
-			user.setAddress(request.getParameter("address"));
-			user.setAge(request.getParameter("age"));
-			user.setPhone(request.getParameter("phone"));
-			user.seteMail(request.getParameter("eMail"));
+ 			 
 			System.out.println("name"+user.getSex());
 		    int updateId= userService.updateUser(user);
-      		System.out.println(request.getParameter("sex")+"updateIdaaaaaqqaaaaaa");
-       		return updateId;
+        	return updateId;
 		}
 		 
 		 /*@RequestMapping("UserController/userlist")
@@ -166,21 +158,23 @@ public class UserController {
 		} 
 		@RequestMapping("UserController/addAddress")
 		@ResponseBody
-		public int addAddresslist(HttpSession session,HttpServletRequest request) throws UnsupportedEncodingException{
-			
+		public int addAddresslist(HttpSession session,HttpServletRequest request,Address address) throws UnsupportedEncodingException{
+			request.setCharacterEncoding("UTF-8");
+
 			User user=(User) session.getAttribute("user");
 			String userId=user.getUserId();
-			/*String province = request.getParameter("province");
+
+			address.setUserId(userId);
+			String province = request.getParameter("province");
 			String city = request.getParameter("city");
-			String district = request.getParameter("district");*/
-			String address = new String(request.getParameter("address").getBytes("ISO-8859-1"),"UTF-8");
-			String detail = request.getParameter("detail");
-			String addressDetail=address+detail;
+			String district = request.getParameter("district"); 
+ 			String detail = request.getParameter("detail");
+			String addressDetail=province+city+district+detail;
 			System.out.println(addressDetail+"\n");
 			
-			String addressName=request.getParameter("addressName");
-			String addressPhone=request.getParameter("addressPhone");
-  			return  1;
+			address.setAddressDetail(addressDetail);
+			int addId=userService.addAddress(address);
+  			return  addId;
 		} 
 		
   }
