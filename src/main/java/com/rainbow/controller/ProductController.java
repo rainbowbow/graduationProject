@@ -49,8 +49,9 @@ public class ProductController {
 			String endMoney = request.getParameter("endMoney");
 			System.out.println(productName+"startMoney:"+startMoney+"endMoney"+endMoney);
  			List<Product> productList=new ArrayList<Product>();
-			productList=productService.ShopProduct(productName,startMoney,endMoney,num,num+10);
- 			return productList;
+			productList=productService.ShopProduct(productName,startMoney,endMoney,num*10);
+			 
+			return productList;
 		}
 		@RequestMapping("ProductController/repertoryList")
 		@ResponseBody

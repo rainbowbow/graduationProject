@@ -13,7 +13,7 @@ import com.rainbow.beans.Product;
  */
 public interface ProductDao {
 	
-    List<Product> ShopProduct(@Param("productName")String productName,@Param("startMoney")String startMoney,@Param("endMoney")String endMoney,@Param("numStart")int numStart,@Param("numEnd")int numEnd);//获取所有产品
+    List<Product> ShopProduct(@Param("productName")String productName,@Param("startMoney")String startMoney,@Param("endMoney")String endMoney,@Param("numStart")int numStart);//获取所有产品
     List<Product> RepertoryList(@Param("productName")String productName,@Param("type")String type);
     
     int AddProduct(Product product);

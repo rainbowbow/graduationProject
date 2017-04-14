@@ -111,18 +111,19 @@
 							</div>
                  <div class="pre-scrollable">
 				   <div id="productDiv">
-						 <input type="hidden" id="num" value="0"> 
+						 <input type="hidden" id="num" value="0">
+						 <input type="hidden" id="totalCount" >  
 				  </div>
 				 
 				 </div>
 				 <div>
 				 
 						 
-	    			总共 页&nbsp;&nbsp;当前第 页&nbsp;&nbsp;
-	    			    <a href="#" onclick="alert(0);">首页</a>&nbsp;
-	    				<a href="#" onclick="nextPage();">上页</a>&nbsp;
-	    			    <a href="middle_all.action?page=${page+1}&meid=${meid }">下页</a>&nbsp;
-	    				<a href="middle_all.action?page=${pageCount}&meid=${meid }">尾页</a>&nbsp;
+	    			总共<a id="all" href="#" ></a> 页&nbsp;&nbsp;当前第<a id="order" href="#" ></a>页&nbsp;&nbsp;
+	    			    <a  href="#" onclick="firstPage();">首页</a>&nbsp;
+	    				<a href="#" onclick="upPage();">上页</a>&nbsp;
+	    			    <a href="#" onclick="nextPage();">下页</a>&nbsp;
+	    				<a href="#" onclick="lastestPage();">尾页</a>&nbsp;
  						 
 				  </div>
 				</div>
@@ -158,44 +159,95 @@
 	
 <jsp:include page="include/footer.jsp"></jsp:include>
    <script >
-  function nextPage(){
-	  var num= parseInt($("#num").val());
-	  $("#num").val(num+1);//向input加1
-	  var numstart=$("#num").val();
-	  var productName=$("#productName").val();
-	  var startMoney=$("#startMoney").val();
-	  var endMoney=$("#endMoney").val();
+   
+   
+   function ajaxFuction(){
 	  
-	  var path="${ctx}"+"/ProductController/productlist";
-	    $.ajax({  
-	        type: "post",
-	        dataType:"json",
-	        url:  path,
-	        data:{
-	        	"num" :numstart,
-	        	"productName":productName,
-	        	"startMoney":startMoney,
-	        	"endMoney":endMoney
-	        },
-	        success : function(data){
-	        	shopProduct(data);
-	        },
-	        error : function() {
-				alert('请求出错');
-				location.reload();
-			}
-	    });
+	      var numstart=$("#num").val();
+		  var productName=$("#productName").val();
+		  var startMoney=$("#startMoney").val();
+		  var endMoney=$("#endMoney").val();
+		  
+		  var path="${ctx}"+"/ProductController/productlist";
+		    $.ajax({  
+		        type: "post",
+		        dataType:"json",
+		        url:  path,
+		        data:{
+		        	"num" :numstart,
+		        	"productName":productName,
+		        	"startMoney":startMoney,
+		        	"endMoney":endMoney
+		        },
+		        success : function(data){
+		        	shopProduct(data);
+		        },
+		        error : function() {
+					alert('请求出错');
+					location.reload();
+				}
+		    });
+   }
+   function firstPage(){
+	   
+	   var  totalCount=parseInt($("#totalCount").val());
+	 	  var num= parseInt($("#num").val());
+	 	  document.getElementById("order").innerText="1";
+	 	  if(num==0){
+	 		  alert("已是首页！");
+	 		  return false;
+	 	  }
+		  $("#num").val(0); 
+		  ajaxFuction();
+   }
+   function lastestPage(){
+	   var  totalCount=parseInt($("#totalCount").val());
+	  
+	 	  var num= parseInt($("#num").val());
+	 	  if(num==totalCount){
+	 		  alert("已是首页！");
+	 		  return false;
+	 	  }
+	 	  document.getElementById("order").innerText=totalCount+1;
+		  $("#num").val(totalCount); 
+		  ajaxFuction();
+   }
+   function upPage(){
+	   var  totalCount=parseInt($("#totalCount").val());
+	 	  var num= parseInt($("#num").val());
+	 	  if(num==0){
+	 		  alert("已是首页！");
+	 		  return false;
+	 	  }
+		  document.getElementById("order").innerText=num;
+
+		  $("#num").val(num-1); 
+		  ajaxFuction();
+   }
+   function nextPage(){
+	  var  totalCount=parseInt($("#totalCount").val());
+ 	  var num= parseInt($("#num").val());
+ 	 document.getElementById("order").innerText=num+2;
+ 	  if(num>=totalCount){
+ 		  alert("已是最后一页！");
+ 		  return false;
+ 	  }
+	  $("#num").val(num+1);//向input加1
+	  ajaxFuction();
   }
   
   function shopProduct(data) {
 	  
  	  var div=document.getElementById("productDiv");
- 	 $('#ulId').remove();
-
+ 	  $('#ulId').remove();
+ 	
  	  var ul=document.createElement('ul');
- 	 ul.setAttribute("id", "ulId");
+ 	  ul.setAttribute("id", "ulId");
       ul.setAttribute("class", "tabContent");
-      var json = eval(data); //数组         
+      var json = eval(data); //数组  
+      var totalCount= $("#totalCount").val();
+         
+      $("#totalyCount").val(num+1); 
        $.each(json, function (index, item) {  
           //循环获取数据    
           var productId = json[index].productId; 
@@ -206,8 +258,7 @@
 			
           var li = document.createElement('li');
           var a = document.createElement('a');
-          a.onclick="alert(11)";
-          var img = document.createElement("img");
+           var img = document.createElement("img");
           img.src="${pageContext.request.contextPath}/resources/img/"+imgUrl;
           img.style.width = '100px';
           img.style.height = '100px';
@@ -219,7 +270,6 @@
           ul.appendChild(li);
       });   
       div.appendChild(ul);
- 	alert(data[0].productName); 
 	}
   
     $(document).ready(function(){
@@ -230,7 +280,13 @@
 	        type: "post",  
 	        url:  path,
 	        success : function(data){
-	        	shopProduct(data);
+ 	        	if(data.length>0){
+ 	        		 var totalCount=Math.floor(parseInt(data[0].total)/10);
+ 	        	     $("#totalCount").val(totalCount);
+ 	        		 document.getElementById("all").innerText=totalCount+1;
+ 	        		 document.getElementById("order").innerText="1";
+	        		 shopProduct(data);
+	        	}
 	        },
 	        error : function() {
 				alert('请求出错');
@@ -258,8 +314,14 @@
   	        	"endMoney":endMoney
   	        },
   	        success : function(data){
-  	        	shopProduct(data);
-  	        },
+  	        	if(data.length>0){
+  	        		var totalCount=Math.floor(parseInt(data[0].total)/10);
+	        	     $("#totalCount").val(totalCount);
+	        		 document.getElementById("all").innerText=totalCount+1;
+	        		 document.getElementById("order").innerText="1";
+	        		shopProduct(data);
+	        	}
+   	        },
   	        error : function() {
   				alert('请求出错');
   				location.reload();

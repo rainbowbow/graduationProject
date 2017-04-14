@@ -39,7 +39,7 @@
 				and  price <![CDATA[   <=  ]]> #{endMoney}
 		    </if>
 		</where>
-		) c limit #{numStart},#{numEnd}
+		) c limit #{numStart},10
 	</select>
  
 	 <select id="productById" resultType="Product">
