@@ -18,55 +18,24 @@
 	float: left;
 	margin-right: -1px;
 	margin-bottom: 60px;
-	_position: relative;
+	position: relative;
 	border: 1px solid #e4e4e4;
 	margin-left: 50px;
 	border: 1px
-}
-
-.tabContent li:hover {
-	filter: alpha(opacity =             70);
-	-moz-opacity: 0.7;
-	opacity: 0.7;
-}
+} 
 
 .tabContent img {
-	width: 120px;
-	height: 120px;
+	width: 100px;
+	height: 100px;
 	display: block;
 }
-
-.tabContent1 {
-	width: 600px;
-	position: absolute;
-	left: 270px;
-	top: 320px;
-	padding-left: 5px;
-	_padding-left: 2px;
+ .price {
+	line-height: 30px;
+	color: #c4161c;
+	font-size: 14px;
+	font-weight: bold;
 }
-
-.tabContent1 li {
-	float: left;
-	margin-right: -1px;
-	margin-bottom: 60px;
-	_position: relative;
-	border: 1px solid #e4e4e4;
-	margin-left: 50px;
-	border: 1px
-}
-
-.tabContent1 li:hover {
-	filter: alpha(opacity =             70);
-	-moz-opacity: 0.7;
-	opacity: 0.7;
-}
-
-.tabContent1 img {
-	width: 120px;
-	height: 120px;
-	display: block;
-}
-
+ 
 </style>
 	</head>
 
@@ -159,7 +128,6 @@
 	
 <jsp:include page="include/footer.jsp"></jsp:include>
    <script >
-   
    
    function ajaxFuction(){
 	  
@@ -257,16 +225,27 @@
           var imgUrl = json[index].imgUrl; 
 			
           var li = document.createElement('li');
-          var a = document.createElement('a');
-           var img = document.createElement("img");
+          var aDetail = document.createElement('a');
+          aDetail.addEventListener("click",function(){
+        	  shop(productId,productName,price,count,imgUrl);
+          });
+          var img = document.createElement("img");
           img.src="${pageContext.request.contextPath}/resources/img/"+imgUrl;
-          img.style.width = '100px';
-          img.style.height = '100px';
-          var span=document.createElement('span');
-          span.innerHTML=price;
-          a.appendChild(img);
-          li.appendChild(a);
-          li.appendChild(span);
+         
+          var spanName=document.createElement('span');
+          var spanPrice=document.createElement('span');
+          spanName.innerHTML="商品："+productName+"<br/>";
+         // spanName.appendChild("br/");
+          spanPrice.innerHTML="价格："+price+"<br/>";
+          spanPrice.setAttribute("class","price");
+          
+          var aShopCard = document.createElement('a');
+          aShopCard.innerText="加入购物车";
+          aDetail.appendChild(img);
+          li.appendChild(aDetail);
+          li.appendChild(spanName);
+          li.appendChild(spanPrice);
+          li.appendChild(aShopCard);
           ul.appendChild(li);
       });   
       div.appendChild(ul);
