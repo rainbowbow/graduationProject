@@ -159,10 +159,69 @@
 <jsp:include page="include/footer.jsp"></jsp:include>
    <script >
   function nextPage(){
-	  var num= $("#num").val();
-	  $("#num").val(num+1);
-	  alert($("#num").val());
+	  var num= parseInt($("#num").val());
+	  $("#num").val(num+1);//向input加1
+	  var numstart=$("#num").val();
+	  var productName=$("#productName").val();
+	  var startMoney=$("#startMoney").val();
+	  var endMoney=$("#endMoney").val();
+	  
+	  var path="${ctx}"+"/ProductController/productlist";
+	    $.ajax({  
+	        type: "post",
+	        dataType:"json",
+	        url:  path,
+	        data:{
+	        	"num" :numstart,
+	        	"productName":productName,
+	        	"startMoney":startMoney,
+	        	"endMoney":endMoney
+	        },
+	        success : function(data){
+	        	shopProduct(data);
+	        },
+	        error : function() {
+				alert('请求出错');
+				location.reload();
+			}
+	    });
   }
+  
+  function shopProduct(data) {
+	  
+ 	  var div=document.getElementById("productDiv");
+ 	 $('#ulId').remove();
+
+ 	  var ul=document.createElement('ul');
+ 	 ul.setAttribute("id", "ulId");
+      ul.setAttribute("class", "tabContent");
+      var json = eval(data); //数组         
+       $.each(json, function (index, item) {  
+          //循环获取数据    
+          var productId = json[index].productId; 
+          var productName = json[index].productName; 
+          var price = json[index].price; 
+          var count = json[index].count; 
+          var imgUrl = json[index].imgUrl; 
+			
+          var li = document.createElement('li');
+          var a = document.createElement('a');
+          a.onclick="alert(11)";
+          var img = document.createElement("img");
+          img.src="${pageContext.request.contextPath}/resources/img/"+imgUrl;
+          img.style.width = '100px';
+          img.style.height = '100px';
+          var span=document.createElement('span');
+          span.innerHTML=price;
+          a.appendChild(img);
+          li.appendChild(a);
+          li.appendChild(span);
+          ul.appendChild(li);
+      });   
+      div.appendChild(ul);
+ 	alert(data[0].productName); 
+	}
+  
     $(document).ready(function(){
     var li=document.getElementById('product-active');
     li.setAttribute("class","active");
@@ -170,44 +229,9 @@
 	    $.ajax({  
 	        type: "post",  
 	        url:  path,
-	        success : function(data) {
-	        	
-	        	 var div=document.getElementById("productDiv");
-	        	 var ul=document.createElement('ul');
-	        	 ul.setAttribute("id", "0");
-	             ul.setAttribute("class", "tabContent");
-
-	             var json = eval(data); //数组         
-	             $.each(json, function (index, item) {  
-	                 //循环获取数据    
-	                 var productId = json[index].productId; 
-	                 var productName = json[index].productName; 
-	                 var price = json[index].price; 
-	                 var count = json[index].count; 
-	                 var imgUrl = json[index].imgUrl; 
-					
-					
-	                 var li = document.createElement('li');
-	                 var a = document.createElement('a');
-	                 a.onclick="alert(11)";
-	                 var img = document.createElement("img");
-	                 img.src="${pageContext.request.contextPath}/resources/img/"+imgUrl;
-	                 img.style.width = '100px';
-	                 img.style.height = '100px';
-	                 var span=document.createElement('span');
-	                // span.display="inline-block";
-	                 span.innerHTML=price;
-	                 
-	              
-	                 a.appendChild(img);
-	                 li.appendChild(a);
-	                 li.appendChild(span);
-	                 ul.appendChild(li);
-	                 
-	             });  
-	             div.appendChild(ul);
-	        	//alert(data[0].productName); 
-			},
+	        success : function(data){
+	        	shopProduct(data);
+	        },
 	        error : function() {
 				alert('请求出错');
 				location.reload();
@@ -215,9 +239,32 @@
 	    });  
     });
     function searchProduct(){
-	   
-    	var searchUrl="${ctx}"+ "/ProductController/productlist";
-     	$('#productTable').bootstrapTable('refresh', {url: searchUrl});  
+      $("#num").val(0);
+      var numstart= $("#num").val();//向input加1
+      alert(numstart);
+      var productName=$("#productName").val();
+  	  var startMoney=$("#startMoney").val();
+  	  var endMoney=$("#endMoney").val();
+  	  
+  	  var path="${ctx}"+"/ProductController/productlist";
+  	    $.ajax({  
+  	        type: "post",
+  	        dataType:"json",
+  	        url:  path,
+  	        data:{
+  	        	"num" :numstart,
+  	        	"productName":productName,
+  	        	"startMoney":startMoney,
+  	        	"endMoney":endMoney
+  	        },
+  	        success : function(data){
+  	        	shopProduct(data);
+  	        },
+  	        error : function() {
+  				alert('请求出错');
+  				location.reload();
+  			}
+  	    });
     	}
     
     // 回填购物车

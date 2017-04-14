@@ -15,10 +15,16 @@ public class Product implements Serializable {
     private String detail;
     private String imgUrl;
     private String type;//0:在售；1：库存（未上架+下架）
-	 
+    private String total;
 	 
 	public int getProductId() {
 		return productId;
+	}
+	public String getTotal() {
+		return total;
+	}
+	public void setTotal(String total) {
+		this.total = total;
 	}
 	public void setProductId(int productId) {
 		this.productId = productId;
