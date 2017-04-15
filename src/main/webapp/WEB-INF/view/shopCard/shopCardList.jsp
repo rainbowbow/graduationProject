@@ -128,18 +128,17 @@ $(document).ready(function() {
 							  },
 						columns : [{
 			                        checkbox: true
-		                            },{  
-					                title: '序号',
-					                formatter: function (value, row, index) {  
-					                    return index+1;  
-					                },
-					                width:60,
-					                align:'center' 
-	                  			 },{
+		                            },{
 									field : 'shopCardId',
 									title : '序号'
 								},{
-									field: 'imgUrl' 
+									field: 'imgUrl',
+									title:"",
+									formatter: function (value, row, index) {  
+					                    return '<img width="50" src="${pageContext.request.contextPath}/resources/img/'+value+'">';  
+					                },
+					                width:60,
+					                align:'center' 
 					            },{
 									field : 'productName',
 									title : '产品名称'
@@ -187,7 +186,6 @@ $(document).ready(function() {
 									}
 								} ]
 					});
-	$('#shopCardTable').bootstrapTable('hideColumn', 'imgUrl');
 	$('#shopCardTable').bootstrapTable('hideColumn', 'shopCardId');
           });
 		// 回填表单

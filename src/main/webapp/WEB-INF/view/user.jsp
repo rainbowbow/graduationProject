@@ -35,6 +35,10 @@
 	font-size: 14px;
 	font-weight: bold;
 }
+.pageDiv{
+float: right;
+margin-bottom: 0px;
+}
  
 </style>
 	</head>
@@ -78,23 +82,22 @@
 									
 								</div>
 							</div>
-                 <div class="pre-scrollable">
-				   <div id="productDiv">
-						 <input type="hidden" id="num" value="0">
-						 <input type="hidden" id="totalCount" >  
-				  </div>
-				 
-				 </div>
-				 <div>
-				 
-						 
-	    			总共<a id="all" href="#" ></a> 页&nbsp;&nbsp;当前第<a id="order" href="#" ></a>页&nbsp;&nbsp;
-	    			    <a  href="#" onclick="firstPage();">首页</a>&nbsp;
-	    				<a href="#" onclick="upPage();">上页</a>&nbsp;
-	    			    <a href="#" onclick="nextPage();">下页</a>&nbsp;
-	    				<a href="#" onclick="lastestPage();">尾页</a>&nbsp;
- 						 
-				  </div>
+	                 <div class="pre-scrollable">
+					   <div id="productDiv">
+							 <input type="hidden" id="num" value="0">
+							 <input type="hidden" id="totalCount" >  
+					  </div>
+					 
+					 </div>
+					 <div class="pageDiv">
+					  	 
+		    			总共<a id="all" href="#" ></a> 页&nbsp;&nbsp;当前第<a id="order" href="#" ></a>页&nbsp;&nbsp;
+		    			    <a  href="#" onclick="firstPage();">首页</a>&nbsp;
+		    				<a href="#" onclick="upPage();">上页</a>&nbsp;
+		    			    <a href="#" onclick="nextPage();">下页</a>&nbsp;
+		    				<a href="#" onclick="lastestPage();">尾页</a>&nbsp;
+	 						 
+					  </div>
 				</div>
 			</div> <!-- /span9 -->
 			
@@ -103,6 +106,20 @@
 	 </div> <!-- /container -->
 	
     </div> <!-- /content -->
+    
+    <!-- detail Modal start -->
+	<div class="modal hide fade" id="detailModal" tabindex="-1" role="dialog">
+		<div class="modal-header">
+			<button class="close" type="button" data-dismiss="modal">×</button>
+			<h3>产品详情</h3>
+		</div>
+		<div class="modal-body">
+			<jsp:include page="product/detailProduct.jsp"></jsp:include>
+		</div>
+	</div>
+	<!-- detail Modal end -->
+	
+	
   <!-- 加入购物车Modal start -->
 	<div class="modal hide fade" id="shopModal" tabindex="-1" role="dialog">
 		<div class="modal-header">
@@ -221,13 +238,14 @@
           var productId = json[index].productId; 
           var productName = json[index].productName; 
           var price = json[index].price; 
-          var count = json[index].count; 
+          var count = json[index].count;
+          var detailMessage = json[index].detail;
           var imgUrl = json[index].imgUrl; 
 			
           var li = document.createElement('li');
           var aDetail = document.createElement('a');
           aDetail.addEventListener("click",function(){
-        	  shop(productId,productName,price,count,imgUrl);
+        	  detail(productId,productName,price,count,detailMessage,imgUrl);
           });
           var img = document.createElement("img");
           img.src="${pageContext.request.contextPath}/resources/img/"+imgUrl;
@@ -241,6 +259,9 @@
           
           var aShopCard = document.createElement('a');
           aShopCard.innerText="加入购物车";
+          aShopCard.addEventListener("click",function(){
+        	  shop(productId,productName,price,count,imgUrl);
+          });
           aDetail.appendChild(img);
           li.appendChild(aDetail);
           li.appendChild(spanName);
@@ -309,7 +330,7 @@
     	}
     
     // 回填购物车
-	function shop(id,productName,price,count) {  
+	function shop(id,productName,price,count,imgUrl) {  
 		//向模态框中传值  
 	    $("#shopProductId").val(id);  
 		$("#shopProductName").val(productName);  
@@ -325,6 +346,24 @@
 	}  
     
     
+    
+	 // 商品详情
+	function detail(id,productName,price,count,detailMessage,imgUrl) {  
+		//向模态框中传值  
+	    $("#detailProductId").val(id);  
+		$("#detailProductName").val(productName);  
+	    $("#detailPrice").val(price); 
+	    $("#detailMessage").val(detailMessage); 
+	    $("#maxDetailCount").val(count);
+	    $("#imgDetail").attr("src","${pageContext.request.contextPath}/resources/img/"+imgUrl);
+        
+	    $("#detailProductId").prop("readonly","readonly");
+	    $("#detailProductName").prop("readonly","readonly");
+ 	    $("#detailPrice").prop("readonly","readonly");
+ 	    $("#detailMessage").prop("readonly","readonly");
+	    
+	    $('#detailModal').modal('show');  
+	}  
 	function photo(imgUrl) {  
 		//向模态框中传值  
 		$("#divImg").empty();
