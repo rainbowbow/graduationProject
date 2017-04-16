@@ -38,10 +38,16 @@
 		    <if test="endMoney !=null and endMoney!=''">
 				and  price <![CDATA[   <=  ]]> #{endMoney}
 		    </if>
+		    ) c 
+		     <if test="numStart!=10000">
+                limit #{numStart},10
+		    </if>
+		    
 		</where>
-		) c limit #{numStart},10
+		
 	</select>
- 
+  
+		 
 	 <select id="productById" resultType="Product">
 		select 
 			product_id productId, 
@@ -107,4 +113,8 @@
 	<update id="updateShopCardType"  >
 		update shop_card set type=#{type} where product_id=#{productId}
 	</update>
+	
+	
+	
+	
 </mapper>

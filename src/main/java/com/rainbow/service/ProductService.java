@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.rainbow.beans.Product;
 import com.rainbow.dao.ProductDao;
+import com.rainbow.utils.ListHelper;
 
 
 @Service("productService")
@@ -51,7 +52,7 @@ public class ProductService{
     
      
      public int DelProduct(String productId){
-    	 List<String> productIdList = getList(productId);
+    	 List<String> productIdList = ListHelper.getList(productId);
     	 return productDao.DelProduct(productIdList);
 	    }
      
@@ -65,14 +66,5 @@ public class ProductService{
     	 return productDao.productById(productId);
      }
      
-     
-     public List<String> getList(String id) {
-    	      List<String> list = new ArrayList<String>();
-    	      String[] str = id.split(",");
-    	       for (int i = 0; i < str.length; i++) {
-    	          list.add(str[i]);
-    	      }
-    	      return list;
-    	  }
      
 	}

@@ -40,9 +40,13 @@ public class ProductController {
 		@RequestMapping("ProductController/productlist")
 		@ResponseBody
 		public List<Product> ShopProduct(HttpServletRequest request){
-			
-			int num = Integer.parseInt(request.getParameter("num"));
-			
+			String numString=request.getParameter("num");
+			int num;
+			if(numString!=null){
+			   num = Integer.parseInt(request.getParameter("num"));
+			}else{
+				num=1000;
+			}
 			System.out.println(num+"\nnum");
 			String productName = request.getParameter("productName");
 			String startMoney = request.getParameter("startMoney");
@@ -68,11 +72,6 @@ public class ProductController {
 		@RequestMapping("ProductController/addProduct")
 		@ResponseBody
 		int addProduct(Product product){
-			/*
-			String productName = request.getParameter("productName");
-			int count = Integer.parseInt(request.getParameter("count"));
-			Double price = Double.parseDouble(request.getParameter("price"));
-			String detail=request.getParameter("detail");*/
 			int addId=productService.AddProduct(product);
  			return addId;
 		}
@@ -81,21 +80,14 @@ public class ProductController {
 		@RequestMapping("ProductController/updateProduct")
 		@ResponseBody
 		int updateProduct(Product product){
-			
-			/*int  productId = Integer.parseInt(request.getParameter("productId"));
-			String productName = request.getParameter("productName");
-			int count = Integer.parseInt(request.getParameter("count"));
-			Double price = Double.parseDouble(request.getParameter("price"));
-			String detail=request.getParameter("detail");*/
  			int updateId=productService.UpdateProduct(product);
-      		System.out.println(updateId+"aaaaaqqaaaaaa");
        		return updateId;
 		}
 		
 		
 		@RequestMapping("ProductController/delProduct")
 		@ResponseBody
-		int delProduct(Model model,HttpServletRequest request){	
+		int delProduct(HttpServletRequest request){	
 			
 			String productIdMore = request.getParameter("productId");
 			return productService.DelProduct(productIdMore);

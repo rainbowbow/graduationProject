@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.rainbow.dao.UserDao;
+import com.rainbow.utils.ListHelper;
 import com.rainbow.beans.Address;
 import com.rainbow.beans.User;
 
@@ -62,5 +63,14 @@ public class UserService {
          public int addAddress(Address address) {
 	         
  	    	return userDao.addAddress(address);
+ 	    }
+         public int updateAddress(Address address) {
+	         
+  	    	return userDao.updateAddress(address);
+  	    }
+         
+         public int delAddress(String addressId){
+        	 List<String> addressIdList = ListHelper.getList(addressId);
+  	    	 return userDao.delAddress(addressIdList);
  	    }
 	}

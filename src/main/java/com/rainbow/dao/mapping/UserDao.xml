@@ -5,6 +5,7 @@
 	<resultMap id="addressMap" type="com.rainbow.beans.Address" >
          <result property="userId"     column="user_id" />
 	     <result property="addressId" column="address_id" />
+	     <result property="address"    column="address" />
 	     <result property="addressDetail"    column="address_detail" />
 	     <result property="addressName"    column="address_name" />
 	     <result property="addressPhone"    column="address_phone" />
@@ -16,6 +17,7 @@
 		select 
 			user_id userId, 
 			address_id addressId,
+			address address,
 			address_detail addressDetail,
 			address_name addressName,
 			address_phone addressPhone,
@@ -96,6 +98,8 @@
 		where user_id=#{userId}
 	</update>
 	
+	 
+	
 	<insert id="createUser">
 		insert into user(user_id,user_name) 
 		values(#{userId},#{userName})
@@ -106,9 +110,23 @@
 	</update>
 	
 	
-	<insert id="addAddress"   >
-		insert into address(user_id,address_detail,address_name,address_phone)
-		value(#{userId},#{addressDetail},#{addressName},#{addressPhone} )
+	<insert id="addAddress"  >
+		insert into address(user_id,address,address_detail,address_name,address_phone)
+		value(#{userId},#{address},#{addressDetail},#{addressName},#{addressPhone} )
   </insert>
+  
+ <update id="updateAddress"   >
+		update address set address=#{address},address_detail=#{addressDetail},address_name=#{addressName},address_phone=#{addressPhone}
+		where address_id=#{addressId}
+	</update>
+	
+	 <delete id="delAddress" parameterType="java.util.List" >
+        delete from address where address_id in
+        <foreach item="id" collection="list" open="(" close=")" separator=",">
+             #{id}
+        </foreach>
+         
+    </delete>
+  
   
 </mapper>

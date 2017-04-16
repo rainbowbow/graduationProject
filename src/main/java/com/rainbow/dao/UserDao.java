@@ -24,8 +24,9 @@ public interface UserDao {
     
     public int updateUser(User user);//修改用户
     public int editType(@Param("userId")int userId,@Param("type")String type);//修改用户状态
-    public int addAddress(Address address);//添加用户
-    
+    public int addAddress(Address address);//添加地址
+    public int updateAddress(Address address);//修改地址
+    public int delAddress(List<String> addressId);//删除地址
 
 }
 

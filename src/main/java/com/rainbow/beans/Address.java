@@ -10,6 +10,7 @@ public class Address implements Serializable {
 	
 	private String addressId;
     private String userId;
+    private String address;
     private String addressDetail;
     private String type;
     private String addressPhone;
@@ -32,6 +33,12 @@ public class Address implements Serializable {
 	}
 	public void setAddressDetail(String addressDetail) {
 		this.addressDetail = addressDetail;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
 	}
 	public String getAddressPhone() {
 		return addressPhone;

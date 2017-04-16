@@ -63,30 +63,8 @@ public class UserController {
 	 
 			@RequestMapping("UserController/updateUser")
 			@ResponseBody
-			int updateProduct(Model model,HttpServletRequest request){
-				
-				User user=new User();
-				
-				String  userId =request.getParameter("userId");
-				String userName = request.getParameter("userName");
-				String sex = request.getParameter("sex");
-				String age = request.getParameter("age");
-				String phone = request.getParameter("phone");
-				String eMail = request.getParameter("eMail");
-				String address = request.getParameter("address");
-
-				user.setUserId(userId);
-				user.setUserName(userName);
-				user.setSex(sex);
-				user.setAge(age);
-				user.setPhone(phone);
-				user.seteMail(eMail);
-				user.setAddress(address);
-				
-				 
+			int updateProduct(HttpServletRequest request,User user){
 	 			int updateId=userService.updateUser(user);
-	      		System.out.println("address:"+address+"\n"+updateId+"aaaaaqqaaaaaa");
-	      	 
 	      		return updateId;
 			}
 			
@@ -98,7 +76,6 @@ public class UserController {
 			
 			String userName = request.getParameter("userName");
 			String sex = request.getParameter("sex");
-			System.out.println(userName+"llllllllqqq"+sex);
  			List<User> userList=new ArrayList<User>();
  			userList=userService.UserListByQuery(userName,sex);
 			return userList;
@@ -125,17 +102,7 @@ public class UserController {
         	return updateId;
 		}
 		 
-		 /*@RequestMapping("UserController/userlist")
-			@ResponseBody
-			public List<User> userlistByQuery(HttpServletRequest request){
-				String userName = request.getParameter("userName");
-				String age = request.getParameter("age");
-
-			   List<User> userListByQuery=new ArrayList<User>();
-	 			userListByQuery=userService.UserListByQuery(userName,age);
-				System.out.println(userListByQuery.get(0).getUserName());
-				return userListByQuery;
-			}*/
+		 
 		@RequestMapping("UserController/editType")
 		@ResponseBody
 		int editType(HttpServletRequest request){
@@ -158,23 +125,37 @@ public class UserController {
 		} 
 		@RequestMapping("UserController/addAddress")
 		@ResponseBody
-		public int addAddresslist(HttpSession session,HttpServletRequest request,Address address) throws UnsupportedEncodingException{
-			request.setCharacterEncoding("UTF-8");
-
+		public int addAddresslist(HttpSession session,HttpServletRequest request,Address addressBean) throws UnsupportedEncodingException{
+ 
 			User user=(User) session.getAttribute("user");
 			String userId=user.getUserId();
 
-			address.setUserId(userId);
+			addressBean.setUserId(userId);
 			String province = request.getParameter("province");
 			String city = request.getParameter("city");
 			String district = request.getParameter("district"); 
- 			String detail = request.getParameter("detail");
-			String addressDetail=province+city+district+detail;
-			System.out.println(addressDetail+"\n");
-			
-			address.setAddressDetail(addressDetail);
-			int addId=userService.addAddress(address);
+ 			String address=province+city+district;
+ 			addressBean.setAddress(address);
+ 			int addId;
+			System.out.println("\n\n"+addressBean.getAddressId()+"\n");
+			if(addressBean.getAddressId()!=null){
+				addId=userService.updateAddress(addressBean);
+			}else{
+				addId=userService.addAddress(addressBean);
+			}
+			System.out.println(addressBean.getAddressDetail()+"\n"+addressBean.getAddress());
+		 
   			return  addId;
 		} 
+		
+		@RequestMapping("UserController/delAddress")
+		@ResponseBody
+		int delProduct(Model model,HttpServletRequest request){	
+			
+			String addressId = request.getParameter("addressId");
+			return userService.delAddress(addressId);
+			
+		}
+		 
 		
   }

@@ -42,8 +42,8 @@
                          
 								 
 							<div id="toolbar" class="btn-group">
-								 
-									<input type="button" class="btn btn-primary" value="新增地址" data-toggle="modal" data-target="#addModal" />
+								<input type="button" class="btn btn-primary" value="新增地址" data-toggle="modal" data-target="#addModal" />
+							    <input type="button" class="btn btn-primary" value="删除" onclick="del(null)" />
 							</div>
 							<div >
 							<table  class="table table-bordered" id="addressTable">
@@ -71,6 +71,20 @@
 		</div>
 	</div>
 	<!-- 新增 Modal end -->
+	
+	<!-- edit Modal -->
+	<div class="modal hide fade" id="editModal" tabindex="-1" role="dialog">
+		<div class="modal-header">
+			<button class="close" type="button" data-dismiss="modal">×</button>
+			<h3>修改信息</h3>
+		</div>
+		<div class="modal-body">
+			<jsp:include page="editAddress.jsp"></jsp:include>
+		</div>
+	</div>
+	<!-- edit Modal end -->
+	
+	
 	<jsp:include page="../include/footer.jsp"></jsp:include>
 	<script>
 	
@@ -120,8 +134,12 @@
 							title : '收件人'
 						} ,
 						{
-							field : 'addressDetail',
+							field : 'address',
 							title : '地址'
+						} ,
+						{
+							field : 'addressDetail',
+							title : '详细街道'
 						} ,
 						{
 							field : 'addressPhone',
@@ -132,15 +150,18 @@
 							field : 'doSomething',
 							align : 'center',
 							formatter : function(value, row,index) {
-								var e = '<a href="#" onclick="edit(\''
-									+ row.addressId+'\'\,\''
-									+ row.address+
-							'\')">编辑</a> '; 
+								 
+							var e = '<a href="#" onclick="editInfo(\''
+								+ row.addressId+'\'\,\''
+								+ row.addressName+'\'\,\''
+								+ row.addressDetail+'\'\,\''
+								+ row.addressPhone+
+						'\')">编辑</a> ';
 								
 									var d = '<a href="#"  onclick="del(\''
-										+ row.orderId
+										+ row.addressId
 										+ '\')">删除</a> ';
-								return d;
+								return e+d;
 							}
 						} ]
 			});
@@ -148,7 +169,85 @@
 				$('#addressTable').bootstrapTable('hideColumn', 'addressId');
 				$('#addressTable').bootstrapTable('hideColumn', 'userId');
     });
- 
+		  // 回填表单
+		function editInfo(id,addressName,addressDetail,addressPhone) {  
+			//向模态框中传值  
+		    $("#editAddressId").val(id);  
+			$("#editAddressName").val(addressName);  
+		    $("#editAddressDetail").val(addressDetail);  
+		    $("#editAddressPhone").val(addressPhone);  
+		    
+		    var selectProvince = document.getElementById("editProvince"); 
+		    var selectCity = document.getElementById("editCity");
+		    var selectDistrict = document.getElementById("editDistrict");
+		   
+		    for(var i=0; i<selectProvince.options.length; i++){  
+		        if(addressDetail.indexOf(selectProvince.options[i].innerHTML) >= 0){  
+		        	selectProvince.options[i].selected = true;  
+		            break;  
+		        }  
+		    }  
+		    
+		    for(var j=0; j<selectCity.options.length; j++){  
+		        if(addressDetail.indexOf(selectCity.options[j].innerHTML) >= 0){  
+		        	selectCity.options[j].selected = true;  
+		            break;  
+		        }  
+		    } 
+		    
+		    for(var k=0; i<editDistrict.options.length; k++){  
+		        if(addressDetail.indexOf(editDistrict.options[k].innerHTML) >= 0){  
+		        	editDistrict.options[k].selected = true;  
+		            break;  
+		        }  
+		    } 
+		    $('#editModal').modal('show');  
+		}  
+		  
+		function del(id) {
+			var addressId;
+			if(id==null||id==""){
+				addressId=$.map($('#addressTable').bootstrapTable('getSelections'), function (row) {
+			        return row.addressId;
+			    });
+			}else{
+				addressId=id;
+			}
+ 			if(addressId.length>0){
+		 	$.ajax({
+			url : "${ctx}" + "/UserController/delAddress?addressId="+addressId,
+			data : {
+				"addressId" : addressId
+			},
+			type : "post",
+			beforeSend : function() {
+				if (window.confirm('你确定要删除吗？')) {
+					//alert("确定");
+					return true;
+				} else {
+					//alert("取消");
+					return false;
+				}
+			},
+			success : function(data) {
+				if (data!=null) {
+					alert('操作成功:' + data);
+
+					location.reload();
+				} else {
+					alert('操作失败' + data);
+				}
+			},
+			error : function() {
+				alert('请求出错');
+			} 
+		});
+         }else{ 
+				alert("请至少选择一条数据");
+				return false;
+		   }
+		}
+		
 	</script>
 </body>
 </html>

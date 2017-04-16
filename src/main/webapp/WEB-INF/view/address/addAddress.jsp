@@ -36,7 +36,7 @@
 		<div class="control-group">
 			<label class="control-label">详细街道:</label>
 			<div class="controls">
-				<input style="height: 25px" type="text" name="detail" id="detail">
+				<input style="height: 25px" type="text" name="addressDetail" id="addressDetail">
 			</div>
 		</div>
 		
