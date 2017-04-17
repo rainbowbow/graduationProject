@@ -24,14 +24,13 @@
 				<input style="height: 25px" type="text" name="productName" id="shopProductName" >
 			</div>
 		</div>
-		<div class="control-group">
-			<label class="control-label">数量:</label>
-			<div class="controls">
-				<input style="height: 25px" type="text" name="count" id="shopCount" onkeyup='this.value=this.value.replace(/\D/gi,"")'>
-	            <input type="text" style="display:none"  id="maxCount"/>
-			
-			</div>
-		</div>
+		 <div   style="margin-left:110px;margin-bottom:20px;">
+ 		     
+		                 数量: <span id="decreaseShopCount">--</span>
+		                 <input style="width:80px;" type="text" value="1" name="count" id="shopCount" onkeyup='this.value=this.value.replace(/\D/gi,"")'>
+		            <span id="addShopCount">+</span>
+		            库存：<input type="text" style="boder:none;width:40px;"  id="maxShopCount"/>
+ 		    </div>
 		<div class="control-group">
 			<label class="control-label">价格:</label>
 			<div class="controls">
@@ -55,7 +54,7 @@
 	//提交购物车
 	function shopCard(){  
 	      var shopCount=$("#shopCount").val();
-	      var maxCount=parseInt($("#maxCount").val());
+	      var maxCount=parseInt($("#maxshopCount").val());
 	      if(parseInt(shopCount)>maxCount||parseInt(shopCount)<=0||shopCount==""){
 	    	  alert("数量有误！请重新选择11！");
 	    	  return false;
@@ -80,6 +79,7 @@
 	    }); 
 	    return false; 
 	}		
+	
 	</script>
 </body>
 </html>

@@ -28,7 +28,6 @@ public class LoginController {
 					User user=userService.login(userName,password,type);
  					if(user!=null){
 						session.setAttribute("user", user);
-					    model.addAttribute("user",user);
 					    if(type.equals("0")){
 					    	return "admin";
 					    }else{

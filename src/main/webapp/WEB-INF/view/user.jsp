@@ -39,7 +39,9 @@
 float: right;
 margin-bottom: 0px;
 }
- 
+ .classSpan{
+ color:red;
+ }
 </style>
 	</head>
 
@@ -110,7 +112,7 @@ margin-bottom: 0px;
     <!-- detail Modal start -->
 	<div class="modal hide fade" id="detailModal" tabindex="-1" role="dialog">
 		<div class="modal-header">
-			<button class="close" type="button" data-dismiss="modal">×</button>
+			<button class="close" type="button" data-dismiss="modal" onclick="closeModal();">×</button>
 			<h3>产品详情</h3>
 		</div>
 		<div class="modal-body">
@@ -123,7 +125,7 @@ margin-bottom: 0px;
   <!-- 加入购物车Modal start -->
 	<div class="modal hide fade" id="shopModal" tabindex="-1" role="dialog">
 		<div class="modal-header">
-			<button class="close" type="button" data-dismiss="modal">×</button>
+			<button class="close" type="button" data-dismiss="modal" onclick="closeModal();">×</button>
 			<h3>加入购物车</h3>
 		</div>
 		<div class="modal-body">
@@ -271,8 +273,9 @@ margin-bottom: 0px;
       });   
       div.appendChild(ul);
 	}
-  
+
     $(document).ready(function(){
+    	
     var li=document.getElementById('product-active');
     li.setAttribute("class","active");
     var path="${ctx}"+"/ProductController/productlist?num=0";
@@ -335,8 +338,8 @@ margin-bottom: 0px;
 	    $("#shopProductId").val(id);  
 		$("#shopProductName").val(productName);  
 	    $("#shopPrice").val(price); 
-	    $("#maxCount").val(count);
-	    
+	    $("#maxShopCount").val(count);
+
 	    $("#shopProductId").prop("readonly","readonly");
 	    $("#shopProductName").prop("readonly","readonly");
  	    $("#shopPrice").prop("readonly","readonly");
@@ -355,8 +358,9 @@ margin-bottom: 0px;
 	    $("#detailPrice").val(price); 
 	    $("#detailMessage").val(detailMessage); 
 	    $("#maxDetailCount").val(count);
-	    $("#imgDetail").attr("src","${pageContext.request.contextPath}/resources/img/"+imgUrl);
-        
+ 	    $("#imgDetail").attr("src","${pageContext.request.contextPath}/resources/img/"+imgUrl);
+	   // document.getElementById("maxCount").innerText=count;
+	  
 	    $("#detailProductId").prop("readonly","readonly");
 	    $("#detailProductName").prop("readonly","readonly");
  	    $("#detailPrice").prop("readonly","readonly");
@@ -373,6 +377,70 @@ margin-bottom: 0px;
 	    
 	}  
 
+	$("#addCount").click(function(){
+ 		var n=$(this).prev().val();
+		if(parseInt(n)>=parseInt($("#maxDetailCount").val())){
+			$("#addCount").attr("class","classSpan");
+ 			return false;
+		}
+		$("#decreaseCount").removeClass("classSpan");
+		$("#addCount").removeClass("classSpan");
+		var num=parseInt(n)+1;
+		$(this).prev().val(num);
+		});
+	
+	
+	//减的效果
+	$("#decreaseCount").click(function(){
+	var n=$(this).next().val();
+	if(parseInt(n)<=1){
+		$("#decreaseCount").attr("class","classSpan");
+		return false;
+	}
+	$("#addCount").removeClass("classSpan");
+	$("#decreaseCount").removeClass("classSpan");
+	var num=parseInt(n)-1;
+	$(this).next().val(num);
+	});
+	
+	
+
+
+	$("#addShopCount").click(function(){
+ 		var n=$(this).prev().val();
+		if(parseInt(n)>=parseInt($("#maxShopCount").val())){
+			$("#addShopCount").attr("class","classSpan");
+ 			return false;
+		}
+		$("#decreaseShopCount").removeClass("classSpan");
+		$("#addShopCount").removeClass("classSpan");
+		var num=parseInt(n)+1;
+		$(this).prev().val(num);
+		});
+	
+	
+	//减的效果
+	$("#decreaseShopCount").click(function(){
+	var n=$(this).next().val();
+	if(parseInt(n)<=1){
+		$("#decreaseShopCount").attr("class","classSpan");
+		return false;
+	}
+	$("#addShopCount").removeClass("classSpan");
+	$("#decreaseShopCount").removeClass("classSpan");
+	var num=parseInt(n)-1;
+	$(this).next().val(num);
+	});
+	
+	function closeModal(){
+		 $("#detailCount").val("1");
+		 $("#shopCount").val("1");
+		 $("#addCount").removeClass("classSpan");
+		 $("#decreaseCount").removeClass("classSpan");
+		 $("#decreaseShopCount").removeClass("classSpan");
+		 $("#addShopCount").removeClass("classSpan");
+	}
+	
     </script>
 	</body>
 </html>

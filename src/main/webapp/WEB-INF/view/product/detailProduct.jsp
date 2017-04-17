@@ -27,6 +27,12 @@ margin-bottom:20px;
 .buttonDiv{
 margin-left:230px;
 }
+#decreaseCount{
+ margin-left:10px;
+}
+#addCount{
+ margin-right:10px;
+}
 </style>
 </head>
 <body style="padding: 20px;">
@@ -40,10 +46,13 @@ margin-left:230px;
 			<div>
 			        名称:<input  type="text" name="productName" id="detailProductName" >
 			</div>
-			<input type="text" style="display:none"  id="maxDetailCount"/>
- 		    <div>
-		                 数量: <input type="text" name="count" id="detailCount" onkeyup='this.value=this.value.replace(/\D/gi,"")'>
-		    </div>
+  		    <div>
+ 		     
+		                 数量: <span id="decreaseCount">--</span>
+		                 <input style="width:80px;" type="text" value="1" name="count" id="detailCount" onkeyup='this.value=this.value.replace(/\D/gi,"")'>
+		            <span id="addCount">+</span>
+		            库存：<input type="text" style="boder:none;width:40px;"  id="maxDetailCount"/>
+ 		    </div>
 			<div>
 			       价格: <input  type="text" name="price" id="detailPrice">
 			</div>
@@ -92,7 +101,7 @@ margin-left:230px;
 		    }); 
 		    return false; 
 		}	
-	 
+		
 	</script> 
 </body>
 </html>
