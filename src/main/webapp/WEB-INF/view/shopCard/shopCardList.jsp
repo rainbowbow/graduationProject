@@ -195,9 +195,6 @@ $(document).ready(function() {
 		    $("#editPrice").val(price);  
 		    $("#editCount").val(count); 
 		    
-		    $("#editShopCardId").prop("readonly","readonly");
-		    $("#editProductName").prop("readonly","readonly");
-	 	    $("#editPrice").prop("readonly","readonly");
 		    $('#editModal').modal('show');  
 		}
 		

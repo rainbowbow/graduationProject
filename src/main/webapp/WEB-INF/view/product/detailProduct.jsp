@@ -44,20 +44,20 @@ margin-left:230px;
 	   <form id="detailForm"  method="post" class="form-horizontal" novalidate="novalidate">
 			<input style="display:none" type="text" name="productId" id="detailProductId" >
 			<div>
-			        名称:<input  type="text" name="productName" id="detailProductName" >
+			        名称:<input  type="text"  id="detailProductName" readonly>
 			</div>
   		    <div>
  		     
 		                 数量: <span id="decreaseCount">--</span>
 		                 <input style="width:80px;" type="text" value="1" name="count" id="detailCount" onkeyup='this.value=this.value.replace(/\D/gi,"")'>
 		            <span id="addCount">+</span>
-		            库存：<input type="text" style="boder:none;width:40px;"  id="maxDetailCount"/>
+		            库存：<input type="text" style="boder:none;width:40px;"  id="maxDetailCount" readonly/>
  		    </div>
 			<div>
-			       价格: <input  type="text" name="price" id="detailPrice">
+			       价格: <input  type="text" name="price" id="detailPrice" readonly>
 			</div>
 			 <div>
-			       详情: <input  type="text" name="detail" id="detailMessage">
+			       详情: <input  type="text" name="detail" id="detailMessage" readonly>
 			</div>
 		</form>
 	</div>
@@ -102,6 +102,8 @@ margin-left:230px;
 		    return false; 
 		}	
 		
+		
+
 	</script> 
 </body>
 </html>

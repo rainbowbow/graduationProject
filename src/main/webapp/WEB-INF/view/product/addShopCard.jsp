@@ -18,7 +18,7 @@
 		<div class="control-group">
 			<label class="control-label">产品名称:</label>
 			<div class="controls">
-				<input   type="text" name="productName" id="shopProductName" >
+				<input   type="text" name="productName" id="shopProductName" readonly>
 			</div>
 		</div>
 		<div class="control-group">
@@ -32,7 +32,7 @@
 		<div class="control-group">
 			<label class="control-label">价格:</label>
 			<div class="controls">
-				<input  type="text" name="price" id="shopPrice">
+				<input  type="text" name="price" id="shopPrice" readonly>
 			</div>
 		</div>
 		 
@@ -77,6 +77,7 @@
 	    }); 
 	    return false; 
 	}		
+	
 	</script>
 </body>
 </html>

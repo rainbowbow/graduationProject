@@ -22,20 +22,20 @@ border:none;
 						<div class="control-group">
 							<label class="control-label">用户名:</label>
 							<div class="controls">
-								<input disabled type="text"  id="userNameDetail" >
+								<input disabled type="text"  id="userNameDetail" readonly >
 							</div>
 						</div>
 			
 						<div class="control-group">
 							<label class="control-label">收件人:</label>
 							<div class="controls">
-								<input disabled type="text" id="addressNameDetail" >
+								<input disabled type="text" id="addressNameDetail" readonly>
 							</div>
 						</div>
 						<div class="control-group">
 							<label class="control-label">电话:</label>
 							<div class="controls">
-								<input disabled type="text" id="addressPhoneDetail"  >
+								<input disabled type="text" id="addressPhoneDetail" readonly >
 							
 							</div>
 						</div>
@@ -43,7 +43,7 @@ border:none;
 						<div class="control-group">
 							<label class="control-label">地址</label>
 							<div class="controls">
-								<input disabled type="text"  id="addressDetail" >
+								<input disabled type="text"  id="addressDetail" readonly>
 							
 							</div>
 						</div>

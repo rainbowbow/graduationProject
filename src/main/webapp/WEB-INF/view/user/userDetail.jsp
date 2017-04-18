@@ -15,12 +15,12 @@
 
 				 <form id="detailForm"  method="post" class="form-horizontal" novalidate="novalidate">
 						 
-								<input style="display:none" type="text" readonly="readonly" id="userId" >
+						 <input style="display:none" type="text"   id="userId" >
 							 
 						<div class="control-group">
 							<label class="control-label">用户名:</label>
 							<div class="controls">
-								<input style="height: 25px;width:210px;" type="text" readonly="readonly" id="userNameDetail" >
+								<input  type="text"   id="userNameDetail" readonly>
 							</div>
 						</div>
 			
@@ -28,7 +28,7 @@
 			           <div class="control-group">
 							<label class="control-label">性别:</label>
 							<div class="controls">
-								<input style="height: 25px;width:210px;" type="text" readonly="readonly" id = "sexDetail"  >
+								<input  type="text"  id = "sexDetail"  readonly>
 							</div>
 						</div>
 						 
@@ -36,13 +36,13 @@
 						<div class="control-group">
 							<label class="control-label">年龄</label>
 							<div class="controls">
-								<input style="height: 25px;width:210px;" type="text" readonly="readonly" id="age"  >
+								<input  type="text"  id="age" readonly >
 							</div>
 						</div>
 						<div class="control-group">
 							<label class="control-label">电话:</label>
 							<div class="controls">
-								<input style="height: 25px;width:210px;" type="text" readonly="readonly" id="phone"  >
+								<input   type="text"  id="phone"  readonly>
 							
 							</div>
 						</div>
@@ -50,14 +50,14 @@
 						<div class="control-group">
 							<label class="control-label">E-mail</label>
 							<div class="controls">
-								<input style="height: 25px;width:210px;" type="text" readonly="readonly" id="eMail" >
+								<input  type="text" id="eMail" readonly>
 							
 							</div>
 						</div>
 				      <div class="control-group">
 							<label class="control-label">地址:</label>
 							<div class="controls">
-								<input style="height: 25px;width:210px;" type="text" readonly="readonly" id="address"  >
+								<input  type="text"  id="address" readonly >
 							
 							</div>
 						</div>

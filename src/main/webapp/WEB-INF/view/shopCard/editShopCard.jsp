@@ -13,12 +13,12 @@
 <body style="padding: 20px;">
 	<form id="shopForm"  method="post" class="form-horizontal" novalidate="novalidate">
 		 
-				<input style="display:none"  type="text" name="shopCardId" id="editShopCardId" >
+				<input style="display:none"  type="text" name="shopCardId" id="editShopCardId" readonly>
 			 
 		<div class="control-group">
 			<label class="control-label">产品名称:</label>
 			<div class="controls">
-				<input  type="text" name="productName" id="editProductName" >
+				<input  type="text" name="productName" id="editProductName" readonly>
 			</div>
 		</div>
 		<div class="control-group">
@@ -31,7 +31,7 @@
 		<div class="control-group">
 			<label class="control-label">价格:</label>
 			<div class="controls">
-				<input  type="text" name="price" id="editPrice">
+				<input  type="text" name="price" id="editPrice" readonly>
 			</div>
 		</div>
 		 

@@ -19,9 +19,9 @@
 	margin-right: -1px;
 	margin-bottom: 60px;
 	position: relative;
-	border: 1px solid #e4e4e4;
+	bsort: 1px solid #e4e4e4;
 	margin-left: 50px;
-	border: 1px
+	bsort: 1px
 } 
 
 .tabContent img {
@@ -93,7 +93,7 @@ margin-bottom: 0px;
 					 </div>
 					 <div class="pageDiv">
 					  	 
-		    			总共<a id="all" href="#" ></a> 页&nbsp;&nbsp;当前第<a id="order" href="#" ></a>页&nbsp;&nbsp;
+		    			总共<a id="all" href="#" ></a> 页&nbsp;&nbsp;当前第<a id="sort" href="#" ></a>页&nbsp;&nbsp;
 		    			    <a  href="#" onclick="firstPage();">首页</a>&nbsp;
 		    				<a href="#" onclick="upPage();">上页</a>&nbsp;
 		    			    <a href="#" onclick="nextPage();">下页</a>&nbsp;
@@ -146,192 +146,84 @@ margin-bottom: 0px;
 	<!-- 查看大图Modal end -->
 	
 <jsp:include page="include/footer.jsp"></jsp:include>
+<script src="${pageContext.request.contextPath}/resources/js/product.js"></script>
    <script >
    
-   function ajaxFuction(){
-	  
-	      var numstart=$("#num").val();
-		  var productName=$("#productName").val();
-		  var startMoney=$("#startMoney").val();
-		  var endMoney=$("#endMoney").val();
-		  
-		  var path="${ctx}"+"/ProductController/productlist";
+   $(document).ready(function(){
+   	
+	    var li=document.getElementById('product-active');
+	    li.setAttribute("class","active");
+	    var path="${ctx}"+"/ProductController/productlist?num=0";
 		    $.ajax({  
-		        type: "post",
-		        dataType:"json",
+		        type: "post",  
 		        url:  path,
-		        data:{
-		        	"num" :numstart,
-		        	"productName":productName,
-		        	"startMoney":startMoney,
-		        	"endMoney":endMoney
-		        },
 		        success : function(data){
-		        	shopProduct(data);
+	 	        	if(data.length>0){
+	 	        		 var totalCount=Math.floor(parseInt(data[0].total)/10);
+	 	        	     $("#totalCount").val(totalCount);
+	 	        		 document.getElementById("all").innerText=totalCount+1;
+	 	        		 document.getElementById("sort").innerText="1";
+		        		 shopProduct(data);
+		        	}
 		        },
 		        error : function() {
 					alert('请求出错');
 					location.reload();
 				}
-		    });
-   }
-   function firstPage(){
-	   
-	   var  totalCount=parseInt($("#totalCount").val());
-	 	  var num= parseInt($("#num").val());
-	 	  document.getElementById("order").innerText="1";
-	 	  if(num==0){
-	 		  alert("已是首页！");
-	 		  return false;
-	 	  }
-		  $("#num").val(0); 
-		  ajaxFuction();
-   }
-   function lastestPage(){
-	   var  totalCount=parseInt($("#totalCount").val());
-	  
-	 	  var num= parseInt($("#num").val());
-	 	  if(num==totalCount){
-	 		  alert("已是首页！");
-	 		  return false;
-	 	  }
-	 	  document.getElementById("order").innerText=totalCount+1;
-		  $("#num").val(totalCount); 
-		  ajaxFuction();
-   }
-   function upPage(){
-	   var  totalCount=parseInt($("#totalCount").val());
-	 	  var num= parseInt($("#num").val());
-	 	  if(num==0){
-	 		  alert("已是首页！");
-	 		  return false;
-	 	  }
-		  document.getElementById("order").innerText=num;
-
-		  $("#num").val(num-1); 
-		  ajaxFuction();
-   }
-   function nextPage(){
-	  var  totalCount=parseInt($("#totalCount").val());
- 	  var num= parseInt($("#num").val());
- 	 document.getElementById("order").innerText=num+2;
- 	  if(num>=totalCount){
- 		  alert("已是最后一页！");
- 		  return false;
- 	  }
-	  $("#num").val(num+1);//向input加1
-	  ajaxFuction();
-  }
-  
-  function shopProduct(data) {
-	  
- 	  var div=document.getElementById("productDiv");
- 	  $('#ulId').remove();
- 	
- 	  var ul=document.createElement('ul');
- 	  ul.setAttribute("id", "ulId");
-      ul.setAttribute("class", "tabContent");
-      var json = eval(data); //数组  
-      var totalCount= $("#totalCount").val();
-         
-      $("#totalyCount").val(num+1); 
-       $.each(json, function (index, item) {  
-          //循环获取数据    
-          var productId = json[index].productId; 
-          var productName = json[index].productName; 
-          var price = json[index].price; 
-          var count = json[index].count;
-          var detailMessage = json[index].detail;
-          var imgUrl = json[index].imgUrl; 
-			
-          var li = document.createElement('li');
-          var aDetail = document.createElement('a');
-          aDetail.addEventListener("click",function(){
-        	  detail(productId,productName,price,count,detailMessage,imgUrl);
-          });
-          var img = document.createElement("img");
-          img.src="${pageContext.request.contextPath}/resources/img/"+imgUrl;
-         
-          var spanName=document.createElement('span');
-          var spanPrice=document.createElement('span');
-          spanName.innerHTML="商品："+productName+"<br/>";
-         // spanName.appendChild("br/");
-          spanPrice.innerHTML="价格："+price+"<br/>";
-          spanPrice.setAttribute("class","price");
-          
-          var aShopCard = document.createElement('a');
-          aShopCard.innerText="加入购物车";
-          aShopCard.addEventListener("click",function(){
-        	  shop(productId,productName,price,count,imgUrl);
-          });
-          aDetail.appendChild(img);
-          li.appendChild(aDetail);
-          li.appendChild(spanName);
-          li.appendChild(spanPrice);
-          li.appendChild(aShopCard);
-          ul.appendChild(li);
-      });   
-      div.appendChild(ul);
-	}
-
-    $(document).ready(function(){
-    	
-    var li=document.getElementById('product-active');
-    li.setAttribute("class","active");
-    var path="${ctx}"+"/ProductController/productlist?num=0";
-	    $.ajax({  
-	        type: "post",  
-	        url:  path,
-	        success : function(data){
- 	        	if(data.length>0){
- 	        		 var totalCount=Math.floor(parseInt(data[0].total)/10);
- 	        	     $("#totalCount").val(totalCount);
- 	        		 document.getElementById("all").innerText=totalCount+1;
- 	        		 document.getElementById("order").innerText="1";
-	        		 shopProduct(data);
-	        	}
-	        },
-	        error : function() {
-				alert('请求出错');
-				location.reload();
-			}
-	    });  
-    });
-    function searchProduct(){
-      $("#num").val(0);
-      var numstart= $("#num").val();//向input加1
-      alert(numstart);
-      var productName=$("#productName").val();
-  	  var startMoney=$("#startMoney").val();
-  	  var endMoney=$("#endMoney").val();
-  	  
-  	  var path="${ctx}"+"/ProductController/productlist";
-  	    $.ajax({  
-  	        type: "post",
-  	        dataType:"json",
-  	        url:  path,
-  	        data:{
-  	        	"num" :numstart,
-  	        	"productName":productName,
-  	        	"startMoney":startMoney,
-  	        	"endMoney":endMoney
-  	        },
-  	        success : function(data){
-  	        	if(data.length>0){
-  	        		var totalCount=Math.floor(parseInt(data[0].total)/10);
-	        	     $("#totalCount").val(totalCount);
-	        		 document.getElementById("all").innerText=totalCount+1;
-	        		 document.getElementById("order").innerText="1";
-	        		shopProduct(data);
-	        	}
-   	        },
-  	        error : function() {
-  				alert('请求出错');
-  				location.reload();
-  			}
-  	    });
-    	}
-    
+		    });  
+	    });
+   
+   function shopProduct(data) {
+		  
+	 	  var div=document.getElementById("productDiv");
+	 	  $('#ulId').remove();
+	 	
+	 	  var ul=document.createElement('ul');
+	 	  ul.setAttribute("id", "ulId");
+	      ul.setAttribute("class", "tabContent");
+	     // var json = eval(data); //数组  
+	      var totalCount= $("#totalCount").val();
+	         
+	      $("#totalyCount").val(num+1); 
+	       $.each(data, function (index, item) {  
+	          //循环获取数据    
+	          var productId = data[index].productId; 
+	          var productName = data[index].productName; 
+	          var price = data[index].price; 
+	          var count = data[index].count;
+	          var detailMessage = data[index].detail;
+	          var imgUrl = data[index].imgUrl; 
+				
+	          var li = document.createElement('li');
+	          var aDetail = document.createElement('a');
+	          aDetail.addEventListener("click",function(){
+	        	  detail(productId,productName,price,count,detailMessage,imgUrl);
+	          });
+	          var img = document.createElement("img");
+	          img.src="${pageContext.request.contextPath}/resources/img/"+imgUrl;
+	           var spanName=document.createElement('span');
+	          var spanPrice=document.createElement('span');
+	          spanName.innerHTML="商品："+productName+"<br/>";
+	         // spanName.appendChild("br/");
+	          spanPrice.innerHTML="价格："+price+"<br/>";
+	          spanPrice.setAttribute("class","price");
+	          
+	          var aShopCard = document.createElement('a');
+	          aShopCard.innerText="加入购物车";
+	          aShopCard.addEventListener("click",function(){
+	        	  shop(productId,productName,price,count,imgUrl);
+	          });
+	          aDetail.appendChild(img);
+	          li.appendChild(aDetail);
+	          li.appendChild(spanName);
+	          li.appendChild(spanPrice);
+	          li.appendChild(aShopCard);
+	          ul.appendChild(li);
+	      });   
+	      div.appendChild(ul);
+		}
+   
+   
     // 回填购物车
 	function shop(id,productName,price,count,imgUrl) {  
 		//向模态框中传值  
@@ -339,12 +231,7 @@ margin-bottom: 0px;
 		$("#shopProductName").val(productName);  
 	    $("#shopPrice").val(price); 
 	    $("#maxShopCount").val(count);
-
-	    $("#shopProductId").prop("readonly","readonly");
-	    $("#shopProductName").prop("readonly","readonly");
- 	    $("#shopPrice").prop("readonly","readonly");
- 	    $("#shopdetail").prop("readonly","readonly");
-	    
+ 
 	    $('#shopModal').modal('show');  
 	}  
     
@@ -359,13 +246,7 @@ margin-bottom: 0px;
 	    $("#detailMessage").val(detailMessage); 
 	    $("#maxDetailCount").val(count);
  	    $("#imgDetail").attr("src","${pageContext.request.contextPath}/resources/img/"+imgUrl);
-	   // document.getElementById("maxCount").innerText=count;
-	  
-	    $("#detailProductId").prop("readonly","readonly");
-	    $("#detailProductName").prop("readonly","readonly");
- 	    $("#detailPrice").prop("readonly","readonly");
- 	    $("#detailMessage").prop("readonly","readonly");
-	    
+	   
 	    $('#detailModal').modal('show');  
 	}  
 	function photo(imgUrl) {  
@@ -377,69 +258,9 @@ margin-bottom: 0px;
 	    
 	}  
 
-	$("#addCount").click(function(){
- 		var n=$(this).prev().val();
-		if(parseInt(n)>=parseInt($("#maxDetailCount").val())){
-			$("#addCount").attr("class","classSpan");
- 			return false;
-		}
-		$("#decreaseCount").removeClass("classSpan");
-		$("#addCount").removeClass("classSpan");
-		var num=parseInt(n)+1;
-		$(this).prev().val(num);
-		});
-	
-	
-	//减的效果
-	$("#decreaseCount").click(function(){
-	var n=$(this).next().val();
-	if(parseInt(n)<=1){
-		$("#decreaseCount").attr("class","classSpan");
-		return false;
-	}
-	$("#addCount").removeClass("classSpan");
-	$("#decreaseCount").removeClass("classSpan");
-	var num=parseInt(n)-1;
-	$(this).next().val(num);
-	});
-	
 	
 
 
-	$("#addShopCount").click(function(){
- 		var n=$(this).prev().val();
-		if(parseInt(n)>=parseInt($("#maxShopCount").val())){
-			$("#addShopCount").attr("class","classSpan");
- 			return false;
-		}
-		$("#decreaseShopCount").removeClass("classSpan");
-		$("#addShopCount").removeClass("classSpan");
-		var num=parseInt(n)+1;
-		$(this).prev().val(num);
-		});
-	
-	
-	//减的效果
-	$("#decreaseShopCount").click(function(){
-	var n=$(this).next().val();
-	if(parseInt(n)<=1){
-		$("#decreaseShopCount").attr("class","classSpan");
-		return false;
-	}
-	$("#addShopCount").removeClass("classSpan");
-	$("#decreaseShopCount").removeClass("classSpan");
-	var num=parseInt(n)-1;
-	$(this).next().val(num);
-	});
-	
-	function closeModal(){
-		 $("#detailCount").val("1");
-		 $("#shopCount").val("1");
-		 $("#addCount").removeClass("classSpan");
-		 $("#decreaseCount").removeClass("classSpan");
-		 $("#decreaseShopCount").removeClass("classSpan");
-		 $("#addShopCount").removeClass("classSpan");
-	}
 	
     </script>
 	</body>

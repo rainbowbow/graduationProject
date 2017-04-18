@@ -134,10 +134,8 @@
 			type : "post",
 			beforeSend : function() {
 				if (window.confirm('你确定要下架吗？')) {
-					//alert("确定");
 					return true;
 				} else {
-					//alert("取消");
 					return false;
 				}
 			},
