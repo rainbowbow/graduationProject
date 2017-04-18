@@ -46,7 +46,7 @@
 								<form class="form-inline" role="form">
 									<div class="form-group">
 									    <label  for="productName">名称</label> 
-										<input style="height: 25px"  class="form-control" name="productName" id="productName" placeholder="Enter productName">
+										<input   class="form-control" name="productName" id="productName" placeholder="Enter productName">
 									    <select id="type" name="type" class="form-control" >
 													<option value="" >请选择状态</option>
 													<option value="1" >在售中</option>
@@ -140,9 +140,8 @@ function() {
 			pageNumber : 1,
 			clickToSelect : true,
 			pageSize : 7, //每页的记录行数（*）
-			pageList : [ 7, 10, 25 ], //可供选择的每页的行数（*）
-			sidePagination : "client", //客户端处理分页
-			 formatNoMatches: function () {  //没有匹配的结果
+ 			sidePagination : "client", //客户端处理分页
+			formatNoMatches: function () {  //没有匹配的结果
 				    return '无符合条件的记录';
 				  },
 			columns : [{

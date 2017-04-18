@@ -12,29 +12,26 @@
 </head>
 <body style="padding: 20px;">
 	<form id="shopForm"  method="post" class="form-horizontal" novalidate="novalidate">
-		<div class="control-group">
-			<label class="control-label">购物Id:</label>
-			<div class="controls">
-				<input style="height: 25px" type="text" name="shopCardId" id="editShopCardId" >
-			</div>
-		</div>
+		 
+				<input style="display:none"  type="text" name="shopCardId" id="editShopCardId" >
+			 
 		<div class="control-group">
 			<label class="control-label">产品名称:</label>
 			<div class="controls">
-				<input style="height: 25px" type="text" name="productName" id="editProductName" >
+				<input  type="text" name="productName" id="editProductName" >
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">数量:</label>
 			<div class="controls">
-				<input style="height: 25px" type="text" name="count" id="editCount" onkeyup='this.value=this.value.replace(/\D/gi,"")'>
+				<input  type="text" name="count" id="editCount" onkeyup='this.value=this.value.replace(/\D/gi,"")'>
 			
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">价格:</label>
 			<div class="controls">
-				<input style="height: 25px" type="text" name="price" id="editPrice">
+				<input  type="text" name="price" id="editPrice">
 			</div>
 		</div>
 		 

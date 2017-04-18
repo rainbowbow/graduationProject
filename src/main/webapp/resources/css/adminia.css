@@ -16,27 +16,11 @@ h1 {
 hr {
 	border-top-color: #DDD;
 }
-
- 
-/*------------------------------------------------------------------
-[2. Navbar / .navbar]
-*/
-
-.navbar {
-	font-size: 12px;
+input{
+	height: 25px;width:210px;
 }
 
-.navbar .brand {
-	position: relative;
-	top: 2px;
-	
-	font-size: 18px;
-	font-weight: 600;
-}
-
-.copyrights{text-indent:-9999px;height:0;line-height:0;font-size:0;overflow:hidden;}
-
-/*------------------------------------------------------------------
+  /*------------------------------------------------------------------
 左边菜单
 */
 
@@ -70,7 +54,6 @@ hr {
 #main-nav.nav-tabs.nav-stacked > li.active > a,
 #main-nav.nav-tabs.nav-stacked > li > a:hover {	
 	color: #FFF;
-	
 	background: #3C4049;
 	background:-moz-linear-gradient(top, #4A515B 0%, #3C4049 100%); /* FF3.6+ */
 	background:-webkit-gradient(linear, left top, left bottom, color-stop(0%,#4A515B), color-stop(100%,#3C4049)); /* Chrome,Safari4+ */
@@ -170,8 +153,7 @@ hr {
 	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#4A515B', endColorstr='#3C4049')";
 	
 	border-radius: 4px;
-	
-	text-shadow: 1px 1px 2px rgba(0,0,0,.5);
+	 
 }
  
  

@@ -12,16 +12,13 @@
 </head>
 <body style="padding: 20px;">
 	<form id="shopForm"  method="post" class="form-horizontal" novalidate="novalidate">
-		<div class="control-group">
-			<label class="control-label">产品Id:</label>
-			<div class="controls">
-				<input style="height: 25px" type="text" name="productId" id="shopProductId" >
-			</div>
-		</div>
+		 
+				<input style="display:none"  type="text" name="productId" id="shopProductId" >
+			 
 		<div class="control-group">
 			<label class="control-label">产品名称:</label>
 			<div class="controls">
-				<input style="height: 25px" type="text" name="productName" id="shopProductName" >
+				<input   type="text" name="productName" id="shopProductName" >
 			</div>
 		</div>
 		 <div   style="margin-left:110px;margin-bottom:20px;">
@@ -34,7 +31,7 @@
 		<div class="control-group">
 			<label class="control-label">价格:</label>
 			<div class="controls">
-				<input style="height: 25px" type="text" name="price" id="shopPrice">
+				<input   type="text" name="price" id="shopPrice">
 			</div>
 		</div>
 		 

@@ -12,34 +12,29 @@
 </head>
 <body style="padding: 20px;">
 	<form id="updateForm"  method="post" class="form-horizontal"  novalidate="novalidate">
-		<div class="control-group">
-			<label class="control-label">产品Id:</label>
-			<div class="controls">
-				<input style="height: 25px" type="text" name="productId" id="editProductId" >
-			</div>
-		</div>
-		<div class="control-group">
+		<input style="display:none" type="text" name="productId" id="editProductId" >
+ 		<div class="control-group">
 			<label class="control-label">产品名称:</label>
 			<div class="controls">
-				<input style="height: 25px" type="text" name="productName" id="editProductName" >
+				<input type="text" name="productName" id="editProductName" >
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">数量:</label>
 			<div class="controls">
-				<input style="height: 25px" type="text" name="count" id="editCount">
+				<input type="text" name="count" id="editCount">
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">价格:</label>
 			<div class="controls">
-				<input style="height: 25px" type="text" name="price" id="editPrice">
+				<input  type="text" name="price" id="editPrice">
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">详情:</label>
 			<div class="controls">
-				<input style="height: 25px" type="text" name="detail" id="editPrice">
+				<input  type="text" name="detail" id="editPrice">
 			</div>
 		</div>
 

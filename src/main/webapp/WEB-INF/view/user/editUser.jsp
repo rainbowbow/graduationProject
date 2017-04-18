@@ -13,17 +13,14 @@
 
 	<body>
 
-				 <form id="updateForm"  method="post" class="form-horizontal" novalidate="novalidate">
-						<div class="control-group">
-							<label class="control-label">用户Id:</label>
-							<div class="controls">
-								<input style="height: 25px;width:210px;" type="text" name="userId"  id="userIdEdit" readonly="readonly">
-							</div>
-						</div>
+			  <form id="updateForm"  method="post" class="form-horizontal" novalidate="novalidate">
+						 
+					 <input style="display:none" type="text" name="userId"  id="userIdEdit" readonly="readonly">
+						 
 						<div class="control-group">
 							<label class="control-label">用户名:</label>
 							<div class="controls">
-								<input style="height: 25px;width:210px;" type="text" name="userName" id="userNameEdit" >
+								<input  type="text" name="userName" id="userNameEdit" >
 							</div>
 						</div>
 			
@@ -41,13 +38,13 @@
 						<div class="control-group">
 							<label class="control-label">年龄</label>
 							<div class="controls">
-								<input style="height: 25px;width:210px;" type="text" name="age" id="ageEdit"  >
+								<input   type="text" name="age" id="ageEdit"  >
 							</div>
 						</div>
 						<div class="control-group">
 							<label class="control-label">电话:</label>
 							<div class="controls">
-								<input style="height: 25px;width:210px;" type="text" name="phone" id="phoneEdit"  >
+								<input  type="text" name="phone" id="phoneEdit"  >
 							
 							</div>
 						</div>
@@ -55,14 +52,14 @@
 						<div class="control-group">
 							<label class="control-label">E-mail</label>
 							<div class="controls">
-								<input style="height: 25px;width:210px;" type="text" name="eMail" id="eMailEdit" >
+								<input  type="text" name="eMail" id="eMailEdit" >
 							
 							</div>
 						</div>
 				      <div class="control-group">
 							<label class="control-label">地址:</label>
 							<div class="controls">
-								<input style="height: 25px;width:210px;" type="text" name="address" id="addressEdit"  >
+								<input   type="text" name="address" id="addressEdit"  >
 							
 							</div>
 						</div>

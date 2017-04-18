@@ -46,13 +46,13 @@
 								<form class="form-inline" role="form">
 									<div class="form-group">
 									    <label  for="productName">产品名称</label> 
-										<input style="height: 25px"  class="form-control" name="productName" id="productName" placeholder="Enter productName">
+										<input   class="form-control" name="productName" id="productName" placeholder="Enter productName">
 									    
 									    
 							<c:choose>
 								<c:when test="${user.getType()=='0'}">
 									<label  for="userName">用户名称</label> 
-									<input style="height: 25px"  class="form-control" name="userName" id="userName" placeholder="Enter userName">
+									<input   class="form-control" name="userName" id="userName" placeholder="Enter userName">
 												   
 								</c:when>
 								
@@ -61,7 +61,7 @@
 				
 									    
 									    <label  for="orderTime">时间</label> 
-										<input style="height: 25px"  class="dateSearch" name="orderTime" id="orderTime" placeholder="Enter orderTime">
+										<input    class="dateSearch" name="orderTime" id="orderTime" placeholder="Enter orderTime">
 									    
 										<button type="button" style="margin-right: 20px"
 											id="btn_query" onclick="searchProductRecord();" class="btn btn-primary">查询</button>
@@ -76,7 +76,7 @@
 								 
 									<input type="button" class="btn btn-primary" value="删除" onclick="delMore()" />
 							</div>
-							<div >
+							<div class="pre-scrollable">
 							<table  class="table table-bordered" id="orderTable">
 							</table>
 						    </div>
@@ -106,29 +106,7 @@
  	
 	<jsp:include page="../include/footer.jsp"></jsp:include>
 	<script>
-	
-	function detail(userId,userName,age,phone,address,eMail,type) {
-		//向模态框中传值  
-		//userId,userName,age,phone,address,eMail,type+
-	    $("#userId").val(userId);  
-	    $("#userName").val(userName);  
-	    $("#age").val(age);  
-	    $("#phone").val(phone); 
-	    $("#address").val(address);
-	    $("#eMail").val(eMail);
-	    $("#type").val(type);
-	    
-	    if(type=="11"){
-			 $("#type").val("正常用户");
-	    }else if(value=="0"){
-	    	$("#type").val("管理员");
-		    }else{
-	    	$("#type").val("拉黑中");
-		    }
-	    
-		$('#recordDetail').modal('show');
-		
-	}
+	 
 	
 	
 	 $(".dateSearch").datetimepicker({
@@ -173,8 +151,7 @@
 				pageNumber : 1,
 				clickToSelect : true,
 				pageSize : 7, //每页的记录行数（*）
-				pageList : [ 7, 10, 25 ], //可供选择的每页的行数（*）
-				sidePagination : "client", //客户端处理分页
+ 				sidePagination : "client", //客户端处理分页
 				 formatNoMatches: function () {  //没有匹配的结果
 					    return '无符合条件的记录';
 					  },
@@ -209,6 +186,15 @@
 							title : '数量'
 						},
 						{
+							field : 'address' 
+						},
+						{
+							field : 'addressName' 
+						},
+						{
+							field : 'addressPhone' 
+						},
+						{
 							field : 'orderTime',
 							title : '购买时间',
 						},{
@@ -220,25 +206,25 @@
 							field : 'doSomething',
 							align : 'center',
 							formatter : function(value, row,index) {
-								/* var e = '<a href="#" onclick="detail(\''
-									+ row.orderId+'\'\,\''
-									+ row.productName+'\'\,\''
+								 var e = '<a href="#" onclick="detail(\''
 									+ row.userName+'\'\,\''
-									+ row.price+'\'\,\''
-									+ row.count+'\'\,\''
-									+ row.orderTime+'\'\,\''
-									+ row.totalMoney+
-							'\')">详情</a> '; */
+									+ row.addressName+'\'\,\''
+									+ row.addressPhone+'\'\,\''
+									+ row.address+
+							'\')">地址详情</a> ';  
 								
 									var d = '<a href="#"  onclick="del(\''
 										+ row.orderId
 										+ '\')">删除</a> ';
-								return d;
+								return e+d;
 							}
 						} ]
 			});
 				
 				$('#orderTable').bootstrapTable('hideColumn', 'orderId');
+				$('#orderTable').bootstrapTable('hideColumn', 'address');
+				$('#orderTable').bootstrapTable('hideColumn', 'addressName');
+				$('#orderTable').bootstrapTable('hideColumn', 'addressPhone');
     });
 
 		  function searchProductRecord(){
@@ -328,7 +314,19 @@
 				return false;
 		   }
 		}
-		
+		function detail(userName,addressName,addressPhone,address) {
+			//向模态框中传值  
+			//userId,userName,age,phone,address,eMail,type+
+		    $("#userNameDetail").val(userName);  
+		    $("#addressNameDetail").val(addressName);  
+		    $("#addressPhoneDetail").val(addressPhone);  
+		    $("#addressDetail").val(address); 
+		   
+		     
+		    
+			$('#recordDetail').modal('show');
+			
+		}
 		   
 	</script>
 </body>

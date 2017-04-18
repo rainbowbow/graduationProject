@@ -12,22 +12,19 @@
 </head>
 <body style="padding: 20px;">
 	<form id="updateForm"  method="post" class="form-horizontal"  novalidate="novalidate">
-		<div class="control-group">
-			<label class="control-label">产品Id:</label>
-			<div class="controls">
-				<input style="height: 25px" type="text" name="addressId" id="editAddressId" >
-			</div>
-		</div>
+		 
+				<input style="display:none"  type="text" name="addressId" id="editAddressId" >
+			 
 		<div class="control-group">
 			<label class="control-label">收件人:</label>
 			<div class="controls">
-				<input style="height: 25px" type="text" name="addressName" id="editAddressName" >
+				<input   type="text" name="addressName" id="editAddressName" >
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">联系电话:</label>
 			<div class="controls">
-				<input style="height: 25px" type="text" name="addressPhone" id="editAddressPhone">
+				<input   type="text" name="addressPhone" id="editAddressPhone" onkeyup='this.value=this.value.replace(/\D/gi,"")'>
 			</div>
 		</div>
 		<div   class="control-group" data-toggle="distpicker">
@@ -42,7 +39,7 @@
 		<div class="control-group">
 			<label class="control-label">详细街道:</label>
 			<div class="controls">
-				<input style="height: 25px" type="text" name="addressDetail" id="editAddressDetail">
+				<input  type="text" name="addressDetail" id="editAddressDetail">
 			</div>
 		</div>
 		

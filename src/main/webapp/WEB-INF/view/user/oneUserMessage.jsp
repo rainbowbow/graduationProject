@@ -42,16 +42,13 @@
 				<div class="right-content">
 				
 				 <form id="editForm"  method="post" class="form-horizontal" novalidate="novalidate">
-						<div class="control-group">
-							<label class="control-label">用户Id:</label>
-							<div class="controls">
-								<input style="height: 25px;width:210px;" type="text" name="userId" id="userId" >
-							</div>
-						</div>
+						 
+								<input style="display:none" type="text" name="userId" id="userId" >
+							 
 						<div class="control-group">
 							<label class="control-label">用户名:</label>
 							<div class="controls">
-								<input style="height: 25px;width:210px;" type="text" name="userName" id="userName" >
+								<input  type="text" name="userName" id="userName" >
 							</div>
 						</div>
 			
@@ -69,13 +66,13 @@
 						<div class="control-group">
 							<label class="control-label">年龄</label>
 							<div class="controls">
-								<input style="height: 25px;width:210px;" type="text" name="age" id="age" onkeyup='this.value=this.value.replace(/\D/gi,"")'>
+								<input type="text" name="age" id="age" onkeyup='this.value=this.value.replace(/\D/gi,"")'>
 							</div>
 						</div>
 						<div class="control-group">
 							<label class="control-label">电话:</label>
 							<div class="controls">
-								<input style="height: 25px;width:210px;" type="text" name="phone" id="phone" onkeyup='this.value=this.value.replace(/\D/gi,"")'>
+								<input  " type="text" name="phone" id="phone" onkeyup='this.value=this.value.replace(/\D/gi,"")'>
 							
 							</div>
 						</div>
@@ -83,14 +80,14 @@
 						<div class="control-group">
 							<label class="control-label">E-mail</label>
 							<div class="controls">
-								<input style="height: 25px;width:210px;" type="text" name="eMail" id="eMail" >
+								<input   type="text" name="eMail" id="eMail" >
 							
 							</div>
 						</div>
 				      <div class="control-group">
 							<label class="control-label">地址:</label>
 							<div class="controls">
-								<input style="height: 25px;width:210px;" type="text" name="address" id="address"  >
+								<input  type="text" name="address" id="address"  >
 							
 							</div>
 						</div>

@@ -16,25 +16,25 @@
 		<div class="control-group">
 			<label class="control-label">产品名称:</label>
 			<div class="controls">
-				<input style="height: 25px" type="text" name="productName" id="productName" >
+				<input   type="text" name="productName" id="productName" >
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">数量:</label>
 			<div class="controls">
-				<input style="height: 25px" type="text" name="count" id="count">
+				<input  type="text" name="count" id="count">
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">价格:</label>
 			<div class="controls">
-				<input style="height: 25px" type="text" name="price" id="price">
+				<input  type="text" name="price" id="price">
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">详情:</label>
 			<div class="controls">
-				<input style="height: 25px" type="text" name="detail" id="detail">
+				<input  type="text" name="detail" id="detail">
 			</div>
 		</div>
 

@@ -46,7 +46,7 @@
 								<form class="form-inline" role="form">
 									<div class="form-group">
 									    <label  for="userName">名称</label> 
-										<input style="height: 25px"  class="form-control" name="userName" id="userName" placeholder="Enter userName">
+										<input  class="form-control" name="userName" id="userName" placeholder="Enter userName">
 									    <select id="sex" name="sex" class="form-control" >
 													<option value="" >请选择性别</option>
 													<option value="0" >女生</option>
@@ -67,7 +67,7 @@
 								<input type="button" class="btn btn-primary" value="新增"
 									data-toggle="modal" data-target="#add" href="user" />
 							</div>
-							<div>
+							<div class="pre-scrollable">
 								<table  class="table table-bordered"id="messageTable">
 								</table>
 							</div>
@@ -138,9 +138,8 @@
 				    paginationNextText: "下一页",
 					pageNumber : 1,
 					clickToSelect : true,
-					pageSize : 10, //每页的记录行数（*）
-					pageList : [ 10, 25, 50,100 ], //可供选择的每页的行数（*）
-					sidePagination : "client", //客户端处理分页
+					pageSize : 7, //每页的记录行数（*）
+ 					sidePagination : "client", //客户端处理分页
 				    formatNoMatches: function () {  //没有匹配的结果
 						    return '无符合条件的记录';
 						  },

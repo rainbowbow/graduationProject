@@ -43,7 +43,7 @@
 							<div id="toolbar" class="btn-group">
 								<input type="button" class="btn btn-primary" value="删除" onclick="delMore()" />
 							</div>
-							<div >
+							<div class="pre-scrollable">
 							<table data-search="true"  class="table table-bordered"
 								id="shopCardTable">
 							</table>
@@ -121,8 +121,7 @@ $(document).ready(function() {
 						pageNumber : 1,
 						clickToSelect : true,
 						pageSize : 7, //每页的记录行数（*）
-						pageList : [ 7, 10, 25 ], //可供选择的每页的行数（*）
-						sidePagination : "client", //客户端处理分页
+ 						sidePagination : "client", //客户端处理分页
 						 formatNoMatches: function () {  //没有匹配的结果
 							    return '无符合条件的记录';
 							  },

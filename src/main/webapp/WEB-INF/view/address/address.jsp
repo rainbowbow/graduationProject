@@ -45,7 +45,7 @@
 								<input type="button" class="btn btn-primary" value="新增地址" data-toggle="modal" data-target="#addModal" />
 							    <input type="button" class="btn btn-primary" value="删除" onclick="del(null)" />
 							</div>
-							<div >
+							<div class="pre-scrollable">
 							<table  class="table table-bordered" id="addressTable">
 							</table>
 						    </div>
@@ -110,8 +110,10 @@
 				pageNumber : 1,
 				clickToSelect : true,
 				pageSize : 7, //每页的记录行数（*）
-				pageList : [ 7, 10, 25 ], //可供选择的每页的行数（*）
 				sidePagination : "client", //客户端处理分页
+				formatNoMatches: function () {  //没有匹配的结果
+				    return '无符合条件的记录';
+				  },
 				columns : [{
 	                        checkbox: true
                         },{  

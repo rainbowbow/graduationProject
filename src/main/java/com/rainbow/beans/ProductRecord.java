@@ -15,6 +15,9 @@ public class ProductRecord implements Serializable {
      private String productName;
      private String price;
      private String count;
+     private String address;
+     private String addressPhone;
+     private String addressName;
      private String orderTime; 
      private String totalMoney;
 	public String getOrderId() {
@@ -60,6 +63,24 @@ public class ProductRecord implements Serializable {
 		this.count = count;
 	}
 	 
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public String getAddressPhone() {
+		return addressPhone;
+	}
+	public void setAddressPhone(String addressPhone) {
+		this.addressPhone = addressPhone;
+	}
+	public String getAddressName() {
+		return addressName;
+	}
+	public void setAddressName(String addressName) {
+		this.addressName = addressName;
+	}
 	public String getOrderTime() {
 		return orderTime;
 	}

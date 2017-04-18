@@ -30,12 +30,12 @@
 					<i class="icon-th-list"></i>
 					产品管理					
 				</h1>
+	  	        <div class="pre-scrollable">
 	  
 				 <table  data-search="true" class="table table-bordered" id="productTable">
 				 </table>
 				 </div>
-				</div>
-			</div> <!-- /span9 -->
+ 			</div> <!-- /span9 -->
 			
 	      </div> <!-- /row -->
 		
@@ -70,10 +70,11 @@
     search: true,//搜索功能 
     singleSelect: false,
     pagination: true, //分页
-    pageNumber:1, 
+    pageNumber:1,
     clickToSelect: true,
     pageSize: 7,                       //每页的记录行数（*）
-    pageList: [7,14, 21, 28],        //可供选择的每页的行数（*）
+    pageList: [7, 14,21],
+    showColumns: false,
     sidePagination: "client", //客户端处理分页
     formatNoMatches: function () {  //没有匹配的结果
 	    return '无符合条件的记录';
@@ -86,6 +87,14 @@
               width:60,
               align:'center' 
        },{
+			field: 'imgUrl',
+			title:"",
+			formatter: function (value, row, index) {  
+                return '<img width="50" src="${pageContext.request.contextPath}/resources/img/'+value+'">';  
+            },
+            width:60,
+            align:'center' 
+        },{
               field: 'productId',
               title: '序号'
           }, {

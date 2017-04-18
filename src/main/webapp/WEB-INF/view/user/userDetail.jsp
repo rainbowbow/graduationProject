@@ -14,12 +14,9 @@
 	<body  style="padding: 20px;">
 
 				 <form id="detailForm"  method="post" class="form-horizontal" novalidate="novalidate">
-						<div class="control-group">
-							<label class="control-label">用户Id:</label>
-							<div class="controls">
-								<input style="height: 25px;width:210px;" type="text" readonly="readonly" id="userId" >
-							</div>
-						</div>
+						 
+								<input style="display:none" type="text" readonly="readonly" id="userId" >
+							 
 						<div class="control-group">
 							<label class="control-label">用户名:</label>
 							<div class="controls">

@@ -15,14 +15,14 @@
 		<div class="control-group">
 			<label class="control-label">收件人:</label>
 			<div class="controls">
-				<input style="height: 25px" type="text" id="addressName"name="addressName">
+				<input type="text" id="addressName"name="addressName">
 			</div>
 		</div>
 		 
 		<div class="control-group">
 			<label class="control-label">联系电话:</label>
 			<div class="controls">
-				<input style="height: 25px" type="text" id="addressPhone" name="addressPhone">
+				<input  type="text" id="addressPhone" name="addressPhone" onkeyup='this.value=this.value.replace(/\D/gi,"")'>
 			</div>
 		</div>
 		<div   class="control-group" data-toggle="distpicker">
@@ -36,7 +36,7 @@
 		<div class="control-group">
 			<label class="control-label">详细街道:</label>
 			<div class="controls">
-				<input style="height: 25px" type="text" name="addressDetail" id="addressDetail">
+				<input type="text" name="addressDetail" id="addressDetail">
 			</div>
 		</div>
 		
