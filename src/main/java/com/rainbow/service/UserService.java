@@ -73,4 +73,12 @@ public class UserService {
         	 List<String> addressIdList = ListHelper.getList(addressId);
   	    	 return userDao.delAddress(addressIdList);
  	    }
+         
+          
+         public int CancelDefaultAddress(List<Address> addressList){
+   	    	 return userDao.CancelDefaultAddress(addressList);
+ 	    }
+         public int defaultAddress(String addressId){
+        	 return userDao.defaultAddress(addressId);
+         }
 	}

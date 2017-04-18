@@ -121,7 +121,7 @@
 			                formatter: function (value, row, index) {  
 			                    return index+1;  
 			                },
-			                width:60,
+			                width:40,
 			                align:'center' 
                      },
 						{
@@ -151,19 +151,22 @@
 							title : '操作',
 							field : 'doSomething',
 							align : 'center',
+							width:150,
 							formatter : function(value, row,index) {
 								 
+							var dA= '<a href="#" onclick="defaultAddress(\''
+								+ row.addressId+
+						'\')">默认地址</a> ';
 							var e = '<a href="#" onclick="editInfo(\''
 								+ row.addressId+'\'\,\''
 								+ row.addressName+'\'\,\''
 								+ row.addressDetail+'\'\,\''
 								+ row.addressPhone+
 						'\')">编辑</a> ';
-								
 									var d = '<a href="#"  onclick="del(\''
 										+ row.addressId
 										+ '\')">删除</a> ';
-								return e+d;
+								return dA+e+d;
 							}
 						} ]
 			});
@@ -250,6 +253,26 @@
 		   }
 		}
 		
+		
+		function defaultAddress(addressId){
+			$.ajax({
+				url : "${ctx}" + "/UserController/defaultAddress",
+				data : {"addressId" : addressId},
+				type : "post",
+				success : function(data) {
+					if (data > 0) {
+						alert('操作成功:' + data);
+                        location.reload();
+					} else {
+						alert('操作失败' + data);
+					}
+				},
+				error : function() {
+					alert('请求出错');
+				} 
+			});
+			return false;
+		}
 	</script>
 </body>
 </html>

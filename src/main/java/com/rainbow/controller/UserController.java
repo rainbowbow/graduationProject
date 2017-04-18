@@ -156,6 +156,19 @@ public class UserController {
 			return userService.delAddress(addressId);
 			
 		}
-		 
 		
+		@RequestMapping("UserController/defaultAddress")
+		@ResponseBody
+		int defaultAddress(HttpServletRequest request,HttpSession session){
+			
+			String addressId = request.getParameter("addressId");
+
+			User user=(User) session.getAttribute("user");
+			List<Address> addressList=new ArrayList<Address>();
+ 			addressList=userService.AddressList(user.getUserId());
+ 			userService.CancelDefaultAddress(addressList);
+    			int defaultAddressCount=userService.defaultAddress(addressId);
+   			return defaultAddressCount;
+		}
+		 
   }

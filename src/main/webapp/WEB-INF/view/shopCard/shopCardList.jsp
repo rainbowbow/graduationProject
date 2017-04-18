@@ -219,12 +219,17 @@ $(document).ready(function() {
 				return  false;
 			}else if(type.indexOf('1')<0){
 				alert('请选择产品！');
+				return false;
 			}
 			
 			$("#testList").val(shopCardId);
+			var allMoney=0;
+			var typeAdd=0;
+			var typtCount=0;
 			var path = "${ctx}"+ "/ShopCardController/shopCardListSelective?shopCardIdMore="+shopCardId;
-			$('#shopCardPayListTable').bootstrapTable(
-							{
+			var addressPath = "${ctx}"+ "/UserController/addresslist";
+
+			$('#shopCardPayListTable').bootstrapTable({
 								url : path,
 								dataType : "json",
 								columns : [{
@@ -239,9 +244,59 @@ $(document).ready(function() {
 										},{
 											field : 'count',
 											title : '数量'
+										},{
+											field : '',
+											title : '总价',
+											formatter:function(value, row,index){
+												var perMoney=row.count*row.price;
+												allMoney=allMoney+perMoney;
+ 												document.getElementById ("allMoney").innerText=allMoney;
+ 												return perMoney;
+											}
 										}]
 							});
-		    $('#shopPayBillModal').modal('show');
+			$('#payAddressTable').bootstrapTable({
+						url : addressPath,
+						dataType : "json",
+						singleSelect : true,
+						clickToSelect : true,
+						columns : [{
+	                        checkbox: true,
+	                        width:10,
+	                        formatter:function(value, row,index){
+								if(row.type=="1"){
+									return true;
+								}
+ 							}
+                        }, {
+							field : 'addressId',
+							title : '序号'
+						},
+						{
+							field : 'addressName',
+							title : '收件人' ,
+							width:50,
+			                align:'center'
+						} ,
+						{
+							field : 'address',
+							title : '地址'
+						} ,
+						{
+							field : 'addressDetail',
+							title : '详细街道'
+						} ,
+						{
+							field : 'addressPhone',
+							title : '联系电话'
+						},
+						{
+							field : 'type' 
+						} ]
+					});
+			$('#payAddressTable').bootstrapTable('hideColumn', 'addressId');
+			$('#payAddressTable').bootstrapTable('hideColumn', 'type');
+ 		    $('#shopPayBillModal').modal('show');
 		}
 		function delMore() {
 			var row=$.map($('#shopCardTable').bootstrapTable('getSelections'), function (row) {

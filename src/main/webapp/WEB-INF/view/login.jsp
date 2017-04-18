@@ -6,15 +6,11 @@
   <head>
     <meta charset="utf-8" />
     <title>农产品销售系统</title>
-    
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
-    <link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="${pageContext.request.contextPath}/resources/css/bootstrap-responsive.min.css" rel="stylesheet" />
-    <link href="${pageContext.request.contextPath}/resources/css/font-awesome.css" rel="stylesheet" />
-    <link href="${pageContext.request.contextPath}/resources/css/adminia.css" rel="stylesheet" /> 
-    <link href="${pageContext.request.contextPath}/resources/css/adminia-responsive.css" rel="stylesheet" /> 
-    <link href="${pageContext.request.contextPath}/resources/css/pages/login.css" rel="stylesheet" /> 
+    <jsp:include page="../view/include/header.jsp"></jsp:include>
+     
+    <link href="${pageContext.request.contextPath}/resources/css/login.css" rel="stylesheet" /> 
   
       
     </head>

@@ -16,6 +16,9 @@
 
 	     <table class="table table-bordered" id="shopCardPayListTable">
 	     </table>
+	       <table class="table table-bordered" id="payAddressTable">
+	     </table>
+	     总价格：<span id="allMoney"></span>
    	     <input class="btn btn-primary" type="button"  value="去支付咯" onclick="payBillEnd()" />
 	
 	</form>

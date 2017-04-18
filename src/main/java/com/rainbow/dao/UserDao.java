@@ -27,6 +27,7 @@ public interface UserDao {
     public int addAddress(Address address);//添加地址
     public int updateAddress(Address address);//修改地址
     public int delAddress(List<String> addressId);//删除地址
-
+    public int CancelDefaultAddress(List<Address> addressId);
+    public int defaultAddress(String addressId);
 }
 

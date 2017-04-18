@@ -111,8 +111,8 @@
 	
 	
 	<insert id="addAddress"  >
-		insert into address(user_id,address,address_detail,address_name,address_phone)
-		value(#{userId},#{address},#{addressDetail},#{addressName},#{addressPhone} )
+		insert into address(user_id,address,address_detail,address_name,address_phone,type)
+		value(#{userId},#{address},#{addressDetail},#{addressName},#{addressPhone},'0')
   </insert>
   
  <update id="updateAddress"   >
@@ -128,5 +128,14 @@
          
     </delete>
   
-  
+   <update id="CancelDefaultAddress" parameterType="java.util.List" >
+        update  address set type="0" where address_id in
+        <foreach item="address" collection="list" open="(" close=")" separator=",">
+             #{address.addressId}
+        </foreach>
+         
+    </update>
+     <update id="defaultAddress"  >
+        update  address set type="1" where address_id =#{addressId}
+    </update>
 </mapper>
