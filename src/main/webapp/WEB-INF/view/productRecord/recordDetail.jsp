@@ -41,11 +41,11 @@ border:none;
 						</div>
 						 
 						<div class="control-group">
-							<label class="control-label">地址</label>
+													  
+							<label class="control-label">地址</label> 
 							<div class="controls">
-								<input disabled type="text"  id="addressDetail" readonly>
-							
-							</div>
+ 					        <textarea id="addressDetail" rows="3"readonly></textarea>
+						 </div>
 						</div>
  					</form>
  

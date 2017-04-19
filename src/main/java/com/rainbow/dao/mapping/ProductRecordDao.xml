@@ -37,13 +37,12 @@
 	 <delete id="DelProduct"  >
         delete from product_record where order_id =#{orderId}
     </delete>
-	 
+    
 	 <insert id="addProductRecord"  parameterType="java.util.List">  
-     
-      insert into  product_record(add_time,emp_id,activity_id,flag)   
-      values  
+      insert into  product_record(product_name,price,count,user_id, address,address_name,address_phone,order_time)   
+      values 
     <foreach collection="shopCardList" item="product" index="index" separator="," >  
-        (#{product.addTime},#{item.empId},#{item.activityId},#{item.flag})  
+        (#{product.productName},#{product.price},#{product.count},#{productRecord.userId}, #{productRecord.address},#{productRecord.addressName},#{productRecord.addressPhone},#{productRecord.orderTime})  
     </foreach>  
   </insert> 
 

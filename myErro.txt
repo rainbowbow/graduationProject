@@ -12,3 +12,18 @@
 4:AJAX POST请求中参数以form data和request payload形式在servlet中的获取方式 -
 post请求的Content-Type为application/x-www-form-urlencoded，参数是在请求体中，即上面请求中的Form Data。
 Content-Type为text/plain;charset=UTF-8，而请求表单参数在RequestPayload中。
+
+5:MyBatis在解析xml时找不到其中声明的shopCardList，但是在Dao中明明传的参数就是shopCardList!!!
+原因：
+传递一个 List 实例或者数组作为参数对象传给 MyBatis。当你这么做的时 候,MyBatis 会自动将它包装在一个 Map 中,
+用名称在作为键。List 实例将会以“list” 作为键,而数组实例将会以“array”作为键
+
+因为我传的参数只有一个，而且传入的是一个List集合==》shopCardList，所以mybatis会自动封装成Map<"list",shopCardList>。
+在解析的时候会通过“list”作为Map的key值去寻找。但是我在xml中却声明成shopCardList了，所以自然会报错找不到。
+
+解决办法：
+第一种就是修改mapper.xml中foreach标签内容，把studentNameList修改为list
+第二种方式，修改dao中的参数传入方式，手动封装成map，然后把map当参数传进去
+ Map params = new HashMap();
+         params.put("shopCardList", shopCardList);
+     	 return productDao.UpdateProductCount(params);

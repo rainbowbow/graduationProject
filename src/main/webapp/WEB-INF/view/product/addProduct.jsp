@@ -22,13 +22,13 @@
 		<div class="control-group">
 			<label class="control-label">数量:</label>
 			<div class="controls">
-				<input  type="text" name="count" id="count">
+				<input  type="text" name="count" id="count" onkeyup='this.value=this.value.replace(/\D/gi,"")'>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">价格:</label>
 			<div class="controls">
-				<input  type="text" name="price" id="price">
+				<input  type="text" name="price" id="price" >
 			</div>
 		</div>
 		<div class="control-group">

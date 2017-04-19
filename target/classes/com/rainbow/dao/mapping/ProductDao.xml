@@ -69,9 +69,9 @@
 			type type
 		from product 
 		<where>
-			count>0
+			 1=1
             <if test="productName!=null and productName!='' ">
-				and product_name like concat('%',#{productName},'%')
+				  product_name like concat('%',#{productName},'%')
 		    </if>
             <if test="type !=null and type!=''">
 				and type=#{type} 
@@ -114,7 +114,12 @@
 		update shop_card set type=#{type} where product_id=#{productId}
 	</update>
 	
-	
-	
+	<update id="UpdateProductCount" parameterType="java.util.List" >
+		<foreach collection="shopCardList" item="shopCard" index="index">
+           update product set count = count- #{shopCard.count} 
+           where  product_id = #{shopCard.productId } ;
+		</foreach>
+ 	</update>
+	 
 	
 </mapper>

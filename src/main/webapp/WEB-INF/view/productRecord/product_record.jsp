@@ -197,9 +197,15 @@
 						{
 							field : 'orderTime',
 							title : '购买时间',
+							formatter: function (value, row, index) {  
+			                    return value.substring(0,19);  
+			                }
 						},{
 							field : 'totalMoney',
 							title : '总价',
+							 formatter: function (value, row, index) {  
+				                    return row.price*row.count;  
+				                }
 						},
 						{
 							title : '操作',
@@ -221,10 +227,18 @@
 						} ]
 			});
 				
+
+			var typeUser=${user.type};
+			if(typeUser!='0') {
+				$('#orderTable').bootstrapTable('hideColumn', 'userName');
+			}
+			
+			 
 				$('#orderTable').bootstrapTable('hideColumn', 'orderId');
 				$('#orderTable').bootstrapTable('hideColumn', 'address');
 				$('#orderTable').bootstrapTable('hideColumn', 'addressName');
 				$('#orderTable').bootstrapTable('hideColumn', 'addressPhone');
+				
     });
 
 		  function searchProductRecord(){

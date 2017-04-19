@@ -1,12 +1,15 @@
 package com.rainbow.service;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
 import com.rainbow.beans.Product;
+import com.rainbow.beans.ShopCard;
 import com.rainbow.dao.ProductDao;
 import com.rainbow.utils.ListHelper;
 
@@ -65,6 +68,11 @@ public class ProductService{
      public Product productById(int productId){
     	 return productDao.productById(productId);
      }
-     
+     public int UpdateProductCount(List<ShopCard> shopCardList){
+    	 Map params = new HashMap();
+         params.put("shopCardList", shopCardList);
+     	 return productDao.UpdateProductCount(params);
+     }
+
      
 	}

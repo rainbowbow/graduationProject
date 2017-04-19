@@ -75,46 +75,15 @@ margin-left:230px;
 
 		<div class="buttonDiv"  >
 		 
-			<button type="button" onclick="shopCardDetail();"  class="btn btn-primary">
+			<button type="button" onclick="addshopCard('detailCount','maxDetailCount');"  class="btn btn-primary">
 				<i class="icon-ok icon-white"></i>加入购物车
 			</button>
-			 
+			 &nbsp;&nbsp;
+			<button type="button" onclick="closeModal('decreaseCssById','addCssById');" class="btn btn-primary cancelBtn" >
+				<i class="icon-remove icon-white"></i>取消
+			</button>
 		</div>
 	 
-	 <script >
 	 
-	//提交购物车
-		function shopCardDetail(){  
-		      var detailCount=$("#detailCount").val();
-		      var maxCount=parseInt($("#maxDetailCount").val());
-		      if(parseInt(detailCount)>maxCount||parseInt(detailCount)<=0||detailCount==""){
-		    	  alert("数量有误！请重新选择！");
-		    	  return false;
-		      }
-		    $.ajax({  
-		        type: "post",  
-		        url:  "${ctx}" + "/ShopCardController/addShopCard",
-		        data:$('#detailForm').serialize(),
-		        
-		        success : function(data) {
-					if (data > 0) {
-						alert('操作成功:' + data);
-						location.reload();
-					} else {
-						alert('操作失败' + data);
-					}
-				},
-		        error : function() {
-					alert('请求出错');
-					location.reload();
-				} 
-		    }); 
-		    return false; 
-		}	
-		
-		
-		
-
-	</script> 
 </body>
 </html>

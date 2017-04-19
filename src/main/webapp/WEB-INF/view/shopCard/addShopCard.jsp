@@ -40,11 +40,11 @@
 
 		<div class="form-actions" style="padding-left: 170px;">
 
-			<button type="button" onclick="shopCard()" class="btn btn-primary">
-				<i class="icon-ok icon-white"></i>保存
+			<button type="button" onclick="addshopCard('shopCount','maxShopCount')" class="btn btn-primary">
+				<i class="icon-ok icon-white"></i>加入购物车
 			</button>
 			&nbsp;&nbsp;
-			<button type="button" onclick="$('#shopModal').modal('hide');" class="btn btn-primary cancelBtn" >
+			<button type="button" onclick="closeModal('decreaseShopCssById','addShopCssById');" class="btn btn-primary cancelBtn" >
 				<i class="icon-remove icon-white"></i>取消
 			</button>
 		</div>

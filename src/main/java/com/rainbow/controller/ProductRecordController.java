@@ -83,24 +83,23 @@ public class ProductRecordController {
 		
 		@RequestMapping("ProductRecordController/addProductRecord")
 		@ResponseBody
-		int addProductRecord(HttpServletRequest request,List<Product> productLiset ,HttpSession session){
+		int addProductRecord(HttpServletRequest request ,HttpSession session){
 			
 			User user=(User) session.getAttribute("user");
 			String userId=user.getUserId();
 			String shopCardIdMore =request.getParameter("shopCardId");
 			String addressId =request.getParameter("addressId");
-			
+
 			//根据addressId获取地址信息
             Address address=userService.AddressById(addressId);
-            System.out.println("address/n\n"+address.getAddress());
+            
              List<ShopCard> shopCardList=new ArrayList<ShopCard>();
             //根据shopCardIdMore获取产品价格，名称 产品购买数量
             String[] shopCardId = shopCardIdMore.split(",");
             for(int i=0;i<shopCardId.length;i++){
             	shopCardList.add(shopCardService.shopcardById(Integer.parseInt(shopCardId[i])));
             }
-            System.out.println("ProductName/n"+shopCardList.get(0).getProductName());
- 			 
+  			 
 			 
 			//购买 总价=数量*价格
 			//购买成功则--》1：删除对应的购物车    2：添加对应的订单
@@ -120,11 +119,13 @@ public class ProductRecordController {
             params.put("productRecord", productRecord);
             params.put("shopCardList", shopCardList);
             int addId= productRecordService.addProductRecord(params);
- 			System.out.println(params.get(productRecord)+"/nproductRecord\n"+userId);
- 			
-			
-		 
- 			return num;
+
+ 			//购买成功则--》1：删除对应的购物车    2：减少对应的产品数量
+			if(addId>0){
+				shopCardService.DelShopCard(shopCardIdMore);
+				productService.UpdateProductCount(shopCardList);
+			}
+ 			return addId;
 		}
 	 
   }

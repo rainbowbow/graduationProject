@@ -35,7 +35,7 @@
 		alert(shopCardId);
 		$.ajax({  
 	        type: "post",  
-	        url:  "${ctx}" + "/ProductRecordController/delProductRecord",
+	        url:  "${ctx}" + "/ProductRecordController/addProductRecord?addressId="+addressId+"&&shopCardId="+shopCardId,
 	        data:{
 	        	"shopCardId":shopCardId,
 	        	"addressId":addressId
