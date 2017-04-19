@@ -80,42 +80,7 @@ public class ShopCardController {
 		
 		
 		
-		@RequestMapping("ShopCardController/payBill")
-		@ResponseBody
-		int addProductRecord(Model model,HttpServletRequest request,HttpSession session){
-			
-			User user=(User) session.getAttribute("user");
-			String userId=user.getUserId();
-			String userName=user.getUserName();
-			String shopCardIdMore =request.getParameter("shopCardId");
-			//获取要结算的购物车id，通过这个id获取productId,count
-			//ShopCard shopCard=shopCardService.shopcardById(shopCardId);
-			//通过productId获取产品的productName,price
-			 
-			//购买 总价=数量*价格
-			//购买成功则--》1：删除对应的购物车    2：添加对应的订单
-			
-			String[] shopCardId = shopCardIdMore.split(",");
-			System.out.println(shopCardId.toString());
-            int num=0;
-            ProductRecord productRecord=new ProductRecord();
-            productRecord.setUserId(userId);
-            productRecord.setUserName(userName);
-            
-            SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");  
-            Date date = new Date();  
-            productRecord.setOrderTime(sdf.format(date));
-            
-            //获取要结算的购物车id，通过这个id获取productId,count
-			for (int i = 0; i < shopCardId.length; i++) {
-			 
-			}
- 			System.out.println(shopCardId+"qqqqqqww"+userId);
- 			
-			
 		 
- 			return num;
-		}
 		@RequestMapping("ShopCardController/addShopCard")
 		@ResponseBody
 		 public int addShopCard(HttpServletRequest request,HttpSession session){

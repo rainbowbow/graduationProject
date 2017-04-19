@@ -39,9 +39,9 @@
 float: right;
 margin-bottom: 0px;
 }
- .classSpan{
+  .classSpan{
  color:red;
- }
+ } 
 </style>
 	</head>
 
@@ -112,7 +112,7 @@ margin-bottom: 0px;
     <!-- detail Modal start -->
 	<div class="modal hide fade" id="detailModal" tabindex="-1" role="dialog">
 		<div class="modal-header">
-			<button class="close" type="button" data-dismiss="modal" onclick="closeModal();">×</button>
+			<button class="close" type="button" data-dismiss="modal" onclick="closeModal('decreaseCssById','addCssById');">×</button>
 			<h3>产品详情</h3>
 		</div>
 		<div class="modal-body">
@@ -125,7 +125,7 @@ margin-bottom: 0px;
   <!-- 加入购物车Modal start -->
 	<div class="modal hide fade" id="shopModal" tabindex="-1" role="dialog">
 		<div class="modal-header">
-			<button class="close" type="button" data-dismiss="modal" onclick="closeModal();">×</button>
+			<button class="close" type="button" data-dismiss="modal" onclick="closeModal('decreaseShopCssById','addShopCssById');">×</button>
 			<h3>加入购物车</h3>
 		</div>
 		<div class="modal-body">

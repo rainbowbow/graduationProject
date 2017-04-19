@@ -138,4 +138,15 @@
      <update id="defaultAddress"  >
         update  address set type="1" where address_id =#{addressId}
     </update>
+    
+    <select id="AddressById" resultMap="addressMap">
+		select   
+			address_id addressId,
+			address address,
+			address_detail addressDetail,
+			address_name addressName,
+			address_phone addressPhone 
+			from address where address_id=#{addressId} 
+	</select>
+	
 </mapper>

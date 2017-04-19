@@ -114,34 +114,8 @@
   	    });
     	}
     
-    
-	$("#addShopCount").click(function(){
- 		var n=$(this).prev().val();
-		if(parseInt(n)>=parseInt($("#maxShopCount").val())){
-			$("#addShopCount").attr("class","classSpan");
- 			return false;
-		}
-		$("#decreaseShopCount").removeClass("classSpan");
-		$("#addShopCount").removeClass("classSpan");
-		var num=parseInt(n)+1;
-		$(this).prev().val(num);
-		});
-	
-	
-	//减的效果
-	$("#decreaseShopCount").click(function(){
-	var n=$(this).next().val();
-	if(parseInt(n)<=1){
-		$("#decreaseShopCount").attr("class","classSpan");
-		return false;
-	}
-	$("#addShopCount").removeClass("classSpan");
-	$("#decreaseShopCount").removeClass("classSpan");
-	var num=parseInt(n)-1;
-	$(this).next().val(num);
-	});
-	
-	
+   
+/*	
 	
 	//减的效果
 	$("#decreaseCount").click(function(){
@@ -167,17 +141,41 @@
 		$("#addCount").removeClass("classSpan");
 		var num=parseInt(n)+1;
 		$(this).prev().val(num);
-		});
+		});*/
 	
 	
+	//购物车数量减的效果
+	function decreaseCount(inputId,decreaseId,addId){
+		var n=$("#"+inputId).val();
+		if(parseInt(n)<=1){
+		$("#"+decreaseId).attr("class","classSpan");
+ 		return false;
+	}
+	$("#"+addId).removeClass("classSpan");
+	$("#"+decreaseId).removeClass("classSpan");
+	var num=parseInt(n)-1;
+	$("#"+inputId).val(num)
+		}
+	
+	//购物车数量加的效果
+	function addCount(inputId,decreaseId,addId,macCount){
+		var n=$("#"+inputId).val();
+		if(parseInt(n)>=parseInt($("#"+macCount).val())){
+			$("#"+addId).attr("class","classSpan");
+ 			return false;
+		}
+		$("#"+addId).removeClass("classSpan");
+		$("#"+decreaseId).removeClass("classSpan");
+		var num=parseInt(n)+1;
+		$("#"+inputId).val(num)
+		}
 	
 	
     
-    function closeModal(){
+    function closeModal(decreaseId,addId){
 		 $("#detailCount").val("1");
 		 $("#shopCount").val("1");
-		 $("#addCount").removeClass("classSpan");
-		 $("#decreaseCount").removeClass("classSpan");
-		 $("#decreaseShopCount").removeClass("classSpan");
-		 $("#addShopCount").removeClass("classSpan");
+		 $("#"+decreaseId).removeClass("classSpan");
+		 $("#"+addId).removeClass("classSpan");
+		 
 	}

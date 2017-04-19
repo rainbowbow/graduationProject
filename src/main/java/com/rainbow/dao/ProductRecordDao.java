@@ -1,6 +1,7 @@
 package com.rainbow.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
@@ -16,6 +17,6 @@ public interface ProductRecordDao {
 	
     List<ProductRecord> RecordList(@Param("productName")String productName,@Param("userName")String userName,@Param("userId")int userId,@Param("orderTime")String orderTime);
     int DelProduct(int orderId);
-    public int addProductRecord(ProductRecord productRecord);
+    public int addProductRecord(Map<String,Object> params);
 }
 

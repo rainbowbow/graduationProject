@@ -1,5 +1,6 @@
 package com.rainbow.service;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -34,8 +35,8 @@ public class ProductRecordService{
 	    	
     	 return productRecordDao.DelProduct(orderId);
 	    }
-     public int addProductRecord(ProductRecord productRecord){
-    	 return productRecordDao.addProductRecord(productRecord);
+     public int addProductRecord(Map<String,Object> params){
+    	 return productRecordDao.addProductRecord(params);
      }
      
 	}

@@ -23,9 +23,11 @@
 		</div>
 		 <div   style="margin-left:110px;margin-bottom:20px;">
  		     
-		                 数量: <span id="decreaseShopCount">--</span>
+ 		     
+		      
+		                 数量: <span id="decreaseShopCssById"  onclick="decreaseCount('shopCount','decreaseShopCssById','addShopCssById')">--</span>
 		                 <input style="width:80px;" type="text" value="1" name="count" id="shopCount" onkeyup='this.value=this.value.replace(/\D/gi,"")'>
-		            <span id="addShopCount">+</span>
+		            <span id="addShopCssById" onclick="addCount('shopCount','decreaseShopCssById','addShopCssById','maxShopCount')">+</span>
 		            库存：<input type="text" style="boder:none;width:40px;"  id="maxShopCount"/>
  		    </div>
 		<div class="control-group">

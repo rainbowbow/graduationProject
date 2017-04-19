@@ -29,5 +29,6 @@ public interface UserDao {
     public int delAddress(List<String> addressId);//删除地址
     public int CancelDefaultAddress(List<Address> addressId);
     public int defaultAddress(String addressId);
+    public Address AddressById(String addressId);//获取某个用户
 }
 

@@ -5,10 +5,10 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import com.rainbow.dao.UserDao;
-import com.rainbow.utils.ListHelper;
 import com.rainbow.beans.Address;
 import com.rainbow.beans.User;
+import com.rainbow.dao.UserDao;
+import com.rainbow.utils.ListHelper;
 
 @Service("userService")
 public class UserService {
@@ -81,4 +81,9 @@ public class UserService {
          public int defaultAddress(String addressId){
         	 return userDao.defaultAddress(addressId);
          }
+         
+         public Address AddressById(String addressId) {
+ 	    	
+ 	        return userDao.AddressById(addressId);
+ 	    }
 	}

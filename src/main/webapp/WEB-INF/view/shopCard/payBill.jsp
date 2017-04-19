@@ -24,13 +24,22 @@
 	</form>
 	<script>
 	function payBillEnd() {
-	 
-		var shopCardId=$("#testList").val();
+		addressId=$.map($('#payAddressTable').bootstrapTable('getSelections'), function (row) {
+	        return row.addressId;
+	    });
+		if(addressId==""||addressId==null){
+			alert("请先选择地址！");
+			return false;
+		}
+ 		var shopCardId=$("#testList").val();
 		alert(shopCardId);
 		$.ajax({  
 	        type: "post",  
-	        url:  "${ctx}" + "/ShopCardController/payBill",
-	        data:{"shopCardId":shopCardId},
+	        url:  "${ctx}" + "/ProductRecordController/delProductRecord",
+	        data:{
+	        	"shopCardId":shopCardId,
+	        	"addressId":addressId
+	        },
 	        
 	        success : function(data) {
 				if (data > 0) {
