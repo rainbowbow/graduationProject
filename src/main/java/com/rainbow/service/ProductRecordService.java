@@ -43,5 +43,9 @@ public class ProductRecordService{
      public int addProductRecord(Map<String,Object> params){
     	 return productRecordDao.addProductRecord(params);
      }
+     public int cancelDel(String orderId){
+    	 return productRecordDao.cancelDel(orderId);
+     }
+
      
 	}

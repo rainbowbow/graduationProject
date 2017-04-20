@@ -127,5 +127,15 @@ public class ProductRecordController {
 			}
  			return addId;
 		}
+		
+		@RequestMapping("ProductRecordController/cancelDel")
+		@ResponseBody
+		int upOrDownShopProduct(HttpServletRequest request){
+			
+			String orderId = request.getParameter("orderId");
+ 			//1:在售商品--》修改shop_card表的type为1
+   			int updateId=productRecordService.cancelDel(orderId);
+   			return updateId;
+		}
 	 
   }

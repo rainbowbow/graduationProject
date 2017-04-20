@@ -15,6 +15,7 @@
 			address_phone addressPhone,
 			u.user_name userName,
 			pr.user_id userId,
+			pr.type type,
 			order_time orderTime,
 			total_money totalMoney
 		from product_record pr,user u  
@@ -33,6 +34,7 @@
 				and order_time like concat(#{orderTime},'%')
 		    </if>
 		</where>
+		ORDER BY order_time desc
 	</select>
 	 
     
@@ -54,4 +56,7 @@
     </foreach>  
   </insert> 
     
+     <update id="cancelDel">
+		update product_record set type='1' where order_id =#{orderId}
+	</update>
 </mapper>

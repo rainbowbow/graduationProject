@@ -189,6 +189,9 @@
 							field : 'address' 
 						},
 						{
+							field : 'type' 
+						},
+						{
 							field : 'addressName' 
 						},
 						{
@@ -218,10 +221,16 @@
 									+ row.addressPhone+'\'\,\''
 									+ row.address+
 							'\')">地址详情</a> ';  
-								
-									var d = '<a href="#"  onclick="del(\''
+							var d = '<a href="#"  onclick="del(\''
+								+ row.orderId
+								+ '\')">删除</a> ';
+ 								if(row.type=="0"){
+									var cancelDel = '<a href="#"  onclick="cancelDel(\''
 										+ row.orderId
-										+ '\')">删除</a> ';
+										+ '\')">撤销用户删除</a> ';
+										return e+cancelDel+d;
+								}
+								
 								return e+d;
 							}
 						} ]
@@ -234,7 +243,8 @@
 			}
 			
 			 
-				$('#orderTable').bootstrapTable('hideColumn', 'orderId');
+			    $('#orderTable').bootstrapTable('hideColumn', 'orderId');
+			    $('#orderTable').bootstrapTable('hideColumn', 'type');
 				$('#orderTable').bootstrapTable('hideColumn', 'address');
 				$('#orderTable').bootstrapTable('hideColumn', 'addressName');
 				$('#orderTable').bootstrapTable('hideColumn', 'addressPhone');
@@ -341,7 +351,28 @@
 			$('#recordDetail').modal('show');
 			
 		}
-		   
+		 
+		  function cancelDel(id) {
+				$.ajax({
+					url : "${ctx}" + "/ProductRecordController/cancelDel",
+					data : {"orderId" : id},
+					type : "post",
+					success : function(data) {
+						if (data > 0) {
+							alert('操作成功:' + data);
+							location.reload();
+						} else {
+							alert('操作失败' + data);
+						}
+					},
+					error : function() {
+						alert('请求出错');
+					} 
+				});
+
+				return false;
+			}
+			
 	</script>
 </body>
 </html>
