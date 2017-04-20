@@ -19,7 +19,10 @@ public class ProductRecord implements Serializable {
      private String addressPhone;
      private String addressName;
      private String orderTime; 
-     private String totalMoney;
+     private String totalMoney;   
+     private String type;
+
+     
 	public String getOrderId() {
 		return orderId;
 	}
@@ -92,6 +95,12 @@ public class ProductRecord implements Serializable {
 	}
 	public void setTotalMoney(String totalMoney) {
 		this.totalMoney = totalMoney;
+	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
 	} 
  
 	 

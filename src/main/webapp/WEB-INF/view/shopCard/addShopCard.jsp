@@ -18,29 +18,29 @@
 		<div class="control-group">
 			<label class="control-label">产品名称:</label>
 			<div class="controls">
-				<input   type="text" name="productName" id="shopProductName" >
+				<input   type="text" name="productName" id="shopProductName" readonly>
 			</div>
 		</div>
 		 <div   style="margin-left:110px;margin-bottom:20px;">
  		     
  		     
 		      
-		                 数量: <span id="decreaseShopCssById"  onclick="decreaseCount('shopCount','decreaseShopCssById','addShopCssById')">--</span>
-		                 <input style="width:80px;" type="text" value="1" name="count" id="shopCount" onkeyup='this.value=this.value.replace(/\D/gi,"")'>
+		                 数量: <span  id="decreaseShopCssById"  onclick="decreaseCount('shopCount','decreaseShopCssById','addShopCssById')">--</span>
+		                 <input style="width:80px;margin-bottom:4px;" type="text" value="1" name="count" id="shopCount" onkeyup='this.value=this.value.replace(/\D/gi,"")'>
 		            <span id="addShopCssById" onclick="addCount('shopCount','decreaseShopCssById','addShopCssById','maxShopCount')">+</span>
-		            库存：<input type="text" style="boder:none;width:40px;"  id="maxShopCount"/>
+		            库存：<input type="text" style="boder:none;width:40px;"  id="maxShopCount" readonly />
  		    </div>
 		<div class="control-group">
 			<label class="control-label">价格:</label>
 			<div class="controls">
-				<input   type="text" name="price" id="shopPrice">
+				<input   type="text" name="price" id="shopPrice" readonly>
 			</div>
 		</div>
 		 
 
 		<div class="form-actions" style="padding-left: 170px;">
 
-			<button type="button" onclick="addshopCard('shopCount','maxShopCount')" class="btn btn-primary">
+			<button type="button" onclick="addshopCard('shopCount','maxShopCount','shopForm')" class="btn btn-primary">
 				<i class="icon-ok icon-white"></i>加入购物车
 			</button>
 			&nbsp;&nbsp;
@@ -50,35 +50,7 @@
 		</div>
 	</form>
 	<script>
-	//提交购物车
-	function shopCard(){  
-	      var shopCount=$("#shopCount").val();
-	      var maxCount=parseInt($("#maxshopCount").val());
-	      if(parseInt(shopCount)>maxCount||parseInt(shopCount)<=0||shopCount==""){
-	    	  alert("数量有误！请重新选择11！");
-	    	  return false;
-	      }
-	    $.ajax({  
-	        type: "post",  
-	        url:  "${ctx}" + "/ShopCardController/addShopCard",
-	        data:$('#shopForm').serialize(),
-	        
-	        success : function(data) {
-				if (data > 0) {
-					alert('操作成功:' + data);
-					location.reload();
-				} else {
-					alert('操作失败' + data);
-				}
-			},
-	        error : function() {
-				alert('请求出错');
-				location.reload();
-			} 
-	    }); 
-	    return false; 
-	}		
-	
+	 
 	</script>
 </body>
 </html>

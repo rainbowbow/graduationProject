@@ -79,41 +79,7 @@
  
 
    
-    function searchProduct(){
-      $("#num").val(0);
-      var numstart= $("#num").val();//向input加1
-      alert(numstart);
-      var productName=$("#productName").val();
-  	  var startMoney=$("#startMoney").val();
-  	  var endMoney=$("#endMoney").val();
-  	  
-  	  var path="${ctx}"+"/ProductController/productlist";
-  	    $.ajax({  
-  	        type: "post",
-  	        dataType:"json",
-  	        url:  path,
-  	        data:{
-  	        	"num" :numstart,
-  	        	"productName":productName,
-  	        	"startMoney":startMoney,
-  	        	"endMoney":endMoney
-  	        },
-  	        success : function(data){
-  	        	if(data.length>0){
-  	        		var totalCount=Math.floor(parseInt(data[0].total)/10);
-	        	     $("#totalCount").val(totalCount);
-	        		 document.getElementById("all").innerText=totalCount+1;
-	        		 document.getElementById("sort").innerText="1";
-	        		shopProduct(data);
-	        	}
-   	        },
-  	        error : function() {
-  				alert('请求出错');
-  				location.reload();
-  			}
-  	    });
-    	}
-    
+   
    
 /*	
 	
@@ -146,7 +112,13 @@
 	
 	//购物车数量减的效果
 	function decreaseCount(inputId,decreaseId,addId){
+
 		var n=$("#"+inputId).val();
+		if(n==null||n==""){
+			alert("数量不能为空！！");
+			$("#"+inputId).val(1);
+			return false;
+		}
 		if(parseInt(n)<=1){
 		$("#"+decreaseId).attr("class","classSpan");
  		return false;
@@ -160,6 +132,11 @@
 	//购物车数量加的效果
 	function addCount(inputId,decreaseId,addId,macCount){
 		var n=$("#"+inputId).val();
+		if(n==null||n==""){
+			alert("数量不能为空！！");
+			$("#"+inputId).val(1);
+			return false;
+		}
 		if(parseInt(n)>=parseInt($("#"+macCount).val())){
 			$("#"+addId).attr("class","classSpan");
  			return false;
@@ -171,10 +148,9 @@
 		}
 	
 	
-	
 	//提交购物车
-	function addshopCard(Count,maxCount){  
-	      var detailCount=$("#"+Count).val();
+	function addshopCard(Count,maxCount,Form){  
+ 	      var detailCount=$("#"+Count).val();
 	      var maxCount=parseInt($("#"+maxCount).val());
 	      if(parseInt(detailCount)>maxCount||parseInt(detailCount)<=0||detailCount==""){
 	    	  alert("数量有误！请重新选择！");
@@ -182,9 +158,8 @@
 	      }
 	    $.ajax({  
 	        type: "post",  
-	        url:  "${ctx}" + "/ShopCardController/addShopCard",
-	        data:$('#detailForm').serialize(),
-	        
+	        url:   "ShopCardController/addShopCard",
+	        data:$('#'+Form).serialize(),
 	        success : function(data) {
 				if (data > 0) {
 					alert('操作成功:' + data);
@@ -200,6 +175,8 @@
 	    }); 
 	    return false; 
 	}	
+	
+
 	
     
     function closeModal(decreaseId,addId){

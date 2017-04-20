@@ -8,10 +8,25 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+ <link href="${pageContext.request.contextPath}/resources/css/product.css" rel="stylesheet" />
 
 <jsp:include page="../include/header.jsp"></jsp:include>
 <title>农产品销售系统</title>
-
+<style type="text/css">
+table tr td span{
+     display: inline-block;
+     cursor:pointer;
+     width: 28px;
+     height: 24px;
+     line-height: 24px;
+     text-align: center;
+     font-size: 15px;
+     border: 1px solid #e6e6e6;
+ } 
+ table tr td input{
+ margin-top: 7px;
+ }
+</style>
 </head>
 
 <body>
@@ -100,6 +115,8 @@
 	<!-- 查看大图Modal end -->
 	
 	<jsp:include page="../include/footer.jsp"></jsp:include>
+ 	<script src="${pageContext.request.contextPath}/resources/js/product.js"></script>
+	
 	<script>
 $(document).ready(function() {
 	var li = document.getElementById('shopcard-active');
@@ -144,9 +161,20 @@ $(document).ready(function() {
 								},{
 									field : 'price',
 									title : '价格'
-								},{
+								},
+ 
+								{
 									field : 'count',
-									title : '数量'
+									title : '数量',
+									formatter: function (value, row, index) {  
+										
+										var spanFront='<span id="tableDecreaseCssById'+index+'"  onclick="decreaseCount(\'tableCount'+index+'\'\,\'tableDecreaseCssById'+index+'\'\,\'tableAddCssById'+index+'\')">--</span>';
+										var inputCount='<input style="width:30px;" type="text" value=" '+value+' " name="tableCount" id="tableCount'+index+'" onkeyup=\'this.value=this.value.replace(\/\\D\/gi\,"")\'>';
+										var spanlast='<span id="tableAddCssById'+index+'" onclick="addCount(\'tableCount'+index+'\'\,\'tableDecreaseCssById'+index+'\'\,\'tableAddCssById'+index+'\'\,\' '+
+										row.allCount+'\')">+</span>';
+
+										return spanFront+inputCount+spanlast;  
+					                }
 								},{
 									field : 'allCount',
 									title : '可买数量'
@@ -164,140 +192,69 @@ $(document).ready(function() {
 									title : '操作',
 									field : 'doSomething',
 									align : 'center',
-									formatter : function(value, row,index) {
-                                                          var e = '<a href="#" onclick="editInfo(\''
+									formatter : function(value, row, index) {
+                                         
+										   var bb = '<a href="#" onclick="saveInfo(\''
 												+ row.shopCardId+'\'\,\''
-												+ row.productName+'\'\,\''
-												+ row.price+'\'\,\''
-												+ row.count+
-										'\')">编辑</a> ';
-										var d = '<a href="#"  onclick="del(\''
-											+ row.shopCardId
-											+ '\')">删除</a> ';
+												+ row.allCount+'\'\,\''
+												+ index+ 
+										        '\')">保存</a> ';
+										   var d = '<a href="#"  onclick="del(\'' + row.shopCardId+ '\')">删除</a> ';
+											
                                                  if(row.imgUrl!=null){
                                  					var p= '<a href="#" onclick="photo(\''
                                  						+ row.imgUrl+
                                  				'\')">查看图片</a> ';
-                                 	                return p+e+d;
+                                 	                return p+bb+d;
                                  				}
                                  				
-										return  e+ d;
+										return  bb+ d;
 									}
 								} ]
 					});
 	$('#shopCardTable').bootstrapTable('hideColumn', 'shopCardId');
           });
-		// 回填表单
-		function editInfo(id,productName,price,count) {  
+		
+		//保存数量
+		function saveInfo(id,count,index) {  
 			//向模态框中传值  
-		    $("#editShopCardId").val(id);  
-		    $("#editProductName").val(productName);  
-		    $("#editPrice").val(price);  
-		    $("#editCount").val(count); 
-		    
-		    $('#editModal').modal('show');  
-		}
+			var maxCount=parseInt(count);
+ 		    var tableCount= parseInt($("#tableCount"+index).val());  
+ 		   if($("#tableCount"+index).val()==null||$("#tableCount"+index).val()==""){
+ 				alert("数量不能为空！！");
+ 				$("#tableCount"+index).val(1)
+ 				return false;
+ 			}
+ 	      if(tableCount<=0){
+ 	    	  alert("数量有误！请重新选择！");
+ 	    	 $("#tableCount"+index).val(1);
+ 	    	  return false;
+ 	      }else if(tableCount>maxCount){
+ 	    	 alert(maxCount+"数量不能大于库存！请重新选择！"+tableCount);
+ 	    	$("#tableCount"+index).val(maxCount);
+	    	  return false;
+ 	      }else{
+ 	    $.ajax({  
+ 	        type: "post",  
+ 	        url:  "${ctx}" + "/ShopCardController/editShopCard?shopCardId="+id+"&&count="+tableCount,
+ 	        success : function(data) {
+ 				if (data > 0) {
+ 					alert('操作成功:' + data);
+ 					location.reload();
+ 				} else {
+ 					alert('操作失败' + data);
+ 				}
+ 			},
+ 	        error : function() {
+ 				alert('请求出错');
+ 				location.reload();
+ 			}
+ 	    }); 
+ 	    return false;} 
+ 	      
+ 		}
 		
 		
-		function payBill() {
-			var type=$.map($('#shopCardTable').bootstrapTable('getSelections'), function (row) {
-		        return row.type;
-		    });
-			var shopCardId=$.map($('#shopCardTable').bootstrapTable('getSelections'), function (row) {
-		        return row.shopCardId;
-		    });
-			var row=$('#shopCardTable').bootstrapTable('getSelections');
- 			for(var i=0;i<row.length;i++){
-				if(parseInt(row[i].count)>parseInt(row[i].allCount)){
-					alert(row[i].count+"--"+row[i].productName+"购买数量不能超过"+row[i].allCount+"!!");
-					return false;
-				}
-			}
-			
-			if(type.indexOf('0')!=-1){
-				alert('失效产品不能结算，请重新勾选！！');
-				return  false;
-			}else if(type.indexOf('1')<0){
-				alert('请选择产品！');
-				return false;
-			}
-			
-			$("#testList").val(shopCardId);
-			var allMoney=0;
-			var typeAdd=0;
-			var typtCount=0;
-			var path = "${ctx}"+ "/ShopCardController/shopCardListSelective?shopCardIdMore="+shopCardId;
-			var addressPath = "${ctx}"+ "/UserController/addresslist";
-
-			$('#shopCardPayListTable').bootstrapTable({
-								url : path,
-								dataType : "json",
-								columns : [{
-											field : 'shopCardId',
-											title : '序号'
-										},{
-											field : 'productName',
-											title : '产品名称'
-										},{
-											field : 'price',
-											title : '价格'
-										},{
-											field : 'count',
-											title : '数量'
-										},{
-											field : '',
-											title : '总价',
-											formatter:function(value, row,index){
-												var perMoney=row.count*row.price;
-												allMoney=allMoney+perMoney;
- 												document.getElementById ("allMoney").innerText=allMoney;
- 												return perMoney;
-											}
-										}]
-							});
-			$('#payAddressTable').bootstrapTable({
-						url : addressPath,
-						dataType : "json",
-						singleSelect : true,
-						clickToSelect : true,
-						columns : [{
-	                        checkbox: true,
-	                        width:10,
-	                        formatter:function(value, row,index){
-								if(row.type=="1"){
-									return true;
-								}
- 							}
-                        }, {
-							field : 'addressId',
-							title : '序号'
-						},
-						{
-							field : 'addressName',
-							title : '收件人' ,
-							width:50,
-			                align:'center'
-						} ,
-						{
-							field : 'address',
-							title : '地址'
-						} ,
-						{
-							field : 'addressDetail',
-							title : '详细街道'
-						} ,
-						{
-							field : 'addressPhone',
-							title : '联系电话'
-						},
-						{
-							field : 'type' 
-						} ]
-					});
-			$('#payAddressTable').bootstrapTable('hideColumn', 'addressId');
-			$('#payAddressTable').bootstrapTable('hideColumn', 'type');
- 		    $('#shopPayBillModal').modal('show');
-		}
 		function delMore() {
 			var row=$.map($('#shopCardTable').bootstrapTable('getSelections'), function (row) {
 		        return row.shopCardId;
@@ -377,6 +334,116 @@ function photo(imgUrl) {
     $('#photoModal').modal('show');  
     
 }  
+
+function payBill() {
+    
+    //勾选的产品的状态
+	var type=$.map($('#shopCardTable').bootstrapTable('getSelections'), function (row) {
+        return row.type;
+    });
+	//勾选的产品购物车Id
+	var shopCardId=$.map($('#shopCardTable').bootstrapTable('getSelections'), function (row) {
+        return row.shopCardId;
+    });
+	
+	//判断结算数量是否大于库存
+	var row=$('#shopCardTable').bootstrapTable('getSelections');
+		for(var i=0;i<row.length;i++){
+		if(parseInt(row[i].count)>parseInt(row[i].allCount)){
+			alert(row[i].count+"--"+row[i].productName+"购买数量不能超过"+row[i].allCount+"!!");
+			return false;
+		}
+	}
+	
+	if(type.indexOf('0')!=-1){
+		alert('失效产品不能结算，请重新勾选！！');
+		return  false;
+	}else if(type.indexOf('1')<0){
+		alert('请选择产品！');
+		return false;
+	}
+	
+	$("#testList").val(shopCardId);
+	var allMoney=0;
+	var typeAdd=0;
+	var typtCount=0;
+	var path = "${ctx}"+ "/ShopCardController/shopCardListSelective?shopCardIdMore="+shopCardId;
+	var addressPath = "${ctx}"+ "/UserController/addresslist";
+	
+	//结算产品的信息表
+	$('#shopCardPayListTable').bootstrapTable({
+						url : path,
+						dataType : "json",
+						columns : [{
+									field : 'shopCardId',
+									title : '序号'
+								},{
+									field : 'productName',
+									title : '产品名称'
+								},{
+									field : 'price',
+									title : '价格'
+								},{
+									field : 'count',
+									title : '数量'
+								},{
+									field : '',
+									title : '总价',
+									formatter:function(value, row,index){
+										var perMoney=row.count*row.price;
+										allMoney=allMoney+perMoney;
+											document.getElementById ("allMoney").innerText=allMoney;
+											return perMoney;
+									}
+								}]
+					});
+	
+	//该用户的地址信息表
+	$('#payAddressTable').bootstrapTable({
+				url : addressPath,
+				dataType : "json",
+				singleSelect : true,
+				clickToSelect : true,
+				columns : [{
+                    checkbox: true,
+                    width:10,
+                    formatter:function(value, row,index){
+						if(row.type=="1"){
+							return true;
+						}
+						}
+                }, {
+					field : 'addressId',
+					title : '序号'
+				},
+				{
+					field : 'addressName',
+					title : '收件人' ,
+					width:50,
+	                align:'center'
+				} ,
+				{
+					field : 'address',
+					title : '地址'
+				} ,
+				{
+					field : 'addressDetail',
+					title : '详细街道'
+				} ,
+				{
+					field : 'addressPhone',
+					title : '联系电话'
+				},
+				{
+					field : 'type' 
+				} ]
+			});
+	$('#payAddressTable').bootstrapTable('hideColumn', 'addressId');
+	$('#payAddressTable').bootstrapTable('hideColumn', 'type');
+	    $('#shopPayBillModal').modal('show');
+}
+
+
 	</script>
 </body>
 </html>

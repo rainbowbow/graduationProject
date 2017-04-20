@@ -87,7 +87,7 @@ public class ShopCardController {
 			   
 			    User user=(User) session.getAttribute("user");
 				String userId=user.getUserId();
-				int productId =Integer.parseInt(request.getParameter("productId"));
+ 				int productId =Integer.parseInt(request.getParameter("productId"));
 				int count =Integer.parseInt(request.getParameter("count"));
 		    	int num=shopCardService.isShopCard(userId, productId);
 		    	System.out.println(userId+"\nproductId"+productId+"\ncount"+count);

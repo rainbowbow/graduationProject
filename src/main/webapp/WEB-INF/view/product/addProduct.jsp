@@ -12,7 +12,7 @@
 </head>
 <body style="padding: 20px;">
 	<form id="addForm"  method="post" class="form-horizontal"  novalidate="novalidate">
-		 
+		 <input style="display:none"  type="text" name="productId" id="shopProductId" >
 		<div class="control-group">
 			<label class="control-label">产品名称:</label>
 			<div class="controls">

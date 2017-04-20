@@ -115,11 +115,19 @@
 	</update>
 	
 	<update id="UpdateProductCount" parameterType="java.util.List" >
+		
 		<foreach collection="shopCardList" item="shopCard" index="index">
+			 
            update product set count = count- #{shopCard.count} 
            where  product_id = #{shopCard.productId } ;
 		</foreach>
  	</update>
 	 
 	
+   <update id="productIsOver"  >
+   	 update product set type=0 where count <![CDATA[   <=  ]]>  0 and product_id in
+        <foreach item="shopCard" collection="list" open="(" close=")" separator=",">
+             #{shopCard.productId}
+        </foreach>
+    </update>
 </mapper>

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.rainbow.beans.ShopCard;
 import com.rainbow.dao.ShopCardDao;
+import com.rainbow.utils.ListHelper;
 
 
 @Service("shopCardService")
@@ -54,15 +55,8 @@ public class ShopCardService{//定义一个名为shopCardService的bean
     	 return shopCardDao.shopcardById(shopCardId);
      }
      public int DelShopCard(String shopCardId){
-    	 List<String> shopCardIdList = getList(shopCardId);
+    	 List<String> shopCardIdList = ListHelper.getList(shopCardId);
     	 return shopCardDao.DelShopCard(shopCardIdList);
 	    }
-     public List<String> getList(String id) {
-	      List<String> list = new ArrayList<String>();
-	      String[] str = id.split(",");
-	       for (int i = 0; i < str.length; i++) {
-	          list.add(str[i]);
-	      }
-	      return list;
-	  }
+    
 	}

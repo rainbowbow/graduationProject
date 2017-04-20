@@ -65,18 +65,17 @@ public class ProductRecordController {
 		}
 		@RequestMapping("ProductRecordController/delProductRecord")
 		@ResponseBody
-		int delProductRecord(Model model,HttpServletRequest request){	
+		int delProductRecord(HttpServletRequest request,HttpSession session){	
 			
+			User user=(User) session.getAttribute("user");
+			String userId=user.getUserId();
 			String orderIdMore = request.getParameter("orderId");
-			String[] orderId = orderIdMore.split(",");
-			System.out.println(orderId.toString());
-            int num=0;
-			for (int i = 0; i < orderId.length; i++) {
-			 if(productRecordService.DelProduct(Integer.parseInt(orderId[i]))!=0){
-				 num++;
-			 }
-			}
-			System.out.println(num);
+			int num;			
+			if(userId=="5"){
+				num=productRecordService.DelProduct(orderIdMore);
+			}else{
+				num=productRecordService.UserDelProduct(orderIdMore);
+			} 
 			return num;
 		}
 		
@@ -124,6 +123,7 @@ public class ProductRecordController {
 			if(addId>0){
 				shopCardService.DelShopCard(shopCardIdMore);
 				productService.UpdateProductCount(shopCardList);
+				productService.productIsOver(shopCardList);
 			}
  			return addId;
 		}

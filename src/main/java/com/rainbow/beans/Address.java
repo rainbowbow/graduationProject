@@ -15,7 +15,7 @@ public class Address implements Serializable {
     private String type;
     private String addressPhone;
     private String addressName;
-	public String getAddressId() {
+ 	public String getAddressId() {
 		return addressId;
 	}
 	public void setAddressId(String addressId) {

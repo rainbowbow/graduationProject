@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
  import com.rainbow.beans.ProductRecord;
 import com.rainbow.beans.ShopCard;
 import com.rainbow.dao.ProductRecordDao;
+import com.rainbow.utils.ListHelper;
 
 
 @Service("productRecordService")
@@ -31,9 +32,13 @@ public class ProductRecordService{
 	    	return productRecordDao.RecordList(productName,userName,userId,orderTime);
 	    }  
      
-     public int DelProduct(int orderId){
-	    	
-    	 return productRecordDao.DelProduct(orderId);
+     public int DelProduct(String orderId){
+    	 List<String> orderIdList = ListHelper.getList(orderId);
+    	 return productRecordDao.DelProduct(orderIdList);
+	    }
+     public int UserDelProduct(String orderId){
+    	 List<String> orderIdList = ListHelper.getList(orderId);
+    	 return productRecordDao.UserDelProduct(orderIdList);
 	    }
      public int addProductRecord(Map<String,Object> params){
     	 return productRecordDao.addProductRecord(params);

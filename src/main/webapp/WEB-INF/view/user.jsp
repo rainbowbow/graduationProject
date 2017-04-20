@@ -8,41 +8,9 @@
 	    <meta charset="utf-8">
 	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 	    <meta name="viewport" content="width=device-width, initial-scale=1">
-	    
+	    <link href="${pageContext.request.contextPath}/resources/css/product.css" rel="stylesheet" />
 		<jsp:include page="include/header.jsp"></jsp:include>
 		<title>农产品销售系统</title>
-<style type="text/css">
-
- 
-.tabContent li {
-	float: left;
-	margin-right: -1px;
-	margin-bottom: 60px;
-	position: relative;
-	bsort: 1px solid #e4e4e4;
-	margin-left: 50px;
-	bsort: 1px
-} 
-
-.tabContent img {
-	width: 100px;
-	height: 100px;
-	display: block;
-}
- .price {
-	line-height: 30px;
-	color: #c4161c;
-	font-size: 14px;
-	font-weight: bold;
-}
-.pageDiv{
-float: right;
-margin-bottom: 0px;
-}
-  .classSpan{
- color:red;
- } 
-</style>
 	</head>
 
 	<body>
@@ -258,8 +226,45 @@ margin-bottom: 0px;
 	    
 	}  
 
-	
+	 function searchProduct(){
+	      $("#num").val(0);
+	      var numstart= $("#num").val();//向input加1
+	      alert(numstart);
+	      var productName=$("#productName").val();
+	  	  var startMoney=$("#startMoney").val();
+	  	  var endMoney=$("#endMoney").val();
+	  	  
+	  	  var path="${ctx}"+"/ProductController/productlist";
+	  	    $.ajax({  
+	  	        type: "post",
+	  	        dataType:"json",
+	  	        url:  path,
+	  	        data:{
+	  	        	"num" :numstart,
+	  	        	"productName":productName,
+	  	        	"startMoney":startMoney,
+	  	        	"endMoney":endMoney
+	  	        },
+	  	        success : function(data){
+	  	        	if(data.length>0){
+	  	        		var totalCount=Math.floor(parseInt(data[0].total)/10);
+		        	     $("#totalCount").val(totalCount);
+		        		 document.getElementById("all").innerText=totalCount+1;
+		        		 document.getElementById("sort").innerText="1";
+		        		shopProduct(data);
+		        	}
+	   	        },
+	  	        error : function() {
+	  				alert('请求出错');
+	  				location.reload();
+	  			}
+	  	    });
+	    	}
+	    
+	 
 
+
+		
 
 	
     </script>

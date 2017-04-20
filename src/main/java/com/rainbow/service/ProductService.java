@@ -73,6 +73,8 @@ public class ProductService{
          params.put("shopCardList", shopCardList);
      	 return productDao.UpdateProductCount(params);
      }
-
+     public int productIsOver(List<ShopCard> shopCardList){
+     	 return productDao.productIsOver(shopCardList);
+     }
      
 	}
