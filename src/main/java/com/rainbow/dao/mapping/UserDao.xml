@@ -30,6 +30,7 @@
 		select 
 			user_id userId, 
 			user_name userName,
+			img_url imgUrl,
 			sex sex,
 			age age, 
 			phone phone,
@@ -43,6 +44,7 @@
 		select 
 			user_id userId, 
 			user_name userName,
+			img_url imgUrl,
 			password password,
 			sex sex,
 			age age, 
@@ -61,6 +63,7 @@
 			age age, 
 			phone phone,
 			e_mail eMail,
+			img_url imgUrl,
 			address address,
 			type type,
 			praise_rate praiseRate
@@ -73,6 +76,7 @@
 		select 
 			user_id userId, 
 			user_name userName,
+			img_url imgUrl,
 			sex sex,
 			age age, 
 			phone phone,

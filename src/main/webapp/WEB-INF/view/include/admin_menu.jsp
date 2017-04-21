@@ -4,7 +4,8 @@
 				<div class="account-container">
 				
 					<div class="account-avatar">
-						<img src="./img/headshot.png" alt="" class="thumbnail" />
+						<img src="${user.getImgUrl()}" onclick="showChangePicture();" alt="" class="thumbnail" />
+
 					</div>  
 				
 					<div class="account-details">

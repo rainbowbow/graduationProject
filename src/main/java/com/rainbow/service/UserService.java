@@ -34,11 +34,8 @@ public class UserService {
 	    	
 	        return userDao.login(userName,password,type);
 	    }
+     
       
-      public List<User> UserList(){
-	    	
-	    	return userDao.UserList();
-	    }
       public List<Address> AddressList(String userId){
     	  return userDao.AddressList(userId);
       }

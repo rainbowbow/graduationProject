@@ -115,10 +115,9 @@ public class ShopCardController {
 		
 		@RequestMapping("ShopCardController/delShopCard")
 		@ResponseBody
-		int delShopCard(Model model,HttpServletRequest request){	
+		int delShopCard(HttpServletRequest request){	
 			
 			String shopCardIdMore = request.getParameter("shopCardId");
-			System.out.println("kkkkkkkkkk====>"+shopCardIdMore);
 			return shopCardService.DelShopCard(shopCardIdMore);
 		}
 		

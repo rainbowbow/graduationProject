@@ -103,7 +103,8 @@
               align: 'center',
               formatter:function(value,row,index){ 
             	  var d;
-            	  if(${user.getType()}=='0'){
+            	  var ut=${user.getType()};
+            	  if(ut=='0'){
             		 d = '<a href="#"   onclick="downShop(\''
   						+ row.productId
   						+ '\')">下架</a> ';
