@@ -47,8 +47,7 @@ public class ProductController {
 			}else{
 				num=1000;
 			}
-			System.out.println(num+"\nnum");
-			String productName = request.getParameter("productName");
+ 			String productName = request.getParameter("productName");
 			String startMoney = request.getParameter("startMoney");
 			String endMoney = request.getParameter("endMoney");
 			System.out.println(productName+"startMoney:"+startMoney+"endMoney"+endMoney);
@@ -62,12 +61,10 @@ public class ProductController {
 		public List<Product> RepertoryList(HttpServletRequest request){
 			String productName = request.getParameter("productName");
 			String type = request.getParameter("type");
-			System.out.println(productName+"bbbbbbb"+type); 			
- 			List<Product> repertoryList=new ArrayList<Product>();
+  			List<Product> repertoryList=new ArrayList<Product>();
  			repertoryList=productService.RepertoryList(productName,type);
 			
- 			System.out.println(repertoryList.get(0).getImgUrl()+"\n\nooo\n"); 
- 			return repertoryList;
+  			return repertoryList;
 		}
 		@RequestMapping("ProductController/addProduct")
 		@ResponseBody

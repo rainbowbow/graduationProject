@@ -1,7 +1,9 @@
 package com.rainbow.controller;
 
+import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -11,7 +13,9 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.rainbow.beans.Address;
@@ -96,8 +100,6 @@ public class UserController {
 		@ResponseBody
 		int updateUser(User user){
 			
- 			 
-			System.out.println("name"+user.getSex());
 		    int updateId= userService.updateUser(user);
         	return updateId;
 		}
@@ -125,9 +127,9 @@ public class UserController {
 		} 
 		@RequestMapping("UserController/addAddress")
 		@ResponseBody
-		public int addAddresslist(HttpSession session,HttpServletRequest request,Address addressBean) throws UnsupportedEncodingException{
+		public int addAddresslist(HttpServletRequest request,Address addressBean) throws UnsupportedEncodingException{
  
-			User user=(User) session.getAttribute("user");
+			User user=(User)request.getSession().getAttribute("user");
 			String userId=user.getUserId();
 
 			addressBean.setUserId(userId);
@@ -150,7 +152,7 @@ public class UserController {
 		
 		@RequestMapping("UserController/delAddress")
 		@ResponseBody
-		int delProduct(Model model,HttpServletRequest request){	
+		int delProduct(HttpServletRequest request){	
 			
 			String addressId = request.getParameter("addressId");
 			return userService.delAddress(addressId);
@@ -159,11 +161,10 @@ public class UserController {
 		
 		@RequestMapping("UserController/defaultAddress")
 		@ResponseBody
-		int defaultAddress(HttpServletRequest request,HttpSession session){
+		int defaultAddress(HttpServletRequest request){
 			
 			String addressId = request.getParameter("addressId");
-
-			User user=(User) session.getAttribute("user");
+			User user=(User)request.getSession().getAttribute("user");
 			List<Address> addressList=new ArrayList<Address>();
  			addressList=userService.AddressList(user.getUserId());
  			userService.CancelDefaultAddress(addressList);
@@ -171,4 +172,35 @@ public class UserController {
    			return defaultAddressCount;
 		}
 		 
+		
+		
+		@RequestMapping("changePicture")
+ 		    public String changePicture(@RequestParam(value = "file", required = false) MultipartFile file, HttpServletRequest request,HttpSession session) {
+
+		        System.out.println("开始");
+				User user=(User)request.getSession().getAttribute("user");
+
+		        String path = "F:\\headPicture\\"+user.getUserName();
+		        String fileName = new Date().getTime()+file.getOriginalFilename();
+		        System.out.println("path"+path);
+		        System.out.println("fileName"+fileName);
+		        user.setImgUrl(fileName);
+		        File targetFile = new File(path, fileName);
+		        if(!targetFile.exists()){
+		        	System.out.print(!targetFile.exists());
+		            targetFile.mkdirs();
+		        }
+ 
+		        //保存
+		        try {
+		            file.transferTo(targetFile);
+		            userService.updateUser(user);
+		        } catch (Exception e) {
+		            e.printStackTrace();
+		        }
+		        
+		        user.setImgUrl("/img/"+user.getUserName()+"/"+user.getImgUrl());
+		        session.setAttribute("user", user);
+		        return user.getUserCode();
+		    }
   }

@@ -51,23 +51,24 @@ public class ProductRecordController {
 	  
 		@RequestMapping("ProductRecordController/productRecordList")
 		@ResponseBody
-		public List<ProductRecord> ShopProductRecord(HttpServletRequest request,HttpSession session){
+		public List<ProductRecord> ShopProductRecord(HttpServletRequest request){
 			
+			
+			User user=(User)request.getSession().getAttribute("user");
+
 			String orderTime = request.getParameter("orderTime");
-			User user=(User) session.getAttribute("user");
 			int userId=Integer.parseInt(user.getUserId());
 			String productName = request.getParameter("productName");
 			String userName = request.getParameter("userName");
-			System.out.println(productName+"bbbbaabbb"+orderTime+"\naaaaaa"); 			
- 			List<ProductRecord> recordList=new ArrayList<ProductRecord>();
+  			List<ProductRecord> recordList=new ArrayList<ProductRecord>();
  			recordList=productRecordService.RecordList(productName,userName,userId,orderTime);
 			return recordList;
 		}
 		@RequestMapping("ProductRecordController/delProductRecord")
 		@ResponseBody
-		int delProductRecord(HttpServletRequest request,HttpSession session){	
+		int delProductRecord(HttpServletRequest request){	
 			
-			User user=(User) session.getAttribute("user");
+			User user=(User)request.getSession().getAttribute("user");
 			String userId=user.getUserId();
 			String orderIdMore = request.getParameter("orderId");
 			int num;			
@@ -82,9 +83,9 @@ public class ProductRecordController {
 		
 		@RequestMapping("ProductRecordController/addProductRecord")
 		@ResponseBody
-		int addProductRecord(HttpServletRequest request ,HttpSession session){
+		int addProductRecord(HttpServletRequest request){
 			
-			User user=(User) session.getAttribute("user");
+			User user=(User)request.getSession().getAttribute("user");
 			String userId=user.getUserId();
 			String shopCardIdMore =request.getParameter("shopCardId");
 			String addressId =request.getParameter("addressId");

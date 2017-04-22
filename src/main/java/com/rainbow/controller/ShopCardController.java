@@ -56,22 +56,19 @@ public class ShopCardController {
 		
 		@RequestMapping("ShopCardController/shopCardListSelective")
 		@ResponseBody
-		public List<ShopCard> shopCardListSelective(HttpSession session,HttpServletRequest request){
+		public List<ShopCard> shopCardListSelective(HttpServletRequest request){
 			
-			User user=(User) session.getAttribute("user");
+			User user=(User)request.getSession().getAttribute("user");
 			String userId=user.getUserId();
 			String shopCardIdMore =request.getParameter("shopCardIdMore");
 			
 			String[] shopCardId = shopCardIdMore.split(",");
-			System.out.println(shopCardIdMore.toString());
-            int num=0;
+             int num=0;
 			
 			List<ShopCard> shopCardList=new ArrayList<ShopCard>();
 			ShopCard shopCard;
-			System.out.println(shopCardId+"hhhh");
   			    for(int i=0;i<shopCardId.length;i++){
   			    	shopCard= shopCardService.shopcardById(Integer.parseInt(shopCardId[i]));
-  			    	System.out.println("i:"+i+"==>"+shopCard);
   			    	shopCardList.add(shopCard);
   			    	num++;
   			    }
@@ -83,15 +80,13 @@ public class ShopCardController {
 		 
 		@RequestMapping("ShopCardController/addShopCard")
 		@ResponseBody
-		 public int addShopCard(HttpServletRequest request,HttpSession session){
+		 public int addShopCard(HttpServletRequest request){
 			   
-			    User user=(User) session.getAttribute("user");
+			    User user=(User)request.getSession().getAttribute("user");
 				String userId=user.getUserId();
  				int productId =Integer.parseInt(request.getParameter("productId"));
 				int count =Integer.parseInt(request.getParameter("count"));
 		    	int num=shopCardService.isShopCard(userId, productId);
-		    	System.out.println(userId+"\nproductId"+productId+"\ncount"+count);
-		    	System.out.println("\n"+"num: "+num);
 				if(num>0){
 					return shopCardService.saveShopCard(productId, userId, count);
 		    	}else{

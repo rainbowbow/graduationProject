@@ -34,13 +34,13 @@ width:150px;
 			</div>
 	
 	 <div id="changePictureDiv">
-	     <form id="changePictureForm"  method="post"  enctype="multipart/form-data" >
+	     <form id="changePictureForm"  action="changePicture" method="post"  enctype="multipart/form-data" >
             <div >
- 					<input id="imgInput"  type="file"  onchange="previewImage(this,'divPreviewId');" />
+ 					<input id="imgInput" name="file" type="file"  onchange="previewImage(this,'divPreviewId');" />
 		    </div>
 	 
  			<div>
-				<button type="button" onclick="changePicture()" class="btn btn-primary">
+				<button type="submit"   class="btn btn-primary">
 	              <i class="icon-upload-alt"  ></i>保存
 				</button>
 				&nbsp;&nbsp;
@@ -50,7 +50,30 @@ width:150px;
 			</div>
  		</form>
 	</div> 		
+	
+	 <script >
 	 
+	 function showChangePicture(){
+			document.getElementById("divPreviewId").src="";
+			document.getElementById("imgInput").value="";
+			document.getElementById("newPictureDiv").style.display="none";
+			$('#pictureModal').modal('show');
+		}
+	 function previewImage(fileObj, divPreviewId) {
+ 	    var element = document.getElementById(divPreviewId);
+	    if (fileObj.files) {//兼容chrome、火狐7+、360浏览器5.5+等，应该也兼容ie10，HTML5实现预览
+	        var reader = new FileReader();
+	        reader.onload = function (e) {
+ 	            element.src = e.target.result;
+	        }
+	        reader.readAsDataURL(fileObj.files[0]);
+	       document.getElementById("newPictureDiv").style.display="";
+	    }
+
+	}
+	 
+	
+    </script>
 	 
 </body>
 </html>

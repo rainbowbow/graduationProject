@@ -30,6 +30,7 @@
 		select 
 			user_id userId, 
 			user_name userName,
+			user_code userCode,
 			img_url imgUrl,
 			sex sex,
 			age age, 
@@ -44,6 +45,7 @@
 		select 
 			user_id userId, 
 			user_name userName,
+			user_code userCode,
 			img_url imgUrl,
 			password password,
 			sex sex,
@@ -59,6 +61,7 @@
 		select 
 			user_id userId, 
 			user_name userName,
+			user_code userCode,
 			sex sex,
 			age age, 
 			phone phone,
@@ -76,6 +79,7 @@
 		select 
 			user_id userId, 
 			user_name userName,
+			user_code userCode,
 			img_url imgUrl,
 			sex sex,
 			age age, 
@@ -99,6 +103,9 @@
 	
 	<update id="updateUser"  parameterType="User"  >
 		update user set user_name=#{userName},sex=#{sex},age=#{age},phone=#{phone},e_mail=#{eMail},address=#{address}
+		<if test="imgUrl != null and imgUrl != ''">  
+	            ,img_url=#{imgUrl}
+	     </if> 
 		where user_id=#{userId}
 	</update>
 	

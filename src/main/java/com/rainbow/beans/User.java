@@ -12,6 +12,7 @@ public class User implements Serializable {
     private String userId;
     private String password;
     private String userName;
+    private String userCode;
     private String imgUrl;
     private String sex;
     private String phone;
@@ -38,6 +39,12 @@ public class User implements Serializable {
 	}
 	public void setUserName(String userName) {
 		this.userName = userName;
+	}
+	public String getUserCode() {
+		return userCode;
+	}
+	public void setUserCode(String userCode) {
+		this.userCode = userCode;
 	}
 	public String getSex() {
 		return sex;

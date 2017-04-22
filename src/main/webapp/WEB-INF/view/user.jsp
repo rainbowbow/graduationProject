@@ -79,17 +79,7 @@
 	
     </div> <!-- /content -->
     
-    <!-- detail Modal start -->
-	<div class="modal hide fade" id="pictureModal" tabindex="-1" role="dialog">
-			<div class="modal-header">
-				<button class="close" type="button" data-dismiss="modal" >×</button>
-				<h3>换头像</h3>
-			</div>
- 	   <div class="modal-body">
-			<jsp:include page="user/changePicture.jsp"></jsp:include>
-		</div>
-	</div>
-	<!-- detail Modal end -->
+   
 	
 	 <!-- detail Modal start -->
 	<div class="modal hide fade" id="detailModal" tabindex="-1" role="dialog">
@@ -276,27 +266,6 @@
 	    	}
 	    
 	 
-	function showChangePicture(){
-		document.getElementById("divPreviewId").src="";
-		document.getElementById("imgInput").value="";
-		document.getElementById("newPictureDiv").style.display="none";
-		$('#pictureModal').modal('show');
-	}
-
-		
-	function previewImage(fileObj, divPreviewId) {
- 	    var element = document.getElementById(divPreviewId);
-	    if (fileObj.files) {//兼容chrome、火狐7+、360浏览器5.5+等，应该也兼容ie10，HTML5实现预览
-	        var reader = new FileReader();
-	        reader.onload = function (e) {
- 	            element.src = e.target.result;
-	        }
-	        reader.readAsDataURL(fileObj.files[0]);
-	       document.getElementById("newPictureDiv").style.display="";
-	    }
-
-	}
-	
     </script>
 	</body>
 </html>
