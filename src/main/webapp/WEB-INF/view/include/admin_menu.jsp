@@ -24,7 +24,7 @@
 					<li id="product-active">
 						<a href="admin" targe>
 							<i class="icon-home"></i>
-							 产品管理			
+							 在售产品			
 						</a>
 					</li>
 					

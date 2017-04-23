@@ -34,7 +34,7 @@ width:150px;
 			</div>
 	
 	 <div id="changePictureDiv">
-	     <form id="changePictureForm"  action="changePicture" method="post"  enctype="multipart/form-data" >
+	     <form id="changePictureForm"  action="changeUserPicture" method="post"  enctype="multipart/form-data" >
             <div >
  					<input id="imgInput" name="file" type="file"  onchange="previewImage(this,'divPreviewId');" />
 		    </div>
@@ -60,17 +60,18 @@ width:150px;
 			$('#pictureModal').modal('show');
 		}
 	 function previewImage(fileObj, divPreviewId) {
- 	    var element = document.getElementById(divPreviewId);
-	    if (fileObj.files) {//兼容chrome、火狐7+、360浏览器5.5+等，应该也兼容ie10，HTML5实现预览
-	        var reader = new FileReader();
-	        reader.onload = function (e) {
- 	            element.src = e.target.result;
-	        }
-	        reader.readAsDataURL(fileObj.files[0]);
-	       document.getElementById("newPictureDiv").style.display="";
-	    }
+	 	    var element = document.getElementById(divPreviewId);
+		    if (fileObj.files) {//兼容chrome、火狐7+、360浏览器5.5+等，应该也兼容ie10，HTML5实现预览
+		        var reader = new FileReader();
+		        reader.onload = function (e) {
+	 	            element.src = e.target.result;
+		        }
+		        reader.readAsDataURL(fileObj.files[0]);
+		       document.getElementById("newPictureDiv").style.display="";
+		       document.getElementById("newProductPictureDiv").style.display="";
+		    }
 
-	}
+		}
 	 
 	
     </script>

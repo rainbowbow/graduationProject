@@ -84,6 +84,10 @@
 
 	</div>
 	<!-- /content -->
+	
+	
+	
+	
 
 	<!-- 新增 Modal start -->
 	<div class="modal hide fade" id="addModal" tabindex="-1" role="dialog">
@@ -145,15 +149,14 @@ function() {
 				    return '无符合条件的记录';
 				  },
 			columns : [{
-			                checkbox: true
-			            },{  
-		                title: '序号',
-		                formatter: function (value, row, index) {  
-		                    return index+1;  
-		                },
-		                width:50,
-		                align:'center' 
-                   },
+						field: 'imgUrl',
+						title:"",
+						formatter: function (value, row, index) {  
+			                return '<img width="50" src="/img/productPicture/'+value+'">';  
+			            },
+			            width:60,
+			            align:'center' 
+			        },
 					{
 						field : 'productId',
 						title : '序号'
@@ -187,16 +190,17 @@ function() {
 						field : 'doSomething',
 						align : 'center',
 						formatter : function(value, row,index) {
-                                                       var u;
-                                                       if(row.type=="0"){
-                                                       	u = '<a href="#" '+'style="color:blue"'+'onclick="upShop(\''
-									+ row.productId
-									+ '\')">上架</a> ';
-                                                       }else{
-                                                       	u = '<a href="#"  onclick="downShop(\''
-									+ row.productId
-									+ '\')">下架</a> ';
-                                                       }
+						 
+                            var u;
+                            if(row.type=="0"){
+                            	u = '<a href="#" '+'style="color:blue"'+'onclick="upShop(\''
+								+ row.productId
+								+ '\')">上架</a> ';
+                            }else{
+                                u = '<a href="#"  onclick="downShop(\''
+								+ row.productId
+								+ '\')">下架</a> ';
+                                                      }
 						
 							var e = '<a href="#" onclick="editInfo(\''
 									+ row.productId+'\'\,\''
@@ -205,10 +209,11 @@ function() {
 									+ row.count+
 							'\')">编辑</a> ';
 							
+							
 								var d = '<a href="#"  onclick="del(\''
 									+ row.productId
 									+ '\')">删除</a> ';
-							return u +e
+							return  u +e
 									+ d;
 						}
 					} ]
@@ -371,6 +376,7 @@ function() {
 			    }  */
 			    $('#editModal').modal('show');  
 			}  
+		   
 	</script>
 </body>
 </html>

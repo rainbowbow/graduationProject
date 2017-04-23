@@ -1,15 +1,20 @@
 package com.rainbow.controller;
 
- import java.util.ArrayList;
+ import java.io.File;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.rainbow.beans.Product;
@@ -101,6 +106,40 @@ public class ProductController {
    			int upShopId=productService.upOrDownShopProduct(productId,type);
    			return upShopId;
 		}
+		
+		@RequestMapping("changeProductPicture")
+		    public String changeProductPicture(@RequestParam(value = "file", required = false) MultipartFile file, HttpServletRequest request,HttpSession session) {
+
+	        System.out.println("开始");
+			int productId = Integer.parseInt(request.getParameter("productId"));
+			
+			Product product=new Product();
+			product.setProductId(productId);
+			
+	        String path = "F:\\productPicture\\";
+	        String fileName = new Date().getTime()+file.getOriginalFilename();
+	        
+	        product.setImgUrl(fileName);
+	        System.out.println("path"+path);
+	        System.out.println("fileName"+fileName+"\n\n\nproductId"+productId);
+ 	        File targetFile = new File(path, fileName);
+	        if(!targetFile.exists()){
+	        	System.out.print(!targetFile.exists());
+	            targetFile.mkdirs();
+	        }
+
+	        //保存
+	        try {
+	        	//向新名字的文件传输照片过去
+	           file.transferTo(targetFile);
+	           productService.UpdateProduct(product);
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	        
+ 	        //session.setAttribute("user", user);
+	        return "admin";
+	    }
 		
 	 
   }

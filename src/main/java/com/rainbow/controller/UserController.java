@@ -174,8 +174,8 @@ public class UserController {
 		 
 		
 		
-		@RequestMapping("changePicture")
- 		    public String changePicture(@RequestParam(value = "file", required = false) MultipartFile file, HttpServletRequest request,HttpSession session) {
+		@RequestMapping("changeUserPicture")
+ 		    public String changeUserPicture(@RequestParam(value = "file", required = false) MultipartFile file, HttpServletRequest request,HttpSession session) {
 
 		        System.out.println("开始");
 				User user=(User)request.getSession().getAttribute("user");
@@ -199,7 +199,7 @@ public class UserController {
 		            e.printStackTrace();
 		        }
 		        
-		        user.setImgUrl("/img/"+user.getUserName()+"/"+user.getImgUrl());
+		        user.setImgUrl("/img/headPicture/"+user.getUserName()+"/"+user.getImgUrl());
 		        session.setAttribute("user", user);
 		        return user.getUserCode();
 		    }

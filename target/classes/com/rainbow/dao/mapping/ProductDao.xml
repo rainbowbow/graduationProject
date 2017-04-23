@@ -87,7 +87,14 @@
 	
 	
 	<update id="UpdateProduct"  >
-		update product set product_name=#{productName},price=#{price},count=#{count},detail=#{detail} where product_id=#{productId}
+		update product set 
+		<if test="imgUrl == null or imgUrl == ''">  
+	          product_name=#{productName},price=#{price},count=#{count},detail=#{detail} 
+	     </if>
+	     <if test="imgUrl != null and imgUrl != ''">  
+	            img_url=#{imgUrl}
+	     </if> 
+	     where product_id=#{productId}
 	</update>
 	
 	

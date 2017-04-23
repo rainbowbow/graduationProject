@@ -27,7 +27,7 @@ public class LoginController {
 					
 					User user=userService.login(userName,password,type);
  					if(user!=null){
- 						user.setImgUrl("/img/"+user.getUserName()+"/"+user.getImgUrl());
+ 						user.setImgUrl("/img/headPicture/"+user.getUserName()+"/"+user.getImgUrl());
 						session.setAttribute("user", user);
 					    if(type.equals("0")){
 					    	return "admin";

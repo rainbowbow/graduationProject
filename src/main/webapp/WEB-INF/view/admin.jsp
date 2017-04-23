@@ -44,6 +44,21 @@
     </div> <!-- /content -->
     
     
+    
+     
+	 <!-- picture Modal start -->
+	<div class="modal hide fade" id="productPictureModal" tabindex="-1" role="dialog">
+			<div class="modal-header">
+				<button class="close" type="button" data-dismiss="modal" >×</button>
+				<h3>更换图片</h3>
+			</div>
+ 	   <div class="modal-body">
+			<jsp:include page="product/changeProductPicture.jsp"></jsp:include>
+		</div>
+	</div>
+	<!-- picture Modal end -->
+	
+	
 	
    <!-- 新增 Modal start -->
 	<div class="modal hide fade" id="addModal" tabindex="-1" role="dialog">
@@ -92,7 +107,7 @@
 			field: 'imgUrl',
 			title:"",
 			formatter: function (value, row, index) {  
-                return '<img width="50" src="${pageContext.request.contextPath}/resources/img/'+value+'">';  
+                return '<img width="50"  src="/img/productPicture/'+value+'">';    
             },
             width:60,
             align:'center' 
@@ -114,10 +129,16 @@
               field: 'doSomething',
               align: 'center',
               formatter:function(value,row,index){  
+            	  
+            	  var p = '<a href="#" onclick="changeProductPicture(\''
+						+ row.productId+'\'\,\''
+						+ row.productName+'\'\,\''
+						+ row.imgUrl+
+		'\')">更换图片</a> ';
             	  var d = '<a href="#"  onclick="downShop(\''
 						+ row.productId
 						+ '\')">下架</a> ';
-				  return d;  
+				  return p+d;  
             }}
       ]
       });
