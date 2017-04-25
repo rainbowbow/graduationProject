@@ -74,7 +74,7 @@ public class ProductController {
 		@RequestMapping("ProductController/addProduct")
 		@ResponseBody
 		int addProduct(Product product){
-			int addId=productService.AddProduct(product);
+ 			int addId=productService.AddProduct(product);
  			return addId;
 		}
 		
@@ -111,7 +111,7 @@ public class ProductController {
 		    public String changeProductPicture(@RequestParam(value = "file", required = false) MultipartFile file, HttpServletRequest request,HttpSession session) {
 
 	        System.out.println("开始");
-			int productId = Integer.parseInt(request.getParameter("productId"));
+			String productId = request.getParameter("productId");
 			
 			Product product=new Product();
 			product.setProductId(productId);

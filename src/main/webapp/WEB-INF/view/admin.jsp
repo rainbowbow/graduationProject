@@ -164,20 +164,15 @@
 			},
 			success : function(data) {
 				if (data > 0) {
-					alert('操作成功:' + data);
-
-					// document.location.href='world_system_notice.php'
-					location.reload();
+					alert('操作成功!');
+                     location.reload();
 				} else {
-					alert('操作失败' + data);
+					alert('操作失败!');
 				}
 			},
 			error : function() {
 				alert('请求出错');
-			},
-			complete : function() {
-				// $('#tips').hide();
-			}
+			} 
 		});
 
 		return false;

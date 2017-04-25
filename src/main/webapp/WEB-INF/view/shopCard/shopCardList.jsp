@@ -151,7 +151,7 @@ $(document).ready(function() {
 									field: 'imgUrl',
 									title:"",
 									formatter: function (value, row, index) {  
-					                    return '<img width="50" src="${pageContext.request.contextPath}/resources/img/'+value+'">';  
+					                    return '<img width="50" src="/img/productPicture/'+value+'">';  
 					                },
 					                width:60,
 					                align:'center' 
@@ -329,7 +329,7 @@ function del(id) {
 function photo(imgUrl) {  
 	//向模态框中传值  
 	$("#divImg").empty();
-    var img='<img width="400"  src="${pageContext.request.contextPath}/resources/img/'+imgUrl+'">'
+    var img='<img width="400"  src="/img/productPicture/'+imgUrl+'">'
     $('#divImg').append(img);
     $('#photoModal').modal('show');  
     

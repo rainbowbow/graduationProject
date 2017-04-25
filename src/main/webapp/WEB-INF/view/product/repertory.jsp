@@ -149,6 +149,8 @@ function() {
 				    return '无符合条件的记录';
 				  },
 			columns : [{
+                checkbox: true
+            },{
 						field: 'imgUrl',
 						title:"",
 						formatter: function (value, row, index) {  

@@ -29,7 +29,7 @@
 					</li>
 					
 					<li id="order-active">
-						<a href="product_record">
+						<a href="productRecord">
 							<i class="icon-pushpin"></i>
 							订单管理	
 						</a>

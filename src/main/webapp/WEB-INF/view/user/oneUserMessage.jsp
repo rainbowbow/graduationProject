@@ -153,10 +153,10 @@
 	        
 	        success : function(data) {
 				if (data > 0) {
-					alert('保存成功:' + data);
+					alert('保存成功!');
 					location.reload();
 				} else {
-					alert('保存失败' + data);
+					alert('保存失败!');
 				}
 			},
 	        error : function() {

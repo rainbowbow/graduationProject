@@ -42,9 +42,9 @@ public class ProductRecordController {
 	  @Resource
 	  ShopCardService shopCardService;
 	  
-	  @RequestMapping("product_record")
+	  @RequestMapping("productRecord")
 		public ModelAndView product(){
-			ModelAndView model = new ModelAndView("productRecord/product_record");
+			ModelAndView model = new ModelAndView("productRecord/productRecord");
 			return model;
 		}
 	  
@@ -71,8 +71,9 @@ public class ProductRecordController {
 			User user=(User)request.getSession().getAttribute("user");
 			String userId=user.getUserId();
 			String orderIdMore = request.getParameter("orderId");
+			System.out.println("userId==>"+userId);
 			int num;			
-			if(userId=="5"){
+			if(userId=="1"||userId.equals("1")){
 				num=productRecordService.DelProduct(orderIdMore);
 			}else{
 				num=productRecordService.UserDelProduct(orderIdMore);

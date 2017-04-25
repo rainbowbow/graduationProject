@@ -60,19 +60,16 @@
 	        
 	        success : function(data) {
 				if (data > 0) {
-					alert('操作成功:' + data);
+					alert('操作成功!');
 					location.reload();
 				} else {
-					alert('操作失败' + data);
+					alert('操作失败!');
 				}
 			},
 	        error : function() {
 				alert('请求出错');
 				location.reload();
-			},
-			complete : function() {
-				// $('#tips').hide();
-			}
+			} 
 	    });  
 	    return false;
 	}  

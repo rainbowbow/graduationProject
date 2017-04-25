@@ -8,7 +8,7 @@ import java.io.Serializable;
  */
 public class Product implements Serializable {
     
-	private int productId;
+	private String productId;
     private String productName;
     private String price;
     private String count;
@@ -17,7 +17,7 @@ public class Product implements Serializable {
     private String type;//0:在售；1：库存（未上架+下架）
     private String total;
 	 
-	public int getProductId() {
+	public String getProductId() {
 		return productId;
 	}
 	public String getTotal() {
@@ -26,7 +26,7 @@ public class Product implements Serializable {
 	public void setTotal(String total) {
 		this.total = total;
 	}
-	public void setProductId(int productId) {
+	public void setProductId(String productId) {
 		this.productId = productId;
 	}
 	public String getProductName() {

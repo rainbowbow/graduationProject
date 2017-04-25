@@ -43,10 +43,10 @@
 	        
 	        success : function(data) {
 				if (data > 0) {
-					alert('操作成功:' + data);
+					alert('操作成功!');
 					location.reload();
 				} else {
-					alert('操作失败' + data);
+					alert('操作失败!');
 				}
 			},
 	        error : function() {

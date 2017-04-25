@@ -172,7 +172,7 @@
 	        	  detail(productId,productName,price,count,detailMessage,imgUrl);
 	          });
 	          var img = document.createElement("img");
-	          img.src="${pageContext.request.contextPath}/resources/img/"+imgUrl;
+	          img.src="/img/productPicture/"+imgUrl;
 	           var spanName=document.createElement('span');
 	          var spanPrice=document.createElement('span');
 	          spanName.innerHTML="商品："+productName+"<br/>";
