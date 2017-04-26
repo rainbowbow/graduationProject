@@ -98,9 +98,13 @@ public class UserController {
 		} 
 		@RequestMapping("UserController/updateOneUserMessage")
 		@ResponseBody
-		int updateUser(User user){
+		int updateUser(User user,HttpSession session){
 			
 		    int updateId= userService.updateUser(user);
+		    
+		    User user1=(User) session.getAttribute("user");
+		    user1.setUserName(user.getUserName());
+	        session.setAttribute("user", user1);
         	return updateId;
 		}
 		 

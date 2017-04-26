@@ -38,7 +38,7 @@
 					<li id="user-active">
 						<a href="userMessage">
 							<i class="icon-th-list"></i>
-							 客户管理		
+							 用户管理		
 						</a>
 					</li>
 					

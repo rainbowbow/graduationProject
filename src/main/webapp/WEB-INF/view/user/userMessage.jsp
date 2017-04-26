@@ -62,11 +62,7 @@
 									
 								</div>
 							</div>
-
-							<div id="toolbar" class="btn-group">
-								<input type="button" class="btn btn-primary" value="新增"
-									data-toggle="modal" data-target="#add" href="user" />
-							</div>
+ 
 							<div class="pre-scrollable">
 								<table  class="table table-bordered"id="messageTable">
 								</table>

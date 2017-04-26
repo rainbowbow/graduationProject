@@ -96,7 +96,7 @@
 	<div class="modal hide fade" id="recordDetail" tabindex="-1" role="dialog">
 		<div class="modal-header">
 			<button class="close" type="button" data-dismiss="modal">×</button>
-			<h3>用户详情</h3>
+			<h3>用户地址详情</h3>
 		</div>
 		<div class="modal-body">
 			<jsp:include page="recordDetail.jsp"></jsp:include>

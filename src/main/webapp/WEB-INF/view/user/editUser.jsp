@@ -30,8 +30,8 @@
 						     <label class="control-label" for = "sex">性别</label> 
 						     <div class="controls">
 						     <select name="sex" id = "sexEdit" style="height: 25px;width:210px;"> 
-						      <option value="0" >女生0</option> 
-						      <option value="1" >男生1</option> 
+						      <option value="0" >女生</option> 
+						      <option value="1" >男生</option> 
 						     </select> 
 						     </div>
 						 </div> 
@@ -69,7 +69,7 @@
 						 <br>
 						 <div class="form-actions" style="padding-left: 170px;">
 
-			<button type="button" onclick="updateProduct()" class="btn btn-primary">
+			<button type="submit" onclick="updateProduct();return false;" class="btn btn-primary">
 				<i class="icon-ok icon-white"></i>保存
 			</button>
 			&nbsp;&nbsp;
