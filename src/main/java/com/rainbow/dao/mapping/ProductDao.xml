@@ -81,8 +81,8 @@
 	
 	 
 	<insert id="AddProduct" >
-		insert into product(product_name,price,count,detail,type) 
-		values(#{productName},#{price},#{count},#{detail},"0")
+		insert into product(product_name,price,count,detail,type,img_url) 
+		values(#{productName},#{price},#{count},#{detail},"0","product.png")
 	</insert>
 	
 	

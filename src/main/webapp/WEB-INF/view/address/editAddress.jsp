@@ -11,22 +11,24 @@
 <title></title>
 </head>
 <body style="padding: 20px;">
-	<form id="updateForm"  method="post" class="form-horizontal"  novalidate="novalidate">
+	<form id="updateForm"  method="post"   class="form-horizontal">
 		 
 				<input style="display:none"  type="text" name="addressId" id="editAddressId" >
 			 
-		<div class="control-group">
+		<div class="form-group">
 			<label class="control-label">收件人:</label>
 			<div class="controls">
-				<input   type="text" name="addressName" id="editAddressName" >
+				<input   type="text" name="addressName" id="editAddressName" class="form-control" >
 			</div>
 		</div>
-		<div class="control-group">
+		<br>
+		<div class="form-group">
 			<label class="control-label">联系电话:</label>
 			<div class="controls">
-				<input   type="text" name="addressPhone" id="editAddressPhone" onkeyup='this.value=this.value.replace(/\D/gi,"")'>
+				<input  class="form-control" type="text" name="addressPhone" id="editAddressPhone" onkeyup='this.value=this.value.replace(/\D/gi,"")'>
 			</div>
 		</div>
+		<br>
 		<div   class="control-group" data-toggle="distpicker">
 		<label class="control-label">地址:</label>
 		<div class="controls" >
@@ -45,12 +47,11 @@
 		
 		 
 		<div class="form-actions" style="padding-left: 170px;">
-
-			<button type="button" onclick="updateAddress()" class="btn btn-primary">
+ 			<button type="button" onclick="updateAddress()" class="btn btn-primary">
 				<i class="icon-ok icon-white"></i>保存
 			</button>
 			&nbsp;&nbsp;
-			<button type="button" onclick="$('#editModal').modal('hide');" class="btn btn-primary cancelBtn" >
+			<button type="button" onclick="closeM()" class="btn btn-primary cancelBtn" >
 				<i class="icon-remove icon-white"></i>取消
 			</button>
 		</div>

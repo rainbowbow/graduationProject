@@ -82,6 +82,21 @@
 		<!-- /container -->
 
 	</div>
+	
+	
+	<div class="modal hide fade" id="userAddressModal" tabindex="-1" role="dialog">
+		<div class="modal-header">
+			<button class="close" type="button"  data-dismiss="modal">×</button>
+			<h3>地址详情</h3>
+		</div>
+		<div class="modal-body">
+			<jsp:include page="userAddress.jsp"></jsp:include>
+		</div>
+	</div>
+	
+	
+	
+	
   <!-- detail Modal start -->
 	<div class="modal hide fade" id="userDetail" tabindex="-1" role="dialog">
 		<div class="modal-header">
@@ -215,7 +230,11 @@
 										+ row.phone+'\'\,\''
 										+ row.address+'\'\,\''
 										+ row.eMail+
-								'\')">详情</a> ';
+								'\')">用户详情</a> ';
+								var a = '<a href="#" onclick="address(\''
+									+ row.userId+'\'\,\''
+									+ row.userName+
+							'\')">地址详情</a> ';
 								
 									var e = '<a href="#" onclick="edit(\''
 										+ row.userId+'\'\,\''
@@ -242,7 +261,7 @@
 										return d;
 									}
 
-									return d + t + e;
+									return d + a +t + e;
 								}
 							} ]
 			});
@@ -250,6 +269,60 @@
 		$('#messageTable').bootstrapTable('hideColumn', 'phone');
 		$('#messageTable').bootstrapTable('hideColumn', 'address');
 		$('#messageTable').bootstrapTable('hideColumn', 'eMail');
+		
+		 var space="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+			 $('#updateForm').bootstrapValidator({
+			    	fields: {
+			    		userName: {
+			          		message: '用户名验证失败',
+			          		validators: {
+			            		notEmpty: {
+			              			message: space+'用户名不能为空'
+			            		},
+			            		 regexp: {
+			                            regexp: /^[\u4e00-\u9fa5_a-zA-Z0-9]+$/,
+			                            message: space+'用户名只能包含中英文和数字'
+			                        },
+			                    stringLength: {
+			                         min: 2,
+			                         max: 15,
+			                         message: space+'用户名长度必须在2到20之间'
+			                     },
+			          		}   
+			        	},phone:{
+			        		validators: {
+			            		notEmpty: {
+			              			message: space+'电话不能为空'
+			            		}, 
+			            		stringLength: {
+			                         min: 11,
+			                         max: 11,
+			                         message: space+'请输入11位手机号码'
+			                     } ,
+			            	}
+			        	}, age:{
+			        		validators: {
+			            		stringLength: {
+			                         min: 1,
+			                         max: 3,
+			                         message: space+'请输入正确的年龄'
+			                     } ,
+			            	}
+			        	}, eMail:{
+			        		validators: {
+			            		notEmpty: {
+			              			message: space+'邮箱不能为空'
+			            		}, 
+			            		 regexp: {
+			                            regexp: /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/,
+			                            message: space+'邮箱输入有误'
+			                        },
+			            	}
+			        	}, 
+			      	}
+			    }); 
+		 
+		 
 	});
 
 			function editType(id,t) {
@@ -262,8 +335,7 @@
 					type='11';
 					message="撤销拉黑";
 				}
-				alert('t==>'+t);
-				alert('type==>'+type);
+				 
 				$.ajax({
 					url : "${ctx}" + "/UserController/editType",
 					data : {"userId" : id,"type" :type},
@@ -277,10 +349,10 @@
 					},
 					success : function(data) {
 						if (data > 0) {
-							alert('操作成功:' + data);
+							alert('操作成功!');
                             location.reload();
 						} else {
-							alert('操作失败' + data);
+							alert('操作失败!');
 						}
 					},
 					error : function() {
@@ -333,6 +405,46 @@
 			    	//alert(searchUrl);
  			    	$('#messageTable').bootstrapTable('refresh', {url: searchUrl});  
 			    	}
+			    
+	 function address(id,name){
+		 
+		 $("#addressUserId").val(id);
+		 $("#addressUserName").val(name);
+		 var addressPath = "${ctx}"+ "/UserController/addresslist?userId="+id;
+
+		//该用户的地址信息表
+			$('#userAddressTable').bootstrapTable({
+						url : addressPath,
+						dataType : "json",
+						singleSelect : true,
+						clickToSelect : true,
+						columns : [ {
+							field : 'addressId',
+							title : '序号'
+						},
+						{
+							field : 'addressName',
+							title : '收件人' ,
+							width:50,
+			                align:'center'
+						} ,
+						{
+							field : 'address',
+							title : '地址'
+						} ,
+						{
+							field : 'addressDetail',
+							title : '详细街道'
+						} ,
+						{
+							field : 'addressPhone',
+							title : '联系电话'
+						}  ]
+					});
+			$('#userAddressTable').bootstrapTable('hideColumn', 'addressId');
+ 			$('#userAddressModal').modal('show');
+		}
+	 
 		</script>
 </body>
 </html>

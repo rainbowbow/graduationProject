@@ -221,6 +221,117 @@ function() {
 					} ]
 		});
 	$('#productTable').bootstrapTable('hideColumn', 'productId');
+	
+	 var space="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+		 $('#updateForm').bootstrapValidator({
+		    	fields: {
+		    		productName: {
+		          		message: '验证失败',
+		          		validators: {
+		            		notEmpty: {
+		              			message: space+'产品名不能为空'
+		            		},
+		            		 regexp: {
+		                            regexp: /^[\u4e00-\u9fa5_a-zA-Z0-9]+$/,
+		                            message: space+'产品名只能包含中英文和数字'
+		                        },
+		                    stringLength: {
+		                         min: 2,
+		                         max: 15,
+		                         message: space+'用户名长度必须在2到20之间'
+		                     },
+		          		}   
+		        	},count:{
+		        		validators: {
+		            		notEmpty: {
+		              			message: space+'产品数量不能为空'
+		            		}, 
+		            		stringLength: {
+		                         min: 1,
+		                         max: 7,
+		                         message: space+'请输百万以内的数量'
+		                     } ,
+
+		            		 regexp: {
+		                            regexp: /^[0-9]*$/,
+		                            message: space+'请输入正确的数量'
+		                        },
+		            	}
+		        	}, price:{
+		        		validators: {
+		        			notEmpty: {
+		              			message: space+'产品价格不能为空'
+		            		},
+		            		stringLength: {
+		                         min: 1,
+		                         max: 7,
+		                         message: space+'请输入正确的价格'
+		                     } ,
+
+		            		 regexp: {
+		                            regexp: /^[0-9]+(.[0-9]{2})?$/,
+		                            message: space+'产品价格只能精确到分'
+		                        },
+		                     
+		            	}
+		        	} , 
+		      	}
+		    }); 
+	 
+	 $('#addForm').bootstrapValidator({
+	    	fields: {
+	    		productName: {
+	          		message: '验证失败',
+	          		validators: {
+	            		notEmpty: {
+	              			message: space+'产品名不能为空'
+	            		},
+	            		 regexp: {
+	                            regexp: /^[\u4e00-\u9fa5_a-zA-Z0-9]+$/,
+	                            message: space+'产品名只能包含中英文和数字'
+	                        },
+	                    stringLength: {
+	                         min: 2,
+	                         max: 15,
+	                         message: space+'用户名长度必须在2到20之间'
+	                     },
+	          		}   
+	        	},count:{
+	        		validators: {
+	            		notEmpty: {
+	              			message: space+'产品数量不能为空'
+	            		}, 
+	            		stringLength: {
+	                         min: 1,
+	                         max: 7,
+	                         message: space+'请输百万以内的数量'
+	                     } ,
+
+	            		 regexp: {
+	                            regexp: /^[0-9]*$/,
+	                            message: space+'请输入正确的数量'
+	                        },
+	            	}
+	        	}, price:{
+	        		validators: {
+	        			notEmpty: {
+	              			message: space+'产品价格不能为空'
+	            		},
+	            		stringLength: {
+	                         min: 1,
+	                         max: 7,
+	                         message: space+'请输入正确的价格'
+	                     } ,
+
+	            		 regexp: {
+	                            regexp: /^[0-9]+(.[0-9]{2})?$/,
+	                            message: space+'产品价格只能精确到分'
+	                        },
+	                     
+	            	}
+	        	} , 
+	      	}
+	    }); 
 
 });
 

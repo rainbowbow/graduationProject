@@ -115,9 +115,11 @@ public class ProductController {
 			
 			Product product=new Product();
 			product.setProductId(productId);
-			
 	        String path = "F:\\productPicture\\";
-	        String fileName = new Date().getTime()+file.getOriginalFilename();
+
+			String oldFileName=file.getOriginalFilename();
+	        int dex=oldFileName.indexOf(".");
+	        String fileName = new Date().getTime()+oldFileName.substring(dex,oldFileName.length());
 	        
 	        product.setImgUrl(fileName);
 	        System.out.println("path"+path);

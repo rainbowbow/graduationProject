@@ -89,9 +89,7 @@
 	<script>
 	
 	 
-	 
-		$(document).ready(
-			function() {
+	$(function(){ 
 				var li = document.getElementById('address-active');
 				li.setAttribute("class", "active");
 				var path = "${ctx}"
@@ -173,7 +171,130 @@
 				
 				$('#addressTable').bootstrapTable('hideColumn', 'addressId');
 				$('#addressTable').bootstrapTable('hideColumn', 'userId');
-    });
+				var space="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+				 $('#updateForm').bootstrapValidator({
+				    	fields: {
+				    		addressName: {
+				          		message: '用户名验证失败',
+				          		validators: {
+				            		notEmpty: {
+				              			message: space+'用户名不能为空'
+				            		},
+				            		 regexp: {
+				                            regexp: /^[\u4e00-\u9fa5_a-zA-Z0-9]+$/,
+				                            message: space+'用户名只能包含中英文和数字'
+				                        },
+				                    stringLength: {
+				                         min: 2,
+				                         max: 20,
+				                         message: space+'用户名长度必须在2到20之间'
+				                     },
+				          		}
+				        	}, addressPhone:{
+				        		validators: {
+				            		notEmpty: {
+				              			message: space+'电话不能为空'
+				            		}, 
+				            		stringLength: {
+				                         min: 11,
+				                         max: 11,
+				                         message: space+'请输入11位手机号码'
+				                     } ,
+				            	}
+				        	},
+				        	province:{
+				        		validators: {
+				            		notEmpty: {
+				              			message: space+'省份不能为空'
+				            		},
+				            	}
+				        	},
+				        	city:{
+				        		validators: {
+				            		notEmpty: {
+				              			message: space+'市区不能为空'
+				            		},
+				            	}
+				        	},
+				        	district:{
+				        		validators: {
+				            		notEmpty: {
+				              			message: space+'区域不能为空'
+				            		},
+				            	}
+				        	},
+				        	addressDetail:{
+				        		validators: {
+				            		notEmpty: {
+				              			message: space+'详细街道不能为空'
+				            		},
+				            	}
+				        	},
+				      	}
+				    });  
+				 $('#addForm').bootstrapValidator({
+				    	fields: {
+				    		addressName: {
+				          		message: '用户名验证失败',
+				          		validators: {
+				            		notEmpty: {
+				              			message: space+'用户名不能为空'
+				            		},
+				            		 regexp: {
+				                            regexp: /^[\u4e00-\u9fa5_a-zA-Z0-9]+$/,
+				                            message: space+'用户名只能包含大小写和数字'
+				                        },
+				                    stringLength: {
+				                         min: 2,
+				                         max: 20,
+				                         message: space+'用户名长度必须在2到20之间'
+				                     },
+				          		}
+				        	}, addressPhone:{
+				        		validators: {
+				            		notEmpty: {
+				              			message: space+'电话不能为空'
+				            		}, 
+				            		stringLength: {
+				                         min: 11,
+				                         max: 11,
+				                         message: space+'请输入11位手机号码'
+				                     } ,
+				            	}
+				        	},
+				        	province:{
+				        		validators: {
+				            		notEmpty: {
+				              			message: space+'省份不能为空'
+				            		},
+				            	}
+				        	},
+				        	city:{
+				        		validators: {
+				            		notEmpty: {
+				              			message: space+'市区不能为空'
+				            		},
+				            	}
+				        	},
+				        	district:{
+				        		validators: {
+				            		notEmpty: {
+				              			message: space+'区域不能为空'
+				            		},
+				            	}
+				        	},
+				        	addressDetail:{
+				        		validators: {
+				            		notEmpty: {
+				              			message: space+'详细街道不能为空'
+				            		},
+				            	}
+				        	},
+				      	}
+				    }); 
+				 
+			}); 
+	 
 		  // 回填表单
 		function editInfo(id,addressName,addressDetail,addressPhone) {  
 			//向模态框中传值  
@@ -182,30 +303,19 @@
 		    $("#editAddressDetail").val(addressDetail);  
 		    $("#editAddressPhone").val(addressPhone);  
 		    
-		    var selectProvince = document.getElementById("editProvince"); 
-		    var selectCity = document.getElementById("editCity");
-		    var selectDistrict = document.getElementById("editDistrict");
+		    /* var selectProvince = document.getElementById("editProvince"); 
+		    
 		   
 		    for(var i=0; i<selectProvince.options.length; i++){  
 		        if(addressDetail.indexOf(selectProvince.options[i].innerHTML) >= 0){  
 		        	selectProvince.options[i].selected = true;  
 		            break;  
 		        }  
-		    }  
+		    }  */ 
 		    
-		    for(var j=0; j<selectCity.options.length; j++){  
-		        if(addressDetail.indexOf(selectCity.options[j].innerHTML) >= 0){  
-		        	selectCity.options[j].selected = true;  
-		            break;  
-		        }  
-		    } 
 		    
-		    for(var k=0; i<editDistrict.options.length; k++){  
-		        if(addressDetail.indexOf(editDistrict.options[k].innerHTML) >= 0){  
-		        	editDistrict.options[k].selected = true;  
-		            break;  
-		        }  
-		    } 
+		    
+	  
 		    $('#editModal').modal('show');  
 		}  
 		  
@@ -273,6 +383,13 @@
 			});
 			return false;
 		}
+		
+		function closeM(){
+			//$('#editModal').modal('hide');
+			location.reload();
+			
+		}
+		
 	</script>
 </body>
 </html>

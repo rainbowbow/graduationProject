@@ -117,12 +117,20 @@ public class UserController {
 		}
 		@RequestMapping("UserController/addresslist")
 		@ResponseBody
-		public List<Address> addresslist(HttpSession session){
+		public List<Address> addresslist(HttpSession session,HttpServletRequest request){
 			
-			User user=(User) session.getAttribute("user");
-			 
  			List<Address> addressList=new ArrayList<Address>();
- 			addressList=userService.AddressList(user.getUserId());
+
+			String userId=request.getParameter("userId");
+			if(userId==null||userId==""){
+				System.out.println("\n\nuserId"+userId);
+				User user=(User) session.getAttribute("user");
+	 			addressList=userService.AddressList(user.getUserId());
+				} else{
+				System.out.println("\n\n"+userId);
+				addressList=userService.AddressList(userId);
+			}
+			
 			return addressList;
 		} 
 		@RequestMapping("UserController/addAddress")
@@ -181,8 +189,11 @@ public class UserController {
 				User user=(User)request.getSession().getAttribute("user");
 
 		        String path = "F:\\headPicture\\"+user.getUserName();
-		        String fileName = new Date().getTime()+file.getOriginalFilename();
-		        System.out.println("path"+path);
+		        
+		        String oldFileName=file.getOriginalFilename();
+		        int dex=oldFileName.indexOf(".");
+		        String fileName = new Date().getTime()+oldFileName.substring(dex,oldFileName.length());
+		       	System.out.println("path"+path);
 		        System.out.println("fileName"+fileName);
 		        user.setImgUrl(fileName);
 		        File targetFile = new File(path, fileName);

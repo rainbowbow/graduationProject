@@ -14,17 +14,18 @@
 	<body>
 
 			  <form id="updateForm"  method="post" class="form-horizontal" novalidate="novalidate">
+						
 						 
 					 <input style="display:none" type="text" name="userId"  id="userIdEdit" readonly="readonly">
 						 
-						<div class="control-group">
+						<div class="form-group">
 							<label class="control-label">用户名:</label>
 							<div class="controls">
-								<input  type="text" name="userName" id="userNameEdit" >
+								<input  class="form-control" type="text" name="userName" id="userNameEdit" >
 							</div>
 						</div>
 			
-						
+						<br>
 						<div class = "control-group"> 
 						     <label class="control-label" for = "sex">性别</label> 
 						     <div class="controls">
@@ -35,35 +36,37 @@
 						     </div>
 						 </div> 
 						 
-						<div class="control-group">
+						<div class="form-group">
 							<label class="control-label">年龄</label>
 							<div class="controls">
-								<input   type="text" name="age" id="ageEdit"  >
+								<input  class="form-control"  type="text" name="age" id="ageEdit"  >
 							</div>
 						</div>
-						<div class="control-group">
+						<br>
+						<div class="form-group">
 							<label class="control-label">电话:</label>
 							<div class="controls">
-								<input  type="text" name="phone" id="phoneEdit"  >
+								<input  class="form-control" type="text" name="phone" id="phoneEdit"  >
 							
 							</div>
 						</div>
-						 
-						<div class="control-group">
+						 <br>
+						<div class="form-group">
 							<label class="control-label">E-mail</label>
 							<div class="controls">
-								<input  type="text" name="eMail" id="eMailEdit" >
+								<input class="form-control" type="text" name="eMail" id="eMailEdit" >
 							
 							</div>
 						</div>
-				      <div class="control-group">
+						<br>
+				      <div class="form-group">
 							<label class="control-label">地址:</label>
 							<div class="controls">
 								<input   type="text" name="address" id="addressEdit"  >
 							
 							</div>
 						</div>
-						 
+						 <br>
 						 <div class="form-actions" style="padding-left: 170px;">
 
 			<button type="button" onclick="updateProduct()" class="btn btn-primary">

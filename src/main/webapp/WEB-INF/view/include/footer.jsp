@@ -9,6 +9,5 @@
     <script src="${pageContext.request.contextPath}/resources/js/bootstrap-datetimepicker.zh-CN.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/bootstrap-datetimepicker.fr.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/distpicker.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/jquery.validate.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/messages_zh.js"></script>
-   
+    <script src="${pageContext.request.contextPath}/resources/js/bootstrapValidator.min.js"></script>
+      

@@ -11,29 +11,31 @@
 <title></title>
 </head>
 <body style="padding: 20px;">
-	<form id="addForm" method="post" class="form-horizontal" novalidate="novalidate">
-		<div class="control-group">
+	<form id="addForm" method="post" class="form-horizontal" >
+		<div class="form-group">
 			<label class="control-label">收件人:</label>
 			<div class="controls">
-				<input type="text" id="addressName"name="addressName">
+				<input class="form-control" type="text" id="addressName"name="addressName">
 			</div>
 		</div>
-		 
-		<div class="control-group">
+		<br> 
+		<div class="form-group">
 			<label class="control-label">联系电话:</label>
 			<div class="controls">
-				<input  type="text" id="addressPhone" name="addressPhone" onkeyup='this.value=this.value.replace(/\D/gi,"")'>
+				<input  class="form-control" type="text" id="addressPhone" name="addressPhone" onkeyup='this.value=this.value.replace(/\D/gi,"")'>
 			</div>
 		</div>
-		<div   class="control-group" data-toggle="distpicker">
+		<br>
+		<div   class="form-group" data-toggle="distpicker">
 		<label class="control-label">地址:</label>
 		<div class="controls" >
-		  <select style="width: 210px" id="province" name="province" data-province="---- 选择省 ----"></select>
-		  <select style="width: 210px" id="city" name="city" data-city="---- 选择市 ----"></select>
-		  <select style="width: 210px" id="district" name="district" data-district="---- 选择区 ----"></select>
+		  <select class="form-control" style="width: 210px" id="province" name="province" data-province="---- 选择省 ----"></select>
+		  <select class="form-control" style="width: 210px" id="city" name="city" data-city="---- 选择市 ----"></select>
+		  <select class="form-control" style="width: 210px" id="district" name="district" data-district="---- 选择区 ----"></select>
 		</div>
 		 </div>
-		<div class="control-group">
+		 <br>
+		<div class="form-group">
 			<label class="control-label">详细街道:</label>
 			<div class="controls">
 				<input type="text" name="addressDetail" id="addressDetail">
@@ -41,12 +43,12 @@
 		</div>
 		
 		<div class="form-actions" style="padding-left: 135px;">
-			 
-			<button type="button" onclick="addAddress();"  class="btn btn-primary">
+			
+			<button type="submit" onclick="addAddress();return false;"  class="btn btn-primary">
 				<i class="icon-ok icon-white"></i>保存
 			</button>
 			&nbsp;&nbsp;
-			<button type="button"  onclick="$('#addModal').modal('hide');" class="btn btn-primary cancelBtn">
+			<button type="button"  onclick="closeM()" class="btn btn-primary cancelBtn">
 				<i class="icon-remove icon-white"></i>取消
 			</button>
 		</div>
@@ -55,14 +57,7 @@
 	 
 	 function addAddress() { 
 		 
-		 if($("#addressName").val()==""){
-			 alert("收件人不能为空！");
-			 return false;
-		 }
-		 if($("#addressPhone").val()==""){
-			 alert("联系电话不能为空1！");
-			 return false;
-		 }
+		 
 		 if($("#detail").val()==""){
 			 alert("详细街道不能为空！");
 			 return false;

@@ -13,24 +13,27 @@
 <body style="padding: 20px;">
 	<form id="addForm"  method="post" class="form-horizontal"  novalidate="novalidate">
 		 <input style="display:none"  type="text" name="productId" id="shopProductId" >
-		<div class="control-group">
+		<div class="form-group">
 			<label class="control-label">产品名称:</label>
 			<div class="controls">
-				<input   type="text" name="productName" id="productName" >
+				<input  class="form-control"  type="text" name="productName" id="productName" >
 			</div>
 		</div>
-		<div class="control-group">
+		<br>
+		<div class="form-group">
 			<label class="control-label">数量:</label>
 			<div class="controls">
-				<input  type="text" name="count" id="count" onkeyup='this.value=this.value.replace(/\D/gi,"")'>
+				<input  class="form-control" type="text" name="count" id="count"  >
 			</div>
 		</div>
-		<div class="control-group">
+		<br>
+		<div class="form-group">
 			<label class="control-label">价格:</label>
 			<div class="controls">
-				<input  type="text" name="price" id="price" >
+				<input  class="form-control" type="text" name="price" id="price" >
 			</div>
 		</div>
+		<br>
 		<div class="control-group">
 			<label class="control-label">详情:</label>
 			<div class="controls">

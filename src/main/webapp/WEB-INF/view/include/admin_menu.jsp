@@ -12,7 +12,7 @@
 					
 						<span class="account-name">admin</span>
 						
-						<span class="account-role">Administrator</span>
+						<span class="account-role">${user.getUserName()}</span>
 					
 					</div>  
 				</div>  
