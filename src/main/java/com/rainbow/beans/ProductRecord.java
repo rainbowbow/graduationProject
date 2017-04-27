@@ -21,6 +21,7 @@ public class ProductRecord implements Serializable {
      private String orderTime; 
      private String totalMoney;   
      private String type;
+     private String state;
 
      
 	public String getOrderId() {
@@ -101,6 +102,12 @@ public class ProductRecord implements Serializable {
 	}
 	public void setType(String type) {
 		this.type = type;
+	}
+	public String getState() {
+		return state;
+	}
+	public void setState(String state) {
+		this.state = state;
 	} 
  
 	 

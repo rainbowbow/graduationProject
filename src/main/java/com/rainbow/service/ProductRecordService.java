@@ -46,6 +46,8 @@ public class ProductRecordService{
      public int cancelDel(String orderId){
     	 return productRecordDao.cancelDel(orderId);
      }
-
+     public int cancelOrDownRecord(String orderId,String state){
+    	 return productRecordDao.cancelOrDownRecord(orderId,state);
+     }
      
 	}

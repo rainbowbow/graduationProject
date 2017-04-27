@@ -7,6 +7,7 @@
 	<select id="RecordList" resultType="ProductRecord">
 		select 
 			order_id orderId, 
+			product_id productId,
 			product_name productName,
 			price price,
 			count count,
@@ -16,6 +17,7 @@
 			u.user_name userName,
 			pr.user_id userId,
 			pr.type type,
+			pr.state state,
 			order_time orderTime,
 			total_money totalMoney
 		from product_record pr,user u  
@@ -48,10 +50,10 @@
 	 
      
 	 <insert id="addProductRecord"  parameterType="java.util.List">  
-      insert into  product_record(product_name,price,count,user_id, address,address_name,address_phone,order_time,type)   
+      insert into  product_record(product_id,product_name,price,count,user_id, address,address_name,address_phone,order_time,type,state)   
       values 
     <foreach collection="shopCardList" item="product" index="index" separator="," >  
-        (#{product.productName},#{product.price},#{product.count},#{productRecord.userId}, #{productRecord.address},#{productRecord.addressName},#{productRecord.addressPhone},#{productRecord.orderTime},'1')  
+        (#{product.productId},#{product.productName},#{product.price},#{product.count},#{productRecord.userId}, #{productRecord.address},#{productRecord.addressName},#{productRecord.addressPhone},#{productRecord.orderTime},'1','0')  
     </foreach>  
   </insert> 
     
@@ -73,4 +75,8 @@
 		update product_record set type='1' where order_id =#{orderId}
 	</update>
 	
+	 <update id="cancelOrDownRecord">
+		update product_record set state=#{state} where order_id =#{orderId}
+	</update>
+	 
 </mapper>

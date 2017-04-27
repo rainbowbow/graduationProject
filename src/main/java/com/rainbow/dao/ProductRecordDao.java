@@ -20,6 +20,7 @@ public interface ProductRecordDao {
     int UserDelProduct(List<String> orderId);
     public int addProductRecord(Map<String,Object> params);
     public int cancelDel(String orderId);
+    public int cancelOrDownRecord(@Param("orderId")String orderId,@Param("state")String state);
 
 }
 

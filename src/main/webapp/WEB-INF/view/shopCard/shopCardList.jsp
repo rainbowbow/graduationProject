@@ -166,10 +166,11 @@ $(document).ready(function() {
 								{
 									field : 'count',
 									title : '数量',
+									align:'center' ,
 									formatter: function (value, row, index) {  
 										
-										var spanFront='<span id="tableDecreaseCssById'+index+'"  onclick="decreaseCount(\'tableCount'+index+'\'\,\'tableDecreaseCssById'+index+'\'\,\'tableAddCssById'+index+'\')">--</span>';
-										var inputCount='<input style="width:30px;" type="text" value=" '+value+' " name="tableCount" id="tableCount'+index+'" onkeyup=\'this.value=this.value.replace(\/\\D\/gi\,"")\'>';
+										var spanFront='<span id="tableDecreaseCssById'+index+'"  onclick="decreaseCount(\'tableCount'+index+'\'\,\'tableDecreaseCssById'+index+'\'\,\'tableAddCssById'+index+'\')">—</span>';
+										var inputCount='<input style="width:40px;" type="text" value=" '+value+' " name="tableCount" id="tableCount'+index+'" onkeyup=\'this.value=this.value.replace(\/\\D\/gi\,"")\'>';
 										var spanlast='<span id="tableAddCssById'+index+'" onclick="addCount(\'tableCount'+index+'\'\,\'tableDecreaseCssById'+index+'\'\,\'tableAddCssById'+index+'\'\,\' '+
 										row.allCount+'\')">+</span>';
 

@@ -170,6 +170,10 @@
 							title : '序号'
 						},
 						{
+							field : 'productId',
+							title : '序号'
+						},
+						{
 							field : 'productName',
 							title : '产品名称'
 						},
@@ -221,17 +225,40 @@
 									+ row.addressPhone+'\'\,\''
 									+ row.address+
 							'\')">地址详情</a> ';  
-							var d = '<a href="#"  onclick="del(\''
-								+ row.orderId
-								+ '\')">删除</a> ';
- 								if(row.type=="0"){
-									var cancelDel = '<a href="#"  onclick="cancelDel(\''
-										+ row.orderId
-										+ '\')">撤销用户删除</a> ';
-										return e+cancelDel+d;
-								}
+							
 								
-								return e+d;
+ 							 var cancelRecord;
+ 							 var typeUser=${user.type};
+ 	 								if(row.state=="0"){
+ 	 									if(typeUser=="0"){
+ 	 										cancelRecord = '<a href="#"  onclick="cancelOrDownRecord(\''
+ 	 											+ row.orderId
+ 	 											+ '\'\,\'1\')">安排配送 </a> ';
+ 	 									}else{
+ 	 										cancelRecord = '<a href="#"  onclick="cancelOrDownRecord(\''
+ 	 											+ row.productId+'\'\,\''
+ 	 											+ row.orderId+'\'\,\''
+ 	 											+ row.count
+ 	 											+ '\'\,\'2\')">取消订单 </a> ';
+ 	 									}
+ 	 									
+ 									}else if(row.state=="1"){
+ 										cancelRecord = '<p style="color:blue;font-size:16px;" >正在配送   </>';
+ 									}else{
+ 										cancelRecord = '<p style="color:gray;font-size:16px;" >失效订单 </>';
+ 									}
+ 	 								
+ 	 								var d = '<a href="#"  onclick="del(\''
+ 	 									+ row.orderId
+ 	 									+ '\')">删除</a> ';
+ 	 	 								if(row.type=="0"){
+ 	 										var cancelDel = '<a href="#"  onclick="cancelDel(\''
+ 	 											+ row.orderId
+ 	 											+ '\')">撤销删除</a> ';
+ 	 											return cancelRecord+e+cancelDel+d;
+ 	 									}
+ 	 								
+								return cancelRecord+e+d;
 							}
 						} ]
 			});
@@ -244,6 +271,7 @@
 			
 			 
 			    $('#orderTable').bootstrapTable('hideColumn', 'orderId');
+			    $('#orderTable').bootstrapTable('hideColumn', 'productId');
 			    $('#orderTable').bootstrapTable('hideColumn', 'type');
 				$('#orderTable').bootstrapTable('hideColumn', 'address');
 				$('#orderTable').bootstrapTable('hideColumn', 'addressName');
@@ -356,6 +384,32 @@
 				$.ajax({
 					url : "${ctx}" + "/ProductRecordController/cancelDel",
 					data : {"orderId" : id},
+					type : "post",
+					success : function(data) {
+						if (data > 0) {
+							alert('操作成功:' + data);
+							location.reload();
+						} else {
+							alert('操作失败' + data);
+						}
+					},
+					error : function() {
+						alert('请求出错');
+					} 
+				});
+
+				return false;
+			}
+		  
+		  function cancelOrDownRecord(productId,orderId,count,state) {
+			  alert(state);
+				$.ajax({
+					url : "${ctx}" + "/ProductRecordController/cancelOrDownRecord",
+					data : {
+						"orderId" : orderId,
+						"productId" : productId,
+						"count":count,
+				     	"state":state},
 					type : "post",
 					success : function(data) {
 						if (data > 0) {

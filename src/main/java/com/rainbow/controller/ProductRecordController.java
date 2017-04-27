@@ -71,7 +71,6 @@ public class ProductRecordController {
 			User user=(User)request.getSession().getAttribute("user");
 			String userId=user.getUserId();
 			String orderIdMore = request.getParameter("orderId");
-			System.out.println("userId==>"+userId);
 			int num;			
 			if(userId=="1"||userId.equals("1")){
 				num=productRecordService.DelProduct(orderIdMore);
@@ -106,7 +105,6 @@ public class ProductRecordController {
 			//购买成功则--》1：删除对应的购物车    2：添加对应的订单
 			
 			 
-            int num=0;
             SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");  
             Date date = new Date();
             ProductRecord productRecord=new ProductRecord();
@@ -116,7 +114,7 @@ public class ProductRecordController {
             productRecord.setAddressPhone(address.getAddressPhone());
             productRecord.setOrderTime(sdf.format(date));
             
-            Map params = new HashMap();
+            Map<String, Object> params = new HashMap<String, Object>();
             params.put("productRecord", productRecord);
             params.put("shopCardList", shopCardList);
             int addId= productRecordService.addProductRecord(params);
@@ -132,12 +130,29 @@ public class ProductRecordController {
 		
 		@RequestMapping("ProductRecordController/cancelDel")
 		@ResponseBody
-		int upOrDownShopProduct(HttpServletRequest request){
+		int cancelDel(HttpServletRequest request){
 			
 			String orderId = request.getParameter("orderId");
- 			//1:在售商品--》修改shop_card表的type为1
    			int updateId=productRecordService.cancelDel(orderId);
    			return updateId;
 		}
+		
+
+		@RequestMapping("ProductRecordController/cancelOrDownRecord")
+		@ResponseBody
+		int cancelRecord(HttpServletRequest request){
+			
+			String orderId = request.getParameter("orderId");
+			String state = request.getParameter("state");
+			System.out.println("lllllllllstate:"+state);
+			if(("2").equals(state)){//用户取消订单==》若产品还在即恢复库存
+				String productId = request.getParameter("productId");
+				String count = request.getParameter("count");
+				productService.cancelRecordCount(productId, count);
+			}
+   			int updateId=productRecordService.cancelOrDownRecord(orderId,state);
+   			return updateId;
+		}
+	 
 	 
   }

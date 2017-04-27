@@ -28,6 +28,7 @@ public interface ProductDao {
     //通过这个productId获取productId和购物车数量，类型，价格
     public int UpdateProductCount(Map<String,Object> params);
     public int productIsOver(List<ShopCard> productId);
-    
+    int cancelRecordCount(@Param("productId")String productId,@Param("count")String count);
+
 }
 

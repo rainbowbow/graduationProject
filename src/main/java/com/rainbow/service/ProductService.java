@@ -77,4 +77,8 @@ public class ProductService{
      	 return productDao.productIsOver(shopCardList);
      }
      
+     public int cancelRecordCount(String productId,String count){
+	    	
+    	 return productDao.cancelRecordCount(productId, count);
+	    }
 	}
