@@ -217,14 +217,14 @@
 	    $("#detailPrice").val(price); 
 	    $("#detailMessage").val(detailMessage); 
 	    $("#maxDetailCount").val(count);
- 	    $("#imgDetail").attr("src","${pageContext.request.contextPath}/resources/img/"+imgUrl);
+ 	    $("#imgDetail").attr("src","/img/productPicture/"+imgUrl);
 	   
 	    $('#detailModal').modal('show');  
 	}  
 	function photo(imgUrl) {  
 		//向模态框中传值  
 		$("#divImg").empty();
-	    var img='<img width="400"  src="${pageContext.request.contextPath}/resources/img/'+imgUrl+'">'
+	    var img='<img width="400"  src="/img/productPicture/'+imgUrl+'">'
 	    $('#divImg').append(img);
 	    $('#photoModal').modal('show');  
 	    

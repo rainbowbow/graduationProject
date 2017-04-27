@@ -15,6 +15,7 @@ public interface UserDao {
 	
 	User login(@Param("userName")String userName,@Param("password")String password,@Param("type")String type);
 	User findByUserId(String userId);//获取某个用户
+	User findByUserName(String userName);//获取某个用户
     List<User> UserListByQuery(@Param("userName")String userName, @Param("sex")String sex);
     public int createUser(User user);//添加用户
     

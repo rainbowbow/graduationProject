@@ -26,7 +26,7 @@
 	</select>
 	
 	
-    <select id="findByUserId" resultType="User">
+    <select id="findByUserName" resultType="User">
 		select 
 			user_id userId, 
 			user_name userName,
@@ -40,6 +40,23 @@
 			type type,
 			praise_rate praiseRate
 		from user where user_id=#{userId} 
+	</select>
+	
+	
+    <select id="findByUserId" resultType="User">
+		select 
+			user_id userId, 
+			user_name userName,
+			user_code userCode,
+			img_url imgUrl,
+			sex sex,
+			age age, 
+			phone phone,
+			e_mail eMail,
+			address address,
+			type type,
+			praise_rate praiseRate
+		from user where user_name=#{userName} 
 	</select>
 	<select id="login" resultType="User">
 		select 
@@ -112,8 +129,8 @@
 	 
 	
 	<insert id="createUser">
-		insert into user(user_id,user_name) 
-		values(#{userId},#{userName})
+		insert into user(user_name,sex,age,phone,e_mail,address,password,type) 
+		values(#{userName},#{sex},#{age},#{phone},#{eMail},#{address},#{password},'11')
 	</insert>
 
   <update id="editType" >

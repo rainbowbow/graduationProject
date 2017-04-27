@@ -146,15 +146,22 @@
 							title : '联系电话'
 						} ,
 						{
+							field : 'type'
+						} ,
+						{
 							title : '操作',
 							field : 'doSomething',
 							align : 'center',
 							width:150,
 							formatter : function(value, row,index) {
-								 
-							var dA= '<a href="#" onclick="defaultAddress(\''
-								+ row.addressId+
-						'\')">默认地址</a> ';
+								var dA;
+								 if(row.type=="1"){
+									 dA='<p style="color:orange;font-size:16px;" >默认地址</>';
+								 }else{
+									 dA= '<a href="#" onclick="defaultAddress(\'' + row.addressId+
+									'\')">设为默认</a> ';
+								 }
+							  
 							var e = '<a href="#" onclick="editInfo(\''
 								+ row.addressId+'\'\,\''
 								+ row.addressName+'\'\,\''
@@ -170,6 +177,7 @@
 			});
 				
 				$('#addressTable').bootstrapTable('hideColumn', 'addressId');
+				$('#addressTable').bootstrapTable('hideColumn', 'type');
 				$('#addressTable').bootstrapTable('hideColumn', 'userId');
 				var space="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
 				 $('#updateForm').bootstrapValidator({

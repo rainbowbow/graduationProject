@@ -18,9 +18,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.rainbow.beans.Product;
-import com.rainbow.beans.User;
 import com.rainbow.service.ProductService;
- 
+
 @Controller
 public class ProductController {
 

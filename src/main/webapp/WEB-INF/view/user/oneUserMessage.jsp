@@ -153,11 +153,10 @@
 		          		validators: {
 		            		notEmpty: {
 		              			message: space+'用户名不能为空'
-		            		},
-		            		 regexp: {
-		                            regexp: /^[\u4e00-\u9fa5_a-zA-Z0-9]+$/,
-		                            message: space+'用户名只能包含中英文和数字'
-		                        },
+		            		},regexp: {
+	                            regexp: /^[a-zA-Z0-9]+$/,
+	                            message: space+'用户名只能包含大小写和数字'
+	                        },
 		                    stringLength: {
 		                         min: 2,
 		                         max: 15,

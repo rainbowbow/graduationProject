@@ -65,6 +65,19 @@ public class UserController {
 				return model;
 			}
 	 
+		 
+		 @RequestMapping("UserController/addUser")
+			@ResponseBody
+			int addProduct(User user){
+			    int updateId;
+			    User u=userService.findByUserName(user.getUserName());
+			    if(u==null){
+			    	  updateId=userService.createUser(user);
+			    }else{
+			    	updateId=0;	
+			    }
+	      		return updateId;
+			}
 			@RequestMapping("UserController/updateUser")
 			@ResponseBody
 			int updateProduct(HttpServletRequest request,User user){
@@ -216,6 +229,10 @@ public class UserController {
 		        
 		        user.setImgUrl("/img/headPicture/"+user.getUserName()+"/"+user.getImgUrl());
 		        session.setAttribute("user", user);
-		        return user.getUserCode();
+		        if(("0").equals(user.getType())){
+		        	 return "admin";
+		        }else{
+		        	 return "user";
+		        }
 		    }
   }

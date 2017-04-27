@@ -13,7 +13,7 @@
      
     <link href="${pageContext.request.contextPath}/resources/css/login.css" rel="stylesheet" /> 
   
-      
+      <jsp:include page="WEB-INF/view/include/header.jsp"></jsp:include>
     </head>
 <body>
 
@@ -46,16 +46,119 @@
 		
 		
 		            <div class="end-a">
-			          <label>   <a href="javascript:;">忘记密码？点这里</a></label> 
-			          <label>   <a href="forgot_password.html">还没注册？马上注册</a> </label> 
+ 			          <label>   <a href="#" onclick="add();">还没注册？马上注册</a> </label> 
 		            </div>  
 </form></div> 
-    
-      <script type="text/javascript" src="${ctx}/resources/js/jquery-2.1.4.min.js"></script>
-      <script src="${ctx}/resources/js/bootstrap.js"></script>
+
+
+	 <!-- edit Modal start -->
+	<div class="modal hide fade" id="addUser" tabindex="-1" role="dialog">
+		<div class="modal-header">
+			<button class="close" type="button" data-dismiss="modal">×</button>
+			<h3>用户注册</h3>
+		</div>
+		<div class="modal-body">
+			<jsp:include page="WEB-INF/view/user/addUser.jsp"></jsp:include>
+		</div>
+	</div>
+	
+	
+     
   	  <script type="text/javascript" src="${ctx}/resources/js/jquery.easyui.min.js"></script>
   
   <script type="text/javascript">
+  
+  
+  $(function(){
+	    
+	    var space="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+			 $('#addForm').bootstrapValidator({
+			    	fields: {
+			    		userName: {
+			          		message: '用户名验证失败',
+			          		validators: {
+			            		notEmpty: {
+			              			message: space+'用户名不能为空'
+			            		},
+			            		 regexp: {
+			                            regexp: /^[a-zA-Z0-9]+$/,
+			                            message: space+'用户名只能包含大小写和数字'
+			                        },
+			                    stringLength: {
+			                         min: 2,
+			                         max: 15,
+			                         message: space+'用户名长度必须在2到20之间'
+			                     },
+			          		}   
+			        	},
+			        	password:{
+			        		validators: {
+			            		notEmpty: {
+			              			message: space+'密码不能为空'
+			            		},
+			            		regexp: {//匹配规则
+			                         regexp: /^[a-zA-Z0-9]+$/,
+			                         message: space+'密码只能包含大小写和数字'
+			                     },
+			                    stringLength: {
+			                         min: 3,
+			                         max: 20,
+			                         message: space+'密码长度必须在3到20之间'
+			                     },
+			            	}
+			        	},
+			        	repassword:{
+			        		validators: {
+			            		notEmpty: {
+			              			message: space+'不能为空'
+			            		},
+			                    identical: {//相同
+			                         field: 'password',
+			                         message: space+'两次密码不一致'
+			                     },
+			            	}
+			        	},
+                          phone:{
+			        		validators: {
+			            		notEmpty: {
+			              			message: space+'电话不能为空'
+			            		}, 
+			            		stringLength: {
+			                         min: 11,
+			                         max: 11,
+			                         message: space+'请输入11位手机号码'
+			                     } ,
+			            	}
+			        	}, age:{
+			        		validators: {
+			            		stringLength: {
+			                         min: 1,
+			                         max: 3,
+			                         message: space+'请输入正确的年龄'
+			                     } ,
+			            	}
+			        	}, eMail:{
+			        		validators: {
+			            		notEmpty: {
+			              			message: space+'邮箱不能为空'
+			            		}, 
+			            		 regexp: {
+			                            regexp: /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/,
+			                            message: space+'邮箱输入有误'
+			                        },
+			            	}
+			        	}, 
+			      	}
+			    }); 
+	     
+	    });
+	     
+  
+  
+  
+  function add(){
+	  $('#addUser').modal('show');  
+  }
 		var message = "${message}"
 		    if ("no" == message) {
 		    	$.messager.alert("警告", "无此用户");
