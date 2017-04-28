@@ -121,6 +121,28 @@ public class UserController {
 		}
 		 
 		 
+		@RequestMapping("UserController/editPassword")
+		@ResponseBody
+		int editPassword(HttpServletRequest request){
+			
+			User user = (User)request.getSession().getAttribute("user");
+ 			String userId=user.getUserId();
+			String oldPassword = request.getParameter("oldPassword");
+			String password = request.getParameter("newPassword");
+
+			int editNum;
+			User user2=userService.findByUserIdAndPassword(userId, oldPassword);
+			if(user2!=null){
+				System.out.println(user2.getAddress());
+	   		  editNum=userService.editPassword(userId, password);
+
+			}else{
+				editNum=-1;
+			}
+    			return editNum;
+		}
+		
+		
 		@RequestMapping("UserController/editType")
 		@ResponseBody
 		int editType(HttpServletRequest request){

@@ -32,6 +32,10 @@ public class UserService {
 	    	
 	        return userDao.findByUserId(userName);
 	    }
+      public User findByUserIdAndPassword(String userId,String oldPassword) {
+	    	
+	        return userDao.findByUserIdAndPassword(userId, oldPassword);
+	    }
 	    
 	    
       public User login(String userName,String password,String type) {
@@ -52,6 +56,11 @@ public class UserService {
 	    	
 	    	return userDao.updateUser(user);
 	    }
+      public int editPassword(String userId,String password){
+	    	
+	    	return userDao.editPassword(userId, password);
+	    }
+ 
 	    
 	    public int createUser(User user) {
 	         

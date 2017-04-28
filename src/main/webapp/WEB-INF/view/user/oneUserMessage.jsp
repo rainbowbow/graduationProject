@@ -95,6 +95,7 @@
 						<br>
 						<div class="form-actions" style="padding-left: 170px;">
 				
+				        	<input type="button" class="btn btn-primary" value="修改密码" data-toggle="modal" data-target="#editPasswordModal" />
 							<button type="submit" onclick="editOneUserMessage();return false;" class="btn btn-primary">
 								<i class="icon-ok icon-white"></i>保存
 							</button>
@@ -111,6 +112,21 @@
 	 </div> <!-- /container -->
 	
     </div> <!-- /content -->
+    
+    
+	<!-- edit Modal -->
+	<div class="modal hide fade" id="editPasswordModal" tabindex="-1" role="dialog">
+		<div class="modal-header">
+			<button class="close" type="button" data-dismiss="modal">×</button>
+			<h3>修改密码</h3>
+		</div>
+		<div class="modal-body">
+			<jsp:include page="editPassword.jsp"></jsp:include>
+		</div>
+	</div>
+	<!-- edit Modal end -->
+	
+	
  <!-- 新增 Modal start -->
 	<div class="modal hide fade" id="addModal" tabindex="-1" role="dialog">
 		<div class="modal-body">
@@ -153,10 +169,11 @@
 		          		validators: {
 		            		notEmpty: {
 		              			message: space+'用户名不能为空'
-		            		},regexp: {
-	                            regexp: /^[a-zA-Z0-9]+$/,
-	                            message: space+'用户名只能包含大小写和数字'
-	                        },
+		            		},
+		            		 regexp: {
+		                            regexp: /^[a-zA-Z0-9]+$/,
+		                            message: space+'用户名只能包含大小写和数字'
+		                        },
 		                    stringLength: {
 		                         min: 2,
 		                         max: 15,
@@ -195,6 +212,39 @@
 		        	}, 
 		      	}
 		    }); 
+    
+    $('#editPasswordForm').bootstrapValidator({
+    	fields: { 
+    		
+    		newPassword:{
+        		validators: {
+            		notEmpty: {
+              			message: space+'密码不能为空'
+            		},
+            		regexp: {//匹配规则
+                         regexp: /^[a-zA-Z0-9]+$/,
+                         message: space+'密码只能包含大小写和数字'
+                     },
+                    stringLength: {
+                         min: 3,
+                         max: 20,
+                         message: space+'密码长度必须在3到20之间'
+                     },
+            	}
+        	},
+        	repassword:{
+        		validators: {
+            		notEmpty: {
+              			message: space+'不能为空'
+            		},
+                    identical: {//相同
+                         field: 'newPassword',
+                         message: space+'两次密码不一致'
+                     },
+            	}
+        	}, 
+      	}
+    }); 
      
     });
      

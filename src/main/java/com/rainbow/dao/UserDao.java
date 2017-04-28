@@ -20,6 +20,9 @@ public interface UserDao {
     public int createUser(User user);//添加用户
     
     public int updateUser(User user);//修改用户
+    public int editPassword(@Param("userId")String userId,@Param("password")String password);//修改用户密码
+    User findByUserIdAndPassword(@Param("userId")String userId,@Param("oldPassword")String oldPassword);
+    
     public int editType(@Param("userId")int userId,@Param("type")String type);//修改用户状态
    
 	List<Address> AddressList(String userId);//获取某个用户所有地址

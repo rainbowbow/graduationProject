@@ -126,7 +126,26 @@
 		where user_id=#{userId}
 	</update>
 	
-	 
+	<select id="findByUserIdAndPassword" resultType="User">
+		select 
+			user_id userId, 
+			user_name userName,
+			user_code userCode,
+			img_url imgUrl,
+			sex sex,
+			age age, 
+			phone phone,
+			e_mail eMail,
+			address address,
+			type type,
+			praise_rate praiseRate
+		from user where user_id=#{userId} and   password=#{oldPassword}
+	</select>
+	
+	 <update id="editPassword" >
+		update user set password=#{password}
+		where user_id=#{userId}
+	</update>
 	
 	<insert id="createUser">
 		insert into user(user_name,sex,age,phone,e_mail,address,password,type) 
