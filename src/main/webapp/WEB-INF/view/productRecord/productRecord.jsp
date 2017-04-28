@@ -227,6 +227,7 @@
 							'\')">地址详情</a> ';  
 							
 								
+							var d ;
  							 var cancelRecord;
  							 var typeUser=${user.type};
  	 								if(row.state=="0"){
@@ -234,23 +235,27 @@
  	 										cancelRecord = '<a href="#"  onclick="cancelOrDownRecord(\''
  	 											+ row.orderId
  	 											+ '\'\,\'1\')">安排配送 </a> ';
+ 	 										d='<a href="#"  onclick="del(\'' + row.orderId + '\')">删除</a> ';
  	 									}else{
  	 										cancelRecord = '<a href="#"  onclick="cancelOrDownRecord(\''
  	 											+ row.productId+'\'\,\''
  	 											+ row.orderId+'\'\,\''
  	 											+ row.count
  	 											+ '\'\,\'2\')">取消订单 </a> ';
+ 	 										d='<a href="#"  onclick="alert(\'请先取消订单再删除！\')">删除</a> ';
  	 									}
  	 									
  									}else if(row.state=="1"){
  										cancelRecord = '<p style="color:blue;font-size:16px;" >正在配送   </>';
+ 										d= '<a href="#"  onclick="alert(\'正在配送不能删除！\')">删除</a> ';
  									}else{
  										cancelRecord = '<p style="color:gray;font-size:16px;" >失效订单 </>';
+ 										d= '<a href="#"  onclick="del(\''
+ 											+ row.orderId
+ 											+ '\')">删除</a> '
  									}
  	 								
- 	 								var d = '<a href="#"  onclick="del(\''
- 	 									+ row.orderId
- 	 									+ '\')">删除</a> ';
+ 	 								
  	 	 								if(row.type=="0"){
  	 										var cancelDel = '<a href="#"  onclick="cancelDel(\''
  	 											+ row.orderId
@@ -286,14 +291,7 @@
 		    	}
 		  
 		function del(id) {
-			
-			if (!id) {
-				alert('Error！');
-				return false;
-			}
-			// var form_data = new Array();
-
-			$.ajax({
+		 	$.ajax({
 				url : "${ctx}" + "/ProductRecordController/delProductRecord",
 				data : {"orderId" : id},
 				type : "post",

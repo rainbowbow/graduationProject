@@ -106,7 +106,6 @@ public class UserController {
 			System.out.println("userId:"+user.getUserId());
  			User oneUserMessage=new User();
  			oneUserMessage=userService.findByUserId(user.getUserId());
- 			System.out.println("oneUserMessage:"+oneUserMessage.getUserId()+"\nname:"+oneUserMessage.getUserName());
 			return oneUserMessage;
 		} 
 		@RequestMapping("UserController/updateOneUserMessage")

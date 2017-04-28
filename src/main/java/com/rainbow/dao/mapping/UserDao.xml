@@ -39,7 +39,7 @@
 			address address,
 			type type,
 			praise_rate praiseRate
-		from user where user_id=#{userId} 
+		from user where user_name=#{userName}
 	</select>
 	
 	
@@ -56,7 +56,7 @@
 			address address,
 			type type,
 			praise_rate praiseRate
-		from user where user_name=#{userName} 
+		from user where user_id=#{userId}  
 	</select>
 	<select id="login" resultType="User">
 		select 
