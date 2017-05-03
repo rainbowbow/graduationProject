@@ -11,7 +11,12 @@
 
 4:AJAX POST请求中参数以form data和request payload形式在servlet中的获取方式 -
 post请求的Content-Type为application/x-www-form-urlencoded，参数是在请求体中，即上面请求中的Form Data。
+可以通过request.getParameter(name)的形式来获取表单参数。
 Content-Type为text/plain;charset=UTF-8，而请求表单参数在RequestPayload中。
+通过request.getParameter(name)却是空
+Content-Type不是application/x-www-form-urlencoded的POST请求是不会读取请求体数据和进行相应的参数处理的，即不会解析表单数据来放到request parameter map中。
+所以通过request.getParameter(name)是获取不到的
+通过获取原始数据流的方式来进行解析。
 
 5:MyBatis在解析xml时找不到其中声明的shopCardList，但是在Dao中明明传的参数就是shopCardList!!!
 原因：
