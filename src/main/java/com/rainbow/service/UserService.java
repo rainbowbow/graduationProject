@@ -30,7 +30,7 @@ public class UserService {
 	    }
         public User findByUserName(String userName) {
 	    	
-	        return userDao.findByUserId(userName);
+	        return userDao.findByUserName(userName);
 	    }
       public User findByUserIdAndPassword(String userId,String oldPassword) {
 	    	

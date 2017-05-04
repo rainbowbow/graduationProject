@@ -29,19 +29,22 @@ public class LoginController {
  					if(user!=null){
  						user.setImgUrl("/img/headPicture/"+user.getUserName()+"/"+user.getImgUrl());
 						session.setAttribute("user", user);
-					    if(type.equals("0")){
+					    if(user.getType().equals("0")){
 					    	return "admin";
-					    }else{
+					    }else if(user.getType().equals("11")){
 					    	return "user";
+					    }else{
+					    	model.addAttribute("message", "black");
+					    	return "login";
 					    }
 					
 					}else{
 						System.out.println("nosuccess");
-						model.addAttribute("message", "erro");
+						model.addAttribute("message", "no");
 						return "login";
 					}
 	 	        }else {
-	 	        	model.addAttribute("message", "no");
+	 	        	model.addAttribute("message", "erro");
 	 	        	return "login";
 	 	        }
 		  }
