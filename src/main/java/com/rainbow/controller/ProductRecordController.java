@@ -59,6 +59,7 @@ public class ProductRecordController {
 			String orderTime = request.getParameter("orderTime");
 			int userId=Integer.parseInt(user.getUserId());
 			String productName = request.getParameter("productName");
+			System.out.println("productName"+productName);
 			String userName = request.getParameter("userName");
   			List<ProductRecord> recordList=new ArrayList<ProductRecord>();
  			recordList=productRecordService.RecordList(productName,userName,userId,orderTime);
@@ -81,9 +82,9 @@ public class ProductRecordController {
 		}
 		
 		
-		@RequestMapping("ProductRecordController/addProductRecord")
+		@RequestMapping("ProductRecordController/addProductRecord1")
 		@ResponseBody
-		int addProductRecord(HttpServletRequest request){
+		int addProductRecord1(HttpServletRequest request){
 			
 			User user=(User)request.getSession().getAttribute("user");
 			String userId=user.getUserId();
@@ -117,7 +118,7 @@ public class ProductRecordController {
             Map<String, Object> params = new HashMap<String, Object>();
             params.put("productRecord", productRecord);
             params.put("shopCardList", shopCardList);
-            int addId= productRecordService.addProductRecord(params);
+            int addId= productRecordService.addProductRecord1(params);
 
  			//购买成功则--》1：删除对应的购物车    2：减少对应的产品数量
 			if(addId>0){
@@ -127,6 +128,73 @@ public class ProductRecordController {
 			}
  			return addId;
 		}
+		
+		
+		@RequestMapping("ProductRecordController/addProductRecord")//下订单
+		@ResponseBody
+		int addProductRecord(HttpServletRequest request){
+			
+			User user=(User)request.getSession().getAttribute("user");
+			String userId=user.getUserId();
+			String shopCardIdMore =request.getParameter("shopCardId");
+			String addressId =request.getParameter("addressId");
+			String allMoney =request.getParameter("allMoney");
+
+			System.out.println("allMoney=="+allMoney);
+			//根据addressId获取地址信息
+            Address address=userService.AddressById(addressId);
+            
+            StringBuffer produceId=new StringBuffer();
+            StringBuffer productName=new StringBuffer();
+            StringBuffer producePrice=new StringBuffer();
+            StringBuffer produceCount=new StringBuffer();
+             List<ShopCard> shopCardList=new ArrayList<ShopCard>();
+            //根据shopCardIdMore获取产品价格，名称 产品购买数量
+            String[] shopCardId = shopCardIdMore.split(",");
+            for(int i=0;i<shopCardId.length;i++){
+            	ShopCard shopCard=shopCardService.shopcardById(Integer.parseInt(shopCardId[i]));
+            	
+            	if(produceId!=null){
+            		produceId.append(","+shopCard.getProductId());
+            		productName.append(","+shopCard.getProductName());
+            		producePrice.append(","+shopCard.getPrice());
+            		produceCount.append(","+shopCard.getCount());
+            	 }
+            	shopCardList.add(shopCard);
+            }
+  			 
+			 
+			//购买 总价=数量*价格
+			//购买成功则--》1：删除对应的购物车    2：添加对应的订单
+			
+			 
+            SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");  
+            Date date = new Date();
+            ProductRecord productRecord=new ProductRecord();
+            productRecord.setUserId(userId);
+            productRecord.setAddress(address.getAddress()+address.getAddressDetail());
+            productRecord.setAddressName(address.getAddressName());
+            productRecord.setAddressPhone(address.getAddressPhone());
+            productRecord.setOrderTime(sdf.format(date));
+            productRecord.setProductId(produceId.toString());
+            productRecord.setProductName(productName.toString());
+            productRecord.setPrice(producePrice.toString());
+            productRecord.setCount(produceCount.toString());
+            productRecord.setTotalMoney(allMoney);
+            
+            
+            int addId= productRecordService.addProductRecord(productRecord);
+
+ 			//购买成功则--》1：删除对应的购物车    2：减少对应的产品数量
+			if(addId>0){
+				shopCardService.DelShopCard(shopCardIdMore);
+				productService.UpdateProductCount(shopCardList);
+				productService.productIsOver(shopCardList);
+			}
+ 			return addId;
+		}
+		
+		
 		
 		@RequestMapping("ProductRecordController/cancelDel")
 		@ResponseBody
@@ -138,17 +206,23 @@ public class ProductRecordController {
 		}
 		
 
-		@RequestMapping("ProductRecordController/cancelOrDownRecord")
+		@RequestMapping("ProductRecordController/cancelOrDownRecord")//取消订单or安排配送
 		@ResponseBody
 		int cancelRecord(HttpServletRequest request){
 			
 			String orderId = request.getParameter("orderId");
 			String state = request.getParameter("state");
-			System.out.println("lllllllllstate:"+state);
+			
 			if(("2").equals(state)){//用户取消订单==》若产品还在即恢复库存
-				String productId = request.getParameter("productId");
-				String count = request.getParameter("count");
-				productService.cancelRecordCount(productId, count);
+				String productIdMore = request.getParameter("productId");
+				String countMore = request.getParameter("count");
+			    String[] productId = productIdMore.split(",");
+			    String[] count = countMore.split(",");
+			    
+	            for(int i=0;i<productId.length;i++){
+				System.out.println("lllllllllproductId:"+productId[i]+"====="+count[i]);
+				productService.cancelRecordCount(productId[i], count[i]);
+	            }
 			}
    			int updateId=productRecordService.cancelOrDownRecord(orderId,state);
    			return updateId;

@@ -40,9 +40,13 @@ public class ProductRecordService{
     	 List<String> orderIdList = ListHelper.getList(orderId);
     	 return productRecordDao.UserDelProduct(orderIdList);
 	    }
-     public int addProductRecord(Map<String,Object> params){
-    	 return productRecordDao.addProductRecord(params);
+     public int addProductRecord1(Map<String,Object> params){
+    	 return productRecordDao.addProductRecord1(params);
      }
+     public int addProductRecord(ProductRecord productRecord){
+    	 return productRecordDao.addProductRecord(productRecord);
+     }
+     
      public int cancelDel(String orderId){
     	 return productRecordDao.cancelDel(orderId);
      }

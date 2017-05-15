@@ -337,10 +337,8 @@ function() {
 
 		  function searchProduct(){
 			    var b=$("#productName").val();
-			    alert(b);
-		    	var searchUrl="${ctx}"+ "/ProductController/repertoryList";
-		    	alert(searchUrl);
-		    	$('#productTable').bootstrapTable('refresh', {url: searchUrl});  
+ 		    	var searchUrl="${ctx}"+ "/ProductController/repertoryList";
+ 		    	$('#productTable').bootstrapTable('refresh', {url: searchUrl});  
 		    	}
 		function del(id) {
 			 	$.ajax({
@@ -352,20 +350,18 @@ function() {
 				type : "post",
 				beforeSend : function() {
 					if (window.confirm('你确定要删除吗？')) {
-						//alert("确定");
 						return true;
 					} else {
-						//alert("取消");
 						return false;
 					}
 				},
 				success : function(data) {
 					if (data!=null) {
-						alert('操作成功:' + data);
+						alert('操作成功!');
  
 						location.reload();
 					} else {
-						alert('操作失败' + data);
+						alert('操作失败!');
 					}
 				},
 				error : function() {
@@ -395,10 +391,10 @@ function() {
 					},
 					success : function(data) {
 						if (data > 0) {
-							alert('操作成功:' + data);
+							alert('成功删除' + data+'个产品信息');
                             location.reload();
 						} else {
-							alert('操作失败' + data);
+							alert('操作失败！' );
 						}
 					},
 					error : function() {
@@ -420,21 +416,17 @@ function() {
 				type : "post",
 				beforeSend : function() {
 					if (window.confirm('你确定要上架吗？')) {
-						//alert("确定");
 						return true;
 					} else {
-						//alert("取消");
 						return false;
 					}
 				},
 				success : function(data) {
 					if (data > 0) {
-						alert('操作成功:' + data);
-
-						// document.location.href='world_system_notice.php'
+						alert('操作上架' + data+'个产品');
 						location.reload();
 					} else {
-						alert('操作失败' + data);
+						alert('操作失败!');
 					}
 				},
 				error : function() {
@@ -461,10 +453,10 @@ function() {
 					},
 					success : function(data) {
 						if (data > 0) {
-							alert('操作成功:' + data);
+							alert('成功下架' + data+'个产品');
                             location.reload();
 						} else {
-							alert('操作失败' + data);
+							alert('操作失败!' );
 						}
 					},
 					error : function() {

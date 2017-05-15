@@ -67,7 +67,7 @@
   
 		var message = "${message}"
 		    if ("no" == message) {
-		    	alert("无此用户");
+		    	alert("无此用户！");
 		    }else if ("error" == message) {
 		    	alert("密码错误!");
 		    }else if("black" == message){

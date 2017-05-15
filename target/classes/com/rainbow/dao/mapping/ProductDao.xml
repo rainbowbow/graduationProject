@@ -71,7 +71,7 @@
 		<where>
 			 1=1
             <if test="productName!=null and productName!='' ">
-				  product_name like concat('%',#{productName},'%')
+				 and  product_name like concat('%',#{productName},'%')
 		    </if>
             <if test="type !=null and type!=''">
 				and type=#{type} 

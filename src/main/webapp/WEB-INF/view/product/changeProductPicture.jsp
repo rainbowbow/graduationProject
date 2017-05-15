@@ -25,7 +25,7 @@ width:150px;
 	
 	  
      	<div class="control-group">
-			 产品名称: <input type="text" name="productName" id="productNamePicture" >
+			 产品名称: <input type="text" name="productName" id="productNamePicture" readonly>
  		</div>
 		
 	        <div style="float: left;margin-left: 30px;" >

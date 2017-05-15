@@ -11,7 +11,12 @@
 
 <jsp:include page="../include/header.jsp"></jsp:include>
 <title>农产品销售系统</title>
-
+<style type="text/css">
+table td{
+    vertical-align: middle !important;
+}
+  
+</style>
 </head>
 
 <body>
@@ -137,15 +142,6 @@
 				sortable : true, //是否启用排序
 				sortOrder : "asc", //排序方式
 				queryParamsType: "limit", //参数格式,发送标准的RESTFul类型的参数请求  
-				queryParams: function (params) {
-						return {
-				           
-				    	    rows: this.pageSize,
-				            page: this.pageNumber,
-				            userName:$("input[name='userName']").val(),
-				            productName:$("input[name='productName']").val()
-				        };
-				    },
 				singleSelect : false,
 				pagination : true, //分页
 				pageNumber : 1,
@@ -157,14 +153,7 @@
 					  },
 				columns : [{
 	                        checkbox: true
-                        },{  
-			                title: '序号',
-			                formatter: function (value, row, index) {  
-			                    return index+1;  
-			                },
-			                width:60,
-			                align:'center' 
-                     },
+                        },
 						{
 							field : 'orderId',
 							title : '序号'
@@ -175,7 +164,25 @@
 						},
 						{
 							field : 'productName',
-							title : '产品名称'
+							title : '产品名称',
+							formatter: function (value, row, index) { 
+								var productName;
+								var strs= new Array(); //定义一数组 
+								strs=value.split(","); //字符分割 
+								for (i=0;i<strs.length ;i++ ) 
+								{ 
+									if(productName==null){
+										if(strs[i]!=null&&strs[i]!=""){
+											productName=strs[i];
+										} 
+				
+									}else{
+										productName=productName+"<br/>"+"<br/>"+strs[i]; //分割后的字符输出 
+
+									}
+								} 
+			                    return   productName;
+			                }
 						},
 						{
 							field : 'userName',
@@ -183,11 +190,46 @@
 						},
 						{
 							field : 'price',
-							title : '价格'
+							title : '价格' ,
+							formatter: function (value, row, index) { 
+								var productPrice;
+								var strs= new Array(); //定义一数组 
+								strs=value.split(","); //字符分割 
+								for (i=0;i<strs.length ;i++ ) 
+								{ 
+									if(productPrice==null){
+										if(strs[i]!=null&&strs[i]!=""){
+											productPrice=strs[i];
+										}
+									}else{
+										productPrice=productPrice+"<br/>"+"<br/>"+strs[i]; //分割后的字符输出 
+
+									}
+								} 
+			                    return   productPrice;
+			                }
 						},
 						{
 							field : 'count',
-							title : '数量'
+							title : '数量' ,
+							formatter: function (value, row, index) { 
+								var productCount;
+								var strs= new Array(); //定义一数组 
+								strs=value.split(","); //字符分割 
+								for (i=0;i<strs.length ;i++ ) 
+								{ 
+									if(productCount==null){
+										if(strs[i]!=null&&strs[i]!=""){
+											productCount=strs[i];
+										}
+									
+									}else{
+										productCount=productCount+"<br/>"+"<br/>"+strs[i]; //分割后的字符输出 
+
+									}
+								} 
+			                    return   productCount;
+			                }
 						},
 						{
 							field : 'address' 
@@ -209,10 +251,7 @@
 			                }
 						},{
 							field : 'totalMoney',
-							title : '总价',
-							 formatter: function (value, row, index) {  
-				                    return row.price*row.count;  
-				                }
+							title : '总价'
 						},
 						{
 							title : '操作',
@@ -229,6 +268,7 @@
 								
 							var d ;
  							 var cancelRecord;
+ 							var after;
  							 var typeUser=${user.type};
  	 								if(row.state=="0"){
  	 									if(typeUser=="0"){
@@ -238,22 +278,38 @@
  	 										d='<a href="#"  onclick="del(\'' + row.orderId + '\')">删除</a> ';
  	 									}else{
  	 										cancelRecord = '<a href="#"  onclick="cancelOrDownRecord(\''
+ 	 											+ row.orderId+'\'\,\'2\'\,\''
  	 											+ row.productId+'\'\,\''
- 	 											+ row.orderId+'\'\,\''
  	 											+ row.count
- 	 											+ '\'\,\'2\')">取消订单 </a> ';
+ 	 											+ '\'\)">取消订单 </a> ';
  	 										d='<a href="#"  onclick="alert(\'请先取消订单再删除！\')">删除</a> ';
  	 									}
  	 									
  									}else if(row.state=="1"){
  										cancelRecord = '<p style="color:blue;font-size:16px;" >正在配送   </>';
+ 										sure= '<a href="#"  onclick="cancelOrDownRecord(\''
+ 											+ row.orderId
+ 											+ '\'\,\'3\')">确认收货</a>';
+ 									    after= '<a href="#"  onclick="cancelOrDownRecord(\''
+ 											+ row.orderId
+ 											+ '\'\,\'4\')">申请退货</a>';
  										d= '<a href="#"  onclick="alert(\'正在配送不能删除！\')">删除</a> ';
- 									}else{
+ 										
+ 									}else if(row.state=="2"){
  										cancelRecord = '<p style="color:gray;font-size:16px;" >失效订单 </>';
  										d= '<a href="#"  onclick="del(\''
  											+ row.orderId
  											+ '\')">删除</a> '
+ 									}else if(row.state=="3"){
+ 										cancelRecord = '<p style="color:black;font-size:16px;" >订单完成 </>';
+ 										after= '<a href="#"  onclick="cancelOrDownRecord(\''
+ 											+ row.orderId
+ 											+ '\'\,\'3\')">申请退货</a>';
+ 										d= '<a href="#"  onclick="del(\''
+ 											+ row.orderId
+ 											+ '\')">删除</a> '
  									}
+ 	 								
  	 								
  	 								
  	 	 								if(row.type=="0"){
@@ -285,8 +341,10 @@
     });
 
 		  function searchProductRecord(){
+			    var userName=$("#userName").val();
+	            var productName=$("#productName").val();
 			    var orderTime=$("#orderTime").val();
-			    var searchUrl="${ctx}"+ "/ProductRecordController/productRecordList?orderTime="+orderTime;
+			    var searchUrl="${ctx}"+ "/ProductRecordController/productRecordList?orderTime="+orderTime+"&&productName="+productName;
  		    	$('#orderTable').bootstrapTable('refresh', {url: searchUrl});  
 		    	}
 		  
@@ -297,29 +355,22 @@
 				type : "post",
 				beforeSend : function() {
 					if (window.confirm('你确定要删除吗？')) {
-						//alert("确定");
 						return true;
 					} else {
-						//alert("取消");
 						return false;
 					}
 				},
 				success : function(data) {
 					if (data!=null) {
-						alert('操作成功:' + data);
-
-						// document.location.href='world_system_notice.php'
+						alert('操作成功' );
 						location.reload();
 					} else {
-						alert('操作失败' + data);
+						alert('操作失败' );
 					}
 				},
 				error : function() {
 					alert('请求出错');
-				},
-				complete : function() {
-					// $('#tips').hide();
-				}
+				} 
 			});
 
 			return false;
@@ -337,22 +388,17 @@
 					type : "post",
 					beforeSend : function() {
 						if (window.confirm('你确定要删除吗？')) {
-							//alert("确定");
 							return true;
 						} else {
-							alert(row)
-							//alert("取消");
 							return false;
 						}
 					},
 					success : function(data) {
 						if (data > 0) {
-							alert('操作成功:' + data);
-
-							// document.location.href='world_system_notice.php'
+							alert('操作成功');
 							location.reload();
 						} else {
-							alert('操作失败' + data);
+							alert('操作失败');
 						}
 					},
 					error : function() {
@@ -366,7 +412,6 @@
 		}
 		function detail(userName,addressName,addressPhone,address) {
 			//向模态框中传值  
-			//userId,userName,age,phone,address,eMail,type+
 		    $("#userNameDetail").val(userName);  
 		    $("#addressNameDetail").val(addressName);  
 		    $("#addressPhoneDetail").val(addressPhone);  
@@ -385,10 +430,10 @@
 					type : "post",
 					success : function(data) {
 						if (data > 0) {
-							alert('操作成功:' + data);
+							alert('操作成功');
 							location.reload();
 						} else {
-							alert('操作失败' + data);
+							alert('操作失败');
 						}
 					},
 					error : function() {
@@ -399,7 +444,7 @@
 				return false;
 			}
 		  
-		  function cancelOrDownRecord(productId,orderId,count,state) {
+		  function cancelOrDownRecord(orderId,state,productId,count) {
 			  alert(state);
 				$.ajax({
 					url : "${ctx}" + "/ProductRecordController/cancelOrDownRecord",
@@ -411,10 +456,10 @@
 					type : "post",
 					success : function(data) {
 						if (data > 0) {
-							alert('操作成功:' + data);
+							alert('操作成功');
 							location.reload();
 						} else {
-							alert('操作失败' + data);
+							alert('操作失败');
 						}
 					},
 					error : function() {

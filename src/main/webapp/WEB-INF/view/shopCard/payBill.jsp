@@ -32,13 +32,15 @@
 			return false;
 		}
  		var shopCardId=$("#testList").val();
-		alert(shopCardId);
+ 		var allMoney=$("#allMoney").text();
+		alert("allMoney="+allMoney);
 		$.ajax({  
 	        type: "post",  
-	        url:  "${ctx}" + "/ProductRecordController/addProductRecord?addressId="+addressId+"&&shopCardId="+shopCardId,
+	        url:  "${ctx}" + "/ProductRecordController/addProductRecord?addressId="+addressId+"&&shopCardId="+shopCardId+"&&allMoney="+allMoney,
 	        data:{
 	        	"shopCardId":shopCardId,
-	        	"addressId":addressId
+	        	"addressId":addressId,
+	        	"allMoney":allMoney
 	        },
 	        
 	        success : function(data) {

@@ -114,14 +114,7 @@
 				  },
 				columns : [{
 	                        checkbox: true
-                        },{  
-			                title: '序号',
-			                formatter: function (value, row, index) {  
-			                    return index+1;  
-			                },
-			                width:40,
-			                align:'center' 
-                     },
+                        },
 						{
 							field : 'addressId',
 							title : '序号'

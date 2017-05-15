@@ -43,7 +43,7 @@
 
 		<div class="form-actions" style="padding-left: 170px;">
 
-			<button type="button" onclick="updateProduct()" class="btn btn-primary">
+			<button type="submit" onclick="updateProduct()" class="btn btn-primary">
 				<i class="icon-ok icon-white"></i>保存
 			</button>
 			&nbsp;&nbsp;

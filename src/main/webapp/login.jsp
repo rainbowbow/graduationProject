@@ -161,9 +161,11 @@
   }
 		var message = "${message}"
 		    if ("no" == message) {
-		    	$.messager.alert("警告", "无此用户");
+		    	$.messager.alert("警告", "无此用户！");
 		    }else if ("error" == message) {
-		    	$.messager.alert("警告", "密码错误");
+		    	$.messager.alert("警告", "密码错误!");
+		    }else if ("black" == message) {
+		    	$.messager.alert("警告", "您已被拉黑！");
 		    }
 		function login(){
 			 

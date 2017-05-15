@@ -56,8 +56,8 @@
 						     <label class="control-label" for = "sex">性别</label> 
 						     <div class="controls">
 						     <select name="sex" id = "sex" style="height: 25px;width:210px;"> 
-						      <option value="0" selected>女生0</option> 
-						      <option value="1" >男生1</option> 
+						      <option value="0" selected>女生</option> 
+						      <option value="1" >男生</option> 
 						     </select> 
 						     </div>
 						 </div> 
