@@ -42,7 +42,10 @@
 		    <if test="orderTime !=null and orderTime!=''">
 				and order_time like concat(#{orderTime},'%')
 		    </if>
-		</where>
+		    <if test="state !=null and state!=''">
+				and state = #{state}
+		    </if>
+		</where> 
 		ORDER BY order_time desc
 	</select>
 	 

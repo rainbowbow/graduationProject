@@ -15,7 +15,7 @@ import com.rainbow.beans.ShopCard;
  */
 public interface ProductRecordDao {
 	
-    List<ProductRecord> RecordList(@Param("productName")String productName,@Param("userName")String userName,@Param("userId")int userId,@Param("orderTime")String orderTime);
+    List<ProductRecord> RecordList(@Param("productName")String productName,@Param("userName")String userName,@Param("userId")int userId,@Param("orderTime")String orderTime,@Param("state")String state);
     int DelProduct(List<String> orderId);
     int UserDelProduct(List<String> orderId);
     public int addProductRecord1(Map<String,Object> params);

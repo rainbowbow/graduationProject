@@ -59,10 +59,11 @@ public class ProductRecordController {
 			String orderTime = request.getParameter("orderTime");
 			int userId=Integer.parseInt(user.getUserId());
 			String productName = request.getParameter("productName");
-			System.out.println("productName"+productName);
+			String state = request.getParameter("state");
+			System.out.println("state=======》"+state);
 			String userName = request.getParameter("userName");
   			List<ProductRecord> recordList=new ArrayList<ProductRecord>();
- 			recordList=productRecordService.RecordList(productName,userName,userId,orderTime);
+ 			recordList=productRecordService.RecordList(productName,userName,userId,orderTime,state);
 			return recordList;
 		}
 		@RequestMapping("ProductRecordController/delProductRecord")

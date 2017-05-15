@@ -50,24 +50,36 @@ table td{
 								
 								<form class="form-inline" role="form">
 									<div class="form-group">
-									    <label  for="productName">产品名称</label> 
+									    <label  for="productName">&nbsp;&nbsp;&nbsp;产品名称</label> 
 										<input   class="form-control" name="productName" id="productName" placeholder="Enter productName">
 									    
 									    
-							<c:choose>
+							 
+				
+				                        <label  for="state">&nbsp;&nbsp;&nbsp;订单类型</label> 
+									     <select  id="state" name="state" class="form-control">
+													<option value="" >所有订单</option>
+													<option value="2">失效订单</option>
+													<option value="3">成功订单</option>
+													<option value="4">退货订单</option>
+													<option value="0">未配送订单</option>
+													<option value="1">配送中订单</option>
+													
+										</select>
+											 <br/>	
+									   
+									    <label  for="orderTime">&nbsp;&nbsp;&nbsp;下单时间</label> 
+										<input    class="dateSearch" name="orderTime" id="orderTime" placeholder="Enter orderTime">
+									   
+								   <c:choose>
 								<c:when test="${user.getType()=='0'}">
-									<label  for="userName">用户名称</label> 
+									<label  for="userName">&nbsp;&nbsp;&nbsp;用户名称</label> 
 									<input   class="form-control" name="userName" id="userName" placeholder="Enter userName">
 												   
 								</c:when>
 								
 							</c:choose>
-				
-				
-									    
-									    <label  for="orderTime">时间</label> 
-										<input    class="dateSearch" name="orderTime" id="orderTime" placeholder="Enter orderTime">
-									    
+							 &nbsp;&nbsp;&nbsp;
 										<button type="button" style="margin-right: 20px"
 											id="btn_query" onclick="searchProductRecord();" class="btn btn-primary">查询</button>
 								   
@@ -266,60 +278,67 @@ table td{
 							'\')">地址详情</a> ';  
 							
 								
-							var d ;
- 							 var cancelRecord;
- 							var after;
- 							 var typeUser=${user.type};
- 	 								if(row.state=="0"){
- 	 									if(typeUser=="0"){
- 	 										cancelRecord = '<a href="#"  onclick="cancelOrDownRecord(\''
- 	 											+ row.orderId
- 	 											+ '\'\,\'1\')">安排配送 </a> ';
- 	 										d='<a href="#"  onclick="del(\'' + row.orderId + '\')">删除</a> ';
- 	 									}else{
- 	 										cancelRecord = '<a href="#"  onclick="cancelOrDownRecord(\''
- 	 											+ row.orderId+'\'\,\'2\'\,\''
- 	 											+ row.productId+'\'\,\''
- 	 											+ row.count
- 	 											+ '\'\)">取消订单 </a> ';
- 	 										d='<a href="#"  onclick="alert(\'请先取消订单再删除！\')">删除</a> ';
- 	 									}
- 	 									
- 									}else if(row.state=="1"){
- 										cancelRecord = '<p style="color:blue;font-size:16px;" >正在配送   </>';
- 										sure= '<a href="#"  onclick="cancelOrDownRecord(\''
- 											+ row.orderId
- 											+ '\'\,\'3\')">确认收货</a>';
- 									    after= '<a href="#"  onclick="cancelOrDownRecord(\''
- 											+ row.orderId
- 											+ '\'\,\'4\')">申请退货</a>';
- 										d= '<a href="#"  onclick="alert(\'正在配送不能删除！\')">删除</a> ';
- 										
- 									}else if(row.state=="2"){
- 										cancelRecord = '<p style="color:gray;font-size:16px;" >失效订单 </>';
- 										d= '<a href="#"  onclick="del(\''
- 											+ row.orderId
- 											+ '\')">删除</a> '
- 									}else if(row.state=="3"){
- 										cancelRecord = '<p style="color:black;font-size:16px;" >订单完成 </>';
- 										after= '<a href="#"  onclick="cancelOrDownRecord(\''
- 											+ row.orderId
- 											+ '\'\,\'3\')">申请退货</a>';
- 										d= '<a href="#"  onclick="del(\''
- 											+ row.orderId
- 											+ '\')">删除</a> '
- 									}
- 	 								
- 	 								
- 	 								
- 	 	 								if(row.type=="0"){
- 	 										var cancelDel = '<a href="#"  onclick="cancelDel(\''
- 	 											+ row.orderId
- 	 											+ '\')">撤销删除</a> ';
- 	 											return cancelRecord+e+cancelDel+d;
- 	 									}
- 	 								
-								return cancelRecord+e+d;
+ 							var typeUser=${user.type};
+ 							var d='<a href="#"  onclick="del(\'' + row.orderId + '\')">删除</a> ';
+ 							var cancelDel = '<a href="#"  onclick="cancelDel(\''+ row.orderId+ '\')">撤销删除</a> ';
+ 							var loseRecord='<p style="color:gray;font-size:16px;" >失效订单 </> ';
+ 							var successRecord='<p style="color:gray;font-size:16px;" >成功订单 </> ';
+ 							var noWantRecord='<p style="color:gray;font-size:16px;" >退货订单 </> ';
+ 							var loading = '<p style="color:blue;font-size:16px;" >正在配送   </> ';
+ 							var orderRecord='<a href="#"  onclick="cancelOrDownRecord(\''+ row.orderId+ '\'\,\'1\')">安排配送 </a> ';
+ 							var cancelRecord='<a href="#"  onclick="cancelOrDownRecord(\''+ row.orderId+'\'\,\'2\'\,\''
+								+ row.productId+'\'\,\''+ row.count+ '\'\)">取消订单 </a> ';
+							var sure= '<a href="#"  onclick="cancelOrDownRecord(\''
+									+ row.orderId + '\'\,\'3\')">确认送达</a> ';
+							var userSure= '<a href="#"  onclick="cancelOrDownRecord(\''
+										+ row.orderId + '\'\,\'3\')">确认收货</a> ';
+							var noWant = '<a href="#"  onclick="cancelOrDownRecord(\''+ row.orderId+'\'\,\'2\'\,\''
+								+ row.productId+'\'\,\''+ row.count+ '\'\)">确认退货 </a> ';
+ 							if(row.state=="0"){
+									if(typeUser=="0"){
+										return 	orderRecord+e;
+									}else{
+										return  cancelRecord+e;
+									}
+									
+								}else if(row.state=="1"){
+									if(typeUser=="0"){
+										 return loading+sure+noWant+e;
+										}else{
+											return loading+e;
+										}
+								} else if(row.state=="2"){
+									 if(typeUser=="0"){
+										 if(row.type=="0"){
+											 return loseRecord+cancelDel+d+e; 
+										 }
+										 return loseRecord+d+e;
+									 }else{
+										 return loseRecord+d+e;
+									 }
+									
+								}else if(row.state=="3"){
+									 if(typeUser=="0"){
+										 if(row.type=="0"){
+											 return successRecord+cancelDel+d+e; 
+										 }
+										 return successRecord+d+e;
+									 }else{
+										 return successRecord+d+e;
+									 }
+								
+								}else if(row.state=="4"){
+									 if(typeUser=="0"){
+										 if(row.type=="0"){
+											 return noWantRecord+cancelDel+d+e; 
+										 }
+										 return noWantRecord+d+e;
+									 }else{
+										 return noWantRecord+d+e;
+									 }
+								
+								}
+ 							 
 							}
 						} ]
 			});
@@ -344,7 +363,8 @@ table td{
 			    var userName=$("#userName").val();
 	            var productName=$("#productName").val();
 			    var orderTime=$("#orderTime").val();
-			    var searchUrl="${ctx}"+ "/ProductRecordController/productRecordList?orderTime="+orderTime+"&&productName="+productName;
+			    var state=$("#state").val();
+			    var searchUrl="${ctx}"+ "/ProductRecordController/productRecordList?orderTime="+orderTime+"&&productName="+productName+"&&state="+state;
  		    	$('#orderTable').bootstrapTable('refresh', {url: searchUrl});  
 		    	}
 		  
