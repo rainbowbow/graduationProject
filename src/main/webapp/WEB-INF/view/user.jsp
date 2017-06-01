@@ -265,7 +265,32 @@
 	  	    });
 	    	}
 	    
-	 
+	 function ajaxFuction(){
+		  
+	      var numstart=$("#num").val();
+		  var productName=$("#productName").val();
+		  var startMoney=$("#startMoney").val();
+		  var endMoney=$("#endMoney").val();
+		  var path="${ctx}"+"/ProductController/productlist";
+		    $.ajax({  
+		        type: "post",
+		        dataType:"json",
+		        url:  path,
+		        data:{
+		        	"num" :numstart,
+		        	"productName":productName,
+		        	"startMoney":startMoney,
+		        	"endMoney":endMoney
+		        },
+		        success : function(data){
+		        	shopProduct(data);
+		        },
+		        error : function() {
+					alert('请求出错1');
+					location.reload();
+				}
+		    });
+  }
     </script>
 	</body>
 </html>

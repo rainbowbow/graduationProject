@@ -1,38 +1,12 @@
 //sort:第几页（1开始）
 //页数 sort-1(0开始)
 //totalCount:总页数
-    function ajaxFuction(){
-	  
-	      var numstart=$("#num").val();
-		  var productName=$("#productName").val();
-		  var startMoney=$("#startMoney").val();
-		  var endMoney=$("#endMoney").val();
-		  
-		  var path="${ctx}"+"/ProductController/productlist";
-		    $.ajax({  
-		        type: "post",
-		        dataType:"json",
-		        url:  path,
-		        data:{
-		        	"num" :numstart,
-		        	"productName":productName,
-		        	"startMoney":startMoney,
-		        	"endMoney":endMoney
-		        },
-		        success : function(data){
-		        	shopProduct(data);
-		        },
-		        error : function() {
-					alert('请求出错');
-					location.reload();
-				}
-		    });
-   }
+   
    function firstPage(){
 	   
-	   var  totalCount=parseInt($("#totalCount").val());
+	   var  totalCount=parseInt($("#totalCount").val());//总页数
 	 	  var num= parseInt($("#num").val());
-	 	  document.getElementById("sort").innerText="1";
+	 	  document.getElementById("sort").innerText="1";//当前页数
 	 	  if(num==0){
 	 		  alert("已是首页！");
 	 		  return false;
@@ -42,7 +16,6 @@
    }
    function lastestPage(){
 	   var  totalCount=parseInt($("#totalCount").val());
-	  
 	 	  var num= parseInt($("#num").val());
 	 	  if(num==totalCount){
 	 		  alert("已是最后一页！");

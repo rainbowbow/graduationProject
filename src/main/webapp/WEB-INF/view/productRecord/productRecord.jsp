@@ -89,10 +89,7 @@ table td{
 									
 								</div>
 							</div>
-							<div id="toolbar" class="btn-group">
-								 
-									<input type="button" class="btn btn-primary" value="删除" onclick="delMore()" />
-							</div>
+							
 							<div class="pre-scrollable">
 							<table  class="table table-bordered" id="orderTable">
 							</table>

@@ -45,6 +45,8 @@ public class ProductController {
 		@ResponseBody
 		public List<Product> ShopProduct(HttpServletRequest request){
 			String numString=request.getParameter("num");
+			System.out.println(numString+"====numString:\n\n/n/n");
+
 			int num;
 			if(numString!=null){
 			   num = Integer.parseInt(request.getParameter("num"));
@@ -54,10 +56,9 @@ public class ProductController {
  			String productName = request.getParameter("productName");
 			String startMoney = request.getParameter("startMoney");
 			String endMoney = request.getParameter("endMoney");
-			System.out.println(productName+"startMoney:"+startMoney+"endMoney"+endMoney);
  			List<Product> productList=new ArrayList<Product>();
 			productList=productService.ShopProduct(productName,startMoney,endMoney,num*10);
-			 
+			System.out.println("\n\n/n/n+=="+productList.get(1).getProductName());
 			return productList;
 		}
 		@RequestMapping("ProductController/repertoryList")
@@ -82,6 +83,7 @@ public class ProductController {
 		@ResponseBody
 		int updateProduct(Product product){
  			int updateId=productService.UpdateProduct(product);
+ 			System.out.println(updateId+"\n"+"/n");
        		return updateId;
 		}
 		

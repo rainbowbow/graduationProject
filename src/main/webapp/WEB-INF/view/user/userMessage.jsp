@@ -82,7 +82,7 @@
 	
 	<div class="modal hide fade" id="userAddressModal" tabindex="-1" role="dialog">
 		<div class="modal-header">
-			<button class="close" type="button"  data-dismiss="modal">×</button>
+			<button class="close" type="button" onclick="location.reload()" data-dismiss="modal">×</button>
 			<h3>地址详情</h3>
 		</div>
 		<div class="modal-body">

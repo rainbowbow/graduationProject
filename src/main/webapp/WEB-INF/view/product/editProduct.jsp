@@ -68,11 +68,7 @@
 				} else {
 					alert('操作失败!');
 				}
-			},
-	        error : function() {
-				alert('请求出错');
-				location.reload();
-			} 
+			}
 	    });  
 	    return false;
 	}  
